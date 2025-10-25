@@ -1,0 +1,8 @@
+title: Luca Palomba
+description: Engineering Manager • Team Lead • Web Developer
+baseurl: ""
+url: "https://lucapalomba.github.io"
+theme: jekyll-theme-minimal
+
+plugins:
+  - jekyll-seo-tag
