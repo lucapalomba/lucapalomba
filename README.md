@@ -1,16 +1,130 @@
-## Hi there 👋
+---
+layout: default
+title: Luca Palomba
+---
 
-<!--
-**lucapalomba/lucapalomba** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&family=Fira+Code:wght@700&display=swap');
 
-Here are some ideas to get you started:
+body {
+    margin: 0;
+    padding: 0;
+    background: #0a0a0f;
+}
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+.fancy-name {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    background: linear-gradient(45deg, #6e48aa, #9d50bb);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 2;
+}
+
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+</style>
+
+<!-- Particles.js Container -->
+<div id="particles-js"></div>
+
+<div class="content-wrapper">
+    <h1 class="fancy-name" style="text-align: center; font-size: 4em;">
+        Luca Palomba 
+        <span style="display: block; font-size: 0.4em; margin-top: 1rem;">
+            { Engineering Manager • Team Lead • Web Developer }
+        </span>
+    </h1>
+</div>
+
+<!-- Particles.js Library -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+particlesJS('particles-js',
+  {
+    "particles": {
+      "number": {
+        "value": 80,
+        "density": {
+          "enable": true,
+          "value_area": 800
+        }
+      },
+      "color": {
+        "value": "#6e48aa"
+      },
+      "shape": {
+        "type": "circle"
+      },
+      "opacity": {
+        "value": 0.5,
+        "random": false
+      },
+      "size": {
+        "value": 3,
+        "random": true
+      },
+      "line_linked": {
+        "enable": true,
+        "distance": 150,
+        "color": "#9d50bb",
+        "opacity": 0.4,
+        "width": 1
+      },
+      "move": {
+        "enable": true,
+        "speed": 2,
+        "direction": "none",
+        "random": false,
+        "straight": false,
+        "out_mode": "out",
+        "bounce": false
+      }
+    },
+    "interactivity": {
+      "detect_on": "canvas",
+      "events": {
+        "onhover": {
+          "enable": true,
+          "mode": "grab"
+        },
+        "onclick": {
+          "enable": true,
+          "mode": "push"
+        },
+        "resize": true
+      },
+      "modes": {
+        "grab": {
+          "distance": 140,
+          "line_linked": {
+            "opacity": 1
+          }
+        },
+        "push": {
+          "particles_nb": 4
+        }
+      }
+    },
+    "retina_detect": true
+  }
+);
+</script>
