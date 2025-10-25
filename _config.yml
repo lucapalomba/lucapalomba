@@ -2,4 +2,19 @@ title: Luca Palomba
 description: Engineering Manager • Team Lead • Web Developer
 baseurl: ""
 url: "https://lucapalomba.github.io"
-plugins: []
+
+# GitHub Pages supported plugins
+plugins:
+  - jekyll-seo-tag        # Adds SEO meta tags
+  - jekyll-sitemap        # Generates XML sitemap
+  - jekyll-github-metadata # Adds GitHub repository metadata
+  - jemoji                # Adds support for emoji
+  - jekyll-readme-index   # Uses README.md as index if no index.html exists
+
+# SEO settings
+author: Luca Palomba
+social:
+  name: Luca Palomba
+  links:
+    - https://github.com/lucapalomba
+    - https://linkedin.com/in/lucapalomba
