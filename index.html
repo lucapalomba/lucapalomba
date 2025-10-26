@@ -42,6 +42,26 @@
         align-items: center;
         height: 100vh;
     }
+
+  /* Floating button */
+  .floating-btn {
+    position: fixed;
+    right: 20px;
+    bottom: 24px;
+    z-index: 3;
+    background: linear-gradient(45deg, #6e48aa, #9d50bb);
+    color: white;
+    border: none;
+    padding: 14px 18px;
+    border-radius: 999px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    transition: transform .15s ease, box-shadow .15s ease;
+    text-decoration: none;
+  }
+  .floating-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,0.45); }
     </style>
 </head>
 <body>
@@ -130,5 +150,8 @@
       }
     );
     </script>
+    
+  <!-- Floating button to experiences page -->
+  <a class="floating-btn" href="/experiences.html" aria-label="Work experiences">Work experiences</a>
 </body>
 </html>
