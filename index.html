@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,98 +13,105 @@
   <meta name="theme-color" content="#0a0a0f">
   <!-- Web App Manifest -->
   <link rel="manifest" href="manifest.webmanifest">
-    <style>
+  <style>
     @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&family=Fira+Code:wght@700&display=swap');
 
     body {
-        margin: 0;
-        padding: 0;
-        background: #0a0a0f;
+      margin: 0;
+      padding: 0;
+      background: #0a0a0f;
     }
 
     .fancy-name {
-        font-family: 'JetBrains Mono', 'Fira Code', monospace;
-        background: linear-gradient(45deg, #6e48aa, #9d50bb);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        letter-spacing: 2px;
-        position: relative;
-        z-index: 2;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      background: linear-gradient(45deg, #6e48aa, #9d50bb);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      letter-spacing: 2px;
+      position: relative;
+      z-index: 2;
     }
 
     #particles-js {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
     }
 
     .content-wrapper {
-        position: relative;
-        z-index: 2;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
-  /* Floating action container and buttons */
-  .floating-actions {
-    position: fixed;
-    right: 20px;
-    bottom: 24px;
-    z-index: 3;
-    display: flex;
-    gap: 12px;
-    align-items: center;
-  }
+    /* Floating action container and buttons */
+    .floating-actions {
+      position: fixed;
+      right: 20px;
+      bottom: 24px;
+      z-index: 3;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
 
-  .floating-btn, .hire-btn {
-    background: linear-gradient(45deg, #6e48aa, #9d50bb);
-    color: white;
-    border: none;
-    padding: 12px 16px;
-    border-radius: 999px;
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-    transition: transform .15s ease, box-shadow .15s ease;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .floating-btn:hover, .hire-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,0.45); }
+    .floating-btn,
+    .hire-btn {
+      background: linear-gradient(45deg, #6e48aa, #9d50bb);
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+      transition: transform .15s ease, box-shadow .15s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-  /* Hire button more prominent color */
-  .hire-btn {
-    background: linear-gradient(45deg, #ff6a00, #ff8e53);
-    color: #fff;
-    padding: 12px 18px;
-  }
-    </style>
+    .floating-btn:hover,
+    .hire-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+    }
+
+    /* Hire button more prominent color */
+    .hire-btn {
+      background: linear-gradient(45deg, #ff6a00, #ff8e53);
+      color: #fff;
+      padding: 12px 18px;
+    }
+  </style>
 </head>
+
 <body>
-    <!-- Particles.js Container -->
-    <div id="particles-js"></div>
+  <!-- Particles.js Container -->
+  <div id="particles-js"></div>
 
-    <div class="content-wrapper">
-        <h1 class="fancy-name" style="text-align: center; font-size: 4em;">
-            Luca Palomba 
-            <span style="display: block; font-size: 0.4em; margin-top: 1rem;">
-                { Engineering Manager • Team Lead • Web Developer }
-            </span>
-        </h1>
-    </div>
+  <div class="content-wrapper">
+    <h1 class="fancy-name" style="text-align: center; font-size: 4em;">
+      Luca Palomba
+      <span style="display: block; font-size: 0.4em; margin-top: 1rem;">
+        { Engineering Manager • Team Lead • Web Developer }
+      </span>
+    </h1>
+  </div>
 
-    <!-- Particles.js Library -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
+  <!-- Particles.js Library -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
     particlesJS('particles-js',
       {
         "particles": {
@@ -154,7 +162,7 @@
             },
             "onclick": {
               "enable": true,
-              "mode": "push"
+              "mode": "repulse"
             },
             "resize": true
           },
@@ -167,18 +175,24 @@
             },
             "push": {
               "particles_nb": 4
+            },
+            "repulse": {
+              "distance": 200,
+              "duration": 0.4
             }
           }
         },
         "retina_detect": true
       }
     );
-    </script>
-    
-    <!-- Floating action buttons to experiences page and LinkedIn -->
-    <div class="floating-actions" aria-hidden="false">
-      <a class="floating-btn" href="experiences.html" aria-label="Work experiences">Work experiences</a>
-      <a class="hire-btn" href="https://www.linkedin.com/in/lucapalomba" target="_blank" rel="noopener noreferrer" aria-label="Hire me on LinkedIn">Hire Me</a>
-    </div>
+  </script>
+
+  <!-- Floating action buttons to experiences page and LinkedIn -->
+  <div class="floating-actions" aria-hidden="false">
+    <a class="floating-btn" href="experiences.html" aria-label="Work experiences">Work experiences</a>
+    <a class="hire-btn" href="https://www.linkedin.com/in/lucapalomba" target="_blank" rel="noopener noreferrer"
+      aria-label="Hire me on LinkedIn">Hire Me</a>
+  </div>
 </body>
+
 </html>
