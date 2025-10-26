@@ -13,6 +13,7 @@
   <meta name="theme-color" content="#0a0a0f">
   <!-- Web App Manifest -->
   <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles/transitions.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&family=Fira+Code:wght@700&display=swap');
 
@@ -106,6 +107,14 @@
 </head>
 
 <body>
+  <!-- Transition Overlay -->
+  <div class="transition-overlay">
+    <div class="color-fill"></div>
+    <div class="smoke-container">
+      <div class="smoke"></div>
+    </div>
+  </div>
+
   <!-- Particles.js Container -->
   <div id="particles-js"></div>
 
@@ -202,6 +211,9 @@
     <a class="hire-btn" href="https://www.linkedin.com/in/lucapalomba" target="_blank" rel="noopener noreferrer"
       aria-label="Hire me on LinkedIn">Hire Me</a>
   </div>
+
+  <!-- Scripts -->
+  <script src="js/transitions.js"></script>
 </body>
 
 </html>

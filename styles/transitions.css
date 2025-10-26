@@ -1,0 +1,86 @@
+.transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  /* only apply blur while transitioning (see active) */
+  backdrop-filter: none;
+  z-index: 9999;
+  opacity: 0; /* start hidden */
+  visibility: hidden; /* hidden by default (no entry overlay) */
+  pointer-events: none;
+  will-change: opacity;
+  transition: opacity 0.6s ease; /* smooth fade */
+}
+
+/* visible overlay (used only for exit transition) */
+.transition-overlay.active {
+  opacity: 1;
+  visibility: visible !important; /* ensure becomes visible immediately */
+  pointer-events: all;
+  backdrop-filter: blur(3px); /* subtle blur only during transition */
+}
+
+/* solid color layer that fades in/out smoothly */
+.color-fill {
+  position: absolute;
+  inset: 0;
+  background: #0a0a0f;
+  opacity: 0;
+  transition: opacity 0.6s ease; /* match overlay timing */
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* when overlay is active, color-fill fades to opaque */
+.transition-overlay.active .color-fill {
+  opacity: 1;
+}
+
+/* smoke sits above color-fill so it remains visible during fade */
+.smoke-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.smoke {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(
+    circle,
+    rgba(10, 10, 15, 0.6) 0%,
+    rgba(10, 10, 15, 0.35) 35%,
+    rgba(10, 10, 15, 0) 70%
+  );
+  animation: smoke 6s infinite;
+  transform: translate(-50%, -50%);
+  opacity: 0; /* start hidden */
+  transition: opacity 0.4s ease;
+  mix-blend-mode: screen;
+}
+
+/* show smoke during exit so the effect is visible */
+.transition-overlay.active .smoke {
+  opacity: 0.8;
+}
+
+/* ensure overlay is fully removed (no blur/gloss) after entry */
+.transition-overlay.finished {
+  backdrop-filter: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
+
+@keyframes smoke {
+  0% { transform: translate(-50%, -50%) scale(0.8); }
+  50% { transform: translate(-50%, -50%) scale(1); }
+  100% { transform: translate(-50%, -50%) scale(0.8); }
+}
