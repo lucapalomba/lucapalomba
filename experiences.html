@@ -16,8 +16,8 @@
   @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&family=Fira+Code:wght@700&display=swap');
 
   body { margin:0; padding:0; background:#0a0a0f; color:#e6e6ef; font-family: 'JetBrains Mono', 'Fira Code', monospace; }
-  #particles-js { position: fixed; top:0; left:0; width:100%; height:100%; z-index:1 }
-  .page { position:relative; z-index:2; padding:60px 20px; min-height:100vh; }
+  #particles-js { position: fixed; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events: auto }
+  .page { position:relative; z-index:2; padding:60px 20px; min-height:100vh; pointer-events: none }
   .container { max-width:900px; margin:0 auto; }
 
   h1 { font-size:2.6rem; margin:0 0 18px; background:linear-gradient(45deg,#6e48aa,#9d50bb); -webkit-background-clip:text; background-clip:text; color:transparent }
@@ -40,7 +40,7 @@
   @media (max-width:640px){ .timeline:before { left:12px } .timeline-item { margin-left:48px } .timeline-item:before { left:-28px } h1{font-size:2rem} }
 
   /* Back link */
-  .back { position:fixed; left:18px; bottom:18px; z-index:3; background:rgba(255,255,255,0.04); color:#fff; padding:10px 14px; border-radius:8px; text-decoration:none; font-weight:700 }
+  .back { position:fixed; left:18px; bottom:18px; z-index:3; background:rgba(255,255,255,0.04); color:#fff; padding:10px 14px; border-radius:8px; text-decoration:none; font-weight:700; pointer-events: auto }
   </style>
 </head>
 <body>
