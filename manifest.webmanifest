@@ -5,7 +5,7 @@
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#0a0a0f",
-  "theme_color": "#0a0a0f",
+  "theme_color": "#6e48aa",
   "icons": [
     {
       "src": "https://github.com/lucapalomba.png?s=192",
