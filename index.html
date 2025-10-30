@@ -1,219 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luca Palomba</title>
+    <!-- Favicon / icons (use GitHub avatar as a simple hosted image) -->
+    <link rel="icon" href="https://github.com/lucapalomba.png" sizes="any">
+    <link rel="icon" href="https://github.com/lucapalomba.png?s=32" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="https://github.com/lucapalomba.png" sizes="180x180">
+    <link rel="shortcut icon" href="https://github.com/lucapalomba.png">
+    <meta name="theme-color" content="#0a0a0f">
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="stylesheet" href="styles/transitions.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&family=Fira+Code:wght@700&display=swap');
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Luca Palomba</title>
-  <!-- Favicon / icons (use GitHub avatar as a simple hosted image) -->
-  <link rel="icon" href="https://github.com/lucapalomba.png" sizes="any">
-  <link rel="icon" href="https://github.com/lucapalomba.png?s=32" sizes="32x32" type="image/png">
-  <link rel="apple-touch-icon" href="https://github.com/lucapalomba.png" sizes="180x180">
-  <link rel="shortcut icon" href="https://github.com/lucapalomba.png">
-  <meta name="theme-color" content="#0a0a0f">
-  <!-- Web App Manifest -->
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="styles/transitions.css">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&family=Fira+Code:wght@700&display=swap');
+      body {
+        margin: 0;
+        padding: 0;
+        background: #0a0a0f;
+      }
 
-    body {
-      margin: 0;
-      padding: 0;
-      background: #0a0a0f;
-    }
+      .fancy-name {
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        background: linear-gradient(45deg, #6e48aa, #9d50bb);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        letter-spacing: 2px;
+        position: relative;
+        z-index: 2;
+      }
 
-    .fancy-name {
-      font-family: 'JetBrains Mono', 'Fira Code', monospace;
-      background: linear-gradient(45deg, #6e48aa, #9d50bb);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-      letter-spacing: 2px;
-      position: relative;
-      z-index: 2;
-    }
+      #particles-js {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        pointer-events: auto;
+      }
 
-    #particles-js {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      /* allow the canvas to receive pointer events */
-      pointer-events: auto;
-    }
+      .content-wrapper {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        pointer-events: none;
+      }
 
-    .content-wrapper {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      /* allow clicks to pass through to the particles canvas */
-      pointer-events: none;
-    }
+      /* Floating action container and buttons */
+      .floating-actions {
+        position: fixed;
+        right: 20px;
+        bottom: 24px;
+        z-index: 3;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
 
-    /* Floating action container and buttons */
-    .floating-actions {
-      position: fixed;
-      right: 20px;
-      bottom: 24px;
-      z-index: 3;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
+      .floating-btn,
+      .hire-btn {
+        background: linear-gradient(45deg, #6e48aa, #9d50bb);
+        color: white;
+        border: none;
+        padding: 12px 16px;
+        border-radius: 999px;
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+        transition: transform .15s ease, box-shadow .15s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-    .floating-btn,
-    .hire-btn {
-      background: linear-gradient(45deg, #6e48aa, #9d50bb);
-      color: white;
-      border: none;
-      padding: 12px 16px;
-      border-radius: 999px;
-      font-family: 'JetBrains Mono', 'Fira Code', monospace;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
-      transition: transform .15s ease, box-shadow .15s ease;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
+      .floating-btn:hover,
+      .hire-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+      }
 
-    .floating-btn:hover,
-    .hire-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
-    }
+      /* interactive controls must accept pointer events */
+      .floating-actions,
+      .floating-btn,
+      .hire-btn { pointer-events: auto; }
 
-    /* interactive controls must accept pointer events */
-    .floating-actions,
-    .floating-btn,
-    .hire-btn { pointer-events: auto; }
+      /* Hire button more prominent color and pulsating effect */
+      .hire-btn {
+        background: linear-gradient(45deg, #ff6a00, #ff8e53);
+        color: #fff;
+        padding: 12px 18px;
+        box-shadow: 0 0 15px rgba(255, 105, 179, 0.5), 0 0 30px rgba(255, 105, 179, 0.5);
+        animation: pulse 2s infinite;
+      }
 
-    /* Hire button more prominent color */
-    .hire-btn {
-      background: linear-gradient(45deg, #ff6a00, #ff8e53);
-      color: #fff;
-      padding: 12px 18px;
-    }
-  </style>
-</head>
+      /* Define the pulsating keyframes */
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 15px rgba(255, 105, 179, 0.5), 0 0 30px rgba(255, 105, 179, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 20px rgba(255, 105, 179, 1), 0 0 40px rgba(255, 105, 179, 1);
+        }
+        100% {
+          box-shadow: 0 0 15px rgba(255, 105, 179, 0.5), 0 0 30px rgba(255, 105, 179, 0.5);
+        }
+      }
 
-<body>
-  <!-- Transition Overlay -->
-  <div class="transition-overlay">
-    <div class="color-fill"></div>
-    <div class="smoke-container">
-      <div class="smoke"></div>
+      /* ensure overlay is fully removed (no blur/gloss) after entry */
+      .transition-overlay.finished {
+          backdrop-filter: none !important;
+          visibility: hidden !important;
+          pointer-events: none !important;
+          opacity: 0 !important;
+      }
+
+    </style>
+  </head>
+  <body>
+    <!-- Transition Overlay -->
+    <div class="transition-overlay">
+      <div class="color-fill"></div>
+      <div class="smoke-container">
+        <div class="smoke"></div>
+      </div>
     </div>
-  </div>
 
-  <!-- Particles.js Container -->
-  <div id="particles-js"></div>
+    <!-- Particles.js Container -->
+    <div id="particles-js"></div>
 
-  <div class="content-wrapper">
-    <h1 class="fancy-name" style="text-align: center; font-size: 4em;">
-      Luca Palomba
-      <span style="display: block; font-size: 0.4em; margin-top: 1rem;">
-        { Engineering Manager • Team Lead • Web Developer }
-      </span>
-    </h1>
-  </div>
+    <div class="content-wrapper">
+      <h1 class="fancy-name" style="text-align: center; font-size: 4em;">
+        Luca Palomba
+        <span style="display: block; font-size: 0.4em; margin-top: 1rem;">
+          { Engineering Manager • Team Lead • Web Developer }
+        </span>
+      </h1>
+    </div>
 
-  <!-- Particles.js Library -->
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script>
-    particlesJS('particles-js',
-      {
-        "particles": {
-          "number": {
-            "value": 80,
-            "density": {
-              "enable": true,
-              "value_area": 800
-            }
-          },
-          "color": {
-            "value": "#6e48aa"
-          },
-          "shape": {
-            "type": "circle"
-          },
-          "opacity": {
-            "value": 0.5,
-            "random": false
-          },
-          "size": {
-            "value": 3,
-            "random": true
-          },
-          "line_linked": {
-            "enable": true,
-            "distance": 150,
-            "color": "#9d50bb",
-            "opacity": 0.4,
-            "width": 1
-          },
-          "move": {
-            "enable": true,
-            "speed": 2,
-            "direction": "none",
-            "random": false,
-            "straight": false,
-            "out_mode": "out",
-            "bounce": false
-          }
-        },
-        "interactivity": {
-          "detect_on": "canvas",
-          "events": {
-            "onhover": {
-              "enable": true,
-              "mode": "grab"
-            },
-            "onclick": {
-              "enable": true,
-              "mode": "repulse"
-            },
-            "resize": true
-          },
-          "modes": {
-            "grab": {
-              "distance": 140,
-              "line_linked": {
-                "opacity": 1
+    <!-- Particles.js Library -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+      particlesJS('particles-js',
+        {
+          "particles": {
+            "number": {
+              "value": 80,
+              "density": {
+                "enable": true,
+                "value_area": 800
               }
             },
-            "push": {
-              "particles_nb": 4
+            "color": {
+              "value": "#6e48aa"
             },
-            "repulse": {
-              "distance": 200,
-              "duration": 0.4
+            "shape": {
+              "type": "circle"
+            },
+            "opacity": {
+              "value": 0.5,
+              "random": false
+            },
+            "size": {
+              "value": 3,
+              "random": true
+            },
+            "line_linked": {
+              "enable": true,
+              "distance": 150,
+              "color": "#9d50bb",
+              "opacity": 0.4,
+              "width": 1
+            },
+            "move": {
+              "enable": true,
+              "speed": 2,
+              "direction": "none",
+              "random": false,
+              "straight": false,
+              "out_mode": "out",
+              "bounce": false
             }
-          }
-        },
-        "retina_detect": true
-      }
-    );
-  </script>
+          },
+          "interactivity": {
+            "detect_on": "canvas",
+            "events": {
+              "onhover": {
+                "enable": true,
+                "mode": "grab"
+              },
+              "onclick": {
+                "enable": true,
+                "mode": "repulse"
+              },
+              "resize": true
+            },
+            "modes": {
+              "grab": {
+                "distance": 140,
+                "line_linked": {
+                  "opacity": 1
+                }
+              },
+              "push": {
+                "particles_nb": 4
+              },
+              "repulse": {
+                "distance": 200,
+                "duration": 0.4
+              }
+            }
+          },
+          "retina_detect": true
+        }
+      );
+    </script>
 
-  <!-- Floating action buttons to experiences page and LinkedIn -->
-  <div class="floating-actions" aria-hidden="false">
-    <a class="floating-btn" href="experiences.html" aria-label="Work experiences">Work experiences</a>
-    <a class="hire-btn" href="https://www.linkedin.com/in/lucapalomba" target="_blank" rel="noopener noreferrer"
-      aria-label="Hire me on LinkedIn">Hire Me</a>
-  </div>
+    <!-- Floating action buttons to experiences page and LinkedIn -->
+    <div class="floating-actions" aria-hidden="false">
+      <a class="floating-btn" href="experiences.html" aria-label="Work experiences">Work experiences</a>
+      <a class="hire-btn" href="https://www.linkedin.com/in/lucapalomba" target="_blank" rel="noopener noreferrer"
+        aria-label="Hire me on LinkedIn">Hire Me</a>
+    </div>
 
-  <!-- Scripts -->
-  <script src="js/transitions.js"></script>
-</body>
-
+    <!-- Scripts -->
+    <script src="js/transitions.js"></script>
+  </body>
 </html>
