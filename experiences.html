@@ -1,115 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Work Experiences — Luca Palomba</title>
-  <!-- Favicon / icons (use GitHub avatar as a simple hosted image) -->
-  <link rel="icon" href="https://github.com/lucapalomba.png" sizes="any">
-  <link rel="icon" href="https://github.com/lucapalomba.png?s=32" sizes="32x32" type="image/png">
-  <link rel="apple-touch-icon" href="https://github.com/lucapalomba.png" sizes="180x180">
-  <link rel="shortcut icon" href="https://github.com/lucapalomba.png">
-  <meta name="theme-color" content="#0a0a0f">
-  <!-- Web App Manifest -->
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="styles/transitions.css">
-  <style>
-  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&family=Fira+Code:wght@700&display=swap');
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>Work Experiences — Luca Palomba</title>
+ <!-- Favicon / icons (use GitHub avatar as a simple hosted image) -->
+ <link rel="icon" href="https://github.com/lucapalomba.png" sizes="any">
+ <link rel="icon" href="https://github.com/lucapalomba.png?s=32" sizes="32x32" type="image/png">
+ <link rel="apple-touch-icon" href="https://github.com/lucapalomba.png" sizes="180x180">
+ <link rel="shortcut icon" href="https://github.com/lucapalomba.png">
+ <meta name="theme-color" content="#0a0a0f">
+ <!-- Web App Manifest -->
+ <link rel="manifest" href="manifest.webmanifest">
+ <link rel="stylesheet" href="styles/transitions.css">
+ <style>
+ @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&family=Fira+Code:wght@700&display=swap');
 
-  body { margin:0; padding:0; background:#0a0a0f; color:#e6e6ef; font-family: 'JetBrains Mono', 'Fira Code', monospace;  opacity: 0; /* Initial state */ transition: opacity 0.5s ease-in-out; /* Add a fade-in transition */ }
-  #particles-js { position: fixed; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events: auto }
-  .page { position:relative; z-index:2; padding:60px 20px; min-height:100vh; pointer-events: none }
-  .container { max-width:900px; margin:0 auto; }
+ body { margin:0; padding:0; background:#0a0a0f; color:#e6e6ef; font-family: 'JetBrains Mono', 'Fira Code', monospace;  opacity: 0; /* Initial state */ transition: opacity 0.3s ease-in-out; /* Adjusted the transition speed for faster effect */}
+ #particles-js { position: fixed; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events: auto }
+ .page { position:relative; z-index:2; padding:60px 20px; min-height:100vh; pointer-events: none }
+ .container { max-width:900px; margin:0 auto; }
 
-  h1 { font-size:2.6rem; margin:0 0 18px; background:linear-gradient(45deg,#6e48aa,#9d50bb); -webkit-background-clip:text; background-clip:text; color:transparent }
-  p.lead { color:#bfc0d9; margin-bottom:28px }
+ h1 { font-size:2.6rem; margin:0 0 18px; background:linear-gradient(45deg,#6e48aa,#9d50bb); -webkit-background-clip:text; background-clip:text; color:transparent }
+ p.lead { color:#bfc0d9; margin-bottom:28px }
 
-  /* Vertical timeline */
-  .timeline { position:relative; margin:30px 0; padding:0; list-style:none }
-  .timeline:before { content:''; position:absolute; left:20px; top:0; bottom:0; width:3px; background:linear-gradient(180deg,#6e48aa,#9d50bb); border-radius:2px }
-  .timeline-item { position:relative; margin:18px 0 18px 60px; padding:8px 14px; background:rgba(255,255,255,0.02); border-radius:8px; box-shadow: 0 6px 18px rgba(0,0,0,0.45) }
-  .timeline-item .date { font-size:0.85rem; color:#bfc0d9; margin-bottom:6px }
-  .timeline-item h3 { margin:0 0 6px; font-size:1.05rem; color:#fff }
-  .timeline-item p { color:#d6d6ea }
-  .timeline-item:before { content:''; position:absolute; left:-36px; top:12px; width:14px; height:14px; border-radius:50%; background:linear-gradient(45deg,#6e48aa,#9d50bb); box-shadow:0 0 0 4px rgba(110,72,170,0.08) }
+ /* Vertical timeline */
+ .timeline { position:relative; margin:30px 0; padding:0; list-style:none }
+ .timeline:before { content:''; position:absolute; left:20px; top:0; bottom:0; width:3px; background:linear-gradient(180deg,#6e48aa,#9d50bb); border-radius:2px }
+ .timeline-item { position:relative; margin:18px 0 18px 60px; padding:8px 14px; background:rgba(255,255,255,0.02); border-radius:8px; box-shadow: 0 6px 18px rgba(0,0,0,0.45) }
+ .timeline-item .date { font-size:0.85rem; color:#bfc0d9; margin-bottom:6px }
+ .timeline-item h3 { margin:0 0 6px; font-size:1.05rem; color:#fff }
+ .timeline-item p { color:#d6d6ea }
+ .timeline-item:before { content:''; position:absolute; left:-36px; top:12px; width:14px; height:14px; border-radius:50%; background:linear-gradient(45deg,#6e48aa,#9d50bb); box-shadow:0 0 0 4px rgba(110,72,170,0.08) }
 
-  /* Key project emphasis */
-  .key-project { margin:28px 0 20px; padding:16px; background:linear-gradient(90deg, rgba(110,72,170,0.06), rgba(157,80,187,0.04)); border-radius:8px; color:#eaeaff; border-left:4px solid #6e48aa }
-  .key-project .kp-label { font-weight:800; color:#fff; margin-right:8px }
+ /* Key project emphasis */
+ .key-project { margin:28px 0 20px; padding:16px; background:linear-gradient(90deg, rgba(110,72,170,0.06), rgba(157,80,187,0.04)); border-radius:8px; color:#eaeaff; border-left:4px solid #6e48aa }
+ .key-project .kp-label { font-weight:800; color:#fff; margin-right:8px }
 
-  /* Responsive */
-  @media (max-width:640px){ .timeline:before { left:12px } .timeline-item { margin-left:48px } .timeline-item:before { left:-28px } h1{font-size:2rem} }
+ /* Responsive */
+ @media (max-width:640px){ .timeline:before { left:12px } .timeline-item { margin-left:48px } .timeline-item:before { left:-28px } h1{font-size:2rem} }
 
-  /* Back link */
-  .back { position:fixed; left:18px; bottom:18px; z-index:3; background:rgba(255,255,255,0.04); color:#fff; padding:10px 14px; border-radius:8px; text-decoration:none; font-weight:700; pointer-events: auto }
-  </style>
+ /* Back link */
+ .back { position:fixed; left:18px; bottom:18px; z-index:3; background:rgba(255,255,255,0.04); color:#fff; padding:10px 14px; border-radius:8px; text-decoration:none; font-weight:700; pointer-events: auto }
+ </style>
 </head>
 <body>
-  <!-- Transition Overlay -->
-  <div class="transition-overlay">
-    <div class="color-fill"></div>
-    <div class="smoke-container">
-      <div class="smoke"></div>
-    </div>
-  </div>
+ <!-- Transition Overlay -->
+ <div class="transition-overlay">
+   <div class="color-fill"></div>
+   <div class="smoke-container">
+     <div class="smoke"></div>
+   </div>
+ </div>
 
-  <div id="particles-js"></div>
-  <main class="page">
-    <div class="container">
-      <h1>Work Experiences</h1>
-      <p class="lead">Selected roles and projects across my career.</p>
+ <div id="particles-js"></div>
+ <main class="page">
+   <div class="container">
+     <h1>Work Experiences</h1>
+     <p class="lead">Selected roles and projects across my career.</p>
 
-      <ul class="timeline">
-        <li class="timeline-item">
-          <div class="date">Dec 2020 — May 2025</div>
-          <h3>Senior Full Stack Developer • Head of R&amp;D — P&amp;B Linking / Openware PSIM / COGEN S.p.a.S.U</h3>
-          <p>Led R&amp;D activities and coordinated teams with stakeholders. Organized work using SCRUM, reduced tooling budget ~50% in one year, drove product surveys, analysis and design. Managed up to 20 people across 4 product teams (onsite & remote).</p>
-          <p class="key-project"><span class="kp-label">Key project:</span> Re-engineered the product for cloud distribution (Docker on K8s) and business continuity.</p>
-        </li>
+     <ul class="timeline">
+       <li class="timeline-item">
+         <div class="date">Dec 2020 — May 2025</div>
+         <h3>Senior Full Stack Developer • Head of R&amp;D — P&amp;B Linking / Openware PSIM / COGEN S.p.a.S.U</h3>
+         <p>Led R&amp;D activities and coordinated teams with stakeholders. Organized work using SCRUM, reduced tooling budget ~50% in one year, drove product surveys, analysis and design. Managed up to 20 people across 4 product teams (onsite & remote).</p>
+         <p class="key-project"><span class="kp-label">Key project:</span> Re-engineered the product for cloud distribution (Docker on K8s) and business continuity.</p>
+       </li>
 
-        <li class="timeline-item">
-          <div class="date">Nov 2016 — Nov 2020</div>
-          <h3>Full Stack Developer • Team Lead • R&amp;D Manager — Novigo-Consulting</h3>
-          <p>Designed and implemented application architecture (Zend APIs, React frontends, Node.js automation). Acted as project & team leader for national and international teams, managing up to 20 people. As R&amp;D Manager handled software/service selection and integration testing.</p>
-          <p class="key-project"><span class="kp-label">Key project:</span> Developed RAD automation components used across products.</p>
-        </li>
+       <li class="timeline-item">
+         <div class="date">Nov 2016 — Nov 2020</div>
+         <h3>Full Stack Developer • Team Lead • R&amp;D Manager — Novigo-Consulting</h3>
+         <p>Designed and implemented application architecture (Zend APIs, React frontends, Node.js automation). Acted as project & team leader for national and international teams, managing up to 20 people. As R&amp;D Manager handled software/service selection and integration testing.</p>
+         <p class="key-project"><span class="kp-label">Key project:</span> Developed RAD automation components used across products.</p>
+       </li>
 
-        <li class="timeline-item">
-          <div class="date">Oct 2013 — 2014</div>
-          <h3>Full Stack Developer — DuckMa s.r.l.</h3>
-          <p>Backend API development (Node.js, PHP), PWA and Ionic integrations, and interface design (PHONOTTO).</p>
-        </li>
+       <li class="timeline-item">
+         <div class="date">Oct 2013 — 2014</div>
+         <h3>Full Stack Developer — DuckMa s.r.l.</h3>
+         <p>Backend API development (Node.js, PHP), PWA and Ionic integrations, and interface design (PHONOTTO).</p>
+       </li>
 
-        <li class="timeline-item">
-          <div class="date">Dec 2007 — Sep 2012</div>
-          <h3>Web Developer — System 2000 s.r.l. / Associati s.r.l.</h3>
-          <p>IT consultancy for regional/national projects, .NET development for healthcare management systems, and data-visualization work for the VIGILO wearable sensors project.</p>
-        </li>
+       <li class="timeline-item">
+         <div class="date">Dec 2007 — Sep 2012</div>
+         <h3>Web Developer — System 2000 s.r.l. / Associati s.r.l.</h3>
+         <p>IT consultancy for regional/national projects, .NET development for healthcare management systems, and data-visualization work for the VIGILO wearable sensors project.</p>
+       </li>
 
-      </ul>
+     </ul>
 
-    </div>
-  </main>
+   </div>
+ </main>
 
-  <a class="back" href="index.html">← Back</a>
+ <a class="back" href="index.html">← Back</a>
 
-  <!-- Scripts -->
-  <script src="js/transitions.js"></script>
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script>
-  particlesJS('particles-js', { "particles": { "number": { "value": 60, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#6e48aa" }, "shape": { "type": "circle" }, "opacity": { "value": 0.45, "random": false }, "size": { "value": 3, "random": true }, "line_linked": { "enable": true, "distance": 140, "color": "#9d50bb", "opacity": 0.35, "width": 1 }, "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "repulse" }, "resize": true }, "modes": { "grab": { "distance": 120, "line_linked": { "opacity": 1 } }, "push": { "particles_nb": 4 }, "repulse": { "distance": 180, "duration": 0.45 } } }, "retina_detect": true });
-  </script>
+ <!-- Scripts -->
+ <script src="js/transitions.js"></script>
+ <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+ <script>
+ particlesJS('particles-js', { "particles": { "number": { "value": 60, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#6e48aa" }, "shape": { "type": "circle" }, "opacity": { "value": 0.45, "random": false }, "size": { "value": 3, "random": true }, "line_linked": { "enable": true, "distance": 140, "color": "#9d50bb", "opacity": 0.35, "width": 1 }, "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "repulse" }, "resize": true }, "modes": { "grab": { "distance": 120, "line_linked": { "opacity": 1 } }, "push": { "particles_nb": 4 }, "repulse": { "distance": 180, "duration": 0.45 } } }, "retina_detect": true });
+ </script>
 
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Show content after a delay
-    setTimeout(function() {
-      document.body.style.opacity = '1';
-    }, 300); // Adjust the delay as needed
+ <script>
+ document.addEventListener('DOMContentLoaded', function() {
+   // Show content after a delay
+   setTimeout(function() {
+     document.body.style.opacity = '1';
+   }, 300); // Adjust the delay as needed
 
-    // Hide loader overlay
-    document.querySelector('.transition-overlay').classList.add('finished');
-  });
+   // Hide loader overlay
+   document.querySelector('.transition-overlay').classList.add('finished');
+ });
 </script>
 </body>
 </html>
+
+
