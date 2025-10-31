@@ -16,7 +16,7 @@
   <style>
   @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&family=Fira+Code:wght@700&display=swap');
 
-  body { margin:0; padding:0; background:#0a0a0f; color:#e6e6ef; font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+  body { margin:0; padding:0; background:#0a0a0f; color:#e6e6ef; font-family: 'JetBrains Mono', 'Fira Code', monospace;  opacity: 0; /* Initial state */ transition: opacity 0.5s ease-in-out; /* Add a fade-in transition */ }
   #particles-js { position: fixed; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events: auto }
   .page { position:relative; z-index:2; padding:60px 20px; min-height:100vh; pointer-events: none }
   .container { max-width:900px; margin:0 auto; }
@@ -99,5 +99,17 @@
   <script>
   particlesJS('particles-js', { "particles": { "number": { "value": 60, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#6e48aa" }, "shape": { "type": "circle" }, "opacity": { "value": 0.45, "random": false }, "size": { "value": 3, "random": true }, "line_linked": { "enable": true, "distance": 140, "color": "#9d50bb", "opacity": 0.35, "width": 1 }, "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "repulse" }, "resize": true }, "modes": { "grab": { "distance": 120, "line_linked": { "opacity": 1 } }, "push": { "particles_nb": 4 }, "repulse": { "distance": 180, "duration": 0.45 } } }, "retina_detect": true });
   </script>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Show content after a delay
+    setTimeout(function() {
+      document.body.style.opacity = '1';
+    }, 300); // Adjust the delay as needed
+
+    // Hide loader overlay
+    document.querySelector('.transition-overlay').classList.add('finished');
+  });
+</script>
 </body>
 </html>

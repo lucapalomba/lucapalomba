@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luca Palomba</title>
@@ -20,6 +20,10 @@
         margin: 0;
         padding: 0;
         background: #0a0a0f;
+        position: relative;
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        opacity: 0; /* Initial state */
+        transition: opacity 0.5s ease-in-out; /* Add a fade-in transition */
       }
 
       .fancy-name {
@@ -118,121 +122,138 @@
 
       /* ensure overlay is fully removed (no blur/gloss) after entry */
       .transition-overlay.finished {
-          backdrop-filter: none !important;
-          visibility: hidden !important;
-          pointer-events: none !important;
-          opacity: 0 !important;
+        backdrop-filter: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        opacity: 0 !important;
       }
 
     </style>
-  </head>
-  <body>
-    <!-- Transition Overlay -->
-    <div class="transition-overlay">
-      <div class="color-fill"></div>
-      <div class="smoke-container">
-        <div class="smoke"></div>
-      </div>
-    </div>
+</head>
+<body>
 
-    <!-- Particles.js Container -->
-    <div id="particles-js"></div>
+<!-- Transition Overlay -->
+<div class="transition-overlay">
+  <div class="color-fill"></div>
+  <div class="smoke-container">
+    <div class="smoke"></div>
+  </div>
+</div>
 
-    <div class="content-wrapper">
-      <h1 class="fancy-name" style="text-align: center; font-size: 4em;">
-        Luca Palomba
-        <span style="display: block; font-size: 0.4em; margin-top: 1rem;">
-          { Engineering Manager • Team Lead • Web Developer }
-        </span>
-      </h1>
-    </div>
+<!-- Particles.js Container -->
+<div id="particles-js"></div>
 
-    <!-- Particles.js Library -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-      particlesJS('particles-js',
-        {
-          "particles": {
-            "number": {
-              "value": 80,
-              "density": {
-                "enable": true,
-                "value_area": 800
-              }
-            },
-            "color": {
-              "value": "#6e48aa"
-            },
-            "shape": {
-              "type": "circle"
-            },
-            "opacity": {
-              "value": 0.5,
-              "random": false
-            },
-            "size": {
-              "value": 3,
-              "random": true
-            },
-            "line_linked": {
-              "enable": true,
-              "distance": 150,
-              "color": "#9d50bb",
-              "opacity": 0.4,
-              "width": 1
-            },
-            "move": {
-              "enable": true,
-              "speed": 2,
-              "direction": "none",
-              "random": false,
-              "straight": false,
-              "out_mode": "out",
-              "bounce": false
-            }
-          },
-          "interactivity": {
-            "detect_on": "canvas",
-            "events": {
-              "onhover": {
-                "enable": true,
-                "mode": "grab"
-              },
-              "onclick": {
-                "enable": true,
-                "mode": "repulse"
-              },
-              "resize": true
-            },
-            "modes": {
-              "grab": {
-                "distance": 140,
-                "line_linked": {
-                  "opacity": 1
-                }
-              },
-              "push": {
-                "particles_nb": 4
-              },
-              "repulse": {
-                "distance": 200,
-                "duration": 0.4
-              }
-            }
-          },
-          "retina_detect": true
+<div class="content-wrapper">
+  <h1 class="fancy-name" style="text-align: center; font-size: 4em;">
+    Luca Palomba
+    <span style="display: block; font-size: 0.4em; margin-top: 1rem;">
+      { Engineering Manager • Team Lead • Web Developer }
+    </span>
+  </h1>
+</div>
+
+<!-- Particles.js Library -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+  particlesJS('particles-js',
+    {
+      "particles": {
+        "number": {
+          "value": 80,
+          "density": {
+            "enable": true,
+            "value_area": 800
+          }
+        },
+        "color": {
+          "value": "#6e48aa"
+        },
+        "shape": {
+          "type": "circle"
+        },
+        "opacity": {
+          "value": 0.5,
+          "random": false
+        },
+        "size": {
+          "value": 3,
+          "random": true
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#9d50bb",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 2,
+          "direction": "none",
+          "random": false,
+          "straight": false,
+          "out_mode": "out",
+          "bounce": false
         }
-      );
-    </script>
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": {
+            "enable": true,
+            "mode": "grab"
+          },
+          "onclick": {
+            "enable": true,
+            "mode": "repulse"
+          },
+          "resize": true
+        },
+        "modes": {
+          "grab": {
+            "distance": 140,
+            "line_linked": {
+              "opacity": 1
+            }
+          },
+          "push": {
+            "particles_nb": 4
+          },
+          "repulse": {
+            "distance": 200,
+            "duration": 0.4
+          }
+        }
+      },
+      "retina_detect": true
+    }
+  );
+</script>
 
-    <!-- Floating action buttons to experiences page and LinkedIn -->
-    <div class="floating-actions" aria-hidden="false">
-      <a class="floating-btn" href="experiences.html" aria-label="Work experiences">Work experiences</a>
-      <a class="hire-btn" href="https://www.linkedin.com/in/lucapalomba" target="_blank" rel="noopener noreferrer"
-        aria-label="Hire me on LinkedIn">Hire Me</a>
-    </div>
+<!-- Floating action buttons to experiences page and LinkedIn -->
+<div class="floating-actions" aria-hidden="false">
+  <a class="floating-btn" href="experiences.html" aria-label="Work experiences">Work experiences</a>
+  <a class="hire-btn" href="https://www.linkedin.com/in/lucapalomba" target="_blank" rel="noopener noreferrer"
+    aria-label="Hire me on LinkedIn">Hire Me</a>
+</div>
 
-    <!-- Scripts -->
-    <script src="js/transitions.js"></script>
-  </body>
+<!-- Scripts -->
+<script src="js/transitions.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Show content after a delay
+    setTimeout(function() {
+      document.body.style.opacity = '1';
+    }, 300); // Adjust the delay as needed
+
+    // Hide loader overlay
+    document.querySelector('.transition-overlay').classList.add('finished');
+  });
+</script>
+
+</body>
 </html>
+
+
+
