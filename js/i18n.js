@@ -20,8 +20,17 @@ class I18n {
       this.translations = await response.json();
       this.translate();
       this.updateHtmlLang();
+      this.logConsoleEasterEgg();
     } catch (error) {
       console.error('Failed to load translations:', error);
+    }
+  }
+
+  // Log console easter egg
+  logConsoleEasterEgg() {
+    const message = this.t('consoleEasterEgg');
+    if (message && message !== 'consoleEasterEgg') {
+      console.log(`%c${message}`, 'font-size: 14px; font-family: monospace; color: #6e48aa; padding: 10px; border: 2px solid #6e48aa; border-radius: 5px;');
     }
   }
 
@@ -34,7 +43,7 @@ class I18n {
   t(key) {
     const keys = key.split('.');
     let value = this.translations[this.currentLang];
-    
+
     for (const k of keys) {
       if (value && typeof value === 'object') {
         value = value[k];
@@ -42,7 +51,7 @@ class I18n {
         return key; // Return key if translation not found
       }
     }
-    
+
     return value || key;
   }
 
@@ -57,7 +66,7 @@ class I18n {
     document.querySelectorAll('[data-i18n]').forEach(element => {
       const key = element.getAttribute('data-i18n');
       const translation = this.t(key);
-      
+
       if (translation && translation !== key) {
         element.textContent = translation;
       }
@@ -67,7 +76,7 @@ class I18n {
     document.querySelectorAll('[data-i18n-aria]').forEach(element => {
       const key = element.getAttribute('data-i18n-aria');
       const translation = this.t(key);
-      
+
       if (translation && translation !== key) {
         element.setAttribute('aria-label', translation);
       }
@@ -80,7 +89,7 @@ class I18n {
   // Update page meta tags
   updateMetaTags() {
     const page = document.body.classList.contains('experiences-page') ? 'experiences' : 'index';
-    
+
     // Update title
     const titleElement = document.querySelector('title');
     if (titleElement) {
@@ -103,29 +112,29 @@ class I18n {
     if (!Array.isArray(jobs)) return;
 
     const timelineItems = timeline.querySelectorAll('.timeline-item');
-    
+
     timelineItems.forEach((item, index) => {
       if (jobs[index]) {
         const job = jobs[index];
-        
+
         // Update date
         const dateEl = item.querySelector('.date');
         if (dateEl) dateEl.textContent = job.date;
-        
+
         // Update title
         const titleEl = item.querySelector('h3');
         if (titleEl) titleEl.innerHTML = job.title;
-        
+
         // Update description
         const descEl = item.querySelector('p:not(.key-project)');
         if (descEl) descEl.innerHTML = job.description;
-        
+
         // Update key project if exists
         const keyProjectEl = item.querySelector('.key-project');
         if (keyProjectEl && job.keyProject) {
           const labelEl = keyProjectEl.querySelector('.kp-label');
           if (labelEl) labelEl.textContent = this.t('experiences.keyProject');
-          
+
           // Update the text after the label
           const textNode = Array.from(keyProjectEl.childNodes).find(
             node => node.nodeType === Node.TEXT_NODE
