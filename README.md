@@ -21,6 +21,17 @@ For this project, I am using Continue.dev locally on my machine. The environment
 - **VS Code**: Integrated development environment with QwenCode2.5-coder:7b for enhanced coding capabilities, used with the Agent Support of Continue.dev
 - **Ollama Models**: QwenCode2.5-coder:7b for local AI-assisted development
 
+## Online AI Assistant
+
+In addition to local models, I'm also using **Claude Sonnet 4.5** by Anthropic as an online AI assistant for this project. Claude Sonnet 4.5 is part of the Claude 4 model family and provides:
+
+- Advanced code review and refactoring suggestions
+- English grammar and professional tone improvements
+- Git commit message generation following conventional commit standards
+- Documentation writing and technical content refinement
+
+Claude assists in maintaining code quality and ensuring professional presentation across all project materials.
+
 ## Technologies Used
 
 - HTML
