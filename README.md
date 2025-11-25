@@ -11,15 +11,15 @@ Engineering Manager • Team Lead • Web Developer
 
 ## Description
 
-Welcome to my personal portfolio, a **totally vibe coded website** where I'm testing support for different models hosted locally by Ollama! This site showcases my skills and expertise in web development and engineering management. Feel free to explore the various sections to see how these models enhance user interaction and provide an immersive experience.
+Welcome to my personal portfolio, a website built while testing support for different AI models hosted locally by Ollama! This site showcases my skills and expertise in web development and engineering management. Feel free to explore the various sections.
 
-## Actual ocal Development Environment
+## Actual Local Development Environment
 
 For this project, I am using Continue.dev locally on my machine. The environment includes:
 
-- **Machine Specification**: [CPU i7-7700, RAM 16G, OS Windows, GPU Nvidia 3060 12G ]
-- **VScode**: Integrated development environment with QwenCode2.5-coder:7b for enhanced coding capabilities. Used with the Agent Support of Continue.dev
-- **Ollama Models**: QwenCode2.5-coder:7b is a language model hosted locally by Ollama.
+- **Machine Specification**: CPU i7-7700, RAM 16GB, OS Windows, GPU Nvidia 3060 12GB
+- **VS Code**: Integrated development environment with QwenCode2.5-coder:7b for enhanced coding capabilities, used with the Agent Support of Continue.dev
+- **Ollama Models**: QwenCode2.5-coder:7b for local AI-assisted development
 
 ## Technologies Used
 
