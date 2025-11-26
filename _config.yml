@@ -2,6 +2,7 @@ title: Luca Palomba
 description: Engineering Manager • Team Lead • Web Developer
 baseurl: ""
 url: "https://lucapalomba.github.io"
+source: dist
 
 # GitHub Pages supported plugins
 plugins:
