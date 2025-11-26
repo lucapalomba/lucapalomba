@@ -1,0 +1,51 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const path = window.location.pathname;
+    const isIndex = path.endsWith('index.html') || path.endsWith('/') || path.endsWith('lucapalomba/');
+    const isExperiences = path.endsWith('experiences.html');
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+        if (isIndex && e.key === 'ArrowRight') {
+            navigateTo('experiences.html');
+        } else if (isExperiences && e.key === 'ArrowLeft') {
+            navigateTo('index.html');
+        }
+    });
+
+    // Touch Navigation (Swipe)
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const minSwipeDistance = 50;
+
+    document.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+        const distance = touchEndX - touchStartX;
+
+        if (Math.abs(distance) < minSwipeDistance) return;
+
+        if (distance > 0) {
+            // Swipe Right (Left to Right)
+            if (isExperiences) {
+                navigateTo('index.html');
+            }
+        } else {
+            // Swipe Left (Right to Left)
+            if (isIndex) {
+                navigateTo('experiences.html');
+            }
+        }
+    }
+
+    function navigateTo(url) {
+        // Add a small delay or transition effect if needed, but for now direct navigation
+        window.location.href = url;
+    }
+});
