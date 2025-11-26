@@ -1,11 +1,11 @@
 $sourceDir = $PSScriptRoot
-$distDir = Join-Path $sourceDir "dist"
+$distDir = Join-Path $sourceDir "docs"
 
 Write-Host "Starting build process..."
 
-# Clean dist
+# Clean docs folder
 if (Test-Path $distDir) {
-    Write-Host "Cleaning dist folder..."
+    Write-Host "Cleaning docs folder..."
     Remove-Item -Path $distDir -Recurse -Force
 }
 New-Item -ItemType Directory -Path $distDir | Out-Null
