@@ -53,10 +53,11 @@ function Compress-JS ($content) {
 # Copy and Minify HTML
 Write-Host "Processing HTML files..."
 Get-ChildItem -Path $sourceDir -Filter "*.html" | ForEach-Object {
-    $content = Get-Content $_.FullName -Raw
+    $content = Get-Content $_.FullName -Raw -Encoding UTF8
     $minified = Compress-HTML $content
     $destPath = Join-Path $distDir $_.Name
-    Set-Content -Path $destPath -Value $minified -Encoding UTF8
+    $utf8NoBom = New-Object System.Text.UTF8Encoding $false
+    [System.IO.File]::WriteAllText($destPath, $minified, $utf8NoBom)
 }
 
 # Copy and Minify CSS
@@ -64,10 +65,11 @@ Write-Host "Processing CSS files..."
 $cssDir = Join-Path $distDir "styles"
 New-Item -ItemType Directory -Path $cssDir | Out-Null
 Get-ChildItem -Path (Join-Path $sourceDir "styles") -Filter "*.css" | ForEach-Object {
-    $content = Get-Content $_.FullName -Raw
+    $content = Get-Content $_.FullName -Raw -Encoding UTF8
     $minified = Compress-CSS $content
     $destPath = Join-Path $cssDir $_.Name
-    Set-Content -Path $destPath -Value $minified -Encoding UTF8
+    $utf8NoBom = New-Object System.Text.UTF8Encoding $false
+    [System.IO.File]::WriteAllText($destPath, $minified, $utf8NoBom)
 }
 
 # Copy and Minify JS
@@ -75,10 +77,11 @@ Write-Host "Processing JS files..."
 $jsDir = Join-Path $distDir "js"
 New-Item -ItemType Directory -Path $jsDir | Out-Null
 Get-ChildItem -Path (Join-Path $sourceDir "js") -Filter "*.js" | ForEach-Object {
-    $content = Get-Content $_.FullName -Raw
+    $content = Get-Content $_.FullName -Raw -Encoding UTF8
     $minified = Compress-JS $content
     $destPath = Join-Path $jsDir $_.Name
-    Set-Content -Path $destPath -Value $minified -Encoding UTF8
+    $utf8NoBom = New-Object System.Text.UTF8Encoding $false
+    [System.IO.File]::WriteAllText($destPath, $minified, $utf8NoBom)
 }
 
 # Copy Assets
