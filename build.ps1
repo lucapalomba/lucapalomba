@@ -11,7 +11,7 @@ if (Test-Path $distDir) {
 New-Item -ItemType Directory -Path $distDir | Out-Null
 
 # Helper to minify HTML (Basic)
-function Minify-HTML ($content) {
+function Compress-HTML ($content) {
     $content = $content -replace '<!--[\s\S]*?-->', '' # Remove comments
     $content = $content -replace '\s+', ' '           # Collapse whitespace
     $content = $content -replace '>\s+<', '><'        # Remove whitespace between tags
@@ -19,7 +19,7 @@ function Minify-HTML ($content) {
 }
 
 # Helper to minify CSS (Robust)
-function Minify-CSS ($content) {
+function Compress-CSS ($content) {
     # Pattern matches strings ("...", '...') OR comments (/*...*/)
     $pattern = '("(\.|[^"])*?"|''(\.|[^''])*?'')|(/\*[\s\S]*?\*/)'
     
@@ -34,7 +34,7 @@ function Minify-CSS ($content) {
 }
 
 # Helper to minify JS (Robust)
-function Minify-JS ($content) {
+function Compress-JS ($content) {
     # Pattern matches strings ("...", '...', `...`) OR comments (//..., /*...*/)
     # Note: Backtick string regex might need adjustment if complex nesting, but good for basic cases.
     $pattern = '("(\.|[^"])*?"|''(\.|[^''])*?''|`(\.|[^`])*?`)|(//.*$|/\*[\s\S]*?\*/)'
@@ -54,7 +54,7 @@ function Minify-JS ($content) {
 Write-Host "Processing HTML files..."
 Get-ChildItem -Path $sourceDir -Filter "*.html" | ForEach-Object {
     $content = Get-Content $_.FullName -Raw
-    $minified = Minify-HTML $content
+    $minified = Compress-HTML $content
     $destPath = Join-Path $distDir $_.Name
     Set-Content -Path $destPath -Value $minified -Encoding UTF8
 }
@@ -65,7 +65,7 @@ $cssDir = Join-Path $distDir "styles"
 New-Item -ItemType Directory -Path $cssDir | Out-Null
 Get-ChildItem -Path (Join-Path $sourceDir "styles") -Filter "*.css" | ForEach-Object {
     $content = Get-Content $_.FullName -Raw
-    $minified = Minify-CSS $content
+    $minified = Compress-CSS $content
     $destPath = Join-Path $cssDir $_.Name
     Set-Content -Path $destPath -Value $minified -Encoding UTF8
 }
@@ -76,7 +76,7 @@ $jsDir = Join-Path $distDir "js"
 New-Item -ItemType Directory -Path $jsDir | Out-Null
 Get-ChildItem -Path (Join-Path $sourceDir "js") -Filter "*.js" | ForEach-Object {
     $content = Get-Content $_.FullName -Raw
-    $minified = Minify-JS $content
+    $minified = Compress-JS $content
     $destPath = Join-Path $jsDir $_.Name
     Set-Content -Path $destPath -Value $minified -Encoding UTF8
 }
