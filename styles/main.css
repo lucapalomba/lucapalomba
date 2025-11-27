@@ -6,9 +6,11 @@ body {
   margin: 0;
   padding: 0;
   background: #0a0a0f;
-  color: #e6e6ef; /* Default text color from experiences.html */
+  color: #e6e6ef;
+  /* Default text color from experiences.html */
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  opacity: 0; /* Initial state for transition */
+  opacity: 0;
+  /* Initial state for transition */
   transition: opacity 0.5s ease-in-out;
 }
 
@@ -119,9 +121,11 @@ h1 {
   0% {
     box-shadow: 0 0 15px rgba(255, 105, 179, 0.5), 0 0 30px rgba(255, 105, 179, 0.5);
   }
+
   50% {
     box-shadow: 0 0 20px rgba(255, 105, 179, 1), 0 0 40px rgba(255, 105, 179, 1);
   }
+
   100% {
     box-shadow: 0 0 15px rgba(255, 105, 179, 0.5), 0 0 30px rgba(255, 105, 179, 0.5);
   }
@@ -179,13 +183,15 @@ p.lead {
 .timeline-item:before {
   content: '';
   position: absolute;
-  left: -36px;
-  top: 12px;
-  width: 14px;
-  height: 14px;
+  left: -49.5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  background: linear-gradient(45deg, #6e48aa, #9d50bb);
-  box-shadow: 0 0 0 4px rgba(110, 72, 170, 0.08);
+  background: #0a0a0f;
+  border: 3px solid #9d50bb;
+  box-shadow: 0 0 0 3px rgba(110, 72, 170, 0.1);
 }
 
 .key-project {
@@ -222,12 +228,15 @@ p.lead {
   .timeline:before {
     left: 12px;
   }
+
   .timeline-item {
     margin-left: 48px;
   }
+
   .timeline-item:before {
-    left: -28px;
+    left: -45.5px;
   }
+
   h1 {
     font-size: 2rem;
   }
@@ -239,15 +248,19 @@ p.lead {
     transition: none !important;
     opacity: 1 !important;
   }
+
   .hire-btn {
     animation: none !important;
   }
+
   .smoke {
     animation: none !important;
   }
+
   .transition-overlay {
     display: none !important;
   }
+
   #particles-js {
     display: none !important;
   }
