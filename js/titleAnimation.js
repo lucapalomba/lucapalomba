@@ -7,17 +7,17 @@ class TitleAnimator {
     this.ERASE_SPEED = 60; // Speed of erasing in ms
     this.isAnimating = false; // Track if animation is in progress
     this.currentLanguage = document.documentElement.lang || 'en';
-    this.keySound = null;
+    this.soundPool = [];
+    this.soundPoolIndex = 0;
+    this.SOUND_POOL_SIZE = 5; // Pre-allocate 5 audio instances
     this.init();
   }
 
   init() {
     if (!this.titleElement) return;
 
-    // Load keyboard sound
-    this.keySound = new Audio('sounds/keyboard-click.mp3');
-    this.keySound.preload = 'auto';
-    this.keySound.volume = 0.2;
+    // Pre-create audio pool for better performance
+    this.initSoundPool();
 
     // Add click listener to restart animation
     this.titleElement.style.cursor = 'pointer';
@@ -31,6 +31,19 @@ class TitleAnimator {
     setTimeout(() => {
       this.startAnimation();
     }, this.INTRO_ANIMATION_DURATION);
+  }
+
+  initSoundPool() {
+    try {
+      for (let i = 0; i < this.SOUND_POOL_SIZE; i++) {
+        const audio = new Audio('sounds/keyboard-click.mp3');
+        audio.preload = 'auto';
+        audio.volume = 0.2;
+        this.soundPool.push(audio);
+      }
+    } catch (e) {
+      console.debug('Could not initialize sound pool:', e.message);
+    }
   }
 
   startAnimation() {
@@ -97,7 +110,7 @@ class TitleAnimator {
       this.titleElement.textContent = originalText.substring(0, position);
       
       // Play keyboard sound while erasing
-      if (originalText[position] !== ' ') {
+      if (originalText[position] !== ' ' && this.soundPool.length > 0) {
         this.playKeySound();
       }
 
@@ -115,7 +128,7 @@ class TitleAnimator {
     const typeInterval = setInterval(() => {
       if (position < textArray.length) {
         // Play keyboard sound for each character (except spaces)
-        if (textArray[position].char !== ' ' && this.keySound) {
+        if (textArray[position].char !== ' ' && this.soundPool.length > 0) {
           this.playKeySound();
         }
         // Update the content with the current position
@@ -132,14 +145,16 @@ class TitleAnimator {
 
   playKeySound() {
     try {
-      if (!this.keySound) return;
+      if (this.soundPool.length === 0) return;
       
-      // Create a clone to allow overlapping sounds for rapid typing
-      const sound = this.keySound.cloneNode();
+      // Get the next sound from the pool (cycling through)
+      const sound = this.soundPool[this.soundPoolIndex];
+      this.soundPoolIndex = (this.soundPoolIndex + 1) % this.soundPool.length;
+      
+      // Reset and play
       sound.currentTime = 0;
-      sound.volume = 0.4;
+      sound.volume = 0.2;
       
-      // Play the sound
       const playPromise = sound.play();
       if (playPromise !== undefined) {
         playPromise.catch(err => {
