@@ -1,10 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
   // Initialize Particles.js
   if (window.particlesJS) {
+    // Detect if on mobile/tablet
+    const isMobile = window.innerWidth <= 768;
+    const particleCount = isMobile ? 30 : 50;
+    const enableHover = !isMobile;
+
     particlesJS('particles-js', {
       "particles": {
         "number": {
-          "value": 80,
+          "value": particleCount,
           "density": {
             "enable": true,
             "value_area": 800
@@ -45,11 +50,11 @@ document.addEventListener('DOMContentLoaded', function() {
         "detect_on": "canvas",
         "events": {
           "onhover": {
-            "enable": true,
+            "enable": enableHover,
             "mode": "grab"
           },
           "onclick": {
-            "enable": true,
+            "enable": enableHover,
             "mode": "repulse"
           },
           "resize": true
