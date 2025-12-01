@@ -41,7 +41,7 @@ Claude assists in maintaining code quality and ensuring professional presentatio
 
 ## Using No Stitch (by Google) to Refactor Website Graphics
 
-I recently refactored the graphics of my first website using a tool called No Stitch (by Google). This tool helped me streamline the design process by automating certain tasks, improving visual consistency, and enhancing overall project efficiency. Below is a brief summary of the changes:
+I recently refactored the graphics of my first website using a tool called Stitch (by Google). This tool helped me streamline the design process by automating certain tasks, improving visual consistency, and enhancing overall project efficiency. Below is a brief summary of the changes:
 
 - **Consolidated Images:** I consolidated all images into a single folder to reduce redundancy and improve maintainability.
 - **Unified Styles:** All common graphical elements were moved into a unified style guide to ensure consistency across the website.
