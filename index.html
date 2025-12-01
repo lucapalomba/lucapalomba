@@ -93,6 +93,13 @@
     <div class="logo">
       <a href="index.html">&lt;LP /&gt;</a>
     </div>
+    <button class="hamburger-menu" id="hamburger-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
     <div class="nav-links" aria-label="Main navigation">
       <ol>
         <li><a href="index.html" aria-current="page"><span class="nav-number">01.</span> <span data-i18n="nav.whoami">Who am I</span></a>
@@ -101,6 +108,14 @@
               data-i18n="nav.experience">Experience</span></a></li>
       </ol>
       <a href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer" class="resume-btn"
+        data-i18n="nav.curriculum" aria-label="Curriculum - opens in new window">Curriculum</a>
+    </div>
+    <div class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+      <ol>
+        <li><a href="index.html" aria-current="page"><span class="nav-number">01.</span> <span data-i18n="nav.whoami">Who am I</span></a></li>
+        <li><a href="experiences.html"><span class="nav-number">02.</span> <span data-i18n="nav.experience">Experience</span></a></li>
+      </ol>
+      <a href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer" class="mobile-resume-btn"
         data-i18n="nav.curriculum" aria-label="Curriculum - opens in new window">Curriculum</a>
     </div>
   </nav>
@@ -138,6 +153,7 @@
   <script src="js/main.js" defer></script>
   <script src="js/transitions.js" defer></script>
   <script src="js/navigation.js" defer></script>
+  <script src="js/hamburger.js" defer></script>
   <script src="js/titleAnimation.js" defer></script>
 
 </body>
