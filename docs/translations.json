@@ -56,7 +56,7 @@
   "it": {
     "nav": {
       "whoami": "Chi sono",
-      "experience": "Esperienza",
+      "experience": "Esperienze",
       "curriculum": "Curriculum"
     },
     "index": {
@@ -73,8 +73,8 @@
     },
     "consoleEasterEgg": "Se stai leggendo questo messaggio vuol dire che fai il mio stesso lavoro. Perchè non mi contatti e ci prendiamo un caffè?",
     "experiences": {
-      "title": "Esperienze Lavorative",
-      "pageTitle": "Esperienze Lavorative — Luca Palomba",
+      "title": "Esperienze lavorative",
+      "pageTitle": "Esperienze lavorative — Luca Palomba",
       "description": "Esplora le esperienze lavorative di Luca Palomba, inclusi ruoli come Senior Full Stack Developer, R&D Manager e Team Lead.",
       "lead": "Ruoli e progetti selezionati nel corso della mia carriera.",
       "back": "← Indietro",
