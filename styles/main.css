@@ -59,6 +59,9 @@ h1 {
   align-items: center;
   min-height: 100vh;
   pointer-events: none;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 20px;
 }
 
 .page {
@@ -401,13 +404,26 @@ p.lead {
     /* Hide nav links on mobile for now */
   }
 
+  .content-wrapper {
+    padding: 0 40px;
+  }
+
   .hero {
-    padding: 0 25px;
+    padding: 0;
+    max-width: 100%;
   }
 
   .hero-name,
   .hero-title {
     font-size: 40px;
+  }
+
+  .container {
+    padding: 0 40px;
+  }
+
+  .page {
+    padding: 60px 40px;
   }
 }
 
