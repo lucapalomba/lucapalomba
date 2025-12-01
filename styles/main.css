@@ -181,6 +181,15 @@ h1 {
   color: #8892b0;
   margin: 0 0 20px;
   line-height: 1.1;
+  position: relative;
+  min-height: 1.1em;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.hero-title .highlight {
+  color: #B77EF1;
+  font-weight: 600;
 }
 
 .hero-subtitle {
