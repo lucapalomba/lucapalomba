@@ -10,7 +10,7 @@ body {
   /* Default text color*/
   font-family: 'Google Sans Flex', sans-serif;
   font-weight: 100;
-  opacity: 0;
+  opacity: 0.01;
   /* Initial state for transition */
   transition: opacity 0.5s ease-in-out;
 }
@@ -29,7 +29,7 @@ body {
 /* Typography & Shared Components */
 .fancy-name {
   font-family: 'Google Sans Flex', sans-serif;
-  background: linear-gradient(45deg, #6e48aa, #9d50bb);
+  background: linear-gradient(45deg, #B77EF1, #B77EF1);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -43,7 +43,7 @@ h1 {
   /* Default h1 style from experiences.html, can be overridden */
   font-size: 2.6rem;
   margin: 0 0 18px;
-  background: linear-gradient(45deg, #6e48aa, #9d50bb);
+  background: linear-gradient(45deg, #B77EF1, #B77EF1);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -92,7 +92,7 @@ h1 {
 }
 
 .logo a {
-  color: #6e48aa;
+  color: #B77EF1;
   font-family: 'Google Sans Flex', monospace;
   font-size: 1.5rem;
   font-weight: 700;
@@ -123,17 +123,17 @@ h1 {
 }
 
 .nav-links a:hover {
-  color: #9d50bb;
+  color: #B77EF1;
 }
 
 .nav-number {
-  color: #9d50bb;
+  color: #B77EF1;
   margin-right: 5px;
 }
 
 .resume-btn {
-  color: #9d50bb !important;
-  border: 1px solid #9d50bb;
+  color: #B77EF1 !important;
+  border: 1px solid #B77EF1;
   border-radius: 4px;
   padding: 0.75rem 1rem;
   margin-left: 15px;
@@ -141,7 +141,7 @@ h1 {
 }
 
 .resume-btn:hover {
-  background: rgba(157, 80, 187, 0.1);
+  background: rgba(183, 126, 241, 0.1);
 }
 
 /* Hero Section */
@@ -157,7 +157,7 @@ h1 {
 }
 
 .hero-intro {
-  color: #9d50bb;
+  color: #B77EF1;
   font-family: 'Google Sans Flex', monospace;
   font-size: 16px;
   margin: 0 0 30px 4px;
@@ -186,7 +186,7 @@ h1 {
 .hero-subtitle {
   font-size: 20px;
   font-weight: 400;
-  color: #9d50bb;
+  color: #B77EF1;
   margin: 0 0 20px;
   font-family: 'Roboto Mono', monospace;
   letter-spacing: 0.5px;
@@ -201,9 +201,9 @@ h1 {
 }
 
 .hero-cta {
-  color: #9d50bb;
+  color: #B77EF1;
   background-color: transparent;
-  border: 1px solid #9d50bb;
+  border: 1px solid #B77EF1;
   border-radius: 4px;
   padding: 1.25rem 1.75rem;
   font-size: 14px;
@@ -237,7 +237,7 @@ h1 {
 }
 
 .footer a {
-  color: #9d50bb;
+  color: #B77EF1;
   text-decoration: none;
   transition: color 0.3s ease;
 }
@@ -257,7 +257,7 @@ h1 {
 }
 
 .section-number {
-  color: #9d50bb;
+  color: #B77EF1;
   font-family: 'Roboto Mono', monospace;
   font-size: 24px;
   margin-right: 10px;
@@ -276,7 +276,7 @@ p.lead {
   margin: 40px 0;
   padding: 0;
   list-style: none;
-  border-left: 2px solid rgba(157, 80, 187, 0.2);
+  border-left: 2px solid rgba(183, 126, 241, 0.2);
   margin-left: 10px;
 }
 
@@ -293,8 +293,8 @@ p.lead {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #9d50bb;
-  box-shadow: 0 0 10px rgba(157, 80, 187, 0.5);
+  background: #B77EF1;
+  box-shadow: 0 0 10px rgba(183, 126, 241, 0.5);
 }
 
 .timeline-content h3 {
@@ -305,7 +305,7 @@ p.lead {
 }
 
 .timeline-content .company {
-  color: #9d50bb;
+  color: #B77EF1;
 }
 
 .timeline-content .date {
@@ -336,7 +336,7 @@ p.lead {
   content: '▹';
   position: absolute;
   left: 0;
-  color: #9d50bb;
+  color: #B77EF1;
   font-size: 14px;
   line-height: 1.5;
 }
@@ -344,8 +344,8 @@ p.lead {
 .key-project {
   margin: 20px 0;
   padding: 16px 18px;
-  background: linear-gradient(135deg, rgba(110, 72, 170, 0.08), rgba(157, 80, 187, 0.06));
-  border-left: 4px solid #9d50bb;
+  background: linear-gradient(135deg, rgba(183, 126, 241, 0.08), rgba(183, 126, 241, 0.06));
+  border-left: 4px solid #B77EF1;
   border-radius: 6px;
   color: #ccd6f6;
   font-size: 15px;
@@ -354,7 +354,7 @@ p.lead {
 }
 
 .kp-label {
-  color: #9d50bb;
+  color: #B77EF1;
   font-weight: 700;
   margin-right: 8px;
   font-family: 'Roboto Mono', monospace;
@@ -372,12 +372,13 @@ p.lead {
 .tech-stack span {
   font-family: 'Roboto Mono', monospace;
   font-size: 12px;
-  color: #9d50bb;
-  background: rgba(157, 80, 187, 0.1);
+  color: #B77EF1;
+  background: rgba(183, 126, 241, 0.1);
   padding: 5px 12px;
   border-radius: 15px;
   line-height: 1;
 }
+
 
 /* Responsive */
 @media (max-width: 768px) {
