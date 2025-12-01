@@ -27,18 +27,6 @@ body {
 }
 
 /* Typography & Shared Components */
-.fancy-name {
-  font-family: 'Google Sans Flex', sans-serif;
-  background: linear-gradient(45deg, #B77EF1, #B77EF1);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-  letter-spacing: 2px;
-  position: relative;
-  z-index: 2;
-}
-
 h1 {
   /* Default h1 style from experiences.html, can be overridden */
   font-size: 2.6rem;
@@ -446,14 +434,6 @@ p.lead {
   body {
     transition: none !important;
     opacity: 1 !important;
-  }
-
-  .hire-btn {
-    animation: none !important;
-  }
-
-  .smoke {
-    animation: none !important;
   }
 
   .transition-overlay {
