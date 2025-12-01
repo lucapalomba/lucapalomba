@@ -93,4 +93,15 @@ if (Test-Path (Join-Path $sourceDir "manifest.webmanifest")) {
     Copy-Item -Path (Join-Path $sourceDir "manifest.webmanifest") -Destination $distDir
 }
 
+# Copy Sound Files
+Write-Host "Copying sound files..."
+$soundsSourceDir = Join-Path $sourceDir "sounds"
+if (Test-Path $soundsSourceDir) {
+    $soundsDistDir = Join-Path $distDir "sounds"
+    New-Item -ItemType Directory -Path $soundsDistDir -Force | Out-Null
+    Get-ChildItem -Path $soundsSourceDir -Filter "*.mp3" | ForEach-Object {
+        Copy-Item -Path $_.FullName -Destination $soundsDistDir
+    }
+}
+
 Write-Host "Build completed successfully!"
