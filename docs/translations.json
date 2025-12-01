@@ -1,13 +1,21 @@
 {
   "en": {
     "nav": {
-      "experiences": "Work experiences",
-      "hire": "Hire Me"
+      "whoami": "Who am I",
+      "experience": "Experience",
+      "curriculum": "Curriculum"
     },
     "index": {
       "title": "Luca Palomba - Engineering Manager & Web Developer",
       "description": "Portfolio of Luca Palomba, an Engineering Manager, Team Lead, and Web Developer specializing in full-stack development and R&D.",
-      "subtitle": "Engineering Manager • Team Lead • Web Developer"
+      "subtitle": "Engineering Manager • Team Lead • Web Developer",
+      "hero": {
+        "intro": "Hi, my name is",
+        "name": "Luca Palomba.",
+        "title": "I build things for the web.",
+        "bio": "Software engineer with tech-debt-demolisher super-powers: I walk into chaos, straighten things out, and help everyone go home stress-free. Clear goals, clean commits, and no Friday deploys.",
+        "cta": "Check out my projects!"
+      }
     },
     "consoleEasterEgg": "If you are reading this message, it means you do the same job as me. Why don't you contact me and we have a coffee?",
     "experiences": {
@@ -21,8 +29,8 @@
         {
           "date": "Dec 2020 — May 2025",
           "title": "Senior Full Stack Developer • Head of R&D — P&B Linking / Openware PSIM / COGEN S.p.a.S.U",
-          "description": "Led R&D activities and coordinated teams with stakeholders. Organized work using SCRUM, reduced tooling costs by ~50% within one year, led product research, analysis, and design. Managed up to 20 people across 4 product teams (onsite & remote).",
-          "keyProject": "Re-engineered the product for cloud distribution (Docker on K8s) and business continuity."
+          "description": "Led R&D activities and coordinated teams with stakeholders. Organized work using SCRUM. Reduced tooling costs by ~50% within one year. Led product research, analysis, and design. Managed up to 20 people across 4 product teams (onsite & remote).",
+          "keyProject": "Re-engineered the product for cloud distribution (Docker on K8s) in business continuity."
         },
         {
           "date": "Nov 2016 — Nov 2020",
@@ -47,13 +55,21 @@
   },
   "it": {
     "nav": {
-      "experiences": "Esperienze lavorative",
-      "hire": "Contattami"
+      "whoami": "Chi sono",
+      "experience": "Esperienza",
+      "curriculum": "Curriculum"
     },
     "index": {
       "title": "Luca Palomba - Engineering Manager & Web Developer",
       "description": "Portfolio di Luca Palomba, Engineering Manager, Team Lead e Web Developer specializzato in sviluppo full-stack e R&D.",
-      "subtitle": "Engineering Manager • Team Lead • Web Developer"
+      "subtitle": "Engineering Manager • Team Lead • Web Developer",
+      "hero": {
+        "intro": "Ciao, mi chiamo",
+        "name": "Luca Palomba.",
+        "title": "Costruisco cose per il web.",
+        "bio": "Ingegnere del software con super-poteri da tech-debt-demolisher: entro nel caos, metto ordine e aiuto tutti ad andare a casa senza stress. Obiettivi chiari, commit puliti e nessuna messa in produzione il venerdì.",
+        "cta": "Scopri i miei progetti!"
+      }
     },
     "consoleEasterEgg": "Se stai leggendo questo messaggio vuol dire che fai il mio stesso lavoro. Perchè non mi contatti e ci prendiamo un caffè?",
     "experiences": {
@@ -67,8 +83,8 @@
         {
           "date": "Dic 2020 — Mag 2025",
           "title": "Senior Full Stack Developer • Head of R&D — P&B Linking / Openware PSIM / COGEN S.p.a.S.U",
-          "description": "Ho guidato le attività di R&D e coordinato team con gli stakeholder. Organizzato il lavoro usando SCRUM, ridotto i costi degli strumenti del ~50% in un anno, guidato ricerca, analisi e progettazione del prodotto. Gestito fino a 20 persone in 4 team di prodotto (in sede e remoto).",
-          "keyProject": "Re-ingegnerizzato il prodotto per la distribuzione cloud (Docker su K8s) e business continuity."
+          "description": "Ho guidato le attività di R&D e coordinato team con gli stakeholder. Organizzato il lavoro usando SCRUM. Ridotto i costi degli strumenti del ~50% in un anno. Guidato ricerca, analisi e progettazione del prodotto. Gestito fino a 20 persone in 4 team di prodotto (in sede e remoto).",
+          "keyProject": "Re-ingegnerizzato il prodotto per la distribuzione cloud (Docker su K8s) in business continuity."
         },
         {
           "date": "Nov 2016 — Nov 2020",

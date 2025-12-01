@@ -121,28 +121,55 @@ class I18n {
         const dateEl = item.querySelector('.date');
         if (dateEl) dateEl.textContent = job.date;
 
-        // Update title
+        // Update title (handle "Role @ Company" format)
         const titleEl = item.querySelector('h3');
-        if (titleEl) titleEl.innerHTML = job.title;
+        if (titleEl) {
+          // Split title into role and company parts
+          const titleParts = job.title.split(' — ');
+          if (titleParts.length === 2) {
+            const [role, company] = titleParts;
+            titleEl.innerHTML = `${role} <span class="company">@ ${company}</span>`;
+          } else {
+            titleEl.innerHTML = job.title;
+          }
+        }
 
-        // Update description
-        const descEl = item.querySelector('p:not(.key-project)');
-        if (descEl) descEl.innerHTML = job.description;
+        // Update job description (convert to bullet points)
+        const descriptionList = item.querySelector('.job-description');
+        if (descriptionList && job.description) {
+          // Split description by sentences or line breaks
+          const bullets = job.description
+            .split(/\.\s+/)
+            .filter(text => text.trim().length > 0)
+            .map(text => text.trim() + (text.endsWith('.') ? '' : '.'));
+
+          descriptionList.innerHTML = bullets
+            .map(bullet => `<li>${bullet}</li>`)
+            .join('');
+        }
 
         // Update key project if exists
         const keyProjectEl = item.querySelector('.key-project');
-        if (keyProjectEl && job.keyProject) {
-          const labelEl = keyProjectEl.querySelector('.kp-label');
-          if (labelEl) labelEl.textContent = this.t('experiences.keyProject');
+        if (job.keyProject) {
+          if (!keyProjectEl) {
+            // Create key project element if it doesn't exist
+            const kpDiv = document.createElement('div');
+            kpDiv.className = 'key-project';
+            kpDiv.innerHTML = `<span class="kp-label">${this.t('experiences.keyProject')}</span> ${job.keyProject}`;
 
-          // Update the text after the label
-          const textNode = Array.from(keyProjectEl.childNodes).find(
-            node => node.nodeType === Node.TEXT_NODE
-          );
-          if (textNode) {
-            textNode.textContent = ' ' + job.keyProject;
+            // Insert before tech-stack
+            const techStack = item.querySelector('.tech-stack');
+            if (techStack) {
+              techStack.parentNode.insertBefore(kpDiv, techStack);
+            } else {
+              item.querySelector('.timeline-content').appendChild(kpDiv);
+            }
+          } else {
+            // Update existing key project - clear and rebuild to ensure proper order
+            keyProjectEl.innerHTML = `<span class="kp-label">${this.t('experiences.keyProject')}</span> ${job.keyProject}`;
           }
-        } else if (keyProjectEl && !job.keyProject) {
+        } else if (keyProjectEl) {
+          // Remove key project if job doesn't have one
           keyProjectEl.remove();
         }
       }

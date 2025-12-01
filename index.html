@@ -40,7 +40,7 @@
 
   <!-- Styles -->
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,100..1000&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,100..1000&family=Roboto+Mono:wght@400;500;700&display=swap">
   <link rel="stylesheet" href="styles/transitions.css">
   <link rel="stylesheet" href="styles/main.css">
 </head>
@@ -58,22 +58,46 @@
   <!-- Particles.js Container -->
   <div id="particles-js"></div>
 
-  <div class="content-wrapper">
-    <h1 class="fancy-name" style="text-align: center; font-size: 4em;">
-      Luca Palomba
-      <span style="display: block; font-size: 0.4em; margin-top: 1rem;" data-i18n="index.subtitle">
-        { Engineering Manager • Team Lead • Web Developer }
-      </span>
-    </h1>
-  </div>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">
+      <a href="index.html">&lt;LP /&gt;</a>
+    </div>
+    <div class="nav-links">
+      <ol>
+        <li><a href="index.html"><span class="nav-number">01.</span> <span data-i18n="nav.whoami">Who am I</span></a>
+        </li>
+        <li><a href="experiences.html"><span class="nav-number">02.</span> <span
+              data-i18n="nav.experience">Experience</span></a></li>
+      </ol>
+      <a href="https://www.linkedin.com/in/luca-palomba/" target="_blank" rel="noopener noreferrer" class="resume-btn"
+        data-i18n="nav.curriculum">Curriculum</a>
+    </div>
+  </nav>
 
-  <!-- Floating action buttons -->
-  <div class="floating-actions" aria-hidden="false">
-    <a class="floating-btn" href="experiences.html" data-i18n="nav.experiences" data-i18n-aria="nav.experiences"
-      aria-label="Work experiences">Work experiences</a>
-    <a class="hire-btn" href="https://www.linkedin.com/in/lucapalomba" target="_blank" rel="noopener noreferrer"
-      data-i18n="nav.hire" data-i18n-aria="nav.hire" aria-label="Hire me on LinkedIn">Hire Me</a>
-  </div>
+  <!-- Main Content -->
+  <main class="content-wrapper">
+    <section class="hero">
+      <p class="hero-intro" data-i18n="index.hero.intro">Hi, my name is</p>
+      <h1 class="hero-name" data-i18n="index.hero.name">Luca Palomba.</h1>
+      <h2 class="hero-title" data-i18n="index.hero.title">I build things for the web.</h2>
+      <h3 class="hero-subtitle" data-i18n="index.subtitle">Engineering Manager • Team Lead • Web Developer</h3>
+      <p class="hero-bio" data-i18n="index.hero.bio">
+        I'm a software engineer specializing in building (and occasionally designing) exceptional digital experiences.
+        Currently, I'm focused on building accessible, human-centered products.
+      </p>
+      <a href="experiences.html" class="hero-cta" data-i18n="index.hero.cta">Check out my projects!</a>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>
+      Designed and Built by Luca Palomba using <a href="https://stitch.withgoogle.com/" target="_blank"
+        rel="noopener noreferrer">Stitch</a>.<br>
+      Inspired by the web's coolest nerds.
+    </p>
+  </footer>
 
   <!-- Scripts -->
   <script src="js/i18n.js" defer></script>
