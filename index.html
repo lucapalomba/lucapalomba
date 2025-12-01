@@ -74,6 +74,9 @@
 
 <body>
 
+  <!-- Skip to main content link for keyboard navigation -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- Transition Overlay -->
   <div class="transition-overlay">
     <div class="color-fill"></div>
@@ -90,20 +93,20 @@
     <div class="logo">
       <a href="index.html">&lt;LP /&gt;</a>
     </div>
-    <div class="nav-links">
+    <div class="nav-links" aria-label="Main navigation">
       <ol>
-        <li><a href="index.html"><span class="nav-number">01.</span> <span data-i18n="nav.whoami">Who am I</span></a>
+        <li><a href="index.html" aria-current="page"><span class="nav-number">01.</span> <span data-i18n="nav.whoami">Who am I</span></a>
         </li>
         <li><a href="experiences.html"><span class="nav-number">02.</span> <span
               data-i18n="nav.experience">Experience</span></a></li>
       </ol>
       <a href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer" class="resume-btn"
-        data-i18n="nav.curriculum">Curriculum</a>
+        data-i18n="nav.curriculum" aria-label="Curriculum - opens in new window">Curriculum</a>
     </div>
   </nav>
 
   <!-- Main Content -->
-  <main class="content-wrapper">
+  <main class="content-wrapper" id="main-content">
     <section class="hero">
       <p class="hero-intro" data-i18n="index.hero.intro">Hi, my name is</p>
       <h1 class="hero-name" data-i18n="index.hero.name">Luca Palomba.</h1>

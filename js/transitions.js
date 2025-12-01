@@ -11,7 +11,7 @@ class PageTransition {
   }
 
   setupLinks() {
-    document.querySelectorAll('a:not([target="_blank"])').forEach(link => {
+    document.querySelectorAll('a:not([target="_blank"]):not(.skip-link)').forEach(link => {
       link.addEventListener('click', (e) => {
         if (link.hostname === window.location.hostname) {
           e.preventDefault();

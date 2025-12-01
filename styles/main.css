@@ -15,6 +15,23 @@ body {
   transition: opacity 0.5s ease-in-out;
 }
 
+/* Skip to content link - hidden but accessible to keyboard users */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #B77EF1;
+  color: #0a0a0f;
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: 100;
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
 /* Particles Container */
 #particles-js {
   position: fixed;
@@ -117,6 +134,17 @@ h1 {
   color: #B77EF1;
 }
 
+.nav-links a:focus {
+  outline: 2px solid #B77EF1;
+  outline-offset: 2px;
+}
+
+/* Indicate current page for screen readers and keyboard users */
+.nav-links a[aria-current="page"] {
+  border-bottom: 2px solid #B77EF1;
+  padding-bottom: 4px;
+}
+
 .nav-number {
   color: #B77EF1;
   margin-right: 5px;
@@ -133,6 +161,11 @@ h1 {
 
 .resume-btn:hover {
   background: rgba(183, 126, 241, 0.1);
+}
+
+.resume-btn:focus {
+  outline: 2px solid #B77EF1;
+  outline-offset: 2px;
 }
 
 /* Hero Section */
@@ -217,6 +250,11 @@ h1 {
 
 .hero-cta:hover {
   background-color: rgba(157, 80, 187, 0.1);
+}
+
+.hero-cta:focus {
+  outline: 2px solid #B77EF1;
+  outline-offset: 2px;
 }
 
 /* Footer */
