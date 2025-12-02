@@ -95,8 +95,10 @@
     <div class="logo">
       <a href="index.html">&lt;LP /&gt;</a>
     </div>
-    <button class="hamburger-menu" id="hamburger-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <button class="hamburger-menu" id="hamburger-toggle" aria-label="Toggle navigation menu" aria-expanded="false"
+      aria-controls="mobile-nav">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
         <line x1="3" y1="6" x2="21" y2="6"></line>
         <line x1="3" y1="12" x2="21" y2="12"></line>
         <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -114,11 +116,14 @@
     </div>
     <div class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
       <ol>
-        <li><a href="index.html"><span class="nav-number">01.</span> <span data-i18n="nav.whoami">Who am I</span></a></li>
-        <li><a href="experiences.html" aria-current="page"><span class="nav-number">02.</span> <span data-i18n="nav.experience">Experience</span></a></li>
+        <li><a href="index.html"><span class="nav-number">01.</span> <span data-i18n="nav.whoami">Who am I</span></a>
+        </li>
+        <li><a href="experiences.html" aria-current="page"><span class="nav-number">02.</span> <span
+              data-i18n="nav.experience">Experience</span></a></li>
       </ol>
-      <a href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer" class="mobile-resume-btn"
-        data-i18n="nav.curriculum" aria-label="Curriculum - opens in new window">Curriculum</a>
+      <a href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer"
+        class="mobile-resume-btn" data-i18n="nav.curriculum"
+        aria-label="Curriculum - opens in new window">Curriculum</a>
     </div>
   </nav>
 
@@ -239,10 +244,13 @@
     </p>
   </footer>
 
+  <!-- Navigation Hint -->
+  <div id="navigation-hint" class="navigation-hint" aria-hidden="true"></div>
+
   <!-- Scripts -->
   <!-- Critical: Translation system (needed immediately for content) -->
   <script src="js/i18n.js" defer></script>
-  
+
   <!-- Non-critical: Defer particles and animations until after page is interactive -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
   <script src="js/main.js" defer></script>

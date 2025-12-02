@@ -48,4 +48,29 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add a small delay or transition effect if needed, but for now direct navigation
         window.location.href = url;
     }
+
+    // Navigation Hint Logic
+    const navHint = document.getElementById('navigation-hint');
+    if (navHint) {
+        const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        
+        if (isTouch) {
+            navHint.innerHTML = 'Swipe <kbd>←</kbd> <kbd>→</kbd> to navigate';
+        } else {
+            navHint.innerHTML = 'Use keyboard arrows <kbd>←</kbd> <kbd>→</kbd> to navigate';
+        }
+        
+        // Show the hint
+        navHint.setAttribute('aria-hidden', 'false');
+
+        // Fade out and remove after 5 seconds
+        setTimeout(() => {
+            navHint.classList.add('fade-out');
+            
+            // Remove from DOM after transition (1s)
+            setTimeout(() => {
+                navHint.remove();
+            }, 1000);
+        }, 5000);
+    }
 });
