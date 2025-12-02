@@ -3,6 +3,7 @@
     "nav": {
       "whoami": "Who am I",
       "experience": "Experience",
+      "contact": "Contact",
       "curriculum": "Curriculum"
     },
     "index": {
@@ -51,12 +52,18 @@
           "keyProject": null
         }
       ]
+    },
+    "contact": {
+      "title": "Get In Touch",
+      "pageTitle": "Contact — Luca Palomba",
+      "description": "I'm currently open to new opportunities and collaborations. Feel free to reach out — my inbox is always open, whether you have a question or just want to say hi."
     }
   },
   "it": {
     "nav": {
       "whoami": "Chi sono",
       "experience": "Esperienze",
+      "contact": "Contatti",
       "curriculum": "Curriculum"
     },
     "index": {
@@ -105,6 +112,11 @@
           "keyProject": null
         }
       ]
+    },
+    "contact": {
+      "title": "Mettiti in contatto",
+      "pageTitle": "Contatti — Luca Palomba",
+      "description": "Sono attualmente aperto a nuove opportunità e collaborazioni. Sentiti libero di contattarmi — la mia casella di posta è sempre aperta, che tu abbia una domanda o voglia solo salutare."
     }
   }
 }

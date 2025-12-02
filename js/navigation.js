@@ -1,14 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Define page order for navigation (matches navigation bar order)
+    const pages = [
+        { name: 'index', url: 'index.html', check: (path) => path.endsWith('index.html') || path.endsWith('/') || path.endsWith('lucapalomba/') },
+        { name: 'experiences', url: 'experiences.html', check: (path) => path.endsWith('experiences.html') },
+        { name: 'contact', url: 'contact.html', check: (path) => path.endsWith('contact.html') }
+    ];
+
     const path = window.location.pathname;
-    const isIndex = path.endsWith('index.html') || path.endsWith('/') || path.endsWith('lucapalomba/');
-    const isExperiences = path.endsWith('experiences.html');
+    const currentPageIndex = pages.findIndex(page => page.check(path));
 
     // Keyboard Navigation
     document.addEventListener('keydown', (e) => {
-        if (isIndex && e.key === 'ArrowRight') {
-            navigateTo('experiences.html');
-        } else if (isExperiences && e.key === 'ArrowLeft') {
-            navigateTo('index.html');
+        if (currentPageIndex === -1) return;
+
+        if (e.key === 'ArrowRight') {
+            // Navigate to next page (circular)
+            const nextIndex = (currentPageIndex + 1) % pages.length;
+            navigateTo(pages[nextIndex].url);
+        } else if (e.key === 'ArrowLeft') {
+            // Navigate to previous page (circular)
+            const prevIndex = (currentPageIndex - 1 + pages.length) % pages.length;
+            navigateTo(pages[prevIndex].url);
         }
     });
 
@@ -27,25 +39,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 
     function handleSwipe() {
+        if (currentPageIndex === -1) return;
+
         const distance = touchEndX - touchStartX;
 
         if (Math.abs(distance) < minSwipeDistance) return;
 
         if (distance > 0) {
-            // Swipe Right (Left to Right)
-            if (isExperiences) {
-                navigateTo('index.html');
-            }
+            // Swipe Right (go to previous page)
+            const prevIndex = (currentPageIndex - 1 + pages.length) % pages.length;
+            navigateTo(pages[prevIndex].url);
         } else {
-            // Swipe Left (Right to Left)
-            if (isIndex) {
-                navigateTo('experiences.html');
-            }
+            // Swipe Left (go to next page)
+            const nextIndex = (currentPageIndex + 1) % pages.length;
+            navigateTo(pages[nextIndex].url);
         }
     }
 
     function navigateTo(url) {
-        // Add a small delay or transition effect if needed, but for now direct navigation
         window.location.href = url;
     }
 
@@ -53,20 +64,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const navHint = document.getElementById('navigation-hint');
     if (navHint) {
         const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-        
+
         if (isTouch) {
             navHint.innerHTML = 'Swipe <kbd>←</kbd> <kbd>→</kbd> to navigate';
         } else {
             navHint.innerHTML = 'Use keyboard arrows <kbd>←</kbd> <kbd>→</kbd> to navigate';
         }
-        
+
         // Show the hint
         navHint.setAttribute('aria-hidden', 'false');
 
         // Fade out and remove after 5 seconds
         setTimeout(() => {
             navHint.classList.add('fade-out');
-            
+
             // Remove from DOM after transition (1s)
             setTimeout(() => {
                 navHint.remove();
