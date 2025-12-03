@@ -42,13 +42,13 @@
         {
           "date": "Oct 2013 — 2014",
           "title": "Full Stack Developer — DuckMa s.r.l.",
-          "description": "Backend API development (Node.js, PHP), PWA and Ionic integrations, and UI/UX design for PHONOTTO.",
+          "description": "Backend API development (Node.js, PHP). Hybrid Application development with PWA and Ionic. UI/UX designer for PHONOTTO.",
           "keyProject": null
         },
         {
           "date": "Dec 2007 — Sep 2012",
           "title": "Web Developer — System 2000 s.r.l. / Associati s.r.l.",
-          "description": "IT consultancy for regional/national projects, .NET development for healthcare management systems, and data visualization work for the VIGILO wearable sensors project.",
+          "description": "IT consultancy for regional/national projects. .NET development for healthcare management systems. Data analyst for the VIGILO wearable sensors project.",
           "keyProject": null
         }
       ]
@@ -102,13 +102,13 @@
         {
           "date": "Ott 2013 — 2014",
           "title": "Full Stack Developer — DuckMa s.r.l.",
-          "description": "Sviluppo API backend (Node.js, PHP), integrazioni PWA e Ionic, e design UI/UX per PHONOTTO.",
+          "description": "Sviluppo API backend (Node.js, PHP). Sviluppo Applicazioni Ibride con Ionic e PWA. Designer UI/UX per PHONOTTO.",
           "keyProject": null
         },
         {
           "date": "Dic 2007 — Set 2012",
           "title": "Web Developer — System 2000 s.r.l. / Associati s.r.l.",
-          "description": "Consulenza IT per progetti regionali/nazionali, sviluppo .NET per sistemi di gestione sanitaria e lavoro di visualizzazione dati per il progetto sensori indossabili VIGILO.",
+          "description": "Consulenza IT per progetti regionali/nazionali. Sviluppo .NET per sistemi di gestione sanitaria. Data analyst per il progetto sensori indossabili VIGILO.",
           "keyProject": null
         }
       ]
