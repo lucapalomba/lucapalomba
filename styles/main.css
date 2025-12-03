@@ -168,6 +168,7 @@ h1 {
 .nav-number {
   color: var(--accent-color);
   margin-right: 5px;
+  font-family: var(--font-mono);
 }
 
 .resume-btn {
