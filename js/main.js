@@ -1,9 +1,9 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // Initialize Particles.js
   if (window.particlesJS) {
     // Detect if on mobile/tablet
     const isMobile = window.innerWidth <= 768;
-    const particleCount = isMobile ? 30 : 50;
+    const particleCount = isMobile ? 30 : 70;
     const enableHover = !isMobile;
 
     particlesJS('particles-js', {
@@ -19,18 +19,42 @@ document.addEventListener('DOMContentLoaded', function() {
           "value": "#6e48aa"
         },
         "shape": {
-          "type": "circle"
+          "type": "circle",
+          "stroke": {
+            "width": 0,
+            "color": "#000000"
+          },
+          "polygon": {
+            "nb_sides": 5
+          },
+          "image": {
+            "src": "img/github.svg",
+            "width": 100,
+            "height": 100
+          }
         },
         "opacity": {
-          "value": 0.5,
-          "random": false
+          "value": 1,
+          "random": true,
+          "anim": {
+            "enable": true,
+            "speed": 1,
+            "opacity_min": 0,
+            "sync": false
+          }
         },
         "size": {
           "value": 3,
-          "random": true
+          "random": true,
+          "anim": {
+            "enable": false,
+            "speed": 4,
+            "size_min": 0.3,
+            "sync": false
+          }
         },
         "line_linked": {
-          "enable": true,
+          "enable": false,
           "distance": 150,
           "color": "#9d50bb",
           "opacity": 0.4,
@@ -43,7 +67,12 @@ document.addEventListener('DOMContentLoaded', function() {
           "random": false,
           "straight": false,
           "out_mode": "out",
-          "bounce": false
+          "bounce": false,
+          "attract": {
+            "enable": false,
+            "rotateX": 600,
+            "rotateY": 600
+          }
         }
       },
       "interactivity": {
@@ -80,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Show content after a delay (Fade in)
-  setTimeout(function() {
+  setTimeout(function () {
     document.body.style.opacity = '1';
   }, 300);
 
