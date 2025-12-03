@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Luca Palomba</title>
+    <meta name="description" content="Page not found.">
+
+    <!-- Favicon / icons -->
+    <link rel="icon" href="https://github.com/lucapalomba.png" sizes="any">
+    <link rel="icon" href="https://github.com/lucapalomba.png?s=32" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="https://github.com/lucapalomba.png" sizes="180x180">
+    <link rel="shortcut icon" href="https://github.com/lucapalomba.png">
+    <meta name="theme-color" content="#0a0a0f">
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Styles -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100;600;700&family=Roboto+Mono:wght@400;700&display=swap">
+    <link rel="stylesheet" href="styles/transitions.css">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body class="not-found-page">
+
+    <!-- Skip to main content link for keyboard navigation -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Transition Overlay -->
+    <div class="transition-overlay">
+        <div class="color-fill"></div>
+        <div class="smoke-container">
+            <div class="smoke"></div>
+        </div>
+    </div>
+
+    <!-- Particles.js Container -->
+    <div id="particles-js"></div>
+
+    <!-- Navigation - Logo Only -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">&lt;LP /&gt;</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="error-page" id="main-content">
+        <h1 class="error-code" data-i18n="notFound.code">404</h1>
+        <h2 class="error-title" data-i18n="notFound.title">Page Not Found</h2>
+        <p class="error-desc" data-i18n="notFound.description">The page you are looking for might have been removed,
+            had its name changed, or is temporarily unavailable.</p>
+        <a href="index.html" class="home-btn" data-i18n="notFound.homeButton">Go back home</a>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>
+            Designed and Built by Luca Palomba using <a href="https://stitch.withgoogle.com/" target="_blank"
+                rel="noopener noreferrer">Stitch</a>.<br>
+            Inspired by the web's coolest nerds.
+        </p>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- Critical: Translation system (needed immediately for content) -->
+    <script src="js/i18n.js" defer></script>
+
+    <!-- Non-critical: Defer particles and animations until after page is interactive -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/transitions.js" defer></script>
+
+</body>
+
+</html>
