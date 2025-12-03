@@ -23,23 +23,36 @@ For this project, I am using Continue.dev locally on my machine. The environment
 
 ## Online AI Assistant
 
-In addition to local models, I'm also using **Claude Sonnet 4.5** by Anthropic as an online AI assistant for this project. Claude Sonnet 4.5 is part of the Claude 4 model family and provides:
+In addition to local models, I'm using multiple online AI assistants for this project:
+
+### Claude Sonnet 4.5 (Anthropic)
+
+**Claude Sonnet 4.5** is part of the Claude 4 model family and provides:
 
 - Advanced code review and refactoring suggestions
 - English grammar and professional tone improvements
 - Git commit message generation following conventional commit standards
 - Documentation writing and technical content refinement
 
-Claude assists in maintaining code quality and ensuring professional presentation across all project materials.
+### Gemini with Antigravity (Google)
+
+**Gemini with Antigravity** is Google's advanced AI coding assistant that offers:
+
+- Agentic workflow with autonomous task planning and execution
+- Multi-step code refactoring and implementation
+- Intelligent codebase understanding and navigation
+- Automated testing and verification
+- Real-time browser automation for UI development and testing
+
+Both assistants work together to maintain code quality, ensure professional presentation, and accelerate development across all project materials.
 
 ## Technologies Used
 
 - HTML
 - CSS (Styling with keyframes for animations)
 - JavaScript
-- React (for dynamic components where applicable)
 
-## Using No Stitch (by Google) to Refactor Website Graphics
+## Using Stitch (by Google) to Refactor Website Graphics
 
 I recently refactored the graphics of my first website using a tool called Stitch (by Google). This tool helped me streamline the design process by automating certain tasks, improving visual consistency, and enhancing overall project efficiency. Below is a brief summary of the changes:
 
