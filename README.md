@@ -7,7 +7,7 @@ Engineering Manager • Team Lead • Web Developer
 ## 🔗 Useful Links
 
 - 💼 [LinkedIn](https://linkedin.com/in/lucapalomba)
-- 📫 [Email](mailto:luca.palomba.associati+github@gmail.com)
+- 📫 [Email](mailto:luca.palomba.developer@gmail.com)
 
 ## Description
 
