@@ -2,6 +2,7 @@
     "nav": {
         "whoami": "Chi sono",
         "experience": "Esperienze",
+        "technologies": "Tecnologie",
         "contact": "Contatti",
         "curriculum": "Curriculum"
     },
@@ -51,6 +52,44 @@
                 "keyProject": null
             }
         ]
+    },
+    "technologies": {
+        "title": "Tecnologie",
+        "pageTitle": "Tecnologie — Luca Palomba",
+        "description": "Esplora le tecnologie con cui Luca Palomba ha esperienza e quelle che è entusiasta di imparare.",
+        "lead": "Una lista selezionata di tecnologie con cui ho lavorato e quelle che sto ( o dovrei ) approfondire",
+        "experiencedTitle": "Tecnologie con Esperienza",
+        "learningTitle": "Tecnologie da Studiare",
+        "tech": {
+            "jsNode": "JavaScript (Node.js + TypeScript)",
+            "react": "Frontend Architecture (React.js, jQuery, Vanilla JS)",
+            "cloudK8s": "Cloud & Distributed Systems (Docker, Kubernetes)",
+            "php": "PHP (Symfony, Zend, legacy-to-modern)",
+            "cicd": "CI/CD & Automation (Jenkins, GitLab, Bamboo)"
+        },
+        "desc": {
+            "jsNode": "È il linguaggio/stack che si ripresenta più volte nella mia carriera: backend, automation, integrazioni, progetti cloud, PWA, orchestrazione. Forse non conosco tutto e Typescript mi sorprende ogni volta, ma ormai JS è la mia casa.",
+            "react": "Ho guidato team frontend, definito componenti RAD, reingegnerizzato prodotti, sviluppato PWA. Conosci ciclo di vita, rendering, strutturazione architetture UI complesse.",
+            "cloudK8s": "Nele mie ultime esperienze ho portato un prodotto nativamente distribuito su K8s con 100+ macchine, pipeline, containerizzazione e business continuity. Non sono un DevOps puro, ma ho esperienza concreta di architetture reali.",
+            "php": "Ho sviluppato e mantenuto API Zend per anni. Ultimamente ho lavorato con Symfony per progetti di medie dimensioni. Anche se oggi è meno centrale per me, il livello è sicuramente esperto.",
+            "cicd": "Ho introdotto automazioni, selezionato strumenti, ottimizzato pipeline e processi interni. Competenza solida, anche lato processi e R&D."
+        },
+        "learning": {
+            "python": "Python",
+            "architectures": "Architetture evolute (DDD, Event-Driven, CQRS)",
+            "wasm": "WebAssembly (WASM)",
+            "ml": "Machine Learning",
+            "cloud": "Cloud provider deep dive (AWS, GCP, Azure)",
+            "dotnetJava": ".NET o Java"
+        },
+        "learningDesc": {
+            "python": "Sto approfondendo Python per ampliare le mie competenze nell'automazione, nella creazione di strumenti interni e nell'integrazione con ecosistemi AI, dove questo linguaggio è diventato lo standard de facto.",
+            "architectures": "Approfondisco le architetture evolute per aumentare la robustezza, la scalabilità e la chiarezza dei sistemi complessi che gestisco, migliorando la qualità delle decisioni tecniche e dei processi di progettazione.",
+            "wasm": "Studio WebAssembly per valutare nuove soluzioni ad alte prestazioni nel browser e in contesti server-side, con l'obiettivo di portare efficienza e portabilità in scenari distribuiti e real-time.",
+            "ml": "Mi sto focalizzando sul Machine Learning per potenziare le capacità predittive e analitiche dei prodotti che seguo, integrando intelligenza nei flussi decisionali e negli automatismi interni.",
+            "cloud": "Approfondisco i principali cloud provider per consolidare le competenze architetturali su servizi gestiti, sicurezza, networking e scalabilità, fondamentali per supportare soluzioni enterprise moderne.",
+            "dotnetJava": "Perché il mondo ne ha ancora bisogno!"
+        }
     },
     "contact": {
         "title": "Mettiti in contatto",

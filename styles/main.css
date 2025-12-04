@@ -400,7 +400,8 @@ h1 {
 
 @media (max-width: 768px) {
   .hero-title {
-    min-height: 4em; /* set minimum height to 2 lines on mobile devices */
+    min-height: 4em;
+    /* set minimum height to 2 lines on mobile devices */
   }
 }
 
@@ -588,6 +589,136 @@ p.lead {
   line-height: 1;
 }
 
+/* Technologies Page Styles */
+.tech-section {
+  margin-bottom: 60px;
+  pointer-events: auto;
+}
+
+.tech-section-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  margin-bottom: 30px;
+  margin-top: 0;
+}
+
+.tech-progress-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.tech-progress-item {
+  width: 100%;
+}
+
+.tech-description {
+  margin-top: 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.tech-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.tech-name {
+  font-size: 18px;
+  color: var(--text-tertiary);
+  font-weight: 600;
+}
+
+.tech-percentage {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: var(--accent-color);
+  font-weight: 700;
+}
+
+.tech-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(var(--accent-color-rgb), 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.tech-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6e48aa, var(--accent-color));
+  border-radius: 10px;
+  width: 0%;
+  transition: width 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  position: relative;
+  box-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.5);
+}
+
+.tech-progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.learning-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.learning-item {
+  padding: 0;
+}
+
+.learning-title {
+  font-size: 18px;
+  color: var(--text-tertiary);
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  position: relative;
+  padding-left: 24px;
+}
+
+.learning-title::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
+  font-size: 18px;
+}
+
+.learning-description {
+  margin: 0;
+  padding-left: 24px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
 /* Navigation Hint Overlay */
 .navigation-hint {
   position: fixed;
@@ -672,7 +803,8 @@ p.lead {
   }
 
   .hero-bio {
-    line-height: 1.5; /* adjust line height for better readability on mobile devices */
+    line-height: 1.5;
+    /* adjust line height for better readability on mobile devices */
   }
 
   @media (max-width: 640px) {
@@ -1002,113 +1134,113 @@ p.lead {
     transform: translate(0);
     opacity: 1;
   }
-  
+
   10% {
     transform: translate(-2px, 2px);
     opacity: 0.8;
   }
-  
+
   15% {
     transform: translate(2px, -2px);
     opacity: 0.9;
   }
-  
+
   20% {
     transform: translate(-1px, -1px);
     opacity: 0.85;
-    text-shadow: 
+    text-shadow:
       -2px 0 var(--accent-color),
       2px 0 rgba(var(--accent-color-rgb), 0.5);
   }
-  
+
   25% {
     transform: translate(1px, 1px);
     opacity: 0.95;
   }
-  
+
   30% {
     transform: translate(0);
     opacity: 1;
     filter: blur(1px);
   }
-  
+
   35% {
     transform: translate(-3px, 0);
     opacity: 0.7;
     letter-spacing: 3px;
   }
-  
+
   40% {
     transform: translate(3px, 0);
     opacity: 0.8;
     letter-spacing: -2px;
   }
-  
+
   45% {
     transform: translate(0);
     opacity: 1;
     filter: blur(0);
     letter-spacing: normal;
   }
-  
+
   50% {
     transform: translate(-1px, 1px) skew(1deg);
     opacity: 0.9;
-    text-shadow: 
+    text-shadow:
       -3px 0 rgba(var(--accent-color-rgb), 0.7),
       3px 0 rgba(var(--accent-color-rgb), 0.3);
   }
-  
+
   55% {
     transform: translate(1px, -1px) skew(-1deg);
     opacity: 0.85;
   }
-  
+
   60% {
     transform: translate(0) skew(0);
     opacity: 1;
     text-shadow: none;
   }
-  
+
   65% {
     transform: translate(-2px, 0);
     opacity: 0.75;
     filter: blur(2px);
   }
-  
+
   70% {
     transform: translate(2px, 0);
     opacity: 0.8;
   }
-  
+
   75% {
     transform: translate(0);
     opacity: 1;
     filter: blur(0);
   }
-  
+
   80% {
     transform: translate(-1px, -1px);
     opacity: 0.9;
     letter-spacing: 2px;
   }
-  
+
   85% {
     transform: translate(1px, 1px);
     opacity: 0.95;
     letter-spacing: normal;
   }
-  
+
   90% {
     transform: translate(0);
     opacity: 1;
   }
-  
+
   95% {
     transform: translate(-1px, 0);
     opacity: 0.98;
   }
-  
+
   100% {
     transform: translate(0);
     opacity: 1;
