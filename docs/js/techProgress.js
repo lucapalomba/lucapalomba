@@ -1,0 +1,1 @@
+window.addEventListener('load', () => { if (document.body.classList.contains('technologies-page')) { const progressBars = document.querySelectorAll('.tech-progress-fill'); setTimeout(() => { progressBars.forEach(progressFill => { const targetProgress = progressFill.getAttribute('data-progress'); progressFill.style.width = `${targetProgress}%`; }); }, 100); } });
