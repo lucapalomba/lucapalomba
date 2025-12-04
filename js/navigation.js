@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pages = [
         { name: 'index', url: 'index.html', check: (path) => path.endsWith('index.html') || path.endsWith('/') || path.endsWith('lucapalomba/') },
         { name: 'experiences', url: 'experiences.html', check: (path) => path.endsWith('experiences.html') },
+        { name: 'technologies', url: 'technologies.html', check: (path) => path.endsWith('technologies.html') },
         { name: 'contact', url: 'contact.html', check: (path) => path.endsWith('contact.html') }
     ];
 

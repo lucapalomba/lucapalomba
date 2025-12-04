@@ -93,12 +93,20 @@ class I18n {
 
   // Update page meta tags
   updateMetaTags() {
-    const page = document.body.classList.contains('experiences-page') ? 'experiences' : 'index';
+    let page = 'index';
+    if (document.body.classList.contains('experiences-page')) {
+      page = 'experiences';
+    } else if (document.body.classList.contains('technologies-page')) {
+      page = 'technologies';
+    } else if (document.body.classList.contains('contact-page')) {
+      page = 'contact';
+    }
 
     // Update title
     const titleElement = document.querySelector('title');
     if (titleElement) {
-      titleElement.textContent = this.t(`${page}.${page === 'experiences' ? 'pageTitle' : 'title'}`);
+      const titleKey = (page === 'index') ? 'title' : 'pageTitle';
+      titleElement.textContent = this.t(`${page}.${titleKey}`);
     }
 
     // Update meta description
