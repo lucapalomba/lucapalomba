@@ -27,25 +27,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // Touch Navigation (Swipe)
     let touchStartX = 0;
     let touchEndX = 0;
-    const minSwipeDistance = 50;
+    let touchStartY = 0;
+    let touchEndY = 0;
+    const minSwipeDistance = 100; // Increased from 50 to reduce sensitivity
 
     document.addEventListener('touchstart', (e) => {
         touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
     }, { passive: true });
 
     document.addEventListener('touchend', (e) => {
         touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
         handleSwipe();
     }, { passive: true });
 
     function handleSwipe() {
         if (currentPageIndex === -1) return;
 
-        const distance = touchEndX - touchStartX;
+        const distanceX = touchEndX - touchStartX;
+        const distanceY = touchEndY - touchStartY;
 
-        if (Math.abs(distance) < minSwipeDistance) return;
+        // Check if horizontal swipe distance meets minimum threshold
+        if (Math.abs(distanceX) < minSwipeDistance) return;
 
-        if (distance > 0) {
+        // Ensure it's a horizontal swipe (horizontal movement > 1.5x vertical movement)
+        // This prevents triggering navigation when scrolling vertically
+        if (Math.abs(distanceX) < Math.abs(distanceY) * 1.5) return;
+
+        if (distanceX > 0) {
             // Swipe Right (go to previous page)
             const prevIndex = (currentPageIndex - 1 + pages.length) % pages.length;
             navigateTo(pages[prevIndex].url);
