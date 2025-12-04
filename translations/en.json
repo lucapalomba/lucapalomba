@@ -1,0 +1,67 @@
+{
+    "nav": {
+        "whoami": "Who am I",
+        "experience": "Experience",
+        "contact": "Contact",
+        "curriculum": "Curriculum"
+    },
+    "index": {
+        "title": "Luca Palomba - Engineering Manager & Web Developer",
+        "description": "Portfolio of Luca Palomba, an Engineering Manager, Team Lead, and Web Developer specializing in full-stack development and R&D.",
+        "subtitle": "Engineering Manager • Team Lead • Web Developer",
+        "hero": {
+            "intro": "Hi, my name is",
+            "name": "Luca Palomba.",
+            "title": "I build things for the web.",
+            "bio": "Software engineer with tech-debt-demolisher super-powers: I walk into chaos, straighten things out, and help everyone go home stress-free. Clear goals, clean commits, and no Friday deploys.",
+            "cta": "Check out my projects!"
+        }
+    },
+    "consoleEasterEgg": "If you are reading this message, it means you do the same job as me. Why don't you contact me and we have a coffee?",
+    "experiences": {
+        "title": "Work Experiences",
+        "pageTitle": "Work Experiences — Luca Palomba",
+        "description": "Explore Luca Palomba's work experiences, including roles as Senior Full Stack Developer, R&D Manager, and Team Lead.",
+        "lead": "Selected roles and projects across my career.",
+        "back": "← Back",
+        "keyProject": "Key project:",
+        "jobs": [
+            {
+                "date": "Dec 2020 — May 2025",
+                "title": "Senior Full Stack Developer • Head of R&D — P&B Linking / Openware PSIM / COGEN S.p.a.S.U",
+                "description": "Led R&D activities and coordinated teams with stakeholders. Organized work using SCRUM. Reduced tooling costs by ~50% within one year. Led product research, analysis, and design. Managed up to 20 people across 4 product teams (onsite & remote).",
+                "keyProject": "Re-engineered the product for cloud distribution (Docker on K8s) in business continuity."
+            },
+            {
+                "date": "Nov 2016 — Nov 2020",
+                "title": "Full Stack Developer • Team Lead • R&D Manager — Novigo-Consulting",
+                "description": "Designed and implemented application architecture (Zend APIs, React frontends, Node.js automation). Served as project and team lead for national and international teams, managing up to 20 people. As R&D Manager, oversaw software/service selection and integration testing.",
+                "keyProject": "Developed RAD automation components used across products."
+            },
+            {
+                "date": "Oct 2013 — 2014",
+                "title": "Full Stack Developer — DuckMa s.r.l.",
+                "description": "Backend API development (Node.js, PHP). Hybrid Application development with PWA and Ionic. UI/UX designer for PHONOTTO.",
+                "keyProject": null
+            },
+            {
+                "date": "Dec 2007 — Sep 2012",
+                "title": "Web Developer — System 2000 s.r.l. / Associati s.r.l.",
+                "description": "IT consultancy for regional/national projects. .NET development for healthcare management systems. Data analyst for the VIGILO wearable sensors project.",
+                "keyProject": null
+            }
+        ]
+    },
+    "contact": {
+        "title": "Get In Touch",
+        "pageTitle": "Contact — Luca Palomba",
+        "description": "I'm currently open to new opportunities and collaborations. Feel free to reach out — my inbox is always open, whether you have a question or just want to say hi."
+    },
+    "notFound": {
+        "pageTitle": "404 - Page Not Found | Luca Palomba",
+        "code": "404",
+        "title": "Page Not Found",
+        "description": "It's not a bug, it's a feature… that we can't find it. Let's back on track",
+        "homeButton": "Go back home"
+    }
+}
