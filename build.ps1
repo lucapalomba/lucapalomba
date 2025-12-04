@@ -86,8 +86,13 @@ Get-ChildItem -Path (Join-Path $sourceDir "js") -Filter "*.js" | ForEach-Object 
 
 # Copy Assets
 Write-Host "Copying assets..."
-if (Test-Path (Join-Path $sourceDir "translations.json")) {
-    Copy-Item -Path (Join-Path $sourceDir "translations.json") -Destination $distDir
+$translationsSourceDir = Join-Path $sourceDir "translations"
+if (Test-Path $translationsSourceDir) {
+    $translationsDistDir = Join-Path $distDir "translations"
+    New-Item -ItemType Directory -Path $translationsDistDir -Force | Out-Null
+    Get-ChildItem -Path $translationsSourceDir -Filter "*.json" | ForEach-Object {
+        Copy-Item -Path $_.FullName -Destination $translationsDistDir
+    }
 }
 if (Test-Path (Join-Path $sourceDir "manifest.webmanifest")) {
     Copy-Item -Path (Join-Path $sourceDir "manifest.webmanifest") -Destination $distDir

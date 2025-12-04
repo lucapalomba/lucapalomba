@@ -15,14 +15,19 @@ class I18n {
 
   // Initialize i18n
   async init() {
+    await this.loadLanguage(this.currentLang);
+  }
+
+  // Load a specific language file
+  async loadLanguage(lang) {
     try {
-      const response = await fetch('translations.json');
+      const response = await fetch(`translations/${lang}.json`);
       this.translations = await response.json();
       this.translate();
       this.updateHtmlLang();
       this.logConsoleEasterEgg();
     } catch (error) {
-      console.error('Failed to load translations:', error);
+      console.error(`Failed to load ${lang} translations:`, error);
     }
   }
 
@@ -42,7 +47,7 @@ class I18n {
   // Get translation by key path (e.g., 'nav.experiences')
   t(key) {
     const keys = key.split('.');
-    let value = this.translations[this.currentLang];
+    let value = this.translations;
 
     for (const k of keys) {
       if (value && typeof value === 'object') {
@@ -177,14 +182,11 @@ class I18n {
   }
 
   // Switch language manually (optional feature)
-  switchLanguage(lang) {
-    if (this.translations && this.translations[lang]) {
-      this.currentLang = lang;
-      this.translate();
-      this.updateHtmlLang();
-      // Store preference in localStorage
-      localStorage.setItem('preferredLanguage', lang);
-    }
+  async switchLanguage(lang) {
+    this.currentLang = lang;
+    await this.loadLanguage(lang);
+    // Store preference in localStorage
+    localStorage.setItem('preferredLanguage', lang);
   }
 
   // Get current language
