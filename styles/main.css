@@ -227,19 +227,20 @@ h1 {
   z-index: 11;
   color: var(--accent-color);
   transition: all 0.3s ease;
+  justify-content: center;
+  align-items: center;
 }
 
 .hamburger-menu svg {
   width: 24px;
   height: 24px;
   stroke: currentColor;
-  transform: translateX(1px);
-  /* Correction for centering */
 }
 
 .hamburger-menu svg line {
   transition: all 0.3s ease;
   transform-origin: center;
+  transform-box: fill-box;
 }
 
 .hamburger-menu:focus {
@@ -249,7 +250,7 @@ h1 {
 
 /* Animate lines to X when menu is active */
 .hamburger-menu.active svg line:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 6px);
+  transform: translateY(6px) rotate(45deg);
 }
 
 .hamburger-menu.active svg line:nth-child(2) {
@@ -257,7 +258,7 @@ h1 {
 }
 
 .hamburger-menu.active svg line:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -6px);
+  transform: translateY(-6px) rotate(-45deg);
 }
 
 /* Mobile Navigation */
