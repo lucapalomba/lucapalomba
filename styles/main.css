@@ -172,16 +172,19 @@ h1 {
 }
 
 .resume-btn {
-  color: var(--accent-color) !important;
+  color: var(--text-tertiary) !important;
   border: 1px solid var(--accent-color);
   border-radius: 4px;
   padding: 0.75rem 1rem;
   margin-left: 15px;
   transition: all 0.3s ease !important;
+  box-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.2);
 }
 
 .resume-btn:hover {
-  background: var(--accent-hover);
+  background: rgba(var(--accent-color-rgb), 0.1);
+  box-shadow: 0 0 20px rgba(var(--accent-color-rgb), 0.4);
+  color: var(--text-primary) !important;
 }
 
 .resume-btn:focus {
@@ -317,16 +320,19 @@ h1 {
 }
 
 .mobile-resume-btn {
-  color: var(--accent-color) !important;
+  color: var(--text-tertiary) !important;
   border: 1px solid var(--accent-color);
   border-radius: 4px;
   padding: 0.75rem 1rem;
   text-align: center;
   transition: all 0.3s ease !important;
+  box-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.2);
 }
 
 .mobile-resume-btn:hover {
-  background: var(--accent-hover);
+  background: rgba(var(--accent-color-rgb), 0.1);
+  box-shadow: 0 0 20px rgba(var(--accent-color-rgb), 0.4);
+  color: var(--text-primary) !important;
 }
 
 .mobile-resume-btn:focus {
@@ -407,22 +413,25 @@ h1 {
 }
 
 .hero-cta {
-  color: var(--accent-color);
+  color: var(--text-tertiary);
   background-color: transparent;
   border: 1px solid var(--accent-color);
   border-radius: 4px;
   padding: 1.25rem 1.75rem;
   font-size: 14px;
-  font-family: var(--font-main);
+  font-family: var(--font-mono);
   line-height: 1;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
   pointer-events: auto;
+  box-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.2);
 }
 
 .hero-cta:hover {
-  background-color: var(--accent-hover);
+  background-color: rgba(var(--accent-color-rgb), 0.1);
+  box-shadow: 0 0 20px rgba(var(--accent-color-rgb), 0.4);
+  color: var(--text-primary);
 }
 
 .hero-cta:focus {
@@ -965,20 +974,23 @@ p.lead {
 }
 
 .home-btn {
-  color: var(--accent-color);
+  color: var(--text-tertiary);
   border: 1px solid var(--accent-color);
   border-radius: 4px;
   padding: 0.75rem 1rem;
   font-size: 14px;
-  font-family: var(--font-main);
+  font-family: var(--font-mono);
   text-decoration: none;
   transition: all 0.3s ease;
   pointer-events: auto;
   cursor: pointer;
+  box-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.2);
 }
 
 .home-btn:hover {
-  background: var(--accent-hover);
+  background: rgba(var(--accent-color-rgb), 0.1);
+  box-shadow: 0 0 20px rgba(var(--accent-color-rgb), 0.4);
+  color: var(--text-primary);
 }
 
 /* Glitch animation for 404 - broken digital connection effect */
