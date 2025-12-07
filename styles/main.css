@@ -241,6 +241,7 @@ h1 {
 .hamburger-menu svg line {
   transition: all 0.3s ease;
   transform-origin: center;
+  transform-box: fill-box;
 }
 
 .hamburger-menu:focus {
