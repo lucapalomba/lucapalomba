@@ -227,7 +227,6 @@ h1 {
   z-index: 11;
   color: var(--accent-color);
   transition: all 0.3s ease;
-  display: flex;
   justify-content: center;
   align-items: center;
 }
