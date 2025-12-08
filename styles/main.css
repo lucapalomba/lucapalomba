@@ -1113,3 +1113,51 @@ p.lead {
     filter: blur(0);
   }
 }
+
+/* Back to Top Button */
+/* Back to Top Button */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: rgba(10, 10, 15, 0.9);
+  border: 1px solid rgba(136, 146, 176, 0.2);
+  color: var(--text-secondary);
+  padding: 12px 20px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 99;
+  backdrop-filter: blur(5px);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.back-to-top-btn.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.back-to-top-btn:hover {
+  background-color: rgba(20, 20, 25, 1);
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
+  transform: translateY(-5px);
+}
+
+.back-to-top-btn svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+}
+
+.back-to-top-btn:hover svg {
+  transform: translateY(-3px);
+}
