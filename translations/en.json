@@ -102,5 +102,6 @@
         "title": "Page Not Found",
         "description": "It's not a bug, it's a feature… that we can't find it. Let's back on track",
         "homeButton": "Go back home"
-    }
+    },
+    "backToTop": "Go to Top"
 }

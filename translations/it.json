@@ -102,5 +102,6 @@
         "title": "Pagina Non Trovata",
         "description": "Non è un bug, è una feature… che però non troviamo. Ritorniamo a casa",
         "homeButton": "Torna alla home"
-    }
+    },
+    "backToTop": "Torna in cima"
 }
