@@ -122,7 +122,7 @@ class TitleAnimator {
     // Optionally we could start the sequence from 0.
 
     this.titleElement.textContent = initialText;
-    this.updateContent(this.getTextArray(initialText, currentLangSteps[0].highlights));
+    this.updateContent(this.getTextArray(initialText, currentLangSteps[0].highlights), true);
     this.stepIndex = 0;
 
     setTimeout(() => {
