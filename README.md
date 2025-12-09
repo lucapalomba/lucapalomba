@@ -2,7 +2,7 @@
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-live-brightgreen)](https://lucapalomba.github.io/lucapalomba)
 
-Engineering Manager • Team Lead • Web Developer
+Full Stack Developer & Team Lead, Engineering leadership experience
 
 ## 🔗 Useful Links
 
