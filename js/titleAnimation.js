@@ -2,14 +2,29 @@ class TitleAnimator {
   constructor() {
     this.titleElement = document.querySelector('.hero-title');
     this.INTRO_ANIMATION_DURATION = 2000; // Wait for initial page animation
-    this.SWAP_DELAY = 500; // Delay before starting the first swap
-    this.TYPEWRITER_SPEED = 100; // Speed of typewriter effect in ms
-    this.ERASE_SPEED = 60; // Speed of erasing in ms
+    this.STEP_DELAY = 2000; // Delay between steps
+    this.TYPEWRITER_SPEED = 50; // Speed of typewriter effect in ms
+    this.ERASE_SPEED = 30; // Speed of erasing in ms
     this.isAnimating = false; // Track if animation is in progress
     this.currentLanguage = document.documentElement.lang || 'en';
     this.soundPool = [];
     this.soundPoolIndex = 0;
     this.SOUND_POOL_SIZE = 5; // Pre-allocate 5 audio instances
+
+    this.stepIndex = 0;
+    this.steps = {
+      en: [
+        { text: "I build things for the web.", highlights: ["things", "web"] },
+        { text: "I build teams for Companies.", highlights: ["teams", "Companies"] },
+        { text: "I lead teams for goals.", highlights: ["teams", "goals"] }
+      ],
+      it: [
+        { text: "Costruisco cose per il web.", highlights: ["cose", "web"] },
+        { text: "Costruisco team per le aziende.", highlights: ["team", "aziende"] },
+        { text: "Guido team per gli obiettivi.", highlights: ["Guido", "team", "obiettivi"] }
+      ]
+    };
+
     this.init();
   }
 
@@ -29,7 +44,7 @@ class TitleAnimator {
 
     // Wait for the intro animation to complete before starting the title animation
     setTimeout(() => {
-      this.startAnimation();
+      this.startSequence();
     }, this.INTRO_ANIMATION_DURATION);
   }
 
@@ -46,58 +61,57 @@ class TitleAnimator {
     }
   }
 
-  startAnimation() {
-    // Perform the swap after a delay
-    setTimeout(() => {
-      this.swapTitle();
-    }, this.SWAP_DELAY);
+  startSequence() {
+    // Already at step 0 (initial text). Schedule transition to step 1.
+    this.stepIndex = 0;
+    this.scheduleNextStep();
   }
 
-  resetAndAnimate() {
-    const originalText = this.getOriginalText(this.currentLanguage);
-    this.titleElement.textContent = originalText;
-    
-    // Wait with the same intro animation duration before starting the swap
-    setTimeout(() => {
-      this.startAnimation();
-    }, this.INTRO_ANIMATION_DURATION);
+  scheduleNextStep() {
+    // If we have more steps, schedule the next one
+    const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
+
+    if (this.stepIndex < currentLangSteps.length - 1) {
+      setTimeout(() => {
+        this.transitionToStep(this.stepIndex + 1);
+      }, this.STEP_DELAY);
+    }
   }
 
-  swapTitle() {
+  transitionToStep(nextIndex) {
     if (!this.titleElement) return;
-
     this.currentLanguage = document.documentElement.lang || 'en';
-    let originalText, newText;
+    const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
 
-    // Get the appropriate text based on language
-    if (this.currentLanguage === 'en') {
-      originalText = 'I build things for the web.';
-      newText = 'I build teams for Companies.';
-    } else if (this.currentLanguage === 'it') {
-      originalText = 'Costruisco cose per il web.';
-      newText = 'Costruisco team per le Aziende.';
-    } else {
-      return;
-    }
+    if (nextIndex >= currentLangSteps.length) return;
 
-    // Check if current text matches the original text
-    if (this.titleElement.textContent.trim() !== originalText) {
-      return;
-    }
+    const nextStepConfig = currentLangSteps[nextIndex];
 
-    // Start the typewriter animation: erase then type new text
     this.eraseText(() => {
-      this.typeNewText(newText, this.currentLanguage);
+      this.stepIndex = nextIndex;
+      this.typeNewText(nextStepConfig.text, nextStepConfig.highlights, () => {
+        this.scheduleNextStep();
+      });
     });
   }
 
-  getOriginalText(language) {
-    if (language === 'en') {
-      return 'I build things for the web.';
-    } else if (language === 'it') {
-      return 'Costruisco cose per il web.';
-    }
-    return 'I build things for the web.';
+  resetAndAnimate() {
+    this.currentLanguage = document.documentElement.lang || 'en';
+    const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
+    const initialText = currentLangSteps[0].text;
+
+    // Reset to initial state visually
+    // Note: We don't type it out, just reset immediately to start over or we could type it.
+    // Given "reset", simply setting text is coarser but effective.
+    // Optionally we could start the sequence from 0.
+
+    this.titleElement.textContent = initialText;
+    this.updateContent(this.getTextArray(initialText, currentLangSteps[0].highlights));
+    this.stepIndex = 0;
+
+    setTimeout(() => {
+      this.scheduleNextStep();
+    }, this.INTRO_ANIMATION_DURATION);
   }
 
   eraseText(callback) {
@@ -108,7 +122,7 @@ class TitleAnimator {
     const eraseInterval = setInterval(() => {
       position--;
       this.titleElement.textContent = originalText.substring(0, position);
-      
+
       // Play keyboard sound while erasing
       if (originalText[position] !== ' ' && this.soundPool.length > 0) {
         this.playKeySound();
@@ -121,9 +135,9 @@ class TitleAnimator {
     }, this.ERASE_SPEED);
   }
 
-  typeNewText(fullText, language) {
+  typeNewText(fullText, highlights, callback) {
     let position = 0;
-    const textArray = this.getTextArray(fullText, language);
+    const textArray = this.getTextArray(fullText, highlights);
 
     const typeInterval = setInterval(() => {
       if (position < textArray.length) {
@@ -139,6 +153,7 @@ class TitleAnimator {
         // Final update to ensure all content is displayed with proper highlighting
         this.updateContent(textArray);
         this.isAnimating = false;
+        if (callback) callback();
       }
     }, this.TYPEWRITER_SPEED);
   }
@@ -146,15 +161,15 @@ class TitleAnimator {
   playKeySound() {
     try {
       if (this.soundPool.length === 0) return;
-      
+
       // Get the next sound from the pool (cycling through)
       const sound = this.soundPool[this.soundPoolIndex];
       this.soundPoolIndex = (this.soundPoolIndex + 1) % this.soundPool.length;
-      
+
       // Reset and play
       sound.currentTime = 0;
       sound.volume = 0.2;
-      
+
       const playPromise = sound.play();
       if (playPromise !== undefined) {
         playPromise.catch(err => {
@@ -166,20 +181,19 @@ class TitleAnimator {
     }
   }
 
-  getTextArray(text, language) {
-    // This will be used to build the text character by character
-    // We'll store information about which characters are highlighted
-    const highlightedWords = this.getHighlightedWords(language);
+  getTextArray(text, highlights) {
     const result = [];
-    let charIndex = 0;
 
     for (let i = 0; i < text.length; i++) {
       const char = text[i];
       let isHighlighted = false;
 
       // Check if current position is within a highlighted word
-      for (const word of highlightedWords) {
+      for (const word of highlights) {
         const wordIndex = text.indexOf(word);
+        // Important: check if the word at this position matches (simple check)
+        // Note: indexOf finds first occurrence. For multiple same words we might need regex, 
+        // but for these specific sentences it's fine.
         if (wordIndex !== -1 && i >= wordIndex && i < wordIndex + word.length) {
           isHighlighted = true;
           break;
@@ -192,15 +206,6 @@ class TitleAnimator {
     return result;
   }
 
-  getHighlightedWords(language) {
-    if (language === 'en') {
-      return ['teams', 'Companies'];
-    } else if (language === 'it') {
-      return ['team', 'Aziende'];
-    }
-    return [];
-  }
-
   updateContent(textArray) {
     let html = '';
     let currentHighlight = false;
@@ -208,43 +213,29 @@ class TitleAnimator {
 
     for (let i = 0; i < textArray.length; i++) {
       const item = textArray[i];
-      const nextItem = textArray[i + 1];
-      const isNextHighlighted = nextItem ? nextItem.isHighlighted : false;
+      // Simple optimization: just wrap spans
 
       if (item.isHighlighted && !currentHighlight) {
-        // Start highlighting
-        if (buffer) {
-          html += buffer;
-          buffer = '';
-        }
+        if (buffer) { html += buffer; buffer = ''; }
         html += '<span class="highlight">' + item.char;
         currentHighlight = true;
       } else if (!item.isHighlighted && currentHighlight) {
-        // End highlighting
         html += '</span>' + item.char;
         currentHighlight = false;
       } else if (item.isHighlighted && currentHighlight) {
-        // Continue highlighting
         html += item.char;
       } else {
-        // Regular character
         buffer += item.char;
       }
     }
 
-    if (buffer) {
-      html += buffer;
-    }
-
-    if (currentHighlight) {
-      html += '</span>';
-    }
+    if (buffer) html += buffer;
+    if (currentHighlight) html += '</span>';
 
     this.titleElement.innerHTML = html;
   }
 }
 
-// Initialize the animator when the DOM is ready
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   new TitleAnimator();
 });
