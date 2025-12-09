@@ -12,7 +12,7 @@ class TitleAnimator {
     this.typingSoundIndex = 0;
     this.erasingSoundPool = [];
     this.erasingSoundIndex = 0;
-    this.SOUND_POOL_SIZE = 5; // Pre-allocate 5 audio instances per type
+    this.SOUND_POOL_SIZE = 3; // Pre-allocate 3 audio instances per type
 
     this.stepIndex = 0;
     this.steps = {
