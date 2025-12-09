@@ -99,6 +99,7 @@ h1 {
 
 .container {
   max-width: 900px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -355,6 +356,7 @@ a.mobile-resume-btn {
   padding: 0;
   max-width: 1000px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .hero-intro {
@@ -753,12 +755,6 @@ p.lead {
   white-space: nowrap;
   margin: 0 4px;
 }
-
-
-
-
-
-
 
 /* Contact Page Styles */
 .contact-content {
