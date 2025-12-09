@@ -1,0 +1,13 @@
+/* Reduced Motion */
+body {
+    transition: none !important;
+    opacity: 1 !important;
+}
+
+.transition-overlay {
+    display: none !important;
+}
+
+#particles-js {
+    display: none !important;
+}
