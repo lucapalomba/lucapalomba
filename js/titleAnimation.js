@@ -3,13 +3,16 @@ class TitleAnimator {
     this.titleElement = document.querySelector('.hero-title');
     this.INTRO_ANIMATION_DURATION = 1500; // Wait for initial page animation
     this.STEP_DELAY = 2000; // Delay between steps
-    this.TYPEWRITER_SPEED = 50; // Speed of typewriter effect in ms
-    this.ERASE_SPEED = 30; // Speed of erasing in ms
+    this.TYPEWRITER_SPEED = 65; // Speed of typewriter effect in ms
+    this.ERASE_SPEED = 55; // Speed of erasing in ms
     this.isAnimating = false; // Track if animation is in progress
     this.currentLanguage = document.documentElement.lang || 'en';
-    this.soundPool = [];
-    this.soundPoolIndex = 0;
-    this.SOUND_POOL_SIZE = 5; // Pre-allocate 5 audio instances
+
+    this.typingSoundPool = [];
+    this.typingSoundIndex = 0;
+    this.erasingSoundPool = [];
+    this.erasingSoundIndex = 0;
+    this.SOUND_POOL_SIZE = 5; // Pre-allocate 5 audio instances per type
 
     this.stepIndex = 0;
     this.steps = {
@@ -66,14 +69,23 @@ class TitleAnimator {
 
   initSoundPool() {
     try {
+      // Init typing sounds
       for (let i = 0; i < this.SOUND_POOL_SIZE; i++) {
         const audio = new Audio('sounds/keyboard-click.mp3');
         audio.preload = 'auto';
         audio.volume = 0.2;
-        this.soundPool.push(audio);
+        this.typingSoundPool.push(audio);
+      }
+
+      // Init erasing sounds
+      for (let i = 0; i < this.SOUND_POOL_SIZE; i++) {
+        const audio = new Audio('sounds/keyboard-click-delete.mp3');
+        audio.preload = 'auto';
+        audio.volume = 0.2;
+        this.erasingSoundPool.push(audio);
       }
     } catch (e) {
-      console.debug('Could not initialize sound pool:', e.message);
+      console.warn('Audio initialization failed:', e);
     }
   }
 
@@ -112,13 +124,11 @@ class TitleAnimator {
   }
 
   resetAndAnimate() {
+    // Reset to initial state
     this.currentLanguage = document.documentElement.lang || 'en';
     const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
     const initialText = currentLangSteps[0].text;
 
-    // Reset to initial state visually
-    // Note: We don't type it out, just reset immediately to start over or we could type it.
-    // Given "reset", simply setting text is coarser but effective.
     // Optionally we could start the sequence from 0.
 
     this.titleElement.textContent = initialText;
@@ -126,8 +136,8 @@ class TitleAnimator {
     this.stepIndex = 0;
 
     setTimeout(() => {
-      this.scheduleNextStep();
-    }, this.INTRO_ANIMATION_DURATION);
+      this.startSequence();
+    }, 500);
   }
 
   eraseText(callback) {
@@ -148,8 +158,8 @@ class TitleAnimator {
 
       // Play keyboard sound while erasing
       // Check the character being removed (at position)
-      if (textArray[position] && textArray[position].char !== ' ' && this.soundPool.length > 0) {
-        this.playKeySound();
+      if (textArray[position] && textArray[position].char !== ' ' && this.erasingSoundPool.length > 0) {
+        this.playKeySound('erase');
       }
 
       if (position === 0) {
@@ -170,8 +180,8 @@ class TitleAnimator {
     const typeInterval = setInterval(() => {
       if (position < textArray.length) {
         // Play keyboard sound for each character (except spaces)
-        if (textArray[position].char !== ' ' && this.soundPool.length > 0) {
-          this.playKeySound();
+        if (textArray[position].char !== ' ' && this.typingSoundPool.length > 0) {
+          this.playKeySound('type');
         }
         // Update the content with the current position
         this.updateContent(textArray.slice(0, position + 1));
@@ -187,13 +197,19 @@ class TitleAnimator {
     }, this.TYPEWRITER_SPEED);
   }
 
-  playKeySound() {
+  playKeySound(type = 'type') {
     try {
-      if (this.soundPool.length === 0) return;
+      let sound, index;
 
-      // Get the next sound from the pool (cycling through)
-      const sound = this.soundPool[this.soundPoolIndex];
-      this.soundPoolIndex = (this.soundPoolIndex + 1) % this.soundPool.length;
+      if (type === 'erase') {
+        if (this.erasingSoundPool.length === 0) return;
+        sound = this.erasingSoundPool[this.erasingSoundIndex];
+        this.erasingSoundIndex = (this.erasingSoundIndex + 1) % this.erasingSoundPool.length;
+      } else {
+        if (this.typingSoundPool.length === 0) return;
+        sound = this.typingSoundPool[this.typingSoundIndex];
+        this.typingSoundIndex = (this.typingSoundIndex + 1) % this.typingSoundPool.length;
+      }
 
       // Reset and play
       sound.currentTime = 0;
