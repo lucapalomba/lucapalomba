@@ -14,13 +14,13 @@ class TitleAnimator {
     this.stepIndex = 0;
     this.steps = {
       en: [
-        { text: "I build things for the web.", highlights: ["things", "web"] },
-        { text: "I build teams for Companies.", highlights: ["teams", "Companies"] },
+        { text: "I build things for the web", highlights: ["things", "web"] },
+        { text: "I build teams for Companies", highlights: ["teams", "Companies"] },
         { text: "I lead teams for goals.", highlights: ["teams", "goals"] }
       ],
       it: [
-        { text: "Costruisco cose per il web.", highlights: ["cose", "web"] },
-        { text: "Costruisco team per le aziende.", highlights: ["team", "aziende"] },
+        { text: "Costruisco cose per il web", highlights: ["cose", "web"] },
+        { text: "Costruisco team per le aziende", highlights: ["team", "aziende"] },
         { text: "Guido team per gli obiettivi.", highlights: ["Guido", "team", "obiettivi"] }
       ]
     };
@@ -45,7 +45,7 @@ class TitleAnimator {
     // Apply highlights to the initial text immediately
     const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
     const initialConfig = currentLangSteps[0];
-    this.updateContent(this.getTextArray(initialConfig.text, initialConfig.highlights));
+    this.updateContent(this.getTextArray(initialConfig.text, initialConfig.highlights), true);
 
     // Pre-create audio pool for better performance
     this.initSoundPool();
@@ -132,15 +132,23 @@ class TitleAnimator {
 
   eraseText(callback) {
     this.isAnimating = true;
-    const originalText = this.titleElement.textContent;
-    let position = originalText.length;
+
+    // Get current config to preserve highlights
+    const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
+    const currentConfig = currentLangSteps[this.stepIndex];
+    const textArray = this.getTextArray(currentConfig.text, currentConfig.highlights);
+
+    let position = textArray.length;
 
     const eraseInterval = setInterval(() => {
       position--;
-      this.titleElement.textContent = originalText.substring(0, position);
+
+      // Update content using the array slice, preserving HTML structure
+      this.updateContent(textArray.slice(0, position));
 
       // Play keyboard sound while erasing
-      if (originalText[position] !== ' ' && this.soundPool.length > 0) {
+      // Check the character being removed (at position)
+      if (textArray[position] && textArray[position].char !== ' ' && this.soundPool.length > 0) {
         this.playKeySound();
       }
 
@@ -155,6 +163,10 @@ class TitleAnimator {
     let position = 0;
     const textArray = this.getTextArray(fullText, highlights);
 
+    // Check if this is the last step
+    const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
+    const isLastStep = this.stepIndex === currentLangSteps.length - 1;
+
     const typeInterval = setInterval(() => {
       if (position < textArray.length) {
         // Play keyboard sound for each character (except spaces)
@@ -167,7 +179,8 @@ class TitleAnimator {
       } else {
         clearInterval(typeInterval);
         // Final update to ensure all content is displayed with proper highlighting
-        this.updateContent(textArray);
+        // Show indicator only if NOT the last step
+        this.updateContent(textArray, !isLastStep);
         this.isAnimating = false;
         if (callback) callback();
       }
@@ -208,7 +221,7 @@ class TitleAnimator {
       for (const word of highlights) {
         const wordIndex = text.indexOf(word);
         // Important: check if the word at this position matches (simple check)
-        // Note: indexOf finds first occurrence. For multiple same words we might need regex, 
+        // Note: indexOf finds first occurrence. For multiple same words we might need regex,
         // but for these specific sentences it's fine.
         if (wordIndex !== -1 && i >= wordIndex && i < wordIndex + word.length) {
           isHighlighted = true;
@@ -222,7 +235,7 @@ class TitleAnimator {
     return result;
   }
 
-  updateContent(textArray) {
+  updateContent(textArray, showTypingIndicator = false) {
     let html = '';
     let currentHighlight = false;
     let buffer = '';
@@ -247,6 +260,10 @@ class TitleAnimator {
 
     if (buffer) html += buffer;
     if (currentHighlight) html += '</span>';
+
+    if (showTypingIndicator) {
+      html += '<span class="typing-dots"><span></span><span></span><span></span></span>';
+    }
 
     this.titleElement.innerHTML = html;
   }
