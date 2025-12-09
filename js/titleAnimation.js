@@ -1,7 +1,7 @@
 class TitleAnimator {
   constructor() {
     this.titleElement = document.querySelector('.hero-title');
-    this.INTRO_ANIMATION_DURATION = 2000; // Wait for initial page animation
+    this.INTRO_ANIMATION_DURATION = 1500; // Wait for initial page animation
     this.STEP_DELAY = 2000; // Delay between steps
     this.TYPEWRITER_SPEED = 50; // Speed of typewriter effect in ms
     this.ERASE_SPEED = 30; // Speed of erasing in ms
@@ -30,6 +30,22 @@ class TitleAnimator {
 
   init() {
     if (!this.titleElement) return;
+
+    // Remove data-i18n attribute to prevent i18n.js from overwriting our highlighted HTML
+    this.titleElement.removeAttribute('data-i18n');
+
+    // Robust language detection (since i18n might not have set html lang yet)
+    const browserLang = navigator.language || navigator.userLanguage;
+    if (browserLang && browserLang.toLowerCase().startsWith('it')) {
+      this.currentLanguage = 'it';
+    } else {
+      this.currentLanguage = 'en';
+    }
+
+    // Apply highlights to the initial text immediately
+    const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
+    const initialConfig = currentLangSteps[0];
+    this.updateContent(this.getTextArray(initialConfig.text, initialConfig.highlights));
 
     // Pre-create audio pool for better performance
     this.initSoundPool();
