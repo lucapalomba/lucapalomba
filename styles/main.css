@@ -17,8 +17,8 @@
   --mobile-nav-bg: rgba(10, 10, 15, 0.95);
 
   /* Fonts */
-  --font-main: 'Google Sans Flex', sans-serif;
-  --font-mono: 'Roboto Mono', monospace;
+  --font-main: 'Roboto Mono', 'Menlo', 'Consolas', 'Monaco', 'Liberation Mono', 'Lucida Console', monospace;
+
 }
 
 body {
@@ -168,7 +168,7 @@ h1 {
 .nav-number {
   color: var(--accent-color);
   margin-right: 5px;
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
 }
 
 /* Button Utilities (Common styles) */
@@ -180,7 +180,7 @@ a.home-btn {
   border: 1px solid var(--accent-color);
   border-radius: 4px;
   padding: 0.75rem 1rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
   text-decoration: none;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -221,7 +221,7 @@ a.resume-btn {
   color: var(--accent-color);
   border-radius: 4px;
   padding: 0.5rem 0.8rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
   font-size: 13px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -398,7 +398,7 @@ a.mobile-resume-btn {
   font-weight: 400;
   color: var(--accent-color);
   margin: 0 0 20px;
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
   letter-spacing: 0.5px;
 }
 
@@ -458,7 +458,7 @@ a.mobile-resume-btn {
 
 .section-number {
   color: var(--accent-color);
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
   font-size: 24px;
   margin-right: 10px;
   font-weight: 400;
@@ -509,7 +509,7 @@ p.lead {
 }
 
 .timeline-content .date {
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
   font-size: 13px;
   color: var(--text-date);
   margin-bottom: 20px;
@@ -557,7 +557,7 @@ p.lead {
   color: var(--accent-color);
   font-weight: 700;
   margin-right: 8px;
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -570,7 +570,7 @@ p.lead {
 }
 
 .tech-stack span {
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
   font-size: 12px;
   color: var(--accent-color);
   background: rgba(var(--accent-color-rgb), 0.1);
@@ -626,7 +626,7 @@ p.lead {
 }
 
 .tech-percentage {
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
   font-size: 16px;
   color: var(--accent-color);
   font-weight: 700;
@@ -745,7 +745,7 @@ p.lead {
   box-shadow: 0 2px 0 rgba(var(--accent-color-rgb), 0.2);
   color: var(--accent-color);
   display: inline-block;
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
   font-size: 12px;
   font-weight: 700;
   line-height: 1;
@@ -860,7 +860,7 @@ p.lead {
   color: var(--accent-color);
   margin: 0;
   line-height: 1;
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
   animation: glitch 3s ease-in-out infinite;
   position: relative;
 }
@@ -1024,7 +1024,7 @@ p.lead {
   transition: all 0.3s ease;
   z-index: 99;
   backdrop-filter: blur(5px);
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
   font-size: 14px;
   letter-spacing: 0.5px;
 }
