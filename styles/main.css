@@ -171,26 +171,48 @@ h1 {
   font-family: var(--font-mono);
 }
 
-.resume-btn {
-  color: var(--text-tertiary) !important;
+/* Button Utilities (Common styles) */
+a.resume-btn,
+a.mobile-resume-btn,
+a.hero-cta,
+a.home-btn {
+  color: var(--text-tertiary);
   border: 1px solid var(--accent-color);
   border-radius: 4px;
   padding: 0.75rem 1rem;
-  margin-left: 15px;
-  transition: all 0.3s ease !important;
+  font-family: var(--font-mono);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
   box-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.resume-btn:hover {
+a.resume-btn:hover,
+a.mobile-resume-btn:hover,
+a.hero-cta:hover,
+a.home-btn:hover {
   background: rgba(var(--accent-color-rgb), 0.1);
   box-shadow: 0 0 20px rgba(var(--accent-color-rgb), 0.4);
-  color: var(--text-primary) !important;
+  color: var(--text-primary);
 }
 
-.resume-btn:focus {
+a.resume-btn:focus,
+a.mobile-resume-btn:focus,
+a.hero-cta:focus,
+a.home-btn:focus {
   outline: 2px solid var(--accent-color);
   outline-offset: 2px;
 }
+
+/* Specific Button Overrides */
+a.resume-btn {
+  margin-left: 15px;
+}
+
+
 
 /* Language Toggle */
 .lang-toggle {
@@ -319,25 +341,8 @@ h1 {
   color: var(--accent-color);
 }
 
-.mobile-resume-btn {
-  color: var(--text-tertiary) !important;
-  border: 1px solid var(--accent-color);
-  border-radius: 4px;
-  padding: 0.75rem 1rem;
+a.mobile-resume-btn {
   text-align: center;
-  transition: all 0.3s ease !important;
-  box-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.2);
-}
-
-.mobile-resume-btn:hover {
-  background: rgba(var(--accent-color-rgb), 0.1);
-  box-shadow: 0 0 20px rgba(var(--accent-color-rgb), 0.4);
-  color: var(--text-primary) !important;
-}
-
-.mobile-resume-btn:focus {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 2px;
 }
 
 /* Hero Section */
@@ -405,33 +410,13 @@ h1 {
   line-height: 1.5;
 }
 
-
-
 .hero-cta {
-  color: var(--text-tertiary);
   background-color: transparent;
-  border: 1px solid var(--accent-color);
-  border-radius: 4px;
   padding: 1.25rem 1.75rem;
   font-size: 14px;
-  font-family: var(--font-mono);
   line-height: 1;
-  text-decoration: none;
-  cursor: pointer;
   transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
   pointer-events: auto;
-  box-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.2);
-}
-
-.hero-cta:hover {
-  background-color: rgba(var(--accent-color-rgb), 0.1);
-  box-shadow: 0 0 20px rgba(var(--accent-color-rgb), 0.4);
-  color: var(--text-primary);
-}
-
-.hero-cta:focus {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 2px;
 }
 
 /* Footer */
@@ -894,23 +879,8 @@ p.lead {
 }
 
 .home-btn {
-  color: var(--text-tertiary);
-  border: 1px solid var(--accent-color);
-  border-radius: 4px;
-  padding: 0.75rem 1rem;
   font-size: 14px;
-  font-family: var(--font-mono);
-  text-decoration: none;
-  transition: all 0.3s ease;
   pointer-events: auto;
-  cursor: pointer;
-  box-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.2);
-}
-
-.home-btn:hover {
-  background: rgba(var(--accent-color-rgb), 0.1);
-  box-shadow: 0 0 20px rgba(var(--accent-color-rgb), 0.4);
-  color: var(--text-primary);
 }
 
 /* Glitch animation for 404 - broken digital connection effect */
@@ -1034,7 +1004,6 @@ p.lead {
   }
 }
 
-/* Back to Top Button */
 /* Back to Top Button */
 .back-to-top-btn {
   position: fixed;
