@@ -43,15 +43,7 @@ class PageTransition {
     }, this.TRANSITION_MS + 60);
   }
 
-  // keep revealPage if you want entry behavior later (not used now)
-  revealPage() {
-    if (!this.overlay) return;
-    this.overlay.classList.remove('active');
-    setTimeout(() => {
-      this.overlay.classList.add('finished');
-      this.overlay.style.transition = '';
-    }, this.TRANSITION_MS + 60);
-  }
+}
 }
 
 new PageTransition();

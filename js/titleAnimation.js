@@ -4,7 +4,6 @@ class TitleAnimator {
     this.INTRO_ANIMATION_DURATION = 1500; // Wait for initial page animation
     this.STEP_DELAY = 2000; // Delay between steps
     this.TYPEWRITER_SPEED = 65; // Speed of typewriter effect in ms
-    this.ERASE_SPEED = 55; // Speed of erasing in ms
     this.WORD_ERASE_SPEED = 300; // Speed of erasing words in ms
     this.isAnimating = false; // Track if animation is in progress
     this.currentLanguage = document.documentElement.lang || 'en';
