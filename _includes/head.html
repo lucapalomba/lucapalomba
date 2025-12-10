@@ -1,0 +1,82 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
+<meta name="description"
+    content="{% if page.description %}{{ page.description | escape }}{% else %}{{ site.description | escape }}{% endif %}">
+
+<!-- Favicon / icons -->
+<link rel="icon" href="https://github.com/lucapalomba.png" sizes="any">
+<link rel="icon" href="https://github.com/lucapalomba.png?s=32" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="https://github.com/lucapalomba.png" sizes="180x180">
+<link rel="shortcut icon" href="https://github.com/lucapalomba.png">
+<meta name="theme-color" content="#0a0a0f">
+
+<!-- Web App Manifest -->
+<link rel="manifest" href="manifest.webmanifest">
+
+<!-- Preconnect for performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- SEO & Social Media -->
+<meta property="og:title"
+    content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}">
+<meta property="og:description"
+    content="{% if page.description %}{{ page.description | escape }}{% else %}{{ site.description | escape }}{% endif %}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:image" content="https://github.com/lucapalomba.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title"
+    content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}">
+<meta name="twitter:description"
+    content="{% if page.description %}{{ page.description | escape }}{% else %}{{ site.description | escape }}{% endif %}">
+<meta name="twitter:image" content="https://github.com/lucapalomba.png">
+
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+
+<!-- Schema.org JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Luca Palomba",
+  "url": "https://lucapalomba.github.io/",
+  "jobTitle": "Engineering Manager, Team Leader & Web Developer",
+  "description": "Software engineer with tech-debt-demolisher super-powers: I walk into chaos, straighten things out, and help everyone go home stress-free. Clear goals, clean commits, and no Friday deploys.",
+  "image": "https://github.com/lucapalomba.png",
+  "sameAs": [
+    "https://www.linkedin.com/in/lucapalomba/",
+    "https://github.com/lucapalomba"
+  ],
+  "email": "mailto:luca.palomba.developer@gmail.com",
+  "knowsAbout": [
+    "Full Stack Development",
+    "Team Leadership",
+    "R&D Management",
+    "Web Development",
+    "Software Architecture",
+    "SCRUM",
+    "Engineering management"
+  ],
+  "workLocation": {
+    "@type": "Place",
+    "name": "Remote"
+  }
+}
+</script>
+
+{% if page.header_scripts %}
+{{ page.header_scripts }}
+{% endif %}
+
+<!-- Styles -->
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100;600;700&family=Roboto+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="{{ '/styles/transitions.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/styles/main.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/styles/mobile.css' | relative_url }}" media="(max-width: 768px)">
+<link rel="stylesheet" href="{{ '/styles/mobile-small.css' | relative_url }}" media="(max-width: 640px)">
+<link rel="stylesheet" href="{{ '/styles/reduced-motion.css' | relative_url }}"
+    media="(prefers-reduced-motion: reduce)">
