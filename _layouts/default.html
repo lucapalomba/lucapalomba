@@ -21,7 +21,9 @@
 
     {% include footer.html %}
 
+    {% unless page.body_class == 'not-found-page' %}
     {% include navigation-hint.html %}
+    {% endunless %}
 
     {% include scripts.html %}
 </body>
