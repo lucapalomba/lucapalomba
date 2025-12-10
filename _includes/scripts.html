@@ -1,0 +1,20 @@
+<!-- Critical: Translation system (needed immediately for content) -->
+<script src="{{ '/js/i18n.js' | relative_url }}" defer></script>
+
+<!-- Non-critical: Defer particles and animations until after page is interactive -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
+<script src="{{ '/js/main.js' | relative_url }}" defer></script>
+<script src="{{ '/js/transitions.js' | relative_url }}" defer></script>
+
+{% unless page.hide_nav_scripts %}
+<script src="{{ '/js/navigation.js' | relative_url }}" defer></script>
+<script src="{{ '/js/hamburger.js' | relative_url }}" defer></script>
+{% endunless %}
+
+{% if page.page_scripts %}
+{% for script in page.page_scripts %}
+<script src="{{ script | relative_url }}" defer></script>
+{% endfor %}
+{% endif %}
+
+<script src="{{ '/js/backToTop.js' | relative_url }}" defer></script>

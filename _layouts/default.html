@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: " en" }}">
+
+<head>
+    {% include head.html %}
+</head>
+
+<body class="{{ page.body_class }}">
+
+    <!-- Skip to main content link for keyboard navigation -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    {% include transition-overlay.html %}
+
+    <!-- Particles.js Container -->
+    <div id="particles-js"></div>
+
+    {% include navbar.html %}
+
+    {{ content }}
+
+    {% include footer.html %}
+
+    {% include navigation-hint.html %}
+
+    {% include scripts.html %}
+</body>
+
+</html>

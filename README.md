@@ -11,7 +11,7 @@ Full Stack Developer & Team Lead, Engineering leadership experience
 
 ## Description
 
-Welcome to my personal portfolio, a website built while testing support for different AI models hosted locally by Ollama! This site showcases my skills and expertise in web development and engineering management. Feel free to explore the various sections.
+Welcome to my personal portfolio, a Jekyll-powered website built while testing support for different AI models! This site showcases my skills and expertise in web development and engineering management. The project has evolved from a static HTML site to a modular Jekyll structure, making it easier to add new features, Easter eggs, and test AI companion integrations.
 
 ## Actual Local Development Environment
 
@@ -48,9 +48,11 @@ Both assistants work together to maintain code quality, ensure professional pres
 
 ## Technologies Used
 
-- HTML
+- **Jekyll** - Static site generator for modular, maintainable structure
+- HTML with Liquid templating
 - CSS (Styling with keyframes for animations)
 - JavaScript
+- GitHub Actions for automated deployment
 
 ## Using Stitch (by Google) to Refactor Website Graphics
 
