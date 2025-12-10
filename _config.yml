@@ -10,6 +10,24 @@ plugins:
   - jekyll-github-metadata # Adds GitHub repository metadata
   - jemoji                # Adds support for emoji
   - jekyll-readme-index   # Uses README.md as index if no index.html exists
+  - jekyll-minifier       # Minifies HTML, CSS, and JS
+
+# Minifier settings
+jekyll-minifier:
+  exclude: ['robots.txt','sitemap.xml']  # Files to exclude from minification
+  uglifier_args:
+    harmony: true          # Enable ES6+ support
+  compress_css: true       # Minify CSS
+  compress_javascript: true # Minify JavaScript
+  compress_json: true      # Minify JSON
+  simple_doctype: false    # Keep full DOCTYPE
+  remove_spaces_inside_tags: true
+  remove_multi_spaces: true
+  remove_comments: true    # Remove HTML comments
+  remove_intertag_spaces: false
+  remove_quotes: false
+  simple_boolean_attributes: true
+  compress_js_templates: false
 
 # SEO settings
 author: Luca Palomba
