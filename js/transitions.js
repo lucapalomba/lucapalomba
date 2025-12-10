@@ -44,6 +44,5 @@ class PageTransition {
   }
 
 }
-}
 
 new PageTransition();
