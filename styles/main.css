@@ -1055,12 +1055,19 @@ p.lead {
 
 .typing-dots span {
   display: inline-block;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: var(--text-secondary);
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background-color: transparent;
   animation: bounce 1.4s infinite ease-in-out both;
-  margin: 0 4px;
+  margin: 0 -0.1em;
+  color: var(--text-secondary);
+}
+
+.typing-dots span::before {
+  content: '.';
+  font-size: inherit;
+  line-height: 1;
 }
 
 .typing-dots span:nth-child(1) {
