@@ -1,26 +1,30 @@
 class TitleAnimator {
   constructor() {
     this.titleElement = document.querySelector('.hero-title');
-    this.INTRO_ANIMATION_DURATION = 2000; // Wait for initial page animation
+    this.INTRO_ANIMATION_DURATION = 1500; // Wait for initial page animation
     this.STEP_DELAY = 2000; // Delay between steps
-    this.TYPEWRITER_SPEED = 50; // Speed of typewriter effect in ms
-    this.ERASE_SPEED = 30; // Speed of erasing in ms
+    this.TYPEWRITER_SPEED = 65; // Speed of typewriter effect in ms
+    this.ERASE_SPEED = 55; // Speed of erasing in ms
+    this.WORD_ERASE_SPEED = 300; // Speed of erasing words in ms
     this.isAnimating = false; // Track if animation is in progress
     this.currentLanguage = document.documentElement.lang || 'en';
-    this.soundPool = [];
-    this.soundPoolIndex = 0;
-    this.SOUND_POOL_SIZE = 5; // Pre-allocate 5 audio instances
+
+    this.typingSoundPool = [];
+    this.typingSoundIndex = 0;
+    this.erasingSoundPool = [];
+    this.erasingSoundIndex = 0;
+    this.SOUND_POOL_SIZE = 3; // Pre-allocate 3 audio instances per type
 
     this.stepIndex = 0;
     this.steps = {
       en: [
-        { text: "I build things for the web.", highlights: ["things", "web"] },
-        { text: "I build teams for Companies.", highlights: ["teams", "Companies"] },
+        { text: "I build things for the web", highlights: ["things", "web"] },
+        { text: "I build teams for Companies", highlights: ["teams", "Companies"] },
         { text: "I lead teams for goals.", highlights: ["teams", "goals"] }
       ],
       it: [
-        { text: "Costruisco cose per il web.", highlights: ["cose", "web"] },
-        { text: "Costruisco team per le aziende.", highlights: ["team", "aziende"] },
+        { text: "Costruisco cose per il web", highlights: ["cose", "web"] },
+        { text: "Costruisco team per le aziende", highlights: ["team", "aziende"] },
         { text: "Guido team per gli obiettivi.", highlights: ["Guido", "team", "obiettivi"] }
       ]
     };
@@ -30,6 +34,22 @@ class TitleAnimator {
 
   init() {
     if (!this.titleElement) return;
+
+    // Remove data-i18n attribute to prevent i18n.js from overwriting our highlighted HTML
+    this.titleElement.removeAttribute('data-i18n');
+
+    // Robust language detection (since i18n might not have set html lang yet)
+    const browserLang = navigator.language || navigator.userLanguage;
+    if (browserLang && browserLang.toLowerCase().startsWith('it')) {
+      this.currentLanguage = 'it';
+    } else {
+      this.currentLanguage = 'en';
+    }
+
+    // Apply highlights to the initial text immediately
+    const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
+    const initialConfig = currentLangSteps[0];
+    this.updateContent(this.getTextArray(initialConfig.text, initialConfig.highlights), true);
 
     // Pre-create audio pool for better performance
     this.initSoundPool();
@@ -50,14 +70,23 @@ class TitleAnimator {
 
   initSoundPool() {
     try {
+      // Init typing sounds
       for (let i = 0; i < this.SOUND_POOL_SIZE; i++) {
         const audio = new Audio('sounds/keyboard-click.mp3');
         audio.preload = 'auto';
         audio.volume = 0.2;
-        this.soundPool.push(audio);
+        this.typingSoundPool.push(audio);
+      }
+
+      // Init erasing sounds
+      for (let i = 0; i < this.SOUND_POOL_SIZE; i++) {
+        const audio = new Audio('sounds/keyboard-click-delete.mp3');
+        audio.preload = 'auto';
+        audio.volume = 0.2;
+        this.erasingSoundPool.push(audio);
       }
     } catch (e) {
-      console.debug('Could not initialize sound pool:', e.message);
+      console.warn('Audio initialization failed:', e);
     }
   }
 
@@ -96,54 +125,72 @@ class TitleAnimator {
   }
 
   resetAndAnimate() {
+    // Reset to initial state
     this.currentLanguage = document.documentElement.lang || 'en';
     const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
     const initialText = currentLangSteps[0].text;
 
-    // Reset to initial state visually
-    // Note: We don't type it out, just reset immediately to start over or we could type it.
-    // Given "reset", simply setting text is coarser but effective.
     // Optionally we could start the sequence from 0.
 
     this.titleElement.textContent = initialText;
-    this.updateContent(this.getTextArray(initialText, currentLangSteps[0].highlights));
+    this.updateContent(this.getTextArray(initialText, currentLangSteps[0].highlights), true);
     this.stepIndex = 0;
 
     setTimeout(() => {
-      this.scheduleNextStep();
-    }, this.INTRO_ANIMATION_DURATION);
+      this.startSequence();
+    }, 500);
   }
 
   eraseText(callback) {
     this.isAnimating = true;
-    const originalText = this.titleElement.textContent;
-    let position = originalText.length;
+
+    // Get current config to preserve highlights
+    const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
+    const currentConfig = currentLangSteps[this.stepIndex];
+    const fullText = currentConfig.text;
+    const textArray = this.getTextArray(fullText, currentConfig.highlights);
+
+    let position = textArray.length;
 
     const eraseInterval = setInterval(() => {
-      position--;
-      this.titleElement.textContent = originalText.substring(0, position);
+      // Logic for word-by-word deletion
+      const currentString = fullText.substring(0, position);
+      const lastSpaceIndex = currentString.lastIndexOf(' ');
 
-      // Play keyboard sound while erasing
-      if (originalText[position] !== ' ' && this.soundPool.length > 0) {
-        this.playKeySound();
+      if (lastSpaceIndex !== -1) {
+        position = lastSpaceIndex;
+      } else {
+        position = 0;
+      }
+
+      // Update content using the array slice, preserving HTML structure
+      this.updateContent(textArray.slice(0, position));
+
+      // Play sound
+      if (this.erasingSoundPool.length > 0) {
+        this.playKeySound('erase');
       }
 
       if (position === 0) {
         clearInterval(eraseInterval);
         callback();
       }
-    }, this.ERASE_SPEED);
+    }, this.WORD_ERASE_SPEED);
   }
 
   typeNewText(fullText, highlights, callback) {
     let position = 0;
     const textArray = this.getTextArray(fullText, highlights);
 
+    // Check if this is the last step
+    const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
+    const isLastStep = this.stepIndex === currentLangSteps.length - 1;
+
     const typeInterval = setInterval(() => {
       if (position < textArray.length) {
         // Play keyboard sound for each character (except spaces)
-        if (textArray[position].char !== ' ' && this.soundPool.length > 0) {
-          this.playKeySound();
+        if (textArray[position].char !== ' ' && this.typingSoundPool.length > 0) {
+          this.playKeySound('type');
         }
         // Update the content with the current position
         this.updateContent(textArray.slice(0, position + 1));
@@ -151,20 +198,27 @@ class TitleAnimator {
       } else {
         clearInterval(typeInterval);
         // Final update to ensure all content is displayed with proper highlighting
-        this.updateContent(textArray);
+        // Show indicator only if NOT the last step
+        this.updateContent(textArray, !isLastStep);
         this.isAnimating = false;
         if (callback) callback();
       }
     }, this.TYPEWRITER_SPEED);
   }
 
-  playKeySound() {
+  playKeySound(type = 'type') {
     try {
-      if (this.soundPool.length === 0) return;
+      let sound, index;
 
-      // Get the next sound from the pool (cycling through)
-      const sound = this.soundPool[this.soundPoolIndex];
-      this.soundPoolIndex = (this.soundPoolIndex + 1) % this.soundPool.length;
+      if (type === 'erase') {
+        if (this.erasingSoundPool.length === 0) return;
+        sound = this.erasingSoundPool[this.erasingSoundIndex];
+        this.erasingSoundIndex = (this.erasingSoundIndex + 1) % this.erasingSoundPool.length;
+      } else {
+        if (this.typingSoundPool.length === 0) return;
+        sound = this.typingSoundPool[this.typingSoundIndex];
+        this.typingSoundIndex = (this.typingSoundIndex + 1) % this.typingSoundPool.length;
+      }
 
       // Reset and play
       sound.currentTime = 0;
@@ -192,7 +246,7 @@ class TitleAnimator {
       for (const word of highlights) {
         const wordIndex = text.indexOf(word);
         // Important: check if the word at this position matches (simple check)
-        // Note: indexOf finds first occurrence. For multiple same words we might need regex, 
+        // Note: indexOf finds first occurrence. For multiple same words we might need regex,
         // but for these specific sentences it's fine.
         if (wordIndex !== -1 && i >= wordIndex && i < wordIndex + word.length) {
           isHighlighted = true;
@@ -206,7 +260,7 @@ class TitleAnimator {
     return result;
   }
 
-  updateContent(textArray) {
+  updateContent(textArray, showTypingIndicator = false) {
     let html = '';
     let currentHighlight = false;
     let buffer = '';
@@ -231,6 +285,10 @@ class TitleAnimator {
 
     if (buffer) html += buffer;
     if (currentHighlight) html += '</span>';
+
+    if (showTypingIndicator) {
+      html += '<span class="typing-dots"><span></span><span></span><span></span></span>';
+    }
 
     this.titleElement.innerHTML = html;
   }

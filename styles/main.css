@@ -1046,3 +1046,47 @@ p.lead {
 .back-to-top-btn:hover svg {
   transform: translateY(-3px);
 }
+
+/* Typing Indicator */
+.typing-dots {
+  display: inline-block;
+  margin-left: 4px;
+}
+
+.typing-dots span {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background-color: transparent;
+  animation: bounce 1.4s infinite ease-in-out both;
+  margin: 0 -0.1em;
+  color: var(--text-secondary);
+}
+
+.typing-dots span::before {
+  content: '.';
+  font-size: inherit;
+  line-height: 1;
+}
+
+.typing-dots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.typing-dots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+
+  40% {
+    transform: scale(1);
+  }
+}
