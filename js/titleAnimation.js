@@ -5,6 +5,7 @@ class TitleAnimator {
     this.STEP_DELAY = 2000; // Delay between steps
     this.TYPEWRITER_SPEED = 65; // Speed of typewriter effect in ms
     this.ERASE_SPEED = 55; // Speed of erasing in ms
+    this.WORD_ERASE_SPEED = 300; // Speed of erasing words in ms
     this.isAnimating = false; // Track if animation is in progress
     this.currentLanguage = document.documentElement.lang || 'en';
 
@@ -146,19 +147,27 @@ class TitleAnimator {
     // Get current config to preserve highlights
     const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
     const currentConfig = currentLangSteps[this.stepIndex];
-    const textArray = this.getTextArray(currentConfig.text, currentConfig.highlights);
+    const fullText = currentConfig.text;
+    const textArray = this.getTextArray(fullText, currentConfig.highlights);
 
     let position = textArray.length;
 
     const eraseInterval = setInterval(() => {
-      position--;
+      // Logic for word-by-word deletion
+      const currentString = fullText.substring(0, position);
+      const lastSpaceIndex = currentString.lastIndexOf(' ');
+
+      if (lastSpaceIndex !== -1) {
+        position = lastSpaceIndex;
+      } else {
+        position = 0;
+      }
 
       // Update content using the array slice, preserving HTML structure
       this.updateContent(textArray.slice(0, position));
 
-      // Play keyboard sound while erasing
-      // Check the character being removed (at position)
-      if (textArray[position] && textArray[position].char !== ' ' && this.erasingSoundPool.length > 0) {
+      // Play sound
+      if (this.erasingSoundPool.length > 0) {
         this.playKeySound('erase');
       }
 
@@ -166,7 +175,7 @@ class TitleAnimator {
         clearInterval(eraseInterval);
         callback();
       }
-    }, this.ERASE_SPEED);
+    }, this.WORD_ERASE_SPEED);
   }
 
   typeNewText(fullText, highlights, callback) {
