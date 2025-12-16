@@ -37,6 +37,19 @@ jobs:
       
       - name: Test site with HTML Proofer
         run: bundle exec htmlproofer ./_site --disable-external --swap-urls "^${{ steps.pages.outputs.base_path }}/:/"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run Lighthouse CI
+        run: |
+          npm install -g @lhci/cli
+          echo "Starting Mobile Audit (Default)..."
+          lhci autorun
+          echo "Starting Desktop Audit..."
+          lhci autorun --collect.settings.preset=desktop
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
