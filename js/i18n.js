@@ -168,7 +168,13 @@ class I18n {
             // Create key project element if it doesn't exist
             const kpDiv = document.createElement('div');
             kpDiv.className = 'key-project';
-            kpDiv.innerHTML = `<span class="kp-label">${this.t('experiences.keyProject')}</span> ${job.keyProject}`;
+            kpDiv.innerHTML = `
+              <div class="kp-title">
+                <span class="kp-label">${this.t('experiences.keyProject')}</span>
+                ${job.keyProjectTitle ? `<span class="kp-project-name">${job.keyProjectTitle}</span>` : ''}
+              </div>
+              <div class="kp-description">${job.keyProject}</div>
+            `;
 
             // Insert before tech-stack
             const techStack = item.querySelector('.tech-stack');
@@ -179,7 +185,13 @@ class I18n {
             }
           } else {
             // Update existing key project - clear and rebuild to ensure proper order
-            keyProjectEl.innerHTML = `<span class="kp-label">${this.t('experiences.keyProject')}</span> ${job.keyProject}`;
+            keyProjectEl.innerHTML = `
+              <div class="kp-title">
+                <span class="kp-label">${this.t('experiences.keyProject')}</span>
+                ${job.keyProjectTitle ? `<span class="kp-project-name">${job.keyProjectTitle}</span>` : ''}
+              </div>
+              <div class="kp-description">${job.keyProject}</div>
+            `;
           }
         } else if (keyProjectEl) {
           // Remove key project if job doesn't have one
