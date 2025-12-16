@@ -42,6 +42,33 @@
                 "keyProjectTitle": "Internal Core Components"
             },
             {
+                "date": "2015 — 2016",
+                "title": "CTO,Full Stack Developer — Publidesign s.r.l.",
+                "description": "Sviluppo customizazzioni di progetti Wordpress. CTO per la startup Baucoin",
+                "keyProject": "Piattaforma di gestione crediti per economia circolare basata sui servizi per Pet",
+                "keyProjectTitle": "Baucoin",
+                "techStack": [
+                    "WordPress",
+                    "Startup",
+                    "Leading",
+                    "PHP",
+                    "Node.js"
+                ]
+            },
+            {
+                "date": "2012 — 2016",
+                "title": "Founder • Startupper • Pitcher — TargatoBS",
+                "description": "Cercavo un modo per esprimere me stesso al meglio. Ho fatto qualche concorso, ho vinto qualche premio, presentato a un po' di incontri, cercato di fondare una startup, partecipato ad una business school e fondato qualche community. Alla fine ho capito di essere uno sviluppatore che doveva lavorare sulle proprie soft skill",
+                "keyProject": "Prodotto per la gestione della vendita immobiliare",
+                "keyProjectTitle": "BREIM",
+                "techStack": [
+                    "Community Management",
+                    "Startup",
+                    "Soft Skills",
+                    "Public Speaking"
+                ]
+            },
+            {
                 "date": "Ott 2013 — 2014",
                 "title": "Full Stack Developer — DuckMa s.r.l.",
                 "description": "Sviluppo API backend (Node.js, PHP). Sviluppo Applicazioni Ibride con Ionic e PWA. Designer UI/UX per PHONOTTO.",
