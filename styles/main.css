@@ -544,25 +544,84 @@ p.lead {
 }
 
 .key-project {
-  margin: 20px 0;
-  padding: 16px 18px;
-  background: linear-gradient(135deg, rgba(var(--accent-color-rgb), 0.08), rgba(var(--accent-color-rgb), 0.06));
-  border-left: 4px solid var(--accent-color);
-  border-radius: 6px;
-  color: var(--text-tertiary);
-  font-size: 15px;
-  line-height: 1.6;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  margin: 24px 0;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(var(--accent-color-rgb), 0.15);
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.key-project::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(var(--accent-color-rgb), 0.3),
+      transparent);
+}
+
+.key-project:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(var(--accent-color-rgb), 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.kp-title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  /* Gap between label and project name */
+  margin-bottom: 12px;
 }
 
 .kp-label {
   color: var(--accent-color);
-  font-weight: 700;
-  margin-right: 8px;
-  font-family: var(--font-main);
   font-size: 13px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1.5px;
+  font-family: var(--font-main);
+  /* Remove flex/margin from label since it's now in kp-title container */
+}
+
+.kp-project-name {
+  color: #fff;
+  /* White title as requested */
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: var(--font-main);
+}
+
+.kp-title::after {
+  content: '';
+  display: block;
+  flex-grow: 1;
+  height: 1px;
+  background: rgba(var(--accent-color-rgb), 0.2);
+  margin-left: 16px;
+  min-width: 20px;
+  /* Ensure line is visible even if wrapped */
+}
+
+.kp-description {
+  color: var(--text-tertiary);
+  font-size: 15px;
+  line-height: 1.7;
+  font-weight: 300;
 }
 
 .tech-stack {

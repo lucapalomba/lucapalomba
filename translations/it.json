@@ -31,13 +31,15 @@
                 "date": "Dic 2020 — Mag 2025",
                 "title": "Senior Full Stack Developer • Head of R&D — P&B Linking / Openware PSIM / COGEN S.p.a.S.U",
                 "description": "Ho guidato le attività di R&D e coordinato team con gli stakeholder. Organizzato il lavoro usando SCRUM. Ridotto i costi degli strumenti del ~50% in un anno. Guidato ricerca, analisi e progettazione del prodotto. Gestito fino a 20 persone in 4 team di prodotto (in sede e remoto).",
-                "keyProject": "Re-ingegnerizzato il prodotto per la distribuzione cloud (Docker su K8s) in business continuity."
+                "keyProject": "Re-ingegnerizzato il prodotto per la distribuzione cloud (Docker su K8s) in business continuity.",
+                "keyProjectTitle": "Openware 3.0"
             },
             {
                 "date": "Nov 2016 — Nov 2020",
                 "title": "Full Stack Developer • Team Lead • R&D Manager — Novigo-Consulting",
                 "description": "Progettato e implementato l'architettura applicativa (API Zend, frontend React, automazione Node.js). Servito come project e team lead per team nazionali e internazionali, gestendo fino a 20 persone. Come R&D Manager, supervisionato la selezione di software/servizi e test di integrazione.",
-                "keyProject": "Sviluppato componenti di automazione RAD utilizzati in tutti i prodotti."
+                "keyProject": "Sviluppato componenti di automazione RAD utilizzati in tutti i prodotti.",
+                "keyProjectTitle": "Internal Core Components"
             },
             {
                 "date": "Ott 2013 — 2014",
