@@ -41,7 +41,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Build for Lighthouse CI
         run: bundle exec jekyll build --baseurl "" --destination ./_site_lhci
