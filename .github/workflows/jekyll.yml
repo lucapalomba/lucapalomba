@@ -48,9 +48,12 @@ jobs:
         env:
           JEKYLL_ENV: production
 
+      # - name: Lighthouse CI Action
+      #   uses: treosh/lighthouse-ci-action@v12
+
       - name: Run Lighthouse CI
         run: |
-          npm install -g @lhci/cli
+          npm install -g @lhci/cli lighthouse-plugin-field-performance
           echo "Starting Mobile Audit (Default)..."
           lhci autorun --collect.staticDistDir=./_site_lhci
           echo "Starting Desktop Audit..."

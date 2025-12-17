@@ -2,7 +2,10 @@
     "ci": {
         "collect": {
             "staticDistDir": "./_site",
-            "numberOfRuns": 3
+            "numberOfRuns": 3,
+            "plugins": [
+                "lighthouse-plugin-field-performance"
+            ]
         },
         "upload": {
             "target": "temporary-public-storage"
