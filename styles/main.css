@@ -439,7 +439,7 @@ a.mobile-resume-btn {
 }
 
 .footer a {
-  color: var(--accent-color);
+  color: #ffffff;
   text-decoration: none;
   transition: color 0.3s ease;
 }
