@@ -135,7 +135,7 @@ class I18n {
         if (dateEl) dateEl.textContent = job.date;
 
         // Update title (handle "Role @ Company" format)
-        const titleEl = item.querySelector('h3');
+        const titleEl = item.querySelector('h2');
         if (titleEl) {
           // Split title into role and company parts
           const titleParts = job.title.split(' — ');
