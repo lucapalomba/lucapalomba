@@ -499,7 +499,7 @@ p.lead {
   box-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.5);
 }
 
-.timeline-content h3 {
+.timeline-content h2 {
   margin: 0 0 5px;
   font-size: 20px;
   color: var(--text-tertiary);
