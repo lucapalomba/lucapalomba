@@ -11,12 +11,15 @@
 <link rel="shortcut icon" href="https://github.com/lucapalomba.png">
 <meta name="theme-color" content="#0a0a0f">
 
-<!-- Web App Manifest -->
-<link rel="manifest" href="manifest.webmanifest">
+<!-- Preload critical fonts and CSS -->
+<link rel="preload" href="{{ '/fonts/Roboto_Mono/static/RobotoMono-Regular.ttf' | relative_url }}" as="font"
+  type="font/ttf" crossorigin>
+<link rel="preload" href="{{ '/styles/main.css' | relative_url }}" as="style">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 
-<!-- Preconnect for performance -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Web App Manifest -->
+<link rel="manifest" href="{{ '/manifest.webmanifest' | relative_url }}">
+
 
 <!-- SEO & Social Media -->
 <meta property="og:title"
@@ -71,8 +74,8 @@
 {{ page.header_scripts }}
 {% endif %}
 
-<!-- Styles -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap">
+<!-- Fonts -->
+<link rel="stylesheet" href="{{ '/styles/fonts.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/styles/transitions.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/styles/main.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/styles/mobile.css' | relative_url }}" media="(max-width: 768px)">
