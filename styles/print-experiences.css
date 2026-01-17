@@ -1,0 +1,261 @@
+/* Print Styles for Experiences Page */
+@media print {
+  /* Reset print margins */
+  @page {
+    margin: 0.5in;
+    size: A4;
+  }
+  
+  /* Hide non-essential elements */
+  body * {
+    visibility: hidden;
+  }
+  
+  /* Show only the main content */
+  #main-content,
+  #main-content * {
+    visibility: visible;
+  }
+  
+  /* Position main content at the top */
+  #main-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding-top: 0;
+    margin-top: 0;
+    padding-left: 0.5in;
+    padding-right: 0.5in;
+    padding-bottom: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Remove top margin from container */
+  .container {
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Remove top margin from h1 */
+  h1.section-title {
+    margin-top: 0;
+    padding-top: 0;
+  }
+  
+  /* Remove dark background for printing */
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 11pt;
+    line-height: 1.1;
+  }
+  
+  /* Container adjustments */
+  .container {
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Replace section title with name in print */
+  h1.section-title {
+    margin-bottom: 0.4em;
+    margin-top: 0;
+    padding: 0 !important;
+  }
+  
+  h1.section-title .section-number {
+    display: none !important;
+  }
+  
+  h1.section-title [data-i18n="experiences.title"] {
+    display: none !important;
+  }
+  
+  h1.section-title::before {
+    content: "Luca Palomba";
+    display: block;
+    font-size: 16pt;
+    font-weight: bold;
+    color: #8b5cf6 !important;
+    line-height: 1.1;
+  }
+  
+/* Hide lead paragraph completely in print */
+  .lead {
+    display: none !important;
+  }
+  
+  /* Add subtitle as pseudo-element of timeline */
+  .timeline::before {
+    content: "Full Stack Developer & Team Lead | Node.js • PHP • Frontend | Engineering leadership experience";
+    display: block;
+    font-size: 12pt;
+    font-weight: normal;
+    color: #666 !important;
+    margin-bottom: 0.2em;
+    line-height: 1.3;
+    text-align: center;
+  }
+  
+  .lead::before {
+    content: "Full Stack Developer & Team Lead | Node.js • PHP • Frontend | Engineering leadership experience";
+    display: block;
+  }
+  
+  h2 {
+    font-size: 12pt;
+    font-weight: bold;
+    margin-bottom: 0.2em;
+    color: #8b5cf6 !important;
+  }
+  
+  .section-number {
+    color: black !important;
+  }
+  
+  .company {
+    font-weight: normal;
+    color: #666 !important;
+  }
+  
+  
+  
+  /* Timeline adjustments */
+  .timeline {
+    list-style: none;
+    padding: 0 !important;
+    margin: 0 !important;
+    margin-top: 0 !important;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  
+  .timeline-item {
+    margin-bottom: 0.5em;
+  }
+  
+  /* Hide timeline markers (dots) in print */
+  .timeline-marker {
+    display: none;
+  }
+  
+  .timeline-content {
+    margin-left: 0;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  /* Date styling */
+  .date {
+    font-size: 11pt;
+    color: #666 !important;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+  }
+  
+  /* Job description */
+  .job-description {
+    margin: 0.5em 0 1em 0;
+    padding-left: 1.5em;
+  }
+  
+  .job-description li {
+    margin-bottom: 0.3em;
+    font-size: 11pt;
+    line-height: 1.3;
+  }
+  
+  /* Key project styling - appear as simple paragraph */
+  .key-project {
+    margin: 1em 0;
+    padding: 0;
+    border: none;
+    background: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+    outline: none !important;
+    border-radius: 0 !important;
+  }
+  
+  .kp-title {
+    font-weight: bold;
+    margin-bottom: 0.3em;
+  }
+  
+  .kp-label {
+    color: #333 !important;
+  }
+  
+  .kp-project-name {
+    color: #8b5cf6 !important;
+  }
+  
+  .kp-description {
+    font-size: 10pt;
+    color: #666 !important;
+    font-style: italic;
+  }
+  
+  /* Tech stack for print */
+  .tech-stack {
+    margin-top: 1em;
+  }
+  
+  /* Ultra specific selector to override main.css */
+  .timeline-item .timeline-content .tech-stack span {
+    display: inline-block !important;
+    background: #B77EF1 !important;
+    background-color: #B77EF1 !important;
+    background-image: none !important;
+    color: white !important;
+    padding: 2px 6px !important;
+    margin: 2px !important;
+    font-size: 9pt !important;
+    border: 1px solid #B77EF1 !important;
+    border-radius: 3px !important;
+  }
+  
+  /* Fallback - catch any tech-stack span */
+  .tech-stack span {
+    background: #B77EF1 !important;
+    background-color: #B77EF1 !important;
+    background-image: none !important;
+    color: white !important;
+  }
+  
+  /* Ensure links don't show URLs */
+  a {
+    color: black !important;
+    text-decoration: none;
+  }
+  
+  a[href]:after {
+    content: none !important;
+  }
+  
+  /* Page break control */
+  .timeline-item {
+    page-break-after: auto;
+  }
+  
+  /* Remove animations and transitions */
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  /* Print optimization */
+  .no-print {
+    display: none !important;
+  }
+}
