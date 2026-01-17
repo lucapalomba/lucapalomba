@@ -258,4 +258,9 @@
   .no-print {
     display: none !important;
   }
+  
+  /* Hide print button in print version */
+  .print-btn {
+    display: none !important;
+  }
 }
