@@ -456,6 +456,8 @@ a.mobile-resume-btn {
   margin-bottom: 10px;
   display: flex;
   align-items: center;
+  position: relative;
+  overflow: visible;
 }
 
 .section-number {
@@ -464,6 +466,33 @@ a.mobile-resume-btn {
   font-size: 24px;
   margin-right: 10px;
   font-weight: 400;
+}
+
+.print-btn {
+  background: none;
+  border: 1px solid var(--accent-color);
+  border-radius: 8px;
+  padding: 8px;
+  margin-left: auto;
+  cursor: pointer;
+  color: var(--accent-color);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  flex-shrink: 0;
+  pointer-events: auto;
+}
+
+.print-btn:hover {
+  background: var(--accent-color);
+  color: white;
+  transform: scale(1.05);
+}
+
+.print-btn:active {
+  transform: scale(0.95);
 }
 
 p.lead {

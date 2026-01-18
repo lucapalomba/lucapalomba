@@ -9,8 +9,16 @@ page_scripts:
 
 <main class="page" id="main-content">
   <div class="container">
-    <h1 class="section-title"><span class="section-number">02.</span> <span data-i18n="experiences.title">Work
-        experiences</span></h1>
+<h1 class="section-title"><span class="section-number">02.</span> <span data-i18n="experiences.title">Work
+        experiences</span>
+      <button class="print-btn" onclick="event.preventDefault(); handlePrint();" aria-label="Print this page">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+      </button>
+    </h1>
     <p class="lead" data-i18n="experiences.lead">Selected roles and projects across my career.</p>
 
     <ul class="timeline">
@@ -163,7 +171,35 @@ page_scripts:
         </div>
       </li>
 
-    </ul>
+</ul>
 
   </div>
 </main>
+
+<script>
+function handlePrint() {
+  try {
+    window.print();
+  } catch (e) {
+    console.error('Print failed:', e);
+    // Fallback: try to open print dialog manually
+    if (document.queryCommandSupported('print')) {
+      document.execCommand('print');
+    } else {
+      alert('Please use Ctrl+P or Cmd+P to print this page');
+    }
+  }
+}
+
+// Also add event listener as backup
+document.addEventListener('DOMContentLoaded', function() {
+  const printBtn = document.querySelector('.print-btn');
+  if (printBtn) {
+    printBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      handlePrint();
+    });
+  }
+});
+</script>
