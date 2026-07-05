@@ -29,6 +29,14 @@ jekyll-minifier:
   simple_boolean_attributes: true
   compress_js_templates: false
 
+# Files/dirs excluded from the Jekyll build.
+# AGENTS.md is repo documentation for AI agents, not a site page: the
+# jekyll-default-layout plugin would render it as AGENTS.html with the
+# default layout (skip-link #main-content), but its content has no
+# matching id, breaking htmlproofer. Exclude it so it never enters _site.
+exclude:
+  - AGENTS.md
+
 # SEO settings
 author: Luca Palomba
 social:
