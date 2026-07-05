@@ -6,10 +6,14 @@ class I18n {
     this.init();
   }
 
-  // Detect browser language
+  // Detect browser language — checks localStorage first for user preference
   detectLanguage() {
+    // 1. Respect the user's manual choice stored in localStorage
+    const stored = localStorage.getItem('preferredLanguage');
+    if (stored === 'it' || stored === 'en') return stored;
+
+    // 2. Fall back to browser language
     const browserLang = navigator.language || navigator.userLanguage;
-    // Check if browser language starts with 'it' (it, it-IT, it-CH, etc.)
     return browserLang.toLowerCase().startsWith('it') ? 'it' : 'en';
   }
 

@@ -1,48 +1,139 @@
-<nav class="navbar">
-    <div class="logo">
-        <a href="index.html">&lt;LP /&gt;</a>
+<nav class="w-full top-0 sticky flex justify-between items-center px-margin py-4 w-full z-50 bg-background/90 backdrop-blur-md border-b-4 border-primary dark:border-primary shadow-[8px_8px_0px_#ff544e]">
+  <!-- Logo / System Title -->
+  <div class="font-headline-lg-mobile text-headline-lg-mobile italic uppercase tracking-tighter text-primary dark:text-primary active:scale-95 transition-transform">
+    <a href="index.html">LUCA_PALOMBA.SYS</a>
+  </div>
+
+  <!-- Desktop Links & Controls -->
+  <div class="hidden md:flex gap-gutter items-center">
+    <a class="font-label-mono text-label-mono transition-all duration-100 px-2 py-1 {% if page.url == '/' or page.url == '/index.html' %}text-secondary dark:text-secondary border-b-2 border-secondary pb-1{% else %}text-text-muted dark:text-text-muted hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high{% endif %}" href="index.html">
+      <span data-i18n="nav.whoami">WHO_AM_I</span>
+    </a>
+    <a class="font-label-mono text-label-mono transition-all duration-100 px-2 py-1 {% if page.url == '/experiences.html' %}text-secondary dark:text-secondary border-b-2 border-secondary pb-1{% else %}text-text-muted dark:text-text-muted hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high{% endif %}" href="experiences.html">
+      <span data-i18n="nav.experience">EXPERIENCE</span>
+    </a>
+    <a class="font-label-mono text-label-mono transition-all duration-100 px-2 py-1 {% if page.url == '/technologies.html' %}text-secondary dark:text-secondary border-b-2 border-secondary pb-1{% else %}text-text-muted dark:text-text-muted hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high{% endif %}" href="technologies.html">
+      <span data-i18n="nav.technologies">TECH_STACK</span>
+    </a>
+    <a class="font-label-mono text-label-mono transition-all duration-100 px-2 py-1 {% if page.url == '/contact.html' %}text-secondary dark:text-secondary border-b-2 border-secondary pb-1{% else %}text-text-muted dark:text-text-muted hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high{% endif %}" href="contact.html">
+      <span data-i18n="nav.contact">CONTACT</span>
+    </a>
+
+    <!-- Language Selector Toggle -->
+    <div class="flex items-center gap-1 bg-surface-gray border border-text-muted px-2 py-1 font-label-mono text-[10px]">
+      <button onclick="window.i18n.switchLanguage('en'); updateLangToggleUI('en')" id="lang-btn-en" class="px-1 text-secondary font-bold hover:text-white transition-colors">EN</button>
+      <span class="text-text-muted">/</span>
+      <button onclick="window.i18n.switchLanguage('it'); updateLangToggleUI('it')" id="lang-btn-it" class="px-1 text-text-muted hover:text-white transition-colors">IT</button>
     </div>
-    {% unless page.hide_nav_links %}
-    <button class="hamburger-menu" id="hamburger-toggle" aria-label="Toggle navigation menu" aria-expanded="false"
-        aria-controls="mobile-nav">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
+  </div>
+
+  <!-- Mobile Actions -->
+  <div class="flex md:hidden items-center gap-4">
+    <!-- Lang toggle for mobile -->
+    <div class="flex items-center gap-1 bg-surface-gray border border-text-muted px-2 py-1 font-label-mono text-[10px]">
+      <button onclick="window.i18n.switchLanguage('en'); updateLangToggleUI('en')" id="mob-lang-btn-en" class="px-1 text-secondary font-bold">EN</button>
+      <span class="text-text-muted">/</span>
+      <button onclick="window.i18n.switchLanguage('it'); updateLangToggleUI('it')" id="mob-lang-btn-it" class="px-1 text-text-muted">IT</button>
+    </div>
+
+    <!-- Hamburger Button -->
+    <button class="text-primary focus:outline-none" id="hamburger-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span class="material-symbols-outlined text-[32px] hover:scale-110 active:scale-95 transition-all">menu</span>
     </button>
-    <div class="nav-links" aria-label="Main navigation">
-        <ol>
-            <li><a href="index.html" {% if page.url=="/" or page.url=="/index.html" %}aria-current="page" {% endif
-                    %}><span class="nav-number">01.</span> <span data-i18n="nav.whoami">Who am I</span></a>
-            </li>
-            <li><a href="experiences.html" {% if page.url=="/experiences.html" %}aria-current="page" {% endif %}><span
-                        class="nav-number">02.</span> <span data-i18n="nav.experience">Experience</span></a></li>
-            <li><a href="technologies.html" {% if page.url=="/technologies.html" %}aria-current="page" {% endif %}><span
-                        class="nav-number">03.</span> <span data-i18n="nav.technologies">Technologies</span></a></li>
-            <li><a href="contact.html" {% if page.url=="/contact.html" %}aria-current="page" {% endif %}><span
-                        class="nav-number">04.</span> <span data-i18n="nav.contact">Contact</span></a>
-            </li>
-        </ol>
-        <a href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer" class="resume-btn"
-            data-i18n="nav.curriculum" aria-label="Curriculum - opens in new window">Curriculum</a>
-    </div>
-    <div class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
-        <ol>
-            <li><a href="index.html" {% if page.url=="/" or page.url=="/index.html" %}aria-current="page" {% endif
-                    %}><span class="nav-number">01.</span> <span data-i18n="nav.whoami">Who am I</span></a></li>
-            <li><a href="experiences.html" {% if page.url=="/experiences.html" %}aria-current="page" {% endif %}><span
-                        class="nav-number">02.</span> <span data-i18n="nav.experience">Experience</span></a></li>
-            <li><a href="technologies.html" {% if page.url=="/technologies.html" %}aria-current="page" {% endif %}><span
-                        class="nav-number">03.</span> <span data-i18n="nav.technologies">Technologies</span></a></li>
-            <li><a href="contact.html" {% if page.url=="/contact.html" %}aria-current="page" {% endif %}><span
-                        class="nav-number">04.</span> <span data-i18n="nav.contact">Contact</span></a>
-            </li>
-        </ol>
-        <a href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer"
-            class="mobile-resume-btn" data-i18n="nav.curriculum"
-            aria-label="Curriculum - opens in new window">Curriculum</a>
-    </div>
-    {% endunless %}
+  </div>
+
+  <a href="contact.html" class="hidden md:block bg-primary-container text-on-primary-container px-6 py-2 font-label-mono text-label-mono font-bold hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-all duration-100 active:translate-x-1 active:translate-y-1 active:shadow-none shadow-[4px_4px_0px_#000]">
+    GET_IN_TOUCH
+  </a>
 </nav>
+
+<!-- Mobile Navigation Drawer -->
+<div class="fixed inset-0 bg-background/95 backdrop-blur-lg z-40 transform translate-x-full transition-transform duration-300 md:hidden flex flex-col justify-center items-center gap-8" id="mobile-nav">
+  <button class="absolute top-6 right-6 text-primary" id="mobile-nav-close" aria-label="Close menu">
+    <span class="material-symbols-outlined text-[40px]">close</span>
+  </button>
+
+  <a class="font-display-xl text-[28px] uppercase tracking-wider text-text-muted hover:text-secondary hover:skew-x-[-6deg] transition-all" href="index.html">
+    <span data-i18n="nav.whoami">WHO_AM_I</span>
+  </a>
+  <a class="font-display-xl text-[28px] uppercase tracking-wider text-text-muted hover:text-secondary hover:skew-x-[-6deg] transition-all" href="experiences.html">
+    <span data-i18n="nav.experience">EXPERIENCE</span>
+  </a>
+  <a class="font-display-xl text-[28px] uppercase tracking-wider text-text-muted hover:text-secondary hover:skew-x-[-6deg] transition-all" href="technologies.html">
+    <span data-i18n="nav.technologies">TECH_STACK</span>
+  </a>
+  <a class="font-display-xl text-[28px] uppercase tracking-wider text-text-muted hover:text-secondary hover:skew-x-[-6deg] transition-all" href="contact.html">
+    <span data-i18n="nav.contact">CONTACT</span>
+  </a>
+
+  <a href="contact.html" class="mt-8 bg-primary-container text-on-primary-container px-8 py-4 font-headline-lg-mobile text-[18px] italic font-bold active:translate-x-1 active:translate-y-1 active:shadow-none shadow-[6px_6px_0px_#000]">
+    GET_IN_TOUCH
+  </a>
+</div>
+
+<script>
+  function updateLangToggleUI(lang) {
+    const activeClass = ['text-secondary', 'font-bold'];
+    const inactiveClass = ['text-text-muted', 'font-normal'];
+
+    const btnEn = document.getElementById('lang-btn-en');
+    const btnIt = document.getElementById('lang-btn-it');
+    const mobBtnEn = document.getElementById('mob-lang-btn-en');
+    const mobBtnIt = document.getElementById('mob-lang-btn-it');
+
+    if (lang === 'en') {
+      if(btnEn) {
+        btnEn.classList.add(...activeClass); btnEn.classList.remove(...inactiveClass);
+        btnIt.classList.add(...inactiveClass); btnIt.classList.remove(...activeClass);
+      }
+      if(mobBtnEn) {
+        mobBtnEn.classList.add(...activeClass); mobBtnEn.classList.remove(...inactiveClass);
+        mobBtnIt.classList.add(...inactiveClass); mobBtnIt.classList.remove(...activeClass);
+      }
+    } else {
+      if(btnEn) {
+        btnEn.classList.add(...inactiveClass); btnEn.classList.remove(...activeClass);
+        btnIt.classList.add(...activeClass); btnIt.classList.remove(...inactiveClass);
+      }
+      if(mobBtnEn) {
+        mobBtnEn.classList.add(...inactiveClass); mobBtnEn.classList.remove(...activeClass);
+        mobBtnIt.classList.add(...activeClass); mobBtnIt.classList.remove(...inactiveClass);
+      }
+    }
+  }
+
+  // Set initial UI language on DOMContentLoaded
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      const currentLang = window.i18n ? window.i18n.getCurrentLanguage() : 'en';
+      updateLangToggleUI(currentLang);
+    }, 100);
+
+    // Mobile nav toggle interactions
+    const menuToggle = document.getElementById('hamburger-toggle');
+    const menuClose = document.getElementById('mobile-nav-close');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    if (menuToggle && mobileNav) {
+      menuToggle.addEventListener('click', () => {
+        mobileNav.classList.remove('translate-x-full');
+        menuToggle.setAttribute('aria-expanded', 'true');
+      });
+    }
+
+    if (menuClose && mobileNav) {
+      menuClose.addEventListener('click', () => {
+        mobileNav.classList.add('translate-x-full');
+        if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    // Close mobile nav when clicking a link
+    const mobileLinks = mobileNav ? mobileNav.querySelectorAll('a') : [];
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (mobileNav) mobileNav.classList.add('translate-x-full');
+      });
+    });
+  });
+</script>

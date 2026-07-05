@@ -9,17 +9,101 @@
 <link rel="icon" href="https://github.com/lucapalomba.png?s=32" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="https://github.com/lucapalomba.png" sizes="180x180">
 <link rel="shortcut icon" href="https://github.com/lucapalomba.png">
-<meta name="theme-color" content="#0a0a0f">
+<meta name="theme-color" content="#131318">
 
-<!-- Preload critical fonts and CSS -->
-<link rel="preload" href="{{ '/fonts/Roboto_Mono/static/RobotoMono-Regular.ttf' | relative_url }}" as="font"
-  type="font/ttf" crossorigin>
-<link rel="preload" href="{{ '/styles/main.css' | relative_url }}" as="style">
-<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<!-- Tailwind CSS CDN and Google Fonts -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,800;1,900&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 
-<!-- Web App Manifest -->
-<link rel="manifest" href="{{ '/manifest.webmanifest' | relative_url }}">
-
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "primary": "#ffb3ac",
+          "primary-container": "#ff544e",
+          "on-background": "#e4e1e9",
+          "on-error-container": "#ffdad6",
+          "on-primary-container": "#5c0006",
+          "outline": "#ad8884",
+          "on-error": "#690005",
+          "text-muted": "#8892B0",
+          "on-secondary-container": "#004d3f",
+          "inverse-on-surface": "#303036",
+          "tertiary-container": "#1ca0aa",
+          "background": "#131318",
+          "secondary-container": "#00c7a5",
+          "on-tertiary-fixed-variant": "#004f55",
+          "tertiary-fixed": "#85f3fe",
+          "primary-fixed-dim": "#ffb3ac",
+          "on-surface-variant": "#e6bdb9",
+          "secondary-fixed-dim": "#38debb",
+          "surface-container-lowest": "#0e0e13",
+          "primary-fixed": "#ffdad6",
+          "secondary-fixed": "#5ffbd6",
+          "surface": "#131318",
+          "on-secondary-fixed-variant": "#005142",
+          "on-primary-fixed": "#410003",
+          "surface-container-high": "#2a292f",
+          "surface-gray": "#16161D",
+          "surface-container-highest": "#35343a",
+          "inverse-primary": "#c00018",
+          "surface-tint": "#ffb3ac",
+          "text-primary": "#CCD6F6",
+          "on-tertiary-fixed": "#002022",
+          "surface-container": "#1f1f25",
+          "surface-dim": "#131318",
+          "on-secondary": "#00382d",
+          "inverse-surface": "#e4e1e9",
+          "on-primary": "#680008",
+          "surface-container-low": "#1b1b20",
+          "error": "#ffb4ab",
+          "error-container": "#93000a",
+          "on-primary-fixed-variant": "#930010",
+          "on-secondary-fixed": "#002019",
+          "secondary": "#41e4c0",
+          "on-tertiary-container": "#002f33",
+          "surface-variant": "#35343a",
+          "electric-blue": "#00F0FF",
+          "on-surface": "#e4e1e9",
+          "surface-bright": "#39383e",
+          "tertiary": "#67d7e1",
+          "tertiary-fixed-dim": "#67d7e1",
+          "on-tertiary": "#00363b",
+          "outline-variant": "#5d3f3c"
+        },
+        "borderRadius": {
+          "DEFAULT": "0px",
+          "lg": "0px",
+          "xl": "0px",
+          "full": "9999px"
+        },
+        "spacing": {
+          "shear-offset": "12px",
+          "unit": "4px",
+          "gutter": "24px",
+          "margin": "40px"
+        },
+        "fontFamily": {
+          "display-xl": ["Montserrat", "sans-serif"],
+          "label-mono": ["'JetBrains Mono'", "monospace"],
+          "headline-lg-mobile": ["Montserrat", "sans-serif"],
+          "headline-lg": ["Montserrat", "sans-serif"],
+          "body-md": ["Inter", "sans-serif"]
+        },
+        "fontSize": {
+          "display-xl": ["80px", {"lineHeight": "80px", "letterSpacing": "-0.05em", "fontWeight": "900"}],
+          "label-mono": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "500"}],
+          "headline-lg-mobile": ["32px", {"lineHeight": "36px", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+          "headline-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+          "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "400"}]
+        }
+      }
+    }
+  };
+</script>
 
 <!-- SEO & Social Media -->
 <meta property="og:title"
@@ -74,12 +158,9 @@
 {{ page.header_scripts }}
 {% endif %}
 
-<!-- Fonts -->
-<link rel="stylesheet" href="{{ '/styles/fonts.css' | relative_url }}">
+<!-- Fonts and Stylesheets -->
 <link rel="stylesheet" href="{{ '/styles/transitions.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/styles/main.css' | relative_url }}">
-<link rel="stylesheet" href="{{ '/styles/mobile.css' | relative_url }}" media="(max-width: 768px)">
-<link rel="stylesheet" href="{{ '/styles/mobile-small.css' | relative_url }}" media="(max-width: 640px)">
 <link rel="stylesheet" href="{{ '/styles/reduced-motion.css' | relative_url }}"
   media="(prefers-reduced-motion: reduce)">
 <link rel="stylesheet" href="{{ '/styles/print-experiences.css' | relative_url }}" media="print">

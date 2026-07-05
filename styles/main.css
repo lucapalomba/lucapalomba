@@ -29,9 +29,7 @@ body {
   /* Default text color*/
   font-family: var(--font-main);
   font-weight: 100;
-  opacity: 0.01;
-  /* Initial state for transition */
-  transition: opacity 0.5s ease-in-out;
+  /* Note: fade-in animation is handled by transitions.css */
 }
 
 /* Skip to content link - hidden but accessible to keyboard users */
@@ -51,18 +49,7 @@ body {
   top: 0;
 }
 
-/* Particles Container */
-#particles-js {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  /* auto: lets particles.js receive mousemove for the on-hover "grab" effect.
-     Set to none by accident in 0ca2d9d (404-page refactor); restored here. */
-  pointer-events: auto;
-}
+/* Particles container removed in V2 Kinetic design */
 
 /* Typography & Shared Components */
 h1 {
