@@ -29,6 +29,23 @@ jekyll-minifier:
   simple_boolean_attributes: true
   compress_js_templates: false
 
+# Files/dirs excluded from the Jekyll build.
+# NOTE: setting `exclude` REPLACES Jekyll's defaults (it does not merge),
+# so the default entries must be repeated here — otherwise `vendor/bundle/`
+# (where CI installs gems via `bundler-cache`) gets processed and the build
+# fails. AGENTS.md is added because jekyll-default-layout would otherwise
+# render it as AGENTS.html (default layout skip-link #main-content has no
+# matching id in its content), breaking htmlproofer.
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - AGENTS.md
+
 # SEO settings
 author: Luca Palomba
 social:
