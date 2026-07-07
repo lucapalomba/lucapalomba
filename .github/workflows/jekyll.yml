@@ -18,18 +18,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-      
+        uses: actions/checkout@v7
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3'
           bundler-cache: true
-      
+
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v5
-      
+        uses: actions/configure-pages@v6
+
       - name: Build with Jekyll
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
@@ -39,7 +39,7 @@ jobs:
         run: bundle exec htmlproofer ./_site --disable-external --swap-urls "^${{ steps.pages.outputs.base_path }}/:/"
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 24
 
@@ -57,7 +57,7 @@ jobs:
           lhci autorun --collect.settings.preset=desktop --collect.staticDistDir=./_site_lhci
       
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
 
   deploy:
     if: github.ref == 'refs/heads/main'
@@ -69,4 +69,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
