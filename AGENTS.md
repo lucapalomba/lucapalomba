@@ -26,7 +26,7 @@ L'ambiente ha Ruby 3.4 + Bundler, ma c'è un conflitto `public_suffix` (7 instal
 - **i18n**: ogni stringa UI ha `data-i18n="chiave.puntata"` (es. `nav.whoami`, `index.hero.title`); le traduzioni vivono in `translations/en.json` e `it.json`. Per gli `aria-label` si usa `data-i18n-aria`. Il linguaggio è scelto da `localStorage('preferredLanguage')` poi da `navigator.language`, e salvato su switch manuale.
 - **Front matter delle pagine**: supporta `page_scripts` (lista di path JS aggiuntivi caricati in fondo) e `hide_nav_scripts` (disabilita `navigation.js`/`hamburger.js`). `body_class` marca la pagina (es. `experiences-page`, `technologies-page`, `contact-page`) — usato da `i18n.js` per i meta tag e da `techProgress.js` per attivare le animazioni.
 - **Design system**: tema "brutalist/industriale" — border-radius 0, ombre hard (`shadow-[8px_8px_0px_...]`), skew `-6deg` su titoli, font Montserrat (display) + JetBrains Mono (label/mono) + Inter (body). Palette dark con accenti `primary-container` (#ff544e) e `secondary` (#41e4c0).
-- **Commit**: stile conventional commits (`feat:`, `fix:`). Lavorare su branch separati / PR; il deploy avviene solo da `main`.
+- **Commit (OBBLIGATORIO)**: **ogni** commit deve usare lo standard Conventional Commits come tipologia di messaggio — `feat:`, `fix:`, `chore:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`, `build:`, `ci:`, `revert:` ecc. Niente commit senza prefisso tipo. Lavorare su branch separati / PR; il deploy avviene solo da `main`.
 
 ## Mappa del progetto
 
