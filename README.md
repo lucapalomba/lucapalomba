@@ -13,38 +13,26 @@ Full Stack Developer & Team Lead, Engineering leadership experience
 
 Welcome to my personal portfolio, a Jekyll-powered website built while testing support for different AI models! This site showcases my skills and expertise in web development and engineering management. The project has evolved from a static HTML site to a modular Jekyll structure, making it easier to add new features, Easter eggs, and test AI companion integrations.
 
-## Actual Local Development Environment
+## Local Development Environment
 
-For this project, I am using Continue.dev locally on my machine. The environment includes:
+For this project, I experiment with AI-assisted development using open-source models. The environment includes:
 
-- **Machine Specification**: CPU i7-7700, RAM 16GB, OS Windows, GPU Nvidia 3060 12GB
-- **VS Code**: Integrated development environment with QwenCode2.5-coder:7b for enhanced coding capabilities, used with the Agent Support of Continue.dev
-- **Ollama Models**: QwenCode2.5-coder:7b for local AI-assisted development
+- **Machine Specification**: CPU i7-7700, RAM 16GB, OS Windows, GPU Nvidia RTX 3060 12GB
+- **Ollama**: model runtime used to run **GLM 5.2**
+- **VS Code**: integrated development environment used alongside Ollama
 
-## Online AI Assistant
+## AI Agent: Claude Code
 
-In addition to local models, I'm using multiple online AI assistants for this project:
-
-### Claude Sonnet 4.5 (Anthropic)
-
-**Claude Sonnet 4.5** is part of the Claude 4 model family and provides:
-
-- Advanced code review and refactoring suggestions
-- English grammar and professional tone improvements
-- Git commit message generation following conventional commit standards
-- Documentation writing and technical content refinement
-
-### Gemini with Antigravity (Google)
-
-**Gemini with Antigravity** is Google's advanced AI coding assistant that offers:
+For this project I use **Claude Code** as my autonomous coding agent, powered by the **GLM 5.2** model. Claude Code provides:
 
 - Agentic workflow with autonomous task planning and execution
 - Multi-step code refactoring and implementation
 - Intelligent codebase understanding and navigation
-- Automated testing and verification
-- Real-time browser automation for UI development and testing
+- Automated testing and CI verification (e.g., the Node 24 migration of the GitHub Actions pipeline)
+- Git commit message generation following conventional commit standards
+- Documentation writing and technical content refinement
 
-Both assistants work together to maintain code quality, ensure professional presentation, and accelerate development across all project materials.
+Claude Code acts as the agent that drives the work, while GLM 5.2 is the model powering it.
 
 ## Technologies Used
 
