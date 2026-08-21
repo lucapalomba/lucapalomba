@@ -19,12 +19,14 @@ class TitleAnimator {
       en: [
         { text: "I build things for the web", highlights: ["things", "web"] },
         { text: "I build teams for Companies", highlights: ["teams", "Companies"] },
-        { text: "I lead teams for goals.", highlights: ["teams", "goals"] }
+        { text: "I lead teams for goals.", highlights: ["teams", "goals"] },
+        { text: "I train teams and AI for processes.", highlights: ["teams", "AI", "processes"] }
       ],
       it: [
         { text: "Costruisco cose per il web", highlights: ["cose", "web"] },
         { text: "Costruisco team per le aziende", highlights: ["team", "aziende"] },
-        { text: "Guido team per gli obiettivi.", highlights: ["Guido", "team", "obiettivi"] }
+        { text: "Guido team per gli obiettivi.", highlights: ["Guido", "team", "obiettivi"] },
+        { text: "Addestro team e AI per i processi.", highlights: ["Addestro", "team", "AI", "processi"] }
       ]
     };
 
