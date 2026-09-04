@@ -87,14 +87,17 @@
         "description": "Explore the technologies Luca Palomba has experience with and those he's eager to learn.",
         "lead": "A list of technologies — from the ones I use every day to the ones that are now part of me. But mind you: the future changes fast, and so does this list with it.",
         "experiencedTitle": "Technological Experience",
-        "learningTitle": "Technologies to Study",
         "tech": {
             "aiAgents": "LLM Development Agents & AI Documentation",
             "jsNode": "JavaScript (Node.js + TypeScript)",
             "react": "Frontend Architecture (React.js, Angular, Vanilla JS)",
             "cloudK8s": "Cloud & Distributed Systems (Docker, Kubernetes)",
             "php": "PHP (Symfony, Zend, legacy-to-modern)",
-            "cicd": "CI/CD & Automation (Jenkins, GitLab, Bamboo)"
+            "cicd": "CI/CD & Automation (Jenkins, GitLab, Bamboo)",
+            "architectures": "Advanced Architectures (DDD, Event-Driven, CQRS)",
+            "cloud": "Cloud Provider Deep Dive (AWS, GCP, Azure)",
+            "ml": "Machine Learning",
+            "wasm": "WebAssembly (WASM)"
         },
         "desc": {
             "aiAgents": "I design and orchestrate LLM-based development agents and write AI-friendly documentation, bridging the human team and AI tooling in the development workflow.",
@@ -102,23 +105,11 @@
             "react": "I've led frontend teams, defined RAD components, re-engineered products, developed PWAs. I know lifecycle, rendering, and structuring complex UI architectures.",
             "cloudK8s": "In my recent experiences I brought a product natively distributed on K8s with 100+ machines, pipelines, containerization and business continuity. I'm not a pure DevOps, but I have concrete experience with real architectures.",
             "php": "I've developed and maintained Zend APIs for years. Recently I worked with Symfony on medium-sized projects. Even if it's less central for me today, the level is definitely expert.",
-            "cicd": "I've introduced automations, selected tools, optimized pipelines and internal processes. Solid competence, both in processes and R&D."
-        },
-        "learning": {
-            "python": "Python",
-            "architectures": "Advanced Architectures (DDD, Event-Driven, CQRS)",
-            "wasm": "WebAssembly (WASM)",
-            "ml": "Machine Learning",
-            "cloud": "Cloud Provider Deep Dive (AWS, GCP, Azure)",
-            "dotnetJava": ".NET or Java"
-        },
-        "learningDesc": {
-            "python": "Deepening Python to expand my skills in automation, internal tools creation, and integration with AI ecosystems, where this language has become the de facto standard.",
+            "cicd": "I've introduced automations, selected tools, optimized pipelines and internal processes. Solid competence, both in processes and R&D.",
             "architectures": "Studying advanced architectures to increase robustness, scalability and clarity of complex systems I manage, improving quality of technical decisions and design processes.",
-            "wasm": "Studying WebAssembly to evaluate new high-performance solutions in the browser and server-side contexts, with the goal of bringing efficiency and portability to distributed and real-time scenarios.",
-            "ml": "Focusing on Machine Learning to enhance predictive and analytical capabilities of products I oversee, integrating intelligence into decision-making flows and internal automations.",
             "cloud": "Deepening knowledge of major cloud providers to consolidate architectural skills on managed services, security, networking and scalability, fundamental for supporting modern enterprise solutions.",
-            "dotnetJava": "Cause the world still needs it!"
+            "ml": "Focusing on Machine Learning to enhance predictive and analytical capabilities of products I oversee, integrating intelligence into decision-making flows and internal automations.",
+            "wasm": "Studying WebAssembly to evaluate new high-performance solutions in the browser and server-side contexts, with the goal of bringing efficiency and portability to distributed and real-time scenarios."
         }
     },
     "contact": {

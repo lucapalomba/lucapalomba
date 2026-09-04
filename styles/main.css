@@ -821,41 +821,6 @@ p.lead {
   }
 }
 
-.learning-list {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.learning-item {
-  padding: 0;
-}
-
-.learning-title {
-  font-size: 18px;
-  color: var(--text-tertiary);
-  font-weight: 600;
-  margin: 0 0 8px 0;
-  position: relative;
-  padding-left: 24px;
-}
-
-.learning-title::before {
-  content: '▹';
-  position: absolute;
-  left: 0;
-  color: var(--accent-color);
-  font-size: 18px;
-}
-
-.learning-description {
-  margin: 0;
-  padding-left: 24px;
-  font-size: 14px;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
 /* Navigation Hint Overlay */
 .navigation-hint {
   position: fixed;
