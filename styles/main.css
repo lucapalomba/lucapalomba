@@ -767,22 +767,23 @@ p.lead {
 }
 
 /* Rising-fast indicator: a horizontal row of green right-pointing
-   chevrons (">>>") floating just above the progress fill's right tip.
-   The number of <i> chevrons encodes momentum (more = rising faster);
-   `left` is set inline per item to match data-progress. A horizontal
-   mask fades the row ends so larger clusters stay compact. */
+   chevrons (">>>") floating at the progress fill's right tip, vertically
+   centered on the bar itself. The number of <i> chevrons encodes momentum
+   (more = rising faster); `left` is set inline per item to match
+   data-progress. A horizontal mask fades the row ends so larger clusters
+   stay compact, and the float animation nudges them side-to-side. */
 .tech-rise {
   position: absolute;
-  bottom: calc(100% + 3px);
+  top: 50%;
   left: 0;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 2px;
   pointer-events: none;
   z-index: 2;
-  animation: tech-rise-bounce 1.3s ease-in-out infinite;
+  animation: tech-rise-float 1.6s ease-in-out infinite;
   -webkit-mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent);
   mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent);
 }
@@ -797,15 +798,15 @@ p.lead {
   filter: drop-shadow(0 0 2px rgba(34, 197, 94, 0.7));
 }
 
-@keyframes tech-rise-bounce {
+@keyframes tech-rise-float {
 
   0%,
   100% {
-    transform: translateX(-50%) translateY(0);
+    transform: translate(calc(-50% - 4px), -50%);
   }
 
   50% {
-    transform: translateX(-50%) translateY(-3px);
+    transform: translate(calc(-50% + 4px), -50%);
   }
 }
 
