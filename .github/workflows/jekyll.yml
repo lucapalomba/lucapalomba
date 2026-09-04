@@ -26,6 +26,14 @@ jobs:
           ruby-version: '3.3'
           bundler-cache: true
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: i18n integrity check
+        run: node scripts/check-i18n.js
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v6
@@ -37,11 +45,6 @@ jobs:
       
       - name: Test site with HTML Proofer
         run: bundle exec htmlproofer ./_site --disable-external --swap-urls "^${{ steps.pages.outputs.base_path }}/:/"
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
 
       - name: Build for Lighthouse CI
         run: bundle exec jekyll build --baseurl "" --destination ./_site_lhci
