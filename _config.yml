@@ -35,7 +35,9 @@ jekyll-minifier:
 # (where CI installs gems via `bundler-cache`) gets processed and the build
 # fails. AGENTS.md is added because jekyll-default-layout would otherwise
 # render it as AGENTS.html (default layout skip-link #main-content has no
-# matching id in its content), breaking htmlproofer.
+# matching id in its content), breaking htmlproofer. scripts/ holds Node
+# tooling (check-i18n.js) using ES6+ syntax that jekyll-minifier's uglifier
+# cannot parse, and it is not site content.
 exclude:
   - Gemfile
   - Gemfile.lock
@@ -45,6 +47,7 @@ exclude:
   - vendor/gems/
   - vendor/ruby/
   - AGENTS.md
+  - scripts
 
 # SEO settings
 author: Luca Palomba
