@@ -821,6 +821,21 @@ p.lead {
   }
 }
 
+/* Keep the chevron cluster inside the viewport on small screens: a
+   12-chevron row at 4px+2px gap is ~70px wide and would overflow the
+   bar/page on phones. Shrink the chevrons and tighten the gap so the
+   whole cluster stays within the track. */
+@media (max-width: 600px) {
+  .tech-rise {
+    gap: 1px;
+  }
+
+  .tech-rise i {
+    width: 3px;
+    height: 3px;
+  }
+}
+
 /* Navigation Hint Overlay */
 .navigation-hint {
   position: fixed;
