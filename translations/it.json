@@ -28,6 +28,18 @@
         "keyProject": "Progetto chiave:",
         "jobs": [
             {
+                "date": "Feb 2026 — Presente",
+                "title": "Senior Full Stack Developer • AI Enabler — Vigilate SRL",
+                "description": "Analizzo e riprogetto i processi di sviluppo per ottimizzare il coordinamento umano/AI. Riprogetto e mantengo gli sviluppi delle automazioni — CI/CD. Garantisco che qualità del software e impiego di risorse avanzino in modo coordinato.",
+                "keyProject": null,
+                "techStack": [
+                    "AI",
+                    "Process Design",
+                    "Automation",
+                    "CI/CD"
+                ]
+            },
+            {
                 "date": "Dic 2020 — Mag 2025",
                 "title": "Senior Full Stack Developer • Head of R&D — P&B Linking / Openware PSIM / COGEN S.p.a.S.U",
                 "description": "Ho guidato le attività di R&D e coordinato team con gli stakeholder. Organizzato il lavoro usando SCRUM. Ridotto i costi degli strumenti del ~50% in un anno. Guidato ricerca, analisi e progettazione del prodotto. Gestito fino a 20 persone in 4 team di prodotto (in sede e remoto).",
