@@ -729,7 +729,7 @@ p.lead {
   height: 8px;
   background: rgba(var(--accent-color-rgb), 0.1);
   border-radius: 10px;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
 }
 
@@ -741,6 +741,7 @@ p.lead {
   transition: width 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);
   position: relative;
   box-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.5);
+  overflow: hidden;
 }
 
 .tech-progress-fill::after {
@@ -767,39 +768,74 @@ p.lead {
   }
 }
 
-.learning-list {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.learning-item {
-  padding: 0;
-}
-
-.learning-title {
-  font-size: 18px;
-  color: var(--text-tertiary);
-  font-weight: 600;
-  margin: 0 0 8px 0;
-  position: relative;
-  padding-left: 24px;
-}
-
-.learning-title::before {
-  content: '▹';
+/* Rising-fast indicator: a horizontal row of green right-pointing
+   chevrons (">>>") starting at the progress fill's right tip and extending
+   rightward over the unfilled track, vertically centered on the bar so
+   they don't overlap the fill. The number of <i> chevrons encodes momentum
+   (more = rising faster); `left` is set inline per item to match
+   data-progress. A right-edge mask fades the trailing end so larger
+   clusters stay compact, and the float animation nudges them side-to-side. */
+.tech-rise {
   position: absolute;
+  top: 50%;
   left: 0;
-  color: var(--accent-color);
-  font-size: 18px;
+  transform: translate(0, -50%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+  pointer-events: none;
+  z-index: 2;
+  animation: tech-rise-float 1.6s ease-in-out infinite;
+  -webkit-mask-image: linear-gradient(to right, #000 70%, transparent);
+  mask-image: linear-gradient(to right, #000 70%, transparent);
 }
 
-.learning-description {
-  margin: 0;
-  padding-left: 24px;
-  font-size: 14px;
-  color: var(--text-secondary);
-  line-height: 1.6;
+.tech-rise i {
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-top: 2px solid #22c55e;
+  border-right: 2px solid #22c55e;
+  transform: rotate(45deg);
+  filter: drop-shadow(0 0 2px rgba(34, 197, 94, 0.7));
+}
+
+@keyframes tech-rise-float {
+
+  0%,
+  100% {
+    transform: translate(0, -50%);
+  }
+
+  50% {
+    transform: translate(6px, -50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-rise {
+    animation: none;
+  }
+
+  .tech-rise i {
+    filter: none;
+  }
+}
+
+/* Keep the chevron cluster inside the viewport on small screens: a
+   12-chevron row at 4px+2px gap is ~70px wide and would overflow the
+   bar/page on phones. Shrink the chevrons and tighten the gap so the
+   whole cluster stays within the track. */
+@media (max-width: 600px) {
+  .tech-rise {
+    gap: 1px;
+  }
+
+  .tech-rise i {
+    width: 3px;
+    height: 3px;
+  }
 }
 
 /* Navigation Hint Overlay */
