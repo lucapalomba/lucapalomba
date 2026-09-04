@@ -59,7 +59,9 @@ body {
   width: 100%;
   height: 100%;
   z-index: 1;
-  pointer-events: none;
+  /* auto: lets particles.js receive mousemove for the on-hover "grab" effect.
+     Set to none by accident in 0ca2d9d (404-page refactor); restored here. */
+  pointer-events: auto;
 }
 
 /* Typography & Shared Components */
