@@ -727,7 +727,7 @@ p.lead {
   height: 8px;
   background: rgba(var(--accent-color-rgb), 0.1);
   border-radius: 10px;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
 }
 
@@ -739,6 +739,7 @@ p.lead {
   transition: width 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);
   position: relative;
   box-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.5);
+  overflow: hidden;
 }
 
 .tech-progress-fill::after {
@@ -762,6 +763,65 @@ p.lead {
 
   100% {
     transform: translateX(100%);
+  }
+}
+
+/* Rising-fast indicator: green chevrons placed at the right edge of
+   the progress fill (the bar's moving tip) to signal skills that are
+   climbing quickly. `left` is set inline per item to match data-progress. */
+.tech-rise {
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 16px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 2;
+  animation: tech-rise-bounce 1.3s ease-in-out infinite;
+}
+
+.tech-rise::before,
+.tech-rise::after {
+  content: '';
+  position: absolute;
+  left: 1px;
+  width: 7px;
+  height: 7px;
+  border-top: 2px solid #22c55e;
+  border-left: 2px solid #22c55e;
+  transform: rotate(45deg);
+  filter: drop-shadow(0 0 3px rgba(34, 197, 94, 0.7));
+}
+
+.tech-rise::before {
+  top: 0;
+}
+
+.tech-rise::after {
+  top: 6px;
+  opacity: 0.55;
+}
+
+@keyframes tech-rise-bounce {
+
+  0%,
+  100% {
+    transform: translate(-50%, -50%);
+  }
+
+  50% {
+    transform: translate(-50%, -75%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-rise {
+    animation: none;
+  }
+
+  .tech-rise::before,
+  .tech-rise::after {
+    filter: none;
   }
 }
 
