@@ -767,16 +767,17 @@ p.lead {
 }
 
 /* Rising-fast indicator: a horizontal row of green right-pointing
-   chevrons (">>>") floating at the progress fill's right tip, vertically
-   centered on the bar itself. The number of <i> chevrons encodes momentum
+   chevrons (">>>") starting at the progress fill's right tip and extending
+   rightward over the unfilled track, vertically centered on the bar so
+   they don't overlap the fill. The number of <i> chevrons encodes momentum
    (more = rising faster); `left` is set inline per item to match
-   data-progress. A horizontal mask fades the row ends so larger clusters
-   stay compact, and the float animation nudges them side-to-side. */
+   data-progress. A right-edge mask fades the trailing end so larger
+   clusters stay compact, and the float animation nudges them side-to-side. */
 .tech-rise {
   position: absolute;
   top: 50%;
   left: 0;
-  transform: translate(-50%, -50%);
+  transform: translate(0, -50%);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -784,8 +785,8 @@ p.lead {
   pointer-events: none;
   z-index: 2;
   animation: tech-rise-float 1.6s ease-in-out infinite;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent);
+  -webkit-mask-image: linear-gradient(to right, #000 70%, transparent);
+  mask-image: linear-gradient(to right, #000 70%, transparent);
 }
 
 .tech-rise i {
@@ -802,11 +803,11 @@ p.lead {
 
   0%,
   100% {
-    transform: translate(calc(-50% - 4px), -50%);
+    transform: translate(0, -50%);
   }
 
   50% {
-    transform: translate(calc(-50% + 4px), -50%);
+    transform: translate(6px, -50%);
   }
 }
 
