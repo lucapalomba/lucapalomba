@@ -29,9 +29,15 @@
         "jobs": [
             {
                 "date": "Feb 2026 — Presente",
-                "title": "Senior Full Stack Developer • AI Enabled — Vigilate SRL",
-                "description": "Riprogettare i processi di sviluppo per ottimizzare il coordinamento umano/AI.",
-                "keyProject": null
+                "title": "Senior Full Stack Developer • AI Enabler — Vigilate SRL",
+                "description": "Analizzo e riprogetto i processi di sviluppo per ottimizzare il coordinamento umano/AI. Riprogetto e mantengo gli sviluppi delle automazioni — CI/CD.",
+                "keyProject": null,
+                "techStack": [
+                    "AI",
+                    "Process Design",
+                    "Automation",
+                    "CI/CD"
+                ]
             },
             {
                 "date": "Dic 2020 — Mag 2025",
