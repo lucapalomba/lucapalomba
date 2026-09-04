@@ -766,17 +766,18 @@ p.lead {
   }
 }
 
-/* Rising-fast indicator: a horizontal row of green up-chevrons
-   floating just above the progress fill's right tip, signalling
-   skills that are climbing quickly. `left` is set inline per item
-   to match data-progress. */
+/* Rising-fast indicator: green right-pointing chevrons stacked
+   vertically on the progress fill's right tip, signalling skills
+   that are climbing quickly. `left` is set inline per item to match
+   data-progress. */
 .tech-rise {
   position: absolute;
-  bottom: calc(100% + 3px);
+  top: 50%;
   left: 0;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   display: flex;
-  gap: 1px;
+  flex-direction: column;
+  align-items: center;
   pointer-events: none;
   z-index: 2;
   animation: tech-rise-bounce 1.3s ease-in-out infinite;
@@ -787,7 +788,7 @@ p.lead {
   width: 6px;
   height: 6px;
   border-top: 2px solid #22c55e;
-  border-left: 2px solid #22c55e;
+  border-right: 2px solid #22c55e;
   transform: rotate(45deg);
   filter: drop-shadow(0 0 3px rgba(34, 197, 94, 0.7));
 }
@@ -808,11 +809,11 @@ p.lead {
 
   0%,
   100% {
-    transform: translateX(-50%) translateY(0);
+    transform: translate(-50%, -50%);
   }
 
   50% {
-    transform: translateX(-50%) translateY(-3px);
+    transform: translate(-50%, -75%);
   }
 }
 
