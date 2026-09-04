@@ -91,7 +91,7 @@
         "tech": {
             "aiAgents": "LLM Development Agents & AI Documentation",
             "jsNode": "JavaScript (Node.js + TypeScript)",
-            "react": "Frontend Architecture (React.js, jQuery, Vanilla JS)",
+            "react": "Frontend Architecture (React.js, Angular, Vanilla JS)",
             "cloudK8s": "Cloud & Distributed Systems (Docker, Kubernetes)",
             "php": "PHP (Symfony, Zend, legacy-to-modern)",
             "cicd": "CI/CD & Automation (Jenkins, GitLab, Bamboo)"
