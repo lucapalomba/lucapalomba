@@ -90,6 +90,7 @@
         "experiencedTitle": "Tecnologie con Esperienza",
         "learningTitle": "Tecnologie da Studiare",
         "tech": {
+            "aiAgents": "Agenti di sviluppo LLM & Documentazione per AI",
             "jsNode": "JavaScript (Node.js + TypeScript)",
             "react": "Frontend Architecture (React.js, jQuery, Vanilla JS)",
             "cloudK8s": "Cloud & Distributed Systems (Docker, Kubernetes)",
@@ -97,6 +98,7 @@
             "cicd": "CI/CD & Automation (Jenkins, GitLab, Bamboo)"
         },
         "desc": {
+            "aiAgents": "Progetto e orchestro agenti di sviluppo basati su LLM e redigo documentazione strutturata per l'AI, facendo da ponte tra il team umano e gli strumenti AI nel flusso di sviluppo.",
             "jsNode": "È il linguaggio/stack che si ripresenta più volte nella mia carriera: backend, automation, integrazioni, progetti cloud, PWA, orchestrazione. Forse non conosco tutto e Typescript mi sorprende ogni volta, ma ormai JS è la mia casa.",
             "react": "Ho guidato team frontend, definito componenti RAD, reingegnerizzato prodotti, sviluppato PWA. Conosci ciclo di vita, rendering, strutturazione architetture UI complesse.",
             "cloudK8s": "Nele mie ultime esperienze ho portato un prodotto nativamente distribuito su K8s con 100+ macchine, pipeline, containerizzazione e business continuity. Non sono un DevOps puro, ma ho esperienza concreta di architetture reali.",

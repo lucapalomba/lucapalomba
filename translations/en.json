@@ -89,6 +89,7 @@
         "experiencedTitle": "Experienced Technologies",
         "learningTitle": "Technologies to Study",
         "tech": {
+            "aiAgents": "LLM Development Agents & AI Documentation",
             "jsNode": "JavaScript (Node.js + TypeScript)",
             "react": "Frontend Architecture (React.js, jQuery, Vanilla JS)",
             "cloudK8s": "Cloud & Distributed Systems (Docker, Kubernetes)",
@@ -96,6 +97,7 @@
             "cicd": "CI/CD & Automation (Jenkins, GitLab, Bamboo)"
         },
         "desc": {
+            "aiAgents": "I design and orchestrate LLM-based development agents and write AI-friendly documentation, bridging the human team and AI tooling in the development workflow.",
             "jsNode": "It's the language/stack that recurs throughout my career: backend, automation, integrations, cloud projects, PWA, orchestration. Maybe I don't know everything and TypeScript surprises me every time, but by now JS is my home.",
             "react": "I've led frontend teams, defined RAD components, re-engineered products, developed PWAs. I know lifecycle, rendering, and structuring complex UI architectures.",
             "cloudK8s": "In my recent experiences I brought a product natively distributed on K8s with 100+ machines, pipelines, containerization and business continuity. I'm not a pure DevOps, but I have concrete experience with real architectures.",
