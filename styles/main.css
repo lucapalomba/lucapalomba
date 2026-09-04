@@ -766,54 +766,46 @@ p.lead {
   }
 }
 
-/* Rising-fast indicator: green right-pointing chevrons stacked
-   vertically on the progress fill's right tip, signalling skills
-   that are climbing quickly. `left` is set inline per item to match
-   data-progress. */
+/* Rising-fast indicator: a horizontal row of green right-pointing
+   chevrons (">>>") floating just above the progress fill's right tip.
+   The number of <i> chevrons encodes momentum (more = rising faster);
+   `left` is set inline per item to match data-progress. A horizontal
+   mask fades the row ends so larger clusters stay compact. */
 .tech-rise {
   position: absolute;
-  top: 50%;
+  bottom: calc(100% + 3px);
   left: 0;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  gap: 2px;
   pointer-events: none;
   z-index: 2;
   animation: tech-rise-bounce 1.3s ease-in-out infinite;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent);
 }
 
 .tech-rise i {
   display: block;
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
   border-top: 2px solid #22c55e;
   border-right: 2px solid #22c55e;
   transform: rotate(45deg);
-  filter: drop-shadow(0 0 3px rgba(34, 197, 94, 0.7));
-}
-
-.tech-rise i:nth-child(2) {
-  width: 7px;
-  height: 7px;
-  opacity: 0.75;
-}
-
-.tech-rise i:nth-child(3) {
-  width: 8px;
-  height: 8px;
-  opacity: 0.5;
+  filter: drop-shadow(0 0 2px rgba(34, 197, 94, 0.7));
 }
 
 @keyframes tech-rise-bounce {
 
   0%,
   100% {
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%) translateY(0);
   }
 
   50% {
-    transform: translate(-50%, -75%);
+    transform: translateX(-50%) translateY(-3px);
   }
 }
 
