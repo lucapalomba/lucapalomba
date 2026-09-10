@@ -3,44 +3,143 @@ layout: default
 title: Contacts — Luca Palomba
 description: Get in touch with Luca Palomba. Open to new opportunities and collaborations.
 body_class: contact-page
+page_scripts:
+- /js/backToTop.js
 ---
 
-<main class="page contact-content" id="main-content">
-    <div class="container">
-        <h1 class="section-title"><span class="section-number">04.</span> <span data-i18n="contact.title">Get In
-                Touch</span></h1>
-        <p class="contact-description" data-i18n="contact.description">
-            I'm currently open to new opportunities and collaborations. Feel free to reach out — my inbox is always
-            open,
-            whether you have a question or just want to say hi.
+<main class="relative z-10 flex-grow speed-lines py-12 flex flex-col gap-12" id="main-content">
+  <div class="max-w-[1440px] mx-auto px-margin w-full grid grid-cols-1 lg:grid-cols-12 gap-12">
+    <!-- LEFT SECTION: IDENTITY & LOGS -->
+    <div class="lg:col-span-5 flex flex-col gap-8">
+      <div>
+        <h1 class="font-display-xl text-[44px] md:text-display-xl leading-none uppercase -skew-x-[6deg] mb-4" data-i18n="contact.title">
+          Get In Touch
+        </h1>
+        <p class="font-label-mono text-label-mono text-secondary uppercase tracking-[0.2em] animate-pulse">
+          [ STATUS: READY_FOR_HANDSHAKE ]
         </p>
+      </div>
 
-        <a href="mailto:luca.palomba.developer@gmail.com" class="contact-email">
-            luca.palomba.developer@gmail.com
-        </a>
-
-        <div class="social-links">
-            <a href="https://github.com/lucapalomba" target="_blank" rel="noopener noreferrer"
-                aria-label="GitHub Profile">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path
-                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                    </path>
-                </svg>
-            </a>
-            <a href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer"
-                aria-label="LinkedIn Profile">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                    <rect x="2" y="9" width="4" height="12"></rect>
-                    <circle cx="4" cy="4" r="2"></circle>
-                </svg>
-            </a>
+      <!-- TERMINAL COMPONENT -->
+      <div class="bg-surface-gray border-2 border-text-muted p-6 relative">
+        <div class="absolute -top-3 left-4 bg-background px-2 font-label-mono text-[10px] text-text-muted">SYSTEM_LOGS_V2.0</div>
+        <div class="font-label-mono text-[11px] leading-tight flex flex-col gap-2 h-48 overflow-y-auto custom-scrollbar" id="terminal-logs">
+          <div class="text-text-muted">[ 0.0001 ] INITIALIZING_COMM_PROTOCOL...</div>
+          <div class="text-text-muted">[ 0.0452 ] SCANNING_PORT_8080...</div>
+          <div class="text-secondary">[ 0.1231 ] PORT_OPEN: UPLINK_ESTABLISHED</div>
+          <div class="text-text-muted">[ 0.5422 ] WAITING_FOR_USER_INPUT...</div>
+          <div class="text-primary">[ 1.2001 ] SIGNAL_STRENGTH: OPTIMAL</div>
+          <div class="text-text-muted">[ 2.4501 ] READY_TO_RECEIVE_DATA_PACKETS</div>
         </div>
+        <div class="mt-4 flex items-center gap-2">
+          <span class="w-2 h-2 bg-secondary rounded-full animate-ping"></span>
+          <span class="font-label-mono text-label-mono text-secondary">LINK_ACTIVE</span>
+        </div>
+      </div>
+
+      <!-- QUICK ACTIONS -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <a class="group relative bg-surface-gray border-2 border-primary p-6 hover:translate-x-[-4px] hover:translate-y-[-4px] transition-all shadow-[4px_4px_0px_#ffb3ac] active:shadow-none active:translate-x-0 active:translate-y-0 flex flex-col justify-between" href="mailto:luca.palomba.developer@gmail.com">
+          <div class="flex justify-between items-start mb-4">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">alternate_email</span>
+            <span class="font-label-mono text-[10px] text-text-muted">PRIMARY</span>
+          </div>
+          <div>
+            <div class="font-label-mono text-label-mono text-on-surface group-hover:text-primary transition-colors font-bold">EMAIL_ME</div>
+            <div class="font-body-md text-xs text-text-muted mt-1 break-all">luca.palomba.developer@gmail.com</div>
+          </div>
+        </a>
+        
+        <a class="group relative bg-surface-gray border-2 border-secondary p-6 hover:translate-x-[-4px] hover:translate-y-[-4px] transition-all shadow-[4px_4px_0px_#41e4c0] active:shadow-none active:translate-x-0 active:translate-y-0 flex flex-col justify-between" href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer">
+          <div class="flex justify-between items-start mb-4">
+            <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">link</span>
+            <span class="font-label-mono text-[10px] text-text-muted">SOCIAL</span>
+          </div>
+          <div>
+            <div class="font-label-mono text-label-mono text-on-surface group-hover:text-secondary transition-colors font-bold">LINKEDIN</div>
+            <div class="font-body-md text-xs text-text-muted mt-1">/in/lucapalomba</div>
+          </div>
+        </a>
+      </div>
     </div>
+
+    <!-- RIGHT SECTION: CONNECT AND DESCRIBE -->
+    <div class="lg:col-span-7">
+      <div class="bg-surface-gray border-4 border-on-surface p-8 md:p-12 relative overflow-hidden sheared-card shadow-[12px_12px_0px_#41e4c0] h-full flex flex-col justify-between">
+        <div>
+          <h2 class="font-display-xl text-3xl md:text-headline-lg uppercase -skew-x-[6deg] leading-none mb-6">TRANSMIT_INFO</h2>
+          <p class="font-body-md text-on-surface-variant text-base mb-8 leading-relaxed" data-i18n="contact.description">
+            I'm currently open to new opportunities and collaborations. Feel free to reach out — my inbox is always open, whether you have a question or just want to say hi.
+          </p>
+        </div>
+        
+        <div class="border-t border-outline-variant pt-8">
+          <div class="font-label-mono text-label-mono text-secondary mb-2 uppercase">[ PRE-CONFIGURED DIRECT DIAL ]</div>
+          <a href="mailto:luca.palomba.developer@gmail.com" class="text-xl md:text-2xl font-display-xl text-primary hover:text-white transition-colors duration-200 break-all select-all">
+            luca.palomba.developer@gmail.com
+          </a>
+        </div>
+
+        <!-- VISUAL ELEMENT: SIGNAL GRAPHIC -->
+        <div class="absolute bottom-4 right-8 flex gap-1 items-end h-8 opacity-20">
+          <div class="w-1 bg-secondary h-[40%] animate-pulse"></div>
+          <div class="w-1 bg-secondary h-[80%] animate-pulse delay-75"></div>
+          <div class="w-1 bg-secondary h-[60%] animate-pulse delay-150"></div>
+          <div class="w-1 bg-secondary h-[100%] animate-pulse delay-200"></div>
+          <div class="w-1 bg-secondary h-[30%] animate-pulse delay-300"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM STRIP -->
+  <div class="w-full border-y-2 border-text-muted py-3 px-margin flex overflow-hidden whitespace-nowrap bg-surface-container-lowest select-none">
+    <div class="flex gap-12 font-label-mono text-[10px] text-text-muted animate-[marquee_25s_linear_infinite]">
+      <span>ESTABLISHING SECURE HANDSHAKE // IPV6 VERIFIED // PORT 443 ACTIVE</span>
+      <span class="text-secondary">SYSTEM STATUS: NOMINAL</span>
+      <span>PACKET LOSS: 0.00% // LATENCY: 12ms</span>
+      <span>LOCATION: MILAN_HQ // TIMEZONE: GMT+1</span>
+      <span class="text-primary">ENCRYPTION: ENABLED</span>
+      <span>ESTABLISHING SECURE HANDSHAKE // IPV6 VERIFIED // PORT 443 ACTIVE</span>
+      <span class="text-secondary">SYSTEM STATUS: NOMINAL</span>
+      <span>PACKET LOSS: 0.00% // LATENCY: 12ms</span>
+    </div>
+  </div>
 </main>
+
+<script>
+  // Simple terminal logger animation for high premium aesthetic
+  document.addEventListener('DOMContentLoaded', () => {
+    const logsContainer = document.getElementById('terminal-logs');
+    if (logsContainer) {
+      const extraLogs = [
+        "PARSING_INCOMING_TRANSMISSION... OK",
+        "ESTABLISHING SECURE HANDSHAKE...",
+        "ENCRYPTING PAYLOAD WITH AES-256...",
+        "CALCULATING HEURISTIC LATENCY: 12ms",
+        "RESOLVING DNS FOR SMTP GATEWAY...",
+        "ALERT: DIRECT MAIL UPLINK STANDBY",
+        "SYSTEM HEALTH CHECK: NOMINAL"
+      ];
+      
+      let index = 0;
+      const interval = setInterval(() => {
+        if (index < extraLogs.length) {
+          const newDiv = document.createElement('div');
+          const elapsed = (3.100 + index * 0.45).toFixed(4);
+          newDiv.className = index % 3 === 0 ? "text-secondary" : "text-text-muted";
+          newDiv.textContent = `[ ${elapsed} ] ${extraLogs[index]}`;
+          logsContainer.appendChild(newDiv);
+          logsContainer.scrollTop = logsContainer.scrollHeight;
+          index++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 2500);
+    }
+  });
+</script>
+
 <script type="application/ld+json">
     {
       "@context": "https://schema.org",

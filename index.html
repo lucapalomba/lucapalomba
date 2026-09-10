@@ -6,18 +6,179 @@ page_scripts:
 - /js/titleAnimation.js
 ---
 
-<!-- Main Content -->
-<main class="content-wrapper" id="main-content">
-  <section class="hero">
-    <p class="hero-intro" data-i18n="index.hero.intro">Hi, my name is</p>
-    <h1 class="hero-name" data-i18n="index.hero.name" fetchpriority="high">Luca Palomba.</h1>
-    <h2 class="hero-title" data-i18n="index.hero.title">I build things for the web.</h2>
-    <h3 class="hero-subtitle" data-i18n="index.subtitle">Full Stack Developer & Team Lead, Engineering leadership
-      experience</h3>
-    <p class="hero-bio" data-i18n="index.hero.bio">
-      Software engineer with tech-debt-demolisher super-powers: I walk into chaos, straighten things out, and help
-      everyone go home stress-free. Clear goals, clean commits, and no Friday deploys.
-    </p>
-    <a href="experiences.html" class="hero-cta" data-i18n="index.hero.cta">Check out my experiences!</a>
+<main class="flex-grow speed-lines relative overflow-hidden" id="main-content">
+  <!-- Hero Section -->
+  <section class="relative min-h-[90vh] flex flex-col justify-center items-start px-margin py-20 overflow-hidden">
+    <div class="absolute inset-0 speed-lines pointer-events-none"></div>
+    <div class="absolute right-0 top-1/2 -translate-y-1/2 w-1/3 h-[80%] engine-lines opacity-10 pointer-events-none"></div>
+    
+    <div class="z-10 max-w-[1000px]">
+      <p class="font-label-mono text-label-mono text-secondary mb-4 tracking-widest uppercase">
+        <span data-i18n="index.hero.intro">Hi, my name is</span> <span class="text-white font-bold">LUCA PALOMBA</span>
+      </p>
+      <h1 class="font-display-xl text-[44px] md:text-display-xl skew-x-[-6deg] text-white uppercase mb-8 leading-none">
+        <span data-i18n="index.hero.name">LUCA PALOMBA.</span><br/>
+        <span class="hero-title text-primary-container" data-i18n="index.hero.title">I build things for the web.</span>
+      </h1>
+      <div class="flex flex-col md:flex-row gap-6 mt-8">
+        <div class="h-[4px] w-24 bg-primary-container self-start md:self-center mt-2 md:mt-0"></div>
+        <div class="flex flex-col gap-4">
+          <p class="font-label-mono text-label-mono text-text-muted max-w-[700px] uppercase leading-relaxed" data-i18n="index.hero.bio">
+            Software engineer with tech-debt-demolisher super-powers: I walk into chaos, straighten things out, and help everyone go home stress-free. Clear goals, clean commits, and no Friday deploys.
+          </p>
+          <div>
+            <a href="experiences.html" class="inline-block mt-4 bg-primary text-on-primary px-8 py-4 font-label-mono text-label-mono font-bold hover:skew-x-[-6deg] hover:shadow-[4px_4px_0px_#ff544e] transition-all duration-200 active:translate-y-1 active:translate-x-1 active:shadow-none border-2 border-primary" data-i18n="index.hero.cta">
+              Check out my experiences!
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
+
+  <!-- Work/Deployments Section -->
+  <section class="px-margin py-32 bg-surface-container-lowest" id="work">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-gutter">
+      <div>
+        <h2 class="font-display-xl text-headline-lg skew-x-[-6deg] text-on-background uppercase" data-i18n="experiences.title">Selected Deployments</h2>
+        <p class="font-label-mono text-label-mono text-secondary mt-2">V2.0.0 — PRODUCTION CORE SYSTEMS</p>
+      </div>
+      <div class="h-[2px] flex-grow bg-outline-variant mb-4 hidden md:block"></div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-[1440px] mx-auto">
+      <!-- Project 1: Openware 3.0 -->
+      <div class="group relative bg-surface-gray border-2 border-primary-container p-6 transition-all duration-300 hover:-translate-y-2 hover:-translate-x-2 shadow-[8px_8px_0px_#ff544e] flex flex-col justify-between">
+        <div>
+          <div class="relative aspect-video overflow-hidden mb-6 bg-background">
+            <img alt="Cybernetic Infrastructure" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_IvlpbAgE-iFCKS-Ph5oo-xnuKTPQkJbldf-FU-0gxHOsyY-pMAGBP5YFJaWX-pdorYXfk7ag8_ywHtS29pBMx3jW85d0sV6AkaN1-LWO6LMAZNe-Bb1-q5ooNiqe3Xoqd8bmMuYAHPpR520vINHooOmDB6pG00Zpgo-sNpa-GirmsDW5g2ls8krXNRxgZUNqYPehCipNiyEBOJEnhHE4gyFunZBKExGjy9xvPPcw79lHJrbKE_mxES0O1tnGa93R5sFAMiWZ8eOK"/>
+            <div class="absolute top-4 right-4 bg-primary-container text-on-primary-container px-3 py-1 font-label-mono text-[10px]">01/03</div>
+          </div>
+          <h3 class="font-display-xl text-2xl skew-x-[-6deg] text-on-background">OPENWARE 3.0</h3>
+          <p class="font-label-mono text-label-mono text-text-muted mt-2 uppercase">K8S CLOUD ARCHITECTURE / DEPLOYMENT / STABILITY</p>
+        </div>
+        <div class="flex justify-between items-center mt-6 pt-4 border-t border-surface-container-high">
+          <span class="font-label-mono text-[11px] text-secondary">ACTIVE SYSTEM DEPLOYMENT</span>
+          <span class="material-symbols-outlined text-primary text-3xl group-hover:rotate-45 transition-transform">arrow_outward</span>
+        </div>
+      </div>
+
+      <!-- Project 2: Internal Core Components -->
+      <div class="group relative bg-surface-gray border-2 border-secondary p-6 transition-all duration-300 hover:-translate-y-2 hover:-translate-x-2 shadow-[8px_8px_0px_#41e4c0] flex flex-col justify-between">
+        <div>
+          <div class="relative aspect-video overflow-hidden mb-6 bg-background">
+            <img alt="Vortex Protocol" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjRBFp0Oc3meJrXWzakjVZ00XjHbljuI_3SaA7wKBwoD7m4uN4IFYJABp2JWfGurj20NZyNx8tREgLjr4BsxXCbV1X8epm01e6qfrMFh4XGOc8i7XIZjtCl9KrWjBFAzNI3kZtLRcKdZ3ETEAd8oLbYevIX0hWPMOHbRFwu5KEDvcb53yf3UD-VpwZ2W72cK-VsdyIZBpnpvL4YLV46TJguJrnL-rDlfZcI67pDbtfy6b-o3AiLJ3p0rkyxjMWDO2n66v8wmXavqVH"/>
+            <div class="absolute top-4 right-4 bg-secondary text-on-secondary px-3 py-1 font-label-mono text-[10px]">02/03</div>
+          </div>
+          <h3 class="font-display-xl text-2xl skew-x-[-6deg] text-on-background">RAD ENGINE</h3>
+          <p class="font-label-mono text-label-mono text-text-muted mt-2 uppercase">AUTOMATION CORE COMPONENTS / MULTI-PRODUCT UTILITIES</p>
+        </div>
+        <div class="flex justify-between items-center mt-6 pt-4 border-t border-surface-container-high">
+          <span class="font-label-mono text-[11px] text-secondary">ACTIVE ENGINE STACK</span>
+          <span class="material-symbols-outlined text-secondary text-3xl group-hover:rotate-45 transition-transform">arrow_outward</span>
+        </div>
+      </div>
+
+      <!-- Project 3: Baucoin circular economy -->
+      <div class="group relative bg-surface-gray border-2 border-primary-container p-6 transition-all duration-300 hover:-translate-y-2 hover:-translate-x-2 shadow-[8px_8px_0px_#ff544e] md:col-span-2 flex flex-col justify-between">
+        <div>
+          <div class="relative aspect-[21/9] overflow-hidden mb-6 bg-background hidden md:block">
+            <img alt="Titan Core" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARZN-fgv5ytv_T6LcjP8J4A1c3CGHS39u2_Y2ktmQPx7puJvFe7PmYdQy2IIZfPL3b6rVRO72PVtLuQyMtI_ZFFC7IrcLdxFl8upigOaYuzmKpVJGkKw38MQTYYCH8goQdEz-7jOrUB1RCsi7F3-Qh6aYuKKcwU0g3BiqbfPn-f7ArXg3U9gIXz8-zuOBFwmK2maJjrG9jfV5Zj91HVKQgu4JhFyAEFrKgUT7KjbcQRY2uJ92QOxTRZHBq5so4Qhq-n29gffiKd-Xx"/>
+            <div class="absolute top-4 right-4 bg-primary-container text-on-primary-container px-3 py-1 font-label-mono text-[10px]">03/03</div>
+          </div>
+          <div class="relative aspect-video overflow-hidden mb-6 bg-background md:hidden">
+            <img alt="Titan Core" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARZN-fgv5ytv_T6LcjP8J4A1c3CGHS39u2_Y2ktmQPx7puJvFe7PmYdQy2IIZfPL3b6rVRO72PVtLuQyMtI_ZFFC7IrcLdxFl8upigOaYuzmKpVJGkKw38MQTYYCH8goQdEz-7jOrUB1RCsi7F3-Qh6aYuKKcwU0g3BiqbfPn-f7ArXg3U9gIXz8-zuOBFwmK2maJjrG9jfV5Zj91HVKQgu4JhFyAEFrKgUT7KjbcQRY2uJ92QOxTRZHBq5so4Qhq-n29gffiKd-Xx"/>
+            <div class="absolute top-4 right-4 bg-primary-container text-on-primary-container px-3 py-1 font-label-mono text-[10px]">03/03</div>
+          </div>
+          <h3 class="font-display-xl text-3xl skew-x-[-6deg] text-on-background">BAUCOIN</h3>
+          <p class="font-label-mono text-label-mono text-text-muted mt-2 uppercase">CIRCULAR PET ECONOMY / STARTUP STARTUPPER / WORDPRESS ARCHITECTURE</p>
+        </div>
+        <div class="flex justify-between items-center mt-6 pt-4 border-t border-surface-container-high">
+          <span class="font-label-mono text-[11px] text-secondary">COMPLETED PROJECT ARCHIVE</span>
+          <span class="material-symbols-outlined text-primary text-3xl group-hover:rotate-45 transition-transform">arrow_outward</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="px-margin py-32 relative overflow-hidden" id="about">
+    <div class="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+      <div class="md:col-span-7 z-10">
+        <h2 class="font-display-xl text-[36px] md:text-display-xl skew-x-[-6deg] text-white leading-tight mb-8">
+          TECHNICAL <br/>
+          <span class="text-secondary">SUPERIORITY</span> <br/>
+          BY DESIGN.
+        </h2>
+        <div class="bg-surface-gray border-l-4 border-secondary p-8 shadow-[8px_8px_0px_#00c7a5]">
+          <p class="font-body-md text-on-surface-variant text-lg mb-6 leading-relaxed">
+            I build digital systems for clients and companies who refuse to compromise on stability, speed or clean aesthetics. My approach merges aggressive brutalism with high-performance engineering to build interfaces that don't just exist—they dominate.
+          </p>
+          <div class="grid grid-cols-2 gap-8">
+            <div>
+              <span class="font-label-mono text-label-mono text-secondary uppercase block mb-2">Core Stack</span>
+              <p class="font-label-mono text-label-mono text-on-background">NODE / TS / K8S / REACT</p>
+            </div>
+            <div>
+              <span class="font-label-mono text-label-mono text-secondary uppercase block mb-2">Philosophy</span>
+              <p class="font-label-mono text-label-mono text-on-background">CLEAN CODE // ZERO CRASHES</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="md:col-span-5 relative mt-20 md:mt-0">
+        <div class="relative w-full aspect-square border-2 border-primary-container skew-x-[-6deg]">
+          <img alt="Luca Palomba" class="w-full h-full object-cover grayscale brightness-75 contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCKor_Ry6kMUCnfa040X0xXSiYtGQ2M5a5MszrSoEFHMREFxwGaZafhHrOGg3gj4ynM6kZnrP2nEQbZVcqQKEbiQ-3y5dlyttsMy0MkqN-X2vjXZEtI23I0QQPcM5msNnTp1X3vhSufeKOPhixoGhvNBvP9iIigaZ03S7668trj4exy-Io9Jwu8WMrKaO7XaaQ8MNt93wXcl8PS6pPZcLzyaJao7VBo-p6_wnBuJO_RNJL7ZszVLJRsZS48VgpQh0dLox160iJgvG9"/>
+          <div class="absolute -bottom-6 -right-6 bg-primary-container text-on-primary-container p-6 skew-x-[6deg]">
+            <span class="font-display-xl text-3xl">EST. 2007</span>
+          </div>
+        </div>
+        <!-- Decorative Engine Component -->
+        <div class="absolute -top-10 -left-10 w-32 h-32 engine-lines opacity-30 -z-10"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats/Engine Strip -->
+  <div class="bg-primary text-on-primary py-4 overflow-hidden border-y-2 border-primary-container select-none">
+    <div class="flex whitespace-nowrap animate-[marquee_20s_linear_infinite] font-label-mono text-label-mono tracking-tighter">
+      <span class="mx-8">99.9% UPTIME GUARANTEED</span>
+      <span class="mx-8">//</span>
+      <span class="mx-8">INDUSTRIAL GRADE CODEBASES</span>
+      <span class="mx-8">//</span>
+      <span class="mx-8">LATENCY OPTIMIZED ARCHITECTURE</span>
+      <span class="mx-8">//</span>
+      <span class="mx-8">99.9% UPTIME GUARANTEED</span>
+      <span class="mx-8">//</span>
+      <span class="mx-8">INDUSTRIAL GRADE CODEBASES</span>
+      <span class="mx-8">//</span>
+      <span class="mx-8">LATENCY OPTIMIZED ARCHITECTURE</span>
+    </div>
+  </div>
 </main>
+
+<script>
+  // Mouse shadow micro-interaction for hero text
+  document.addEventListener('mousemove', (e) => {
+    const x = e.clientX / window.innerWidth;
+    const y = e.clientY / window.innerHeight;
+    
+    const heroText = document.querySelector('h1');
+    if(heroText) {
+      heroText.style.textShadow = `${(x - 0.5) * 20}px ${(y - 0.5) * 20}px 0px rgba(255, 179, 172, 0.15)`;
+    }
+  });
+
+  // Inject marquee keyframes
+  if(!document.getElementById('marquee-animation-style')) {
+    const style = document.createElement('style');
+    style.id = 'marquee-animation-style';
+    style.textContent = `
+      @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+</script>

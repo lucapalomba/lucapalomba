@@ -5,194 +5,199 @@ description: Luca Palomba's work experiences, roles as Full Stack Developer, R&D
 body_class: experiences-page
 ---
 
-<main class="page" id="main-content">
-  <div class="container">
-<h1 class="section-title"><span class="section-number">02.</span> <span data-i18n="experiences.title">Work
-        experiences</span>
-      <button class="print-btn" onclick="event.preventDefault(); handlePrint();" aria-label="Print this page">
+<main class="relative z-10 flex-grow speed-lines px-margin py-12 flex flex-col gap-16" id="main-content">
+  <!-- Hero Header -->
+  <header class="flex flex-col md:flex-row justify-between items-end gap-gutter border-l-8 border-primary pl-8 py-4">
+    <div class="max-w-4xl">
+      <div class="font-label-mono text-label-mono text-secondary mb-2 tracking-[0.2em] animate-pulse">// SYSTEM_STATUS: OPERATIONAL</div>
+      <h1 class="font-display-xl text-[40px] md:text-display-xl uppercase leading-none skew-x-[-6deg]">
+        <span data-i18n="experiences.title">Work Experiences</span>
+      </h1>
+    </div>
+    <div class="flex items-center gap-4">
+      <p class="hidden md:block font-label-mono text-label-mono text-text-muted max-w-[300px] text-right" data-i18n="experiences.lead">
+        Selected roles and projects across my career.
+      </p>
+      <button class="bg-primary-container text-on-primary-container p-4 active:scale-95 transition-all shadow-[4px_4px_0px_#000]" onclick="handlePrint();" aria-label="Print this page">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="6 9 6 2 18 2 18 9"></polyline>
           <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
           <rect x="6" y="14" width="12" height="8"></rect>
         </svg>
       </button>
-    </h1>
-    <p class="lead" data-i18n="experiences.lead">Selected roles and projects across my career.</p>
+    </div>
+  </header>
 
-    <ul class="timeline">
-
-      <!-- Vigilate SRL -->
-      <li class="timeline-item">
-        <div class="timeline-marker"></div>
-        <div class="timeline-content">
-          <h2>Senior Full Stack Developer • AI Enabler <span class="company">@ Vigilate SRL</span>
-          </h2>
-          <div class="date">Feb 2026 — Present</div>
-          <ul class="job-description">
-            <li>Analyzing and redesigning development processes to optimize human/AI coordination.</li>
-            <li>Redesigning and maintaining automation development — CI/CD.</li>
-            <li>Keeping software quality and resource usage coordinated.</li>
-          </ul>
-          <div class="tech-stack">
-            <span>AI</span>
-            <span>Process Design</span>
-            <span>Automation</span>
-            <span>CI/CD</span>
+  <!-- Core Roles Section -->
+  <section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+    <div class="lg:col-span-3">
+      <h2 class="font-headline-lg-mobile text-headline-lg-mobile uppercase sticky top-32 text-text-primary">CORE_ROLES</h2>
+      <div class="mt-4 font-label-mono text-label-mono text-secondary underline decoration-2 underline-offset-4">01 // PROFESSIONAL_PATH</div>
+    </div>
+    <div class="lg:col-span-9 flex flex-col gap-12 timeline">
+      <!-- Role Card 1: Vigilate SRL -->
+      <div class="timeline-item group bg-surface-gray border-2 border-text-muted p-8 relative hover:border-primary transition-all duration-200 sheared-card hover:translate-x-[-8px] hover:translate-y-[-8px] hover:shadow-[8px_8px_0px_#ffb3ac]">
+        <div class="flex flex-wrap justify-between items-start gap-4 mb-4">
+          <div>
+            <span class="font-label-mono text-[10px] bg-secondary text-on-secondary px-3 py-1 mb-4 inline-block font-bold tracking-widest">ACTIVE</span>
+            <h2 class="font-headline-lg-mobile text-[22px] md:text-headline-lg-mobile uppercase text-on-surface">
+              Senior Full Stack Developer • AI Enabler <span class="company">@ Vigilate SRL</span>
+            </h2>
+            <div class="date font-label-mono text-label-mono text-secondary mt-2">Feb 2026 — Present</div>
           </div>
+          <div class="material-symbols-outlined text-5xl text-primary opacity-20 group-hover:opacity-100 transition-opacity">smart_toy</div>
         </div>
-      </li>
-
-      <!-- P&B Linking / Openware PSIM / COGEN -->
-      <li class="timeline-item">
-        <div class="timeline-marker"></div>
-        <div class="timeline-content">
-          <h2>Senior Full Stack Developer • Head of R&D <span class="company">@ P&B Linking / Openware PSIM</span>
-          </h2>
-          <div class="date">Dec 2020 — May 2025</div>
-          <ul class="job-description">
-            <li>Led R&D activities and coordinated teams with stakeholders.</li>
-            <li>Organized work using SCRUM.</li>
-            <li>Reducing tooling costs by ~50% within one year.</li>
-            <li>Led product research, analysis, and design, managing up to 20 people across 4 product teams.</li>
-          </ul>
-          <div class="key-project">
-            <span class="kp-label"></span>
-          </div>
-          <div class="tech-stack">
-            <span>Cloud Architecture</span>
-            <span>Leading</span>
-            <span>Docker</span>
-            <span>Kubernetes</span>
-            <span>SCRUM</span>
-            <span>React</span>
-            <span>Node.js</span>
-          </div>
+        <ul class="job-description font-body-md text-body-md text-text-muted mb-6 leading-relaxed flex flex-col gap-2">
+          <li>Analyzing and redesigning development processes to optimize human/AI coordination.</li>
+          <li>Redesigning and maintaining automation development — CI/CD.</li>
+          <li>Keeping software quality and resource usage coordinated.</li>
+        </ul>
+        <div class="key-project"></div>
+        <div class="tech-stack flex flex-wrap gap-2 mt-6">
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">AI</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">Process Design</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">Automation</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">CI/CD</span>
         </div>
-      </li>
+      </div>
 
-      <!-- Novigo-Consulting -->
-      <li class="timeline-item">
-        <div class="timeline-marker"></div>
-        <div class="timeline-content">
-          <h2>Full Stack Developer • Team Lead <span class="company">@ Novigo-Consulting</span></h2>
-          <div class="date">Nov 2016 — Nov 2020</div>
-          <ul class="job-description">
-            <li>Designed and implemented application architecture using Zend APIs, React frontends, and Node.js
-              automation.</li>
-            <li>Served as project and team lead for national and international teams, managing up to 20 people.</li>
-            <li>Oversaw software/service selection and integration testing as R&D Manager.</li>
-          </ul>
-          <div class="key-project">
-            <span class="kp-label"></span>
+      <!-- Role Card 2: P&B Linking -->
+      <div class="timeline-item group bg-surface-gray border-2 border-text-muted p-8 relative hover:border-primary transition-all duration-200 sheared-card hover:translate-x-[-8px] hover:translate-y-[-8px] hover:shadow-[8px_8px_0px_#ffb3ac]">
+        <div class="flex flex-wrap justify-between items-start gap-4 mb-4">
+          <div>
+            <span class="font-label-mono text-[10px] bg-secondary text-on-secondary px-3 py-1 mb-4 inline-block font-bold tracking-widest">ACTIVE</span>
+            <h2 class="font-headline-lg-mobile text-[22px] md:text-headline-lg-mobile uppercase text-on-surface">
+              Senior Full Stack Developer • Head of R&D <span class="company">@ P&B Linking</span>
+            </h2>
+            <div class="date font-label-mono text-label-mono text-secondary mt-2">Dec 2020 — May 2025</div>
           </div>
-          <div class="tech-stack">
-            <span>Leading</span>
-            <span>React</span>
-            <span>Node.js</span>
-            <span>PHP / Zend Framework</span>
-            <span>Automation</span>
-          </div>
+          <div class="material-symbols-outlined text-5xl text-primary opacity-20 group-hover:opacity-100 transition-opacity">memory</div>
         </div>
-      </li>
-
-      <!-- Publidesign -->
-      <li class="timeline-item">
-        <div class="timeline-marker"></div>
-        <div class="timeline-content">
-          <h2>CTO • Full Stack Developer <span class="company">@ Publidesign s.r.l.</span></h2>
-          <div class="date">2015 — 2016</div>
-          <ul class="job-description">
-            <li>Developed customizations for WordPress projects.</li>
-            <li>CTO for Baucoin startup.</li>
-          </ul>
-          <div class="key-project">
-            <div class="kp-title">
-              <span class="kp-label">Key project:</span>
-              <span class="kp-project-name">Baucoin</span>
-            </div>
-            <div class="kp-description">Platform for managing credits for circular economy based on services for pets
-            </div>
-          </div>
-          <div class="tech-stack">
-            <span>WordPress</span>
-            <span>Startup</span>
-            <span>Leading</span>
-            <span>PHP</span>
-            <span>Node.js</span>
-          </div>
+        <ul class="job-description font-body-md text-body-md text-text-muted mb-6 leading-relaxed flex flex-col gap-2"></ul>
+        <div class="key-project"></div>
+        <div class="tech-stack flex flex-wrap gap-2 mt-6">
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">Cloud Architecture</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">Leading</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">Docker</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">Kubernetes</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">SCRUM</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">React</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">Node.js</span>
         </div>
-      </li>
+      </div>
 
-      <!-- TargatoBS -->
-      <li class="timeline-item">
-        <div class="timeline-marker"></div>
-        <div class="timeline-content">
-          <h2>Founder • Startupper • Pitcher <span class="company">@ TargatoBS</span></h2>
-          <div class="date">2012 — 2016</div>
-          <ul class="job-description">
-            <li>I was looking for a way to express myself better.</li>
-            <li>I did some contests, won some prizes, presented at a few events, tried to found a startup, participated
-              in a business school and founded some communities.</li>
-            <li>In the end I realized I was a developer who had to work on his soft skills.</li>
-          </ul>
-          <div class="key-project">
-            <div class="kp-title">
-              <span class="kp-label">Key project:</span>
-              <span class="kp-project-name">BREIM</span>
-            </div>
-            <div class="kp-description">Product for the management of real estate sales</div>
+      <!-- Role Card 3: Novigo-Consulting -->
+      <div class="timeline-item group bg-surface-gray border-2 border-text-muted p-8 relative hover:border-secondary transition-all duration-200 sheared-card hover:translate-x-[-8px] hover:translate-y-[-8px] hover:shadow-[8px_8px_0px_#41e4c0]">
+        <div class="flex flex-wrap justify-between items-start gap-4 mb-4">
+          <div>
+            <span class="font-label-mono text-[10px] bg-text-muted text-surface-container-lowest px-3 py-1 mb-4 inline-block font-bold tracking-widest">COMPLETED</span>
+            <h2 class="font-headline-lg-mobile text-[22px] md:text-headline-lg-mobile uppercase text-on-surface">
+              Full Stack Developer • Team Lead <span class="company">@ Novigo-Consulting</span>
+            </h2>
+            <div class="date font-label-mono text-label-mono text-secondary mt-2">Nov 2016 — Nov 2020</div>
           </div>
-          <div class="tech-stack">
-            <span>Startup</span>
-            <span>Soft Skills</span>
-            <span>Public Speaking</span>
-          </div>
+          <div class="material-symbols-outlined text-5xl text-secondary opacity-20 group-hover:opacity-100 transition-opacity">terminal</div>
         </div>
-      </li>
-
-      <!-- DuckMa -->
-      <li class="timeline-item">
-        <div class="timeline-marker"></div>
-        <div class="timeline-content">
-          <h2>Full Stack Developer <span class="company">@ DuckMa s.r.l.</span></h2>
-          <div class="date">Oct 2013 — 2014</div>
-          <ul class="job-description">
-            <li>Developed backend APIs using Node.js and PHP.</li>
-            <li>Worked on PWA and Ionic integrations.</li>
-            <li>Contributed to UI/UX design for PHONOTTO.</li>
-          </ul>
-          <div class="tech-stack">
-            <span>Node.js</span>
-            <span>PHP</span>
-            <span>Ionic</span>
-            <span>PWA</span>
-            <span>UI/UX</span>
-          </div>
+        <ul class="job-description font-body-md text-body-md text-text-muted mb-6 leading-relaxed flex flex-col gap-2"></ul>
+        <div class="key-project"></div>
+        <div class="tech-stack flex flex-wrap gap-2 mt-6">
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">Leading</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">React</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">Node.js</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">PHP / Zend Framework</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">Automation</span>
         </div>
-      </li>
+      </div>
 
-      <!-- System 2000 / Associati -->
-      <li class="timeline-item">
-        <div class="timeline-marker"></div>
-        <div class="timeline-content">
-          <h2>Web Developer <span class="company">@ System 2000 s.r.l.</span></h2>
-          <div class="date">Dec 2007 — Sep 2012</div>
-          <ul class="job-description">
-            <li>Provided IT consultancy for regional and national projects.</li>
-            <li>Developed healthcare management systems using .NET.</li>
-            <li>Created data visualization solutions for the VIGILO wearable sensors project.</li>
-          </ul>
-          <div class="tech-stack">
-            <span>.NET</span>
-            <span>C#</span>
-            <span>Data Visualization</span>
+      <!-- Role Card 4: Publidesign -->
+      <div class="timeline-item group bg-surface-gray border-2 border-text-muted p-8 relative hover:border-primary transition-all duration-200 sheared-card hover:translate-x-[-8px] hover:translate-y-[-8px] hover:shadow-[8px_8px_0px_#ffb3ac]">
+        <div class="flex flex-wrap justify-between items-start gap-4 mb-4">
+          <div>
+            <span class="font-label-mono text-[10px] bg-text-muted text-surface-container-lowest px-3 py-1 mb-4 inline-block font-bold tracking-widest">COMPLETED</span>
+            <h2 class="font-headline-lg-mobile text-[22px] md:text-headline-lg-mobile uppercase text-on-surface">
+              CTO • Full Stack Developer <span class="company">@ Publidesign s.r.l.</span>
+            </h2>
+            <div class="date font-label-mono text-label-mono text-secondary mt-2">2015 — 2016</div>
           </div>
+          <div class="material-symbols-outlined text-5xl text-primary opacity-20 group-hover:opacity-100 transition-opacity">developer_mode</div>
         </div>
-      </li>
+        <ul class="job-description font-body-md text-body-md text-text-muted mb-6 leading-relaxed flex flex-col gap-2"></ul>
+        <div class="key-project"></div>
+        <div class="tech-stack flex flex-wrap gap-2 mt-6">
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">WordPress</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">Startup</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">Leading</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">PHP</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">Node.js</span>
+        </div>
+      </div>
 
-</ul>
+      <!-- Role Card 5: TargatoBS -->
+      <div class="timeline-item group bg-surface-gray border-2 border-text-muted p-8 relative hover:border-secondary transition-all duration-200 sheared-card hover:translate-x-[-8px] hover:translate-y-[-8px] hover:shadow-[8px_8px_0px_#41e4c0]">
+        <div class="flex flex-wrap justify-between items-start gap-4 mb-4">
+          <div>
+            <span class="font-label-mono text-[10px] bg-text-muted text-surface-container-lowest px-3 py-1 mb-4 inline-block font-bold tracking-widest">COMPLETED</span>
+            <h2 class="font-headline-lg-mobile text-[22px] md:text-headline-lg-mobile uppercase text-on-surface">
+              Founder • Startupper • Pitcher <span class="company">@ TargatoBS</span>
+            </h2>
+            <div class="date font-label-mono text-label-mono text-secondary mt-2">2012 — 2016</div>
+          </div>
+          <div class="material-symbols-outlined text-5xl text-secondary opacity-20 group-hover:opacity-100 transition-opacity">rocket_launch</div>
+        </div>
+        <ul class="job-description font-body-md text-body-md text-text-muted mb-6 leading-relaxed flex flex-col gap-2"></ul>
+        <div class="key-project"></div>
+        <div class="tech-stack flex flex-wrap gap-2 mt-6">
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">Startup</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">Soft Skills</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">Public Speaking</span>
+        </div>
+      </div>
 
-  </div>
+      <!-- Role Card 6: DuckMa -->
+      <div class="timeline-item group bg-surface-gray border-2 border-text-muted p-8 relative hover:border-primary transition-all duration-200 sheared-card hover:translate-x-[-8px] hover:translate-y-[-8px] hover:shadow-[8px_8px_0px_#ffb3ac]">
+        <div class="flex flex-wrap justify-between items-start gap-4 mb-4">
+          <div>
+            <span class="font-label-mono text-[10px] bg-text-muted text-surface-container-lowest px-3 py-1 mb-4 inline-block font-bold tracking-widest">COMPLETED</span>
+            <h2 class="font-headline-lg-mobile text-[22px] md:text-headline-lg-mobile uppercase text-on-surface">
+              Full Stack Developer <span class="company">@ DuckMa s.r.l.</span>
+            </h2>
+            <div class="date font-label-mono text-label-mono text-secondary mt-2">Oct 2013 — 2014</div>
+          </div>
+          <div class="material-symbols-outlined text-5xl text-primary opacity-20 group-hover:opacity-100 transition-opacity">layers</div>
+        </div>
+        <ul class="job-description font-body-md text-body-md text-text-muted mb-6 leading-relaxed flex flex-col gap-2"></ul>
+        <div class="key-project"></div>
+        <div class="tech-stack flex flex-wrap gap-2 mt-6">
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">Node.js</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">PHP</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">Ionic</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">PWA</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">UI/UX</span>
+        </div>
+      </div>
+
+      <!-- Role Card 7: System 2000 -->
+      <div class="timeline-item group bg-surface-gray border-2 border-text-muted p-8 relative hover:border-secondary transition-all duration-200 sheared-card hover:translate-x-[-8px] hover:translate-y-[-8px] hover:shadow-[8px_8px_0px_#41e4c0]">
+        <div class="flex flex-wrap justify-between items-start gap-4 mb-4">
+          <div>
+            <span class="font-label-mono text-[10px] bg-text-muted text-surface-container-lowest px-3 py-1 mb-4 inline-block font-bold tracking-widest">COMPLETED</span>
+            <h2 class="font-headline-lg-mobile text-[22px] md:text-headline-lg-mobile uppercase text-on-surface">
+              Web Developer <span class="company">@ System 2000 s.r.l.</span>
+            </h2>
+            <div class="date font-label-mono text-label-mono text-secondary mt-2">Dec 2007 — Sep 2012</div>
+          </div>
+          <div class="material-symbols-outlined text-5xl text-secondary opacity-20 group-hover:opacity-100 transition-opacity">dns</div>
+        </div>
+        <ul class="job-description font-body-md text-body-md text-text-muted mb-6 leading-relaxed flex flex-col gap-2"></ul>
+        <div class="key-project"></div>
+        <div class="tech-stack flex flex-wrap gap-2 mt-6">
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">.NET</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">C#</span>
+          <span class="font-label-mono text-[10px] border border-outline px-2 py-1 uppercase text-text-primary">Data Visualization</span>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <script>
@@ -201,24 +206,6 @@ function handlePrint() {
     window.print();
   } catch (e) {
     console.error('Print failed:', e);
-    // Fallback: try to open print dialog manually
-    if (document.queryCommandSupported('print')) {
-      document.execCommand('print');
-    } else {
-      alert('Please use Ctrl+P or Cmd+P to print this page');
-    }
   }
 }
-
-// Also add event listener as backup
-document.addEventListener('DOMContentLoaded', function() {
-  const printBtn = document.querySelector('.print-btn');
-  if (printBtn) {
-    printBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      handlePrint();
-    });
-  }
-});
 </script>

@@ -100,6 +100,7 @@
         "description": "Esplora le tecnologie con cui Luca Palomba ha esperienza e quelle che è entusiasta di imparare.",
         "lead": "Una lista di tecnologie, da quelle che uso tutti i giorni a quelle che ormai fanno parte di me. Ma attenzione: il futuro cambia in fretta, e questa lista con lui.",
         "experiencedTitle": "Esperienza tecnologica",
+        "learningTitle": "Tecnologie da studiare",
         "tech": {
             "aiAgents": "Agenti di sviluppo LLM & Documentazione per AI",
             "jsNode": "JavaScript (Node.js + TypeScript)",
@@ -123,6 +124,22 @@
             "cloud": "Approfondisco i principali cloud provider per consolidare le competenze architetturali su servizi gestiti, sicurezza, networking e scalabilità, fondamentali per supportare soluzioni enterprise moderne.",
             "ml": "Mi sto focalizzando sul Machine Learning per potenziare le capacità predittive e analitiche dei prodotti che seguo, integrando intelligenza nei flussi decisionali e negli automatismi interni.",
             "wasm": "Studio WebAssembly per valutare nuove soluzioni ad alte prestazioni nel browser e in contesti server-side, con l'obiettivo di portare efficienza e portabilità in scenari distribuiti e real-time."
+        },
+        "learning": {
+            "dotnetJava": ".NET o Java",
+            "python": "Python",
+            "architectures": "Architetture evolute",
+            "wasm": "WebAssembly (WASM)",
+            "ml": "Machine Learning",
+            "cloud": "Cloud provider deep dive"
+        },
+        "learningDesc": {
+            "dotnetJava": "Perché il mondo ne ha ancora bisogno!",
+            "python": "Approfondisco Python per ampliare le mie competenze in automazione, creazione di strumenti interni e integrazione con ecosistemi AI, dove questo linguaggio è diventato lo standard de facto.",
+            "architectures": "Approfondisco le architetture evolute per aumentare la robustezza, la scalabilità e la chiarezza dei sistemi complessi che gestisco, migliorando la qualità delle decisioni tecniche e dei processi di progettazione.",
+            "wasm": "Studio WebAssembly per valutare nuove soluzioni ad alte prestazioni nel browser e in contesti server-side, con l'obiettivo di portare efficienza e portabilità in scenari distribuiti e real-time.",
+            "ml": "Mi sto focalizzando sul Machine Learning per potenziare le capacità predittive e analitiche dei prodotti che seguo, integrando intelligenza nei flussi decisionali e negli automatismi interni.",
+            "cloud": "Approfondisco i principali cloud provider per consolidare le competenze architetturali su servizi gestiti, sicurezza, networking e scalabilità, fondamentali per supportare soluzioni enterprise moderne."
         }
     },
     "contact": {
