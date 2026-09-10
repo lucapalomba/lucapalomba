@@ -137,5 +137,9 @@
         "description": "Non è un bug, è una feature… che però non troviamo. Ritorniamo a casa",
         "homeButton": "Torna alla home"
     },
-    "backToTop": "Torna in cima"
+    "backToTop": "Torna in cima",
+    "navigation": {
+        "hintTouch": "Scorri <kbd>←</kbd> <kbd>→</kbd> per navigare",
+        "hintKeyboard": "Usa le frecce <kbd>←</kbd> <kbd>→</kbd> per navigare"
+    }
 }

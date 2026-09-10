@@ -76,11 +76,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navHint) {
         const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-        if (isTouch) {
-            navHint.innerHTML = 'Swipe <kbd>←</kbd> <kbd>→</kbd> to navigate';
-        } else {
-            navHint.innerHTML = 'Use keyboard arrows <kbd>←</kbd> <kbd>→</kbd> to navigate';
-        }
+        // Apply the translated hint (kbd markup lives in the locale file).
+        // Re-applied on i18n:ready (first load) and i18n:languageChanged (switch).
+        const applyHint = () => {
+            const key = isTouch ? 'navigation.hintTouch' : 'navigation.hintKeyboard';
+            const fallback = isTouch
+                ? 'Swipe <kbd>←</kbd> <kbd>→</kbd> to navigate'
+                : 'Use keyboard arrows <kbd>←</kbd> <kbd>→</kbd> to navigate';
+            const translation = window.i18n ? window.i18n.t(key) : null;
+            navHint.innerHTML = (translation && translation !== key) ? translation : fallback;
+        };
+        applyHint();
+        document.addEventListener('i18n:ready', applyHint);
+        document.addEventListener('i18n:languageChanged', applyHint);
 
         // Show the hint
         navHint.setAttribute('aria-hidden', 'false');
