@@ -15,6 +15,7 @@ class TitleAnimator {
     this.SOUND_POOL_SIZE = 3; // Pre-allocate 3 audio instances per type
 
     this.stepIndex = 0;
+    this.animationToken = 0; // Incremented to invalidate in-flight animation timers on restart
     this.steps = {
       en: [
         { text: "I build things for the web", highlights: ["things", "web"] },
@@ -69,7 +70,9 @@ class TitleAnimator {
     });
 
     // Wait for the intro animation to complete before starting the title animation
+    const introToken = this.animationToken;
     setTimeout(() => {
+      if (introToken !== this.animationToken) return;
       this.startSequence();
     }, this.INTRO_ANIMATION_DURATION);
   }
@@ -104,10 +107,12 @@ class TitleAnimator {
 
   scheduleNextStep() {
     // If we have more steps, schedule the next one
+    const token = this.animationToken;
     const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
 
     if (this.stepIndex < currentLangSteps.length - 1) {
       setTimeout(() => {
+        if (token !== this.animationToken) return;
         this.transitionToStep(this.stepIndex + 1);
       }, this.STEP_DELAY);
     }
@@ -132,36 +137,35 @@ class TitleAnimator {
 
   onLanguageChanged(lang) {
     if (!this.titleElement) return;
-    // If the animation is mid-flight, let the next transition pick up the new language
-    if (this.isAnimating) return;
-
     this.currentLanguage = lang || document.documentElement.lang || 'en';
-    const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
-    const currentStep = Math.min(this.stepIndex, currentLangSteps.length - 1);
-    const config = currentLangSteps[currentStep];
-    this.updateContent(this.getTextArray(config.text, config.highlights), false);
-    this.stepIndex = currentStep;
+    this.isAnimating = false;
+    // Restart the animation from the beginning in the new language
+    this.resetAndAnimate();
   }
 
   resetAndAnimate() {
+    // Invalidate any in-flight animation timers (erase/type/schedule)
+    this.animationToken++;
+    const token = this.animationToken;
+
     // Reset to initial state
     this.currentLanguage = document.documentElement.lang || 'en';
     const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
     const initialText = currentLangSteps[0].text;
-
-    // Optionally we could start the sequence from 0.
 
     this.titleElement.textContent = initialText;
     this.updateContent(this.getTextArray(initialText, currentLangSteps[0].highlights), true);
     this.stepIndex = 0;
 
     setTimeout(() => {
+      if (token !== this.animationToken) return;
       this.startSequence();
     }, 500);
   }
 
   eraseText(callback) {
     this.isAnimating = true;
+    const token = this.animationToken;
 
     // Get current config to preserve highlights
     const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
@@ -172,6 +176,12 @@ class TitleAnimator {
     let position = textArray.length;
 
     const eraseInterval = setInterval(() => {
+      // Bail out if the animation was restarted (e.g. language changed mid-run)
+      if (token !== this.animationToken) {
+        clearInterval(eraseInterval);
+        return;
+      }
+
       // Logic for word-by-word deletion
       const currentString = fullText.substring(0, position);
       const lastSpaceIndex = currentString.lastIndexOf(' ');
@@ -199,6 +209,7 @@ class TitleAnimator {
 
   typeNewText(fullText, highlights, callback) {
     let position = 0;
+    const token = this.animationToken;
     const textArray = this.getTextArray(fullText, highlights);
 
     // Check if this is the last step
@@ -206,6 +217,12 @@ class TitleAnimator {
     const isLastStep = this.stepIndex === currentLangSteps.length - 1;
 
     const typeInterval = setInterval(() => {
+      // Bail out if the animation was restarted (e.g. language changed mid-run)
+      if (token !== this.animationToken) {
+        clearInterval(typeInterval);
+        return;
+      }
+
       if (position < textArray.length) {
         // Play keyboard sound for each character (except spaces)
         if (textArray[position].char !== ' ' && this.typingSoundPool.length > 0) {
