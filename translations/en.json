@@ -137,5 +137,9 @@
         "description": "It's not a bug, it's a feature… that we can't find it. Let's back on track",
         "homeButton": "Go back home"
     },
-    "backToTop": "Go to Top"
+    "backToTop": "Go to Top",
+    "navigation": {
+        "hintTouch": "Swipe <kbd>←</kbd> <kbd>→</kbd> to navigate",
+        "hintKeyboard": "Use keyboard arrows <kbd>←</kbd> <kbd>→</kbd> to navigate"
+    }
 }

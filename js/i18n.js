@@ -26,6 +26,8 @@ class I18n {
       this.translate();
       this.updateHtmlLang();
       this.logConsoleEasterEgg();
+      // Notify components that create DOM after load (e.g. backToTop, navigation hint)
+      document.dispatchEvent(new CustomEvent('i18n:ready', { detail: { lang } }));
     } catch (error) {
       console.error(`Failed to load ${lang} translations:`, error);
     }
