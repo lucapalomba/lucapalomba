@@ -6,7 +6,7 @@ Portfolio personale di Luca Palomba — static site generato con Jekyll, deploya
 ## Stack
 
 - **Jekyll** (gem `github-pages`) come static site generator; templating Liquid.
-- **Tailwind CSS** caricato via CDN con configurazione inline in `_includes/head.html` (palette, spacing, font, fontSize estesi). Nessun build step Tailwind: le classi sono generate a runtime nel browser.
+- **CSS vanilla** in `styles/` (fonts, transitions, main, mobile, mobile-small, reduced-motion, print-experiences). Nessun framework, nessun build step.
 - **JavaScript vanilla** modulare (moduli ES-ish, caricati via `<script defer>`), niente bundler.
 - **i18n custom** (`js/i18n.js`) basato su attributi `data-i18n` + file JSON in `translations/`.
 - **Deploy**: GitHub Actions → GitHub Pages. Lighthouse CI + htmlproofer nel workflow.
@@ -25,7 +25,7 @@ L'ambiente ha Ruby 3.4 + Bundler, ma c'è un conflitto `public_suffix` (7 instal
 - **Config duale**: `_config.yml` (prod, `baseurl: /lucapalomba`) + `_config_local.yml` (locale, `baseurl: ""`). I link nel markup sono relativi (`index.html`, `experiences.html`) e vengono risolti da Jekyll via `relative_url`.
 - **i18n**: ogni stringa UI ha `data-i18n="chiave.puntata"` (es. `nav.whoami`, `index.hero.title`); le traduzioni vivono in `translations/en.json` e `it.json`. Per gli `aria-label` si usa `data-i18n-aria`. Il linguaggio è scelto da `localStorage('preferredLanguage')` poi da `navigator.language`, e salvato su switch manuale.
 - **Front matter delle pagine**: supporta `page_scripts` (lista di path JS aggiuntivi caricati in fondo) e `hide_nav_scripts` (disabilita `navigation.js`/`hamburger.js`). `body_class` marca la pagina (es. `experiences-page`, `technologies-page`, `contact-page`) — usato da `i18n.js` per i meta tag e da `techProgress.js` per attivare le animazioni.
-- **Design system**: tema "brutalist/industriale" — border-radius 0, ombre hard (`shadow-[8px_8px_0px_...]`), skew `-6deg` su titoli, font Montserrat (display) + JetBrains Mono (label/mono) + Inter (body). Palette dark con accenti `primary-container` (#ff544e) e `secondary` (#41e4c0).
+- **Design system**: tema dark "terminal/developer" — sfondo `#0a0a0f`, testo `#e6e6ef`, accento viola `#B77EF1` (particles `#6e48aa`), font monospace Roboto Mono (locale in `fonts/`). Animazioni CSS keyframes (hero, typing dots, transizioni).
 - **Commit (OBBLIGATORIO)**: **ogni** commit deve usare lo standard Conventional Commits come tipologia di messaggio — `feat:`, `fix:`, `chore:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`, `build:`, `ci:`, `revert:` ecc. Niente commit senza prefisso tipo. Lavorare su branch separati / PR; il deploy avviene solo da `main`.
 
 ## Mappa del progetto
@@ -40,15 +40,15 @@ L'ambiente ha Ruby 3.4 + Bundler, ma c'è un conflitto `public_suffix` (7 instal
 
 ### Layout & includes (Jekyll)
 - `_layouts/default.html` — layout base: html `dark`, skip-link, overlay transizione, navbar, `{{ content }}`, footer, scripts. Tutte le pagine usano `layout: default`.
-- `_includes/head.html` — `<head>`: meta, favicon (da GitHub avatar), CDN Tailwind + config inline (palette/font/spacing), Google Fonts (Montserrat/JetBrains Mono/Inter/Material Symbols), SEO/OG/Twitter, JSON-LD `Person`, stylesheet (`transitions`, `main`, `reduced-motion`, `print-experiences`).
-- `_includes/navbar.html` — navbar sticky con logo, link desktop (stato attivo via confronto `page.url`), selettore lingua EN/IT (desktop+mobile), drawer mobile, CTA "GET_IN_TOUCH". Contiene lo script `updateLangToggleUI` e la logica toggle del drawer.
+- `_includes/head.html` — `<head>`: meta, favicon (da GitHub avatar), font Roboto Mono locale, SEO/OG/Twitter, JSON-LD `Person`, stylesheet (`fonts`, `transitions`, `main`, `mobile`, `mobile-small`, `reduced-motion`, `print-experiences`).
+- `_includes/navbar.html` — navbar sticky con logo, link desktop (stato attivo via confronto `page.url`), hamburger + drawer mobile, CTA "Curriculum" (link LinkedIn). Contiene la logica toggle del drawer.
 - `_includes/footer.html` — footer: copyright, link GitHub/LinkedIn, indicatore "STATUS: NOMINAL".
 - `_includes/scripts.html` — carica i JS core (`i18n`, `main`, `transitions`) + condizionali (`navigation`, `hamburger` salvo `hide_nav_scripts`) + `page_scripts` + `backToTop`.
 - `_includes/transition-overlay.html` — markup dell'overlay a tutto schermo per le transizioni fra pagine (color-fill + smoke).
 - `_includes/navigation-hint.html` — div placeholder per l'hint "usa ← → / swipe" mostrato da `navigation.js`.
 
 ### Pagine
-- `index.html` — home: hero (nome + titolo animato + CTA), sezione "Selected Deployments" (3 progetti: Openware 3.0, Rad Engine, Baucoin), about con foto, striscia marquee. Script inline per micro-interazione mouse-shadow e keyframes marquee. Carica `titleAnimation.js` e `backToTop.js` via `page_scripts`.
+- `index.html` — home: hero (nome + titolo animato + CTA). Carica `titleAnimation.js` via `page_scripts`.
 - `experiences.html` — timeline esperienze lavorative. Struttura `.timeline` / `.timeline-item` con `.date`, `h2`, `.job-description`, `.key-project`, `.tech-stack`. Popolata dinamicamente da `i18n.js` (array `experiences.jobs`). Ha bottone stampa + CSS printabile.
 - `technologies.html` — grid tecnologie con barre di avanzamento (`.tech-progress-fill` con `data-progress`) animate da `techProgress.js`. `body_class: technologies-page`.
 - `contact.html` — pagina contatti con form/links. `body_class: contact-page`.
@@ -61,11 +61,11 @@ L'ambiente ha Ruby 3.4 + Bundler, ma c'è un conflitto `public_suffix` (7 instal
 - `navigation.js` — navigazione circolare tra le 4 pagine con frecce ← → (keyboard) e swipe (touch, soglia 100px + guard orizzontale). Mostra e fa sparire l'hint di navigazione dopo 5s.
 - `hamburger.js` — classe `HamburgerMenu`: toggle drawer mobile, chiusura su link interno / Escape / click esterno, blocca scroll body quando aperto.
 - `backToTop.js` — crea il pulsante "Go to top", lo mostra dopo 300px di scroll, scroll smooth, integra traduzione `backToTop`.
-- `titleAnimation.js` — classe `TitleAnimator`: effetto macchina da scrivere sul `.hero-title` con 3 step multilingua, evidenziazione parole, suoni tastiera (pool di 3 audio per tipo da `sounds/`), riavvio al click. Rimuove `data-i18n` per non essere sovrascritto.
+- `titleAnimation.js` — classe `TitleAnimator`: effetto macchina da scrivere sul `.hero-title` con 4 step multilingua, evidenziazione parole, suoni tastiera (pool di 3 audio per tipo da `sounds/`), riavvio al click e al cambio lingua (evento `i18n:languageChanged`). Rimuove `data-i18n` per non essere sovrascritto.
 - `techProgress.js` — anima la larghezza delle `.tech-progress-fill` al `data-progress`% dopo il load, solo su `technologies-page`.
 
 ### Stili (`styles/`)
-- `main.css` — stili globali principali (layout componenti, timeline, keyframes design "kinetic", back-to-top, navigation-hint, ecc.).
+- `main.css` — stili globali principali (layout componenti, timeline, keyframes, back-to-top, navigation-hint, ecc.).
 - `transitions.css` — animazioni dell'overlay di transizione (color-fill, smoke, fade body in entrata).
 - `reduced-motion.css` — caricato solo con `prefers-reduced-motion: reduce`; disabilita animazioni/transizioni.
 - `print-experiences.css` — stylesheet `media="print"` per la versione stampabile del CV (experiences).
@@ -87,5 +87,4 @@ L'ambiente ha Ruby 3.4 + Bundler, ma c'è un conflitto `public_suffix` (7 instal
 - **`bundle exec` obbligatorio** per evitare il conflitto `public_suffix` 7 vs 5.
 - Aggiungere una nuova pagina: crea il `.html` con front matter `layout: default` + `body_class` + voce in `navigation.js` (array `pages`) + link in `navbar.html` + traduzioni in entrambi i `translations/*.json` + meta key `${page}.${titleKey}`/`description`.
 - Le stringhe nuove vanno aggiunte in **entrambi** `en.json` e `it.json`, altrimenti `i18n.js` mostra la chiave grezza.
-- Tailwind è CDN/runtime: le classi arbitrarie tipo `shadow-[8px_8px_0px_#ff544e]` funzionano, ma non c'è purging — nessun build step CSS da lanciare.
-- 14 file con modifiche non committate al momento della stesura (refactor corposo su head, navbar, contact, experiences, technologies, main.js, transitions.css). Verificare `git diff` prima di lavorare.
+- Il ramo `graphical-review` (PR #68, draft) contiene un refactor grafico WIP (Tailwind CDN, selettore lingua EN/IT, design "kinetic") **non ancora su main**. Se lavori su main, ignora quelle sezioni; se lavori su `graphical-review`, AGENTS.md andrà riallineato a quel ramo.
