@@ -29,14 +29,24 @@ body {
   /* Default text color*/
   font-family: var(--font-main);
   font-weight: 100;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
 }
 
 /* Fade-in only applies when JS is available (html.js added by head.html).
-   Without JS the page stays fully visible. */
+   Without JS the page stays fully visible.
+
+   Implemented as a CSS animation (not a JS-driven opacity change): it runs on
+   the compositor, so it is not blocked by requestAnimationFrame throttling in
+   background/occluded tabs — a JS-driven fade could leave the page stuck at
+   opacity 0.01. No base opacity is set, so if the animation is ever disabled
+   the content degrades to fully visible instead of invisible. */
 html.js body {
-  opacity: 0.01;
-  /* Initial state for transition */
+  animation: body-fade-in 0.2s ease-in-out forwards;
+}
+
+@keyframes body-fade-in {
+  from { opacity: 0.01; }
+  to { opacity: 1; }
 }
 
 /* Skip to content link - hidden but accessible to keyboard users */
@@ -819,6 +829,12 @@ p.lead {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* Entry fade-in is skipped too, so reduced-motion users get the page
+     instantly (matches the instant exit path in transitions.js). */
+  html.js body {
+    animation: none;
+  }
+
   .tech-rise {
     animation: none;
   }
