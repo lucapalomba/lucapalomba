@@ -63,6 +63,11 @@ class TitleAnimator {
       }
     });
 
+    // Listen for language changes to update the claim text
+    document.addEventListener('i18n:languageChanged', (e) => {
+      this.onLanguageChanged(e.detail && e.detail.lang);
+    });
+
     // Wait for the intro animation to complete before starting the title animation
     setTimeout(() => {
       this.startSequence();
@@ -123,6 +128,19 @@ class TitleAnimator {
         this.scheduleNextStep();
       });
     });
+  }
+
+  onLanguageChanged(lang) {
+    if (!this.titleElement) return;
+    // If the animation is mid-flight, let the next transition pick up the new language
+    if (this.isAnimating) return;
+
+    this.currentLanguage = lang || document.documentElement.lang || 'en';
+    const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
+    const currentStep = Math.min(this.stepIndex, currentLangSteps.length - 1);
+    const config = currentLangSteps[currentStep];
+    this.updateContent(this.getTextArray(config.text, config.highlights), false);
+    this.stepIndex = currentStep;
   }
 
   resetAndAnimate() {
