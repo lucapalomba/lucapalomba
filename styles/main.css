@@ -28,7 +28,7 @@ body {
   color: var(--text-primary);
   /* Default text color*/
   font-family: var(--font-main);
-  font-weight: 100;
+  font-weight: 400;
   transition: opacity 0.5s ease-in-out;
 }
 
@@ -78,7 +78,7 @@ h1 {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  font-weight: 100;
+  font-weight: 400;
 }
 
 /* Layout Helpers */
@@ -375,7 +375,7 @@ a.mobile-resume-btn {
 
 .hero-name {
   font-size: 80px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-tertiary);
   margin: 0;
   line-height: 1.1;
@@ -387,7 +387,7 @@ a.mobile-resume-btn {
 
 .hero-title {
   font-size: 80px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-secondary);
   margin: 0 0 20px;
   line-height: 1.1;
@@ -399,7 +399,7 @@ a.mobile-resume-btn {
 
 .hero-title .highlight {
   color: var(--accent-color);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .hero-subtitle {
@@ -458,7 +458,7 @@ a.mobile-resume-btn {
 /* Experiences Page Specifics */
 .section-title {
   font-size: 32px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-tertiary);
   margin-bottom: 10px;
   display: flex;
@@ -539,7 +539,7 @@ p.lead {
   margin: 0 0 5px;
   font-size: 20px;
   color: var(--text-tertiary);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .timeline-content .company {
@@ -657,7 +657,7 @@ p.lead {
   color: var(--text-tertiary);
   font-size: 15px;
   line-height: 1.7;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .tech-stack {
@@ -685,7 +685,7 @@ p.lead {
 
 .tech-section-title {
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-tertiary);
   margin-bottom: 30px;
   margin-top: 0;
@@ -719,7 +719,7 @@ p.lead {
 .tech-name {
   font-size: 18px;
   color: var(--text-tertiary);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .tech-percentage {
@@ -919,7 +919,7 @@ p.lead {
   display: inline-block;
   color: var(--text-tertiary);
   font-size: 28px;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
   margin-bottom: 40px;
   transition: color 0.3s ease;
