@@ -61,7 +61,7 @@ L'ambiente ha Ruby 3.4 + Bundler, ma c'è un conflitto `public_suffix` (7 instal
 - `navigation.js` — navigazione circolare tra le 4 pagine con frecce ← → (keyboard) e swipe (touch, soglia 100px + guard orizzontale). Mostra e fa sparire l'hint di navigazione dopo 5s.
 - `hamburger.js` — classe `HamburgerMenu`: toggle drawer mobile, chiusura su link interno / Escape / click esterno, blocca scroll body quando aperto.
 - `backToTop.js` — crea il pulsante "Go to top", lo mostra dopo 300px di scroll, scroll smooth, integra traduzione `backToTop`.
-- `titleAnimation.js` — classe `TitleAnimator`: effetto macchina da scrivere sul `.hero-title` con 3 step multilingua, evidenziazione parole, suoni tastiera (pool di 3 audio per tipo da `sounds/`), riavvio al click. Rimuove `data-i18n` per non essere sovrascritto.
+- `titleAnimation.js` — classe `TitleAnimator`: effetto macchina da scrivere sul `.hero-title` con 4 step multilingua, evidenziazione parole, suoni tastiera (pool di 3 audio per tipo da `sounds/`), riavvio al click e al cambio lingua (evento `i18n:languageChanged`). Rimuove `data-i18n` per non essere sovrascritto.
 - `techProgress.js` — anima la larghezza delle `.tech-progress-fill` al `data-progress`% dopo il load, solo su `technologies-page`.
 
 ### Stili (`styles/`)
@@ -88,4 +88,3 @@ L'ambiente ha Ruby 3.4 + Bundler, ma c'è un conflitto `public_suffix` (7 instal
 - Aggiungere una nuova pagina: crea il `.html` con front matter `layout: default` + `body_class` + voce in `navigation.js` (array `pages`) + link in `navbar.html` + traduzioni in entrambi i `translations/*.json` + meta key `${page}.${titleKey}`/`description`.
 - Le stringhe nuove vanno aggiunte in **entrambi** `en.json` e `it.json`, altrimenti `i18n.js` mostra la chiave grezza.
 - Tailwind è CDN/runtime: le classi arbitrarie tipo `shadow-[8px_8px_0px_#ff544e]` funzionano, ma non c'è purging — nessun build step CSS da lanciare.
-- 14 file con modifiche non committate al momento della stesura (refactor corposo su head, navbar, contact, experiences, technologies, main.js, transitions.css). Verificare `git diff` prima di lavorare.
