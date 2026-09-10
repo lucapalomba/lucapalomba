@@ -6,11 +6,11 @@
 <meta name="description"
   content="{% if page.description %}{{ page.description | escape }}{% else %}{{ site.description | escape }}{% endif %}">
 
-<!-- Favicon / icons -->
-<link rel="icon" href="https://github.com/lucapalomba.png" sizes="any">
-<link rel="icon" href="https://github.com/lucapalomba.png?s=32" sizes="32x32" type="image/png">
-<link rel="apple-touch-icon" href="https://github.com/lucapalomba.png" sizes="180x180">
-<link rel="shortcut icon" href="https://github.com/lucapalomba.png">
+<!-- Favicon / icons (local, no external dependency) -->
+<link rel="icon" href="{{ '/images/favicon-32.png' | relative_url }}" sizes="any">
+<link rel="icon" href="{{ '/images/favicon-32.png' | relative_url }}" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="{{ '/images/icon-192.png' | relative_url }}" sizes="180x180">
+<link rel="shortcut icon" href="{{ '/images/favicon-32.png' | relative_url }}">
 <meta name="theme-color" content="#0a0a0f">
 
 <!-- Preload critical fonts and CSS -->
