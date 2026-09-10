@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => {
         if (currentPageIndex === -1) return;
 
+        // Don't hijack arrow keys while the user is typing in a form field
+        if (e.target.matches('input, textarea, select, [contenteditable="true"]')) return;
+
         if (e.key === 'ArrowRight') {
             // Navigate to next page (circular)
             const nextIndex = (currentPageIndex + 1) % pages.length;
