@@ -207,6 +207,8 @@ class I18n {
     await this.loadLanguage(lang);
     // Store preference in localStorage
     localStorage.setItem('preferredLanguage', lang);
+    // Notify other components (e.g. title animation) that the language changed
+    document.dispatchEvent(new CustomEvent('i18n:languageChanged', { detail: { lang } }));
   }
 
   // Get current language
