@@ -29,9 +29,14 @@ body {
   /* Default text color*/
   font-family: var(--font-main);
   font-weight: 100;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Fade-in only applies when JS is available (html.js added by head.html).
+   Without JS the page stays fully visible. */
+html.js body {
   opacity: 0.01;
   /* Initial state for transition */
-  transition: opacity 0.5s ease-in-out;
 }
 
 /* Skip to content link - hidden but accessible to keyboard users */
