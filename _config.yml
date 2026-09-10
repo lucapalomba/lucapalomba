@@ -37,7 +37,10 @@ jekyll-minifier:
 # render it as AGENTS.html (default layout skip-link #main-content has no
 # matching id in its content), breaking htmlproofer. scripts/ holds Node
 # tooling (check-i18n.js) using ES6+ syntax that jekyll-minifier's uglifier
-# cannot parse, and it is not site content.
+# cannot parse, and it is not site content. scratch/ holds CDP/UAT scripts
+# and screenshots — with `jekyll serve --livereload` every write there would
+# trigger a rebuild and reload the very page an automated browser session is
+# driving. .zed/ is editor config, not site content.
 exclude:
   - Gemfile
   - Gemfile.lock
@@ -48,6 +51,8 @@ exclude:
   - vendor/ruby/
   - AGENTS.md
   - scripts
+  - scratch
+  - .zed
 
 # SEO settings
 author: Luca Palomba
