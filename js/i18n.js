@@ -2,8 +2,20 @@
 class I18n {
   constructor() {
     this.translations = null;
-    this.currentLang = this.detectLanguage();
+    this.currentLang = this.getSavedLanguage() || this.detectLanguage();
     this.init();
+  }
+
+  // Read the user's saved language preference (persisted by switchLanguage).
+  // localStorage can throw in restrictive/privacy contexts, and a stale or
+  // invalid value should fall back to browser detection.
+  getSavedLanguage() {
+    try {
+      const saved = localStorage.getItem('preferredLanguage');
+      return (saved === 'it' || saved === 'en') ? saved : null;
+    } catch (e) {
+      return null;
+    }
   }
 
   // Detect browser language
@@ -207,8 +219,10 @@ class I18n {
   async switchLanguage(lang) {
     this.currentLang = lang;
     await this.loadLanguage(lang);
-    // Store preference in localStorage
-    localStorage.setItem('preferredLanguage', lang);
+    // Store preference in localStorage (guarded: can throw in privacy modes)
+    try {
+      localStorage.setItem('preferredLanguage', lang);
+    } catch (e) { /* ignore */ }
     // Notify other components (e.g. title animation) that the language changed
     document.dispatchEvent(new CustomEvent('i18n:languageChanged', { detail: { lang } }));
   }
