@@ -1,0 +1,12 @@
+{
+  "name": "lucapalomba-site",
+  "private": true,
+  "description": "Node tooling for the Jekyll portfolio site: Markdown linting. The site itself has no build step.",
+  "scripts": {
+    "lint:md": "markdownlint-cli2",
+    "lint:md:fix": "markdownlint-cli2 --fix"
+  },
+  "devDependencies": {
+    "markdownlint-cli2": "0.23.2"
+  }
+}
