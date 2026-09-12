@@ -16,6 +16,10 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+.zed/
+
+# Local UAT tooling
+scratch/
 
 # Logs
 *.log
