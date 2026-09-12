@@ -6,9 +6,13 @@ class TitleAnimator {
     this.TYPEWRITER_SPEED = 65; // Speed of typewriter effect in ms
     this.WORD_ERASE_SPEED = 300; // Speed of erasing words in ms
     this.isAnimating = false; // Track if animation is in progress
-    this.currentLanguage = document.documentElement.lang || 'en';
     // Users who prefer reduced motion get a static, fully rendered title.
     this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Headline variants and the sound base URL are rendered by the page
+    // (_layouts/home.html) from the locale dictionary, so the animator no longer
+    // keeps its own copies of both languages' strings.
+    const config = this.readConfig();
 
     this.typingSoundPool = [];
     this.typingSoundIndex = 0;
@@ -18,42 +22,40 @@ class TitleAnimator {
 
     this.stepIndex = 0;
     this.animationToken = 0; // Incremented to invalidate in-flight animation timers on restart
-    this.steps = {
-      en: [
-        { text: "I build things for the web", highlights: ["things", "web"] },
-        { text: "I build teams for Companies", highlights: ["teams", "Companies"] },
-        { text: "I lead teams for goals.", highlights: ["teams", "goals"] },
-        { text: "I train teams and AI for processes.", highlights: ["teams", "AI", "processes"] }
-      ],
-      it: [
-        { text: "Costruisco cose per il web", highlights: ["cose", "web"] },
-        { text: "Costruisco team per le aziende", highlights: ["team", "aziende"] },
-        { text: "Guido team per gli obiettivi.", highlights: ["Guido", "team", "obiettivi"] },
-        { text: "Addestro team e AI per i processi.", highlights: ["Addestro", "team", "AI", "processi"] }
-      ]
-    };
+    this.steps = config.steps;
+    this.soundBase = config.soundBase;
 
     this.init();
   }
 
-  init() {
-    if (!this.titleElement) return;
+  // Read the JSON blob the page renders (#hero-animation). A missing or
+  // unparsable blob yields no steps, which makes the animation a no-op instead
+  // of an exception — the page itself has already been rendered by then, so
+  // nothing is lost.
+  readConfig() {
+    const empty = { steps: [], soundBase: '' };
+    const element = document.getElementById('hero-animation');
+    if (!element) return empty;
 
-    // Remove data-i18n attribute to prevent i18n.js from overwriting our highlighted HTML
-    this.titleElement.removeAttribute('data-i18n');
-
-    // Robust language detection (since i18n might not have set html lang yet)
-    const browserLang = navigator.language || navigator.userLanguage;
-    if (browserLang && browserLang.toLowerCase().startsWith('it')) {
-      this.currentLanguage = 'it';
-    } else {
-      this.currentLanguage = 'en';
+    try {
+      const config = JSON.parse(element.textContent);
+      return {
+        steps: Array.isArray(config.steps) ? config.steps : [],
+        soundBase: typeof config.soundBase === 'string' ? config.soundBase : ''
+      };
+    } catch (e) {
+      console.warn('Hero animation config is not valid JSON:', e);
+      return empty;
     }
+  }
 
-    // Apply highlights to the initial text immediately (no typing
-    // indicator for reduced-motion users: the claim stays fully rendered)
-    const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
-    const initialConfig = currentLangSteps[0];
+  init() {
+    if (!this.titleElement || this.steps.length === 0) return;
+
+    // Apply highlights to the initial text immediately (no typing indicator
+    // for reduced-motion users: the claim stays fully rendered). The sentence
+    // is already in the page's language — this only wraps the highlighted words.
+    const initialConfig = this.steps[0];
     this.updateContent(this.getTextArray(initialConfig.text, initialConfig.highlights), !this.prefersReducedMotion);
 
     // Pre-create audio pool for better performance. Skipped entirely while
@@ -83,11 +85,6 @@ class TitleAnimator {
       }
     });
 
-    // Listen for language changes to update the claim text
-    document.addEventListener('i18n:languageChanged', (e) => {
-      this.onLanguageChanged(e.detail && e.detail.lang);
-    });
-
     // Wait for the intro animation to complete before starting the title animation
     const introToken = this.animationToken;
     setTimeout(() => {
@@ -110,7 +107,7 @@ class TitleAnimator {
     try {
       // Init typing sounds
       for (let i = 0; i < this.SOUND_POOL_SIZE; i++) {
-        const audio = new Audio('sounds/keyboard-click.mp3');
+        const audio = new Audio(this.soundBase + 'keyboard-click.mp3');
         audio.preload = 'auto';
         audio.volume = 0.2;
         this.typingSoundPool.push(audio);
@@ -118,7 +115,7 @@ class TitleAnimator {
 
       // Init erasing sounds
       for (let i = 0; i < this.SOUND_POOL_SIZE; i++) {
-        const audio = new Audio('sounds/keyboard-click-delete.mp3');
+        const audio = new Audio(this.soundBase + 'keyboard-click-delete.mp3');
         audio.preload = 'auto';
         audio.volume = 0.2;
         this.erasingSoundPool.push(audio);
@@ -139,9 +136,8 @@ class TitleAnimator {
   scheduleNextStep() {
     // If we have more steps, schedule the next one
     const token = this.animationToken;
-    const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
 
-    if (this.stepIndex < currentLangSteps.length - 1) {
+    if (this.stepIndex < this.steps.length - 1) {
       setTimeout(() => {
         if (token !== this.animationToken) return;
         this.transitionToStep(this.stepIndex + 1);
@@ -151,12 +147,10 @@ class TitleAnimator {
 
   transitionToStep(nextIndex) {
     if (!this.titleElement) return;
-    this.currentLanguage = document.documentElement.lang || 'en';
-    const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
 
-    if (nextIndex >= currentLangSteps.length) return;
+    if (nextIndex >= this.steps.length) return;
 
-    const nextStepConfig = currentLangSteps[nextIndex];
+    const nextStepConfig = this.steps[nextIndex];
 
     this.eraseText(() => {
       this.stepIndex = nextIndex;
@@ -166,26 +160,16 @@ class TitleAnimator {
     });
   }
 
-  onLanguageChanged(lang) {
-    if (!this.titleElement) return;
-    this.currentLanguage = lang || document.documentElement.lang || 'en';
-    this.isAnimating = false;
-    // Restart the animation from the beginning in the new language
-    this.resetAndAnimate();
-  }
-
   resetAndAnimate() {
     // Invalidate any in-flight animation timers (erase/type/schedule)
     this.animationToken++;
     const token = this.animationToken;
 
     // Reset to initial state
-    this.currentLanguage = document.documentElement.lang || 'en';
-    const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
-    const initialText = currentLangSteps[0].text;
+    const initialText = this.steps[0].text;
 
     this.titleElement.textContent = initialText;
-    this.updateContent(this.getTextArray(initialText, currentLangSteps[0].highlights), !this.prefersReducedMotion);
+    this.updateContent(this.getTextArray(initialText, this.steps[0].highlights), !this.prefersReducedMotion);
     this.stepIndex = 0;
 
     // Reduced motion: re-render statically, never replay the typewriter.
@@ -202,8 +186,7 @@ class TitleAnimator {
     const token = this.animationToken;
 
     // Get current config to preserve highlights
-    const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
-    const currentConfig = currentLangSteps[this.stepIndex];
+    const currentConfig = this.steps[this.stepIndex];
     const fullText = currentConfig.text;
     const textArray = this.getTextArray(fullText, currentConfig.highlights);
 
@@ -247,8 +230,7 @@ class TitleAnimator {
     const textArray = this.getTextArray(fullText, highlights);
 
     // Check if this is the last step
-    const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
-    const isLastStep = this.stepIndex === currentLangSteps.length - 1;
+    const isLastStep = this.stepIndex === this.steps.length - 1;
 
     const typeInterval = setInterval(() => {
       // Bail out if the animation was restarted (e.g. language changed mid-run)

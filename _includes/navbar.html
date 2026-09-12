@@ -1,19 +1,27 @@
+{%- comment -%}
+  All labels come from the locale dictionary (`t`, assigned by the layout), and
+  the current page is marked from `page.i18n_key` instead of comparing
+  `page.url` — which is what lets one navbar serve both /en and /it pages.
+  Links stay relative ("experiences.html") so they resolve inside whichever
+  language directory the page lives in.
+{%- endcomment -%}
 <nav class="navbar">
     <div class="logo">
         <a href="index.html">&lt;LP /&gt;</a>
     </div>
     {% unless page.hide_nav_links %}
     <div class="nav-actions">
-        {% if page.url == "/" or page.url == "/index.html" %}
+        {% if page.i18n_key == 'index' %}
         {% comment %}
         Home only: it is the only page whose hero runs the typewriter, so a
-        control anywhere else would mute nothing. js/soundMute.js owns the
-        aria-label (it is state dependent); the data-i18n-aria attribute below
-        only supplies the initial "not muted" wording, and check-i18n.js uses
-        it to verify the key exists in both locales.
+        control anywhere else would mute nothing. Both wordings are rendered
+        here, at build time, from the locale dictionary — js/soundMute.js swaps
+        between them with the data-label-* attributes, since the correct label
+        depends on the mute state rather than on the language alone. Keys are
+        checked in both locales by check-i18n.js.
         {% endcomment %}
         <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="false"
-            aria-label="Mute keyboard sounds" data-i18n-aria="sound.mute">
+            aria-label="{{ t.sound.mute }}" data-label-mute="{{ t.sound.mute }}" data-label-unmute="{{ t.sound.unmute }}">
             <svg class="sound-toggle-icon sound-toggle-icon--on" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
@@ -28,7 +36,7 @@
             </svg>
         </button>
         {% endif %}
-        <button class="hamburger-menu" id="hamburger-toggle" aria-label="Toggle navigation menu" aria-expanded="false"
+        <button class="hamburger-menu" id="hamburger-toggle" aria-label="{{ t.a11y.toggleMenu }}" aria-expanded="false"
             aria-controls="mobile-nav">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -38,37 +46,44 @@
             </svg>
         </button>
     </div>
-    <div class="nav-links" aria-label="Main navigation">
+    <div class="nav-links" aria-label="{{ t.a11y.mainNav }}">
         <ol>
-            <li><a href="index.html" {% if page.url=="/" or page.url=="/index.html" %}aria-current="page" {% endif
-                    %}><span class="nav-number">01.</span> <span data-i18n="nav.whoami">Who am I</span></a>
+            <li><a href="index.html" {% if page.i18n_key == 'index' %}aria-current="page" {% endif %}><span
+                        class="nav-number">01.</span> <span>{{ t.nav.whoami }}</span></a>
             </li>
-            <li><a href="experiences.html" {% if page.url=="/experiences.html" %}aria-current="page" {% endif %}><span
-                        class="nav-number">02.</span> <span data-i18n="nav.experience">Experience</span></a></li>
-            <li><a href="technologies.html" {% if page.url=="/technologies.html" %}aria-current="page" {% endif %}><span
-                        class="nav-number">03.</span> <span data-i18n="nav.technologies">Technologies</span></a></li>
-            <li><a href="contact.html" {% if page.url=="/contact.html" %}aria-current="page" {% endif %}><span
-                        class="nav-number">04.</span> <span data-i18n="nav.contact">Contact</span></a>
+            <li><a href="experiences.html" {% if page.i18n_key == 'experiences' %}aria-current="page" {% endif %}><span
+                        class="nav-number">02.</span> <span>{{ t.nav.experience }}</span></a></li>
+            <li><a href="technologies.html" {% if page.i18n_key == 'technologies' %}aria-current="page" {% endif %}><span
+                        class="nav-number">03.</span> <span>{{ t.nav.technologies }}</span></a></li>
+            <li><a href="contact.html" {% if page.i18n_key == 'contact' %}aria-current="page" {% endif %}><span
+                        class="nav-number">04.</span> <span>{{ t.nav.contact }}</span></a>
             </li>
         </ol>
         <a href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer" class="resume-btn"
-            data-i18n="nav.curriculum" aria-label="Curriculum - opens in new window">Curriculum</a>
+            aria-label="{{ t.a11y.curriculum }}">{{ t.nav.curriculum }}</a>
+        {%- if page.alt_url %}
+        <a class="lang-toggle lang-switch" href="{{ page.alt_url | relative_url }}" hreflang="{{ page.alt_lang }}"
+            aria-label="{{ t.nav.langSwitch }}">{{ t.nav.langCode }}</a>
+        {%- endif %}
     </div>
-    <div class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+    <div class="mobile-nav" id="mobile-nav" role="navigation" aria-label="{{ t.a11y.mobileNav }}">
         <ol>
-            <li><a href="index.html" {% if page.url=="/" or page.url=="/index.html" %}aria-current="page" {% endif
-                    %}><span class="nav-number">01.</span> <span data-i18n="nav.whoami">Who am I</span></a></li>
-            <li><a href="experiences.html" {% if page.url=="/experiences.html" %}aria-current="page" {% endif %}><span
-                        class="nav-number">02.</span> <span data-i18n="nav.experience">Experience</span></a></li>
-            <li><a href="technologies.html" {% if page.url=="/technologies.html" %}aria-current="page" {% endif %}><span
-                        class="nav-number">03.</span> <span data-i18n="nav.technologies">Technologies</span></a></li>
-            <li><a href="contact.html" {% if page.url=="/contact.html" %}aria-current="page" {% endif %}><span
-                        class="nav-number">04.</span> <span data-i18n="nav.contact">Contact</span></a>
+            <li><a href="index.html" {% if page.i18n_key == 'index' %}aria-current="page" {% endif %}><span
+                        class="nav-number">01.</span> <span>{{ t.nav.whoami }}</span></a></li>
+            <li><a href="experiences.html" {% if page.i18n_key == 'experiences' %}aria-current="page" {% endif %}><span
+                        class="nav-number">02.</span> <span>{{ t.nav.experience }}</span></a></li>
+            <li><a href="technologies.html" {% if page.i18n_key == 'technologies' %}aria-current="page" {% endif %}><span
+                        class="nav-number">03.</span> <span>{{ t.nav.technologies }}</span></a></li>
+            <li><a href="contact.html" {% if page.i18n_key == 'contact' %}aria-current="page" {% endif %}><span
+                        class="nav-number">04.</span> <span>{{ t.nav.contact }}</span></a>
             </li>
         </ol>
         <a href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer"
-            class="mobile-resume-btn" data-i18n="nav.curriculum"
-            aria-label="Curriculum - opens in new window">Curriculum</a>
+            class="mobile-resume-btn" aria-label="{{ t.a11y.curriculum }}">{{ t.nav.curriculum }}</a>
+        {%- if page.alt_url %}
+        <a class="lang-toggle lang-switch" href="{{ page.alt_url | relative_url }}" hreflang="{{ page.alt_lang }}"
+            aria-label="{{ t.nav.langSwitch }}">{{ t.nav.langCode }}</a>
+        {%- endif %}
     </div>
     {% endunless %}
 </nav>

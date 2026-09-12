@@ -1,0 +1,11 @@
+---
+layout: default
+---
+{%- assign t = site.data.translations[page.lang] %}
+<!-- Main Content -->
+<main class="error-page" id="main-content">
+    <h1 class="error-code">{{ t.notFound.code }}</h1>
+    <h2 class="error-title">{{ t.notFound.title }}</h2>
+    <p class="error-desc">{{ t.notFound.description }}</p>
+    <a href="{{ '/' | relative_url }}" class="home-btn">{{ t.notFound.homeButton }}</a>
+</main>

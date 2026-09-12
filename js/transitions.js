@@ -21,8 +21,8 @@ class PageTransition {
 
   setupLinks() {
     // Single delegated listener: one handler on document covers every link,
-    // including links injected after load (e.g. the timeline rebuilt by
-    // i18n.js on language switch or future dynamic content).
+    // including links injected after load by page scripts (e.g. the timeline
+    // techProgress.js animates).
     document.addEventListener('click', (e) => {
       // Let modifier-key / middle-click open in a new tab natively.
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;

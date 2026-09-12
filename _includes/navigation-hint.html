@@ -1,2 +1,14 @@
-<!-- Navigation Hint -->
-<div id="navigation-hint" class="navigation-hint" aria-hidden="true"></div>
+{%- comment -%}
+  Both variants are rendered here and CSS picks one — the keyboard hint on
+  pointer devices, the swipe hint on touch screens. The choice used to be made in
+  JavaScript from `maxTouchPoints`, which is wrong on touchscreen laptops and
+  meant the hint was empty until the deferred script ran (and permanently empty
+  without JS). Text stays in the dictionary; only which span is displayed is CSS.
+
+  `aria-hidden="true"` is what keeps the element hidden: it becomes visible only
+  when navigation.js flips it to "false" to show the hint for its few seconds.
+{%- endcomment -%}
+<div id="navigation-hint" class="navigation-hint" aria-hidden="true">
+    <span class="hint-keyboard">{{ t.navigation.hintKeyboard }}</span>
+    <span class="hint-touch">{{ t.navigation.hintTouch }}</span>
+</div>

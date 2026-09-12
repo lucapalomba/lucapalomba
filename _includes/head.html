@@ -2,9 +2,49 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <!-- Mark JS availability before CSS applies, so the fade-in only hides content for JS users -->
 <script>document.documentElement.classList.add('js')</script>
-<title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
-<meta name="description"
-  content="{% if page.description %}{{ page.description | escape }}{% else %}{{ site.description | escape }}{% endif %}">
+
+{%- comment -%}
+  Every string on this page is rendered by Jekyll from the dictionary in
+  _data/translations/, picked by `page.lang`. `t` is assigned by the layout
+  (_layouts/default.html) or by the page layout that renders the body, so it is
+  always in scope here.
+
+  The title/description come from `page.i18n_key`, which every page declares
+  ("index", "experiences", …) — the same key the navbar uses for its active
+  state, instead of the body_class sniffing the old client-side i18n did.
+
+  Language pairing is explicit front matter (`alt_url` + `alt_lang`) because
+  GitHub Pages does no content negotiation: nothing else could tell this file
+  where the other language's copy of the page lives.
+{%- endcomment -%}
+{%- assign meta = t[page.i18n_key] | default: t.index -%}
+{%- assign en_url = page.alt_url -%}
+{%- if page.lang == 'en' -%}{%- assign en_url = page.url -%}{%- endif %}
+<title>{{ meta.pageTitle | escape }}</title>
+<meta name="description" content="{{ meta.description | escape }}">
+
+{%- if page.i18n_key == 'index' and page.lang == 'en' %}
+<!-- Language hand-off on the language root. A visitor whose browser — or whose
+     stored choice from the switcher — is Italian is sent to the Italian home
+     page. Client-side because a static host cannot negotiate a language, and
+     deliberately limited to the root: deep pages and the Italian side are never
+     redirected, so a link someone shared always shows what was shared.
+     Inline (not a deferred file) so it runs before the English hero is painted,
+     and in ES5 because jekyll-minifier minifies inline scripts in production. -->
+<script>
+  (function () {
+    var stored = null;
+    try { stored = localStorage.getItem('preferredLanguage'); } catch (e) { /* ignore */ }
+    if (stored === 'en') return; // the visitor explicitly chose English
+    if (stored !== 'it') {
+      // No stored choice (or an unknown value): fall back to the browser language.
+      var browser = (navigator.language || navigator.userLanguage || '').toLowerCase();
+      if (browser.indexOf('it') !== 0) return;
+    }
+    window.location.replace({{ page.alt_url | relative_url | jsonify }});
+  })();
+</script>
+{%- endif %}
 
 <!-- Favicon / icons (local, no external dependency). The sizes below are the
      real dimensions of the files; they used to claim a flat 180x180 for an
@@ -24,28 +64,37 @@
 
 
 <!-- SEO & Social Media -->
-<meta property="og:title"
-  content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}">
-<meta property="og:description"
-  content="{% if page.description %}{{ page.description | escape }}{% else %}{{ site.description | escape }}{% endif %}">
+<meta property="og:title" content="{{ meta.pageTitle | escape }}">
+<meta property="og:description" content="{{ meta.description | escape }}">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
 <meta property="og:image" content="{{ '/images/icon-512.png' | absolute_url }}">
 <meta property="og:image:width" content="512">
 <meta property="og:image:height" content="512">
+<meta property="og:locale" content="{{ t.ogLocale }}">
+{%- if page.alt_url %}
+<meta property="og:locale:alternate" content="{{ site.data.translations[page.alt_lang].ogLocale }}">
+{%- endif %}
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title"
-  content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}">
-<meta name="twitter:description"
-  content="{% if page.description %}{{ page.description | escape }}{% else %}{{ site.description | escape }}{% endif %}">
+<meta name="twitter:title" content="{{ meta.pageTitle | escape }}">
+<meta name="twitter:description" content="{{ meta.description | escape }}">
 <meta name="twitter:image" content="{{ '/images/icon-512.png' | absolute_url }}">
 
 <link rel="canonical" href="{{ page.url | absolute_url }}">
+{%- if page.alt_url %}
+<!-- hreflang alternates: each page lists itself, its counterpart, and the
+     x-default (English). A page that exists in one language only (the 404, which
+     GitHub Pages serves from the site root whatever the path) has no `alt_url`
+     and so no alternates. -->
+<link rel="alternate" hreflang="{{ page.lang }}" href="{{ page.url | absolute_url }}">
+<link rel="alternate" hreflang="{{ page.alt_lang }}" href="{{ page.alt_url | absolute_url }}">
+<link rel="alternate" hreflang="x-default" href="{{ en_url | absolute_url }}">
+{%- endif %}
 
 <!-- Schema.org JSON-LD Structured Data (Person props from _data/person.yml) -->
 <script type="application/ld+json">
-{"@context": "https://schema.org", {% include jsonld-person-props.html %}}
+{"@context": "https://schema.org", {% include jsonld-person-props.html description=t.index.hero.bio %}}
 </script>
 
 {% if page.header_scripts %}

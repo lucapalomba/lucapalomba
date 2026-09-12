@@ -1,14 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Define page order for navigation (matches navigation bar order)
+    // Page order for arrow-key and swipe navigation (matches the navbar order).
+    // The current page comes from `data-page` on <body>, which the server sets
+    // from the page's `i18n_key`. It used to be guessed from the URL, which broke
+    // on the Italian pages: "/it/" matched neither `endsWith('/')` nor
+    // "index.html", so arrow keys and swipes did nothing there.
     const pages = [
-        { name: 'index', url: 'index.html', check: (path) => path.endsWith('index.html') || path.endsWith('/') || path.endsWith('lucapalomba/') },
-        { name: 'experiences', url: 'experiences.html', check: (path) => path.endsWith('experiences.html') },
-        { name: 'technologies', url: 'technologies.html', check: (path) => path.endsWith('technologies.html') },
-        { name: 'contact', url: 'contact.html', check: (path) => path.endsWith('contact.html') }
+        { name: 'index', url: 'index.html' },
+        { name: 'experiences', url: 'experiences.html' },
+        { name: 'technologies', url: 'technologies.html' },
+        { name: 'contact', url: 'contact.html' }
     ];
 
-    const path = window.location.pathname;
-    const currentPageIndex = pages.findIndex(page => page.check(path));
+    const currentPage = document.body.dataset.page;
+    const currentPageIndex = pages.findIndex(page => page.name === currentPage);
 
     // Keyboard Navigation
     document.addEventListener('keydown', (e) => {
@@ -70,11 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Relative on purpose: the same link resolves inside whichever language
+    // directory the visitor is currently in.
     function navigateTo(url) {
         window.location.href = url;
     }
 
-    // Navigation Hint Logic
+    // Navigation Hint Logic — the hint text (both variants) is rendered by the
+    // server and picked by CSS, so this only reveals it, then dismisses it.
     const navHint = document.getElementById('navigation-hint');
     if (navHint) {
         // Show at most once per session. sessionStorage can throw in
@@ -85,27 +92,11 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (e) { /* ignore */ }
 
         if (alreadyShown) {
-            // The element starts aria-hidden but is visible via CSS, so it
-            // must be removed rather than just left in place.
+            // The element is hidden via aria-hidden, but removing it keeps the
+            // DOM identical to the "dismissed" state either way.
             navHint.remove();
         } else {
             try { sessionStorage.setItem('navHintShown', '1'); } catch (e) { /* ignore */ }
-
-            const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-            // Apply the translated hint (kbd markup lives in the locale file).
-            // Re-applied on i18n:ready (first load) and i18n:languageChanged (switch).
-            const applyHint = () => {
-                const key = isTouch ? 'navigation.hintTouch' : 'navigation.hintKeyboard';
-                const fallback = isTouch
-                    ? 'Swipe ← → to navigate'
-                    : 'Use keyboard arrows <kbd>←</kbd> <kbd>→</kbd> to navigate';
-                const translation = window.i18n ? window.i18n.t(key) : null;
-                navHint.innerHTML = (translation && translation !== key) ? translation : fallback;
-            };
-            applyHint();
-            document.addEventListener('i18n:ready', applyHint);
-            document.addEventListener('i18n:languageChanged', applyHint);
 
             // Show the hint
             navHint.setAttribute('aria-hidden', 'false');

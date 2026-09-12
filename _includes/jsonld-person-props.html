@@ -2,7 +2,11 @@
 comma on the last property). The first property carries no comma; every
 following property leads with its comma, so the fragment is valid both as a
 root JSON-LD object (head.html) and nested under "mainEntity" (contact.html).
-Values are serialized with | jsonify so quoting/escaping is never hand-written.{%- endcomment -%}
+Values are serialized with | jsonify so quoting/escaping is never hand-written.
+
+`description` may be passed in by the caller: since the site has one dictionary
+per language, the localized bio is a better description than the English-only
+one in _data/person.yml. Omitting the parameter keeps that fallback.{%- endcomment -%}
 "@type": "Person"
 {%- assign p = site.data.person -%}
 {%- if p.name -%}
@@ -14,8 +18,9 @@ Values are serialized with | jsonify so quoting/escaping is never hand-written.{
 {%- if p.jobTitle -%}
 ,"jobTitle": {{ p.jobTitle | jsonify }}
 {%- endif -%}
-{%- if p.description -%}
-,"description": {{ p.description | jsonify }}
+{%- assign description = include.description | default: p.description -%}
+{%- if description -%}
+,"description": {{ description | jsonify }}
 {%- endif -%}
 {%- if p.image -%}
 ,"image": {{ p.image | absolute_url | jsonify }}

@@ -1298,3 +1298,51 @@ p.lead {
     transform: scale(1);
   }
 }
+/* ---------------------------------------------------------------------------
+   Language switcher and server-rendered navigation hint.
+
+   `.lang-toggle` above is reused as-is for the switcher — it only needs
+   different spacing when it sits in the mobile panel (a column, not a row).
+   --------------------------------------------------------------------------- */
+.mobile-nav .lang-toggle {
+  margin-left: 0;
+  align-self: flex-start;
+}
+
+/* The hint ships both variants in the HTML and CSS picks the right one. The old
+   code decided in JavaScript from `navigator.maxTouchPoints`, which called
+   touchscreen laptops touch devices and left the hint box empty — permanently,
+   for anyone without JS. `hover: none` + `pointer: coarse` is what "touch
+   screen" actually means.
+
+   Visibility is driven by `aria-hidden` rather than a class: the hint is hidden
+   until navigation.js flips the attribute to "false" to show it, so a page
+   whose script never runs shows nothing. */
+.navigation-hint {
+  display: none;
+}
+
+.navigation-hint[aria-hidden="false"] {
+  display: flex;
+}
+
+.hint-touch {
+  display: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .hint-touch {
+    display: inline;
+  }
+
+  .hint-keyboard {
+    display: none;
+  }
+}
+
+/* `.lang-toggle` was written for a <button> and never wired up; used as a link
+   it also needs the underline removed, since the sheet has no global `a` reset
+   (only the button utilities at the top do). */
+a.lang-toggle {
+  text-decoration: none;
+}

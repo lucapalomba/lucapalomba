@@ -1,21 +1,66 @@
 {
+    "ogLocale": "it_IT",
     "nav": {
         "whoami": "Chi sono",
         "experience": "Esperienze",
         "technologies": "Tecnologie",
         "contact": "Contatti",
-        "curriculum": "Curriculum"
+        "curriculum": "Curriculum",
+        "langSwitch": "Passa all'inglese",
+        "langCode": "EN"
+    },
+    "a11y": {
+        "skipToContent": "Vai al contenuto principale",
+        "toggleMenu": "Apri o chiudi il menu di navigazione",
+        "mainNav": "Navigazione principale",
+        "mobileNav": "Navigazione mobile",
+        "print": "Stampa questa pagina",
+        "github": "Profilo GitHub",
+        "linkedin": "Profilo LinkedIn",
+        "curriculum": "Curriculum — si apre in una nuova finestra"
     },
     "index": {
-        "title": "Luca Palomba - Engineering Manager & Web Developer",
+        "pageTitle": "Luca Palomba - Engineering Manager & Web Developer",
         "description": "Portfolio di Luca Palomba, Engineering Manager, Team Lead e Web Developer specializzato in sviluppo full-stack e R&D.",
         "subtitle": "Full Stack Developer & Team Lead, Engineering leadership experience",
         "hero": {
             "intro": "Ciao, mi chiamo",
             "name": "Luca Palomba.",
-            "title": "Costruisco cose per il web.",
             "bio": "Ingegnere del software con super-poteri da tech-debt-demolisher: entro nel caos, metto ordine e aiuto tutti ad andare a casa senza stress. Obiettivi chiari, commit puliti e nessuna messa in produzione il venerdì.",
-            "cta": "Scopri le mie esperienze!"
+            "cta": "Scopri le mie esperienze!",
+            "steps": [
+                {
+                    "text": "Costruisco cose per il web",
+                    "highlights": [
+                        "cose",
+                        "web"
+                    ]
+                },
+                {
+                    "text": "Costruisco team per le aziende",
+                    "highlights": [
+                        "team",
+                        "aziende"
+                    ]
+                },
+                {
+                    "text": "Guido team per gli obiettivi.",
+                    "highlights": [
+                        "Guido",
+                        "team",
+                        "obiettivi"
+                    ]
+                },
+                {
+                    "text": "Addestro team e AI per i processi.",
+                    "highlights": [
+                        "Addestro",
+                        "team",
+                        "AI",
+                        "processi"
+                    ]
+                }
+            ]
         }
     },
     "consoleEasterEgg": "Se stai leggendo questo messaggio vuol dire che fai il mio stesso lavoro. Perchè non mi contatti e ci prendiamo un caffè?",
@@ -30,39 +75,72 @@
             {
                 "date": "Feb 2026 — Presente",
                 "title": "Senior Full Stack Developer • AI Enabler — Vigilate SRL",
-                "description": "Analizzo e riprogetto i processi di sviluppo per ottimizzare il coordinamento umano/AI. Riprogetto e mantengo gli sviluppi delle automazioni — CI/CD. Garantisco che qualità del software e impiego di risorse avanzino in modo coordinato.",
+                "description": [
+                    "Analizzo e riprogetto i processi di sviluppo per ottimizzare il coordinamento umano/AI.",
+                    "Riprogetto e mantengo gli sviluppi delle automazioni — CI/CD.",
+                    "Garantisco che qualità del software e impiego di risorse avanzino in modo coordinato."
+                ],
                 "keyProject": null,
                 "techStack": [
                     "AI",
-                    "Process Design",
-                    "Automation",
+                    "Design dei processi",
+                    "Automazione",
                     "CI/CD"
                 ]
             },
             {
                 "date": "Dic 2020 — Mag 2025",
                 "title": "Senior Full Stack Developer • Head of R&D — P&B Linking / Openware PSIM / COGEN S.p.a.S.U",
-                "description": "Ho guidato le attività di R&D e coordinato team con gli stakeholder. Organizzato il lavoro usando SCRUM. Ridotto i costi degli strumenti del ~50% in un anno. Guidato ricerca, analisi e progettazione del prodotto. Gestito fino a 20 persone in 4 team di prodotto (in sede e remoto).",
+                "description": [
+                    "Ho guidato le attività di R&D e coordinato team con gli stakeholder.",
+                    "Organizzato il lavoro usando SCRUM.",
+                    "Ridotto i costi degli strumenti del ~50% in un anno.",
+                    "Guidato ricerca, analisi e progettazione del prodotto.",
+                    "Gestito fino a 20 persone in 4 team di prodotto (in sede e remoto)."
+                ],
                 "keyProject": "Re-ingegnerizzato il prodotto per la distribuzione cloud (Docker su K8s) in business continuity.",
-                "keyProjectTitle": "Openware 3.0"
+                "keyProjectTitle": "Openware 3.0",
+                "techStack": [
+                    "Architettura Cloud",
+                    "Leadership",
+                    "Docker",
+                    "Kubernetes",
+                    "SCRUM",
+                    "React",
+                    "Node.js"
+                ]
             },
             {
                 "date": "Nov 2016 — Nov 2020",
                 "title": "Full Stack Developer • Team Lead • R&D Manager — Novigo-Consulting",
-                "description": "Progettato e implementato l'architettura applicativa (API Zend, frontend React, automazione Node.js). Servito come project e team lead per team nazionali e internazionali, gestendo fino a 20 persone. Come R&D Manager, supervisionato la selezione di software/servizi e test di integrazione.",
+                "description": [
+                    "Progettato e implementato l'architettura applicativa (API Zend, frontend React, automazione Node.js).",
+                    "Servito come project e team lead per team nazionali e internazionali, gestendo fino a 20 persone.",
+                    "Come R&D Manager, supervisionato la selezione di software/servizi e test di integrazione."
+                ],
                 "keyProject": "Sviluppato componenti di automazione RAD utilizzati in tutti i prodotti.",
-                "keyProjectTitle": "Internal Core Components"
+                "keyProjectTitle": "Internal Core Components",
+                "techStack": [
+                    "Leadership",
+                    "React",
+                    "Node.js",
+                    "PHP / Zend Framework",
+                    "Automazione"
+                ]
             },
             {
                 "date": "2015 — 2016",
                 "title": "CTO • Full Stack Developer — Publidesign s.r.l.",
-                "description": "Sviluppo customizazzioni di progetti Wordpress. CTO per la startup Baucoin",
+                "description": [
+                    "Sviluppo customizazzioni di progetti Wordpress.",
+                    "CTO per la startup Baucoin."
+                ],
                 "keyProject": "Piattaforma di gestione crediti per economia circolare basata sui servizi per Pet",
                 "keyProjectTitle": "Baucoin",
                 "techStack": [
                     "WordPress",
                     "Startup",
-                    "Leading",
+                    "Leadership",
                     "PHP",
                     "Node.js"
                 ]
@@ -70,7 +148,11 @@
             {
                 "date": "2012 — 2016",
                 "title": "Founder • Startupper • Pitcher — TargatoBS",
-                "description": "Cercavo un modo per esprimere me stesso al meglio. Ho fatto qualche concorso, ho vinto qualche premio, presentato a un po' di incontri, cercato di fondare una startup, partecipato ad una business school e fondato qualche community. Alla fine ho capito di essere uno sviluppatore che doveva lavorare sulle proprie soft skill",
+                "description": [
+                    "Cercavo un modo per esprimere me stesso al meglio.",
+                    "Ho fatto qualche concorso, ho vinto qualche premio, presentato a un po' di incontri, cercato di fondare una startup, partecipato ad una business school e fondato qualche community.",
+                    "Alla fine ho capito di essere uno sviluppatore che doveva lavorare sulle proprie soft skill."
+                ],
                 "keyProject": "Prodotto per la gestione della vendita immobiliare",
                 "keyProjectTitle": "BREIM",
                 "techStack": [
@@ -83,14 +165,34 @@
             {
                 "date": "Ott 2013 — 2014",
                 "title": "Full Stack Developer — DuckMa s.r.l.",
-                "description": "Sviluppo API backend (Node.js, PHP). Sviluppo Applicazioni Ibride con Ionic e PWA. Designer UI/UX per PHONOTTO.",
-                "keyProject": null
+                "description": [
+                    "Sviluppo API backend (Node.js, PHP).",
+                    "Sviluppo Applicazioni Ibride con Ionic e PWA.",
+                    "Designer UI/UX per PHONOTTO."
+                ],
+                "keyProject": null,
+                "techStack": [
+                    "Node.js",
+                    "PHP",
+                    "Ionic",
+                    "PWA",
+                    "UI/UX"
+                ]
             },
             {
                 "date": "Dic 2007 — Set 2012",
                 "title": "Web Developer — System 2000 s.r.l. / Associati s.r.l.",
-                "description": "Consulenza IT per progetti regionali/nazionali. Sviluppo .NET per sistemi di gestione sanitaria. Data analyst per il progetto sensori indossabili VIGILO.",
-                "keyProject": null
+                "description": [
+                    "Consulenza IT per progetti regionali/nazionali.",
+                    "Sviluppo .NET per sistemi di gestione sanitaria.",
+                    "Data analyst per il progetto sensori indossabili VIGILO."
+                ],
+                "keyProject": null,
+                "techStack": [
+                    ".NET",
+                    "C#",
+                    "Visualizzazione dati"
+                ]
             }
         ]
     },

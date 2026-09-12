@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: " en" }}">
+{%- comment -%}
+  `t` is the active locale dictionary. It must be assigned in every layout that
+  renders translated strings (this one, plus each page layout, which renders
+  before this one does) — a Jekyll `include` gets its own Liquid scope, so an
+  assign inside an include would not reach the caller. scripts/check-i18n.js
+  verifies that everything referenced as `t.…` resolves in every language.
+{%- endcomment -%}
+{%- assign t = site.data.translations[page.lang] %}
+<html lang="{{ page.lang | default: 'en' }}">
 
 <head>
     {% include head.html %}
 </head>
 
-<body class="{{ page.body_class }}">
+<body{% if page.body_class %} class="{{ page.body_class }}"{% endif %} data-page="{{ page.i18n_key }}">
 
     <!-- Skip to main content link for keyboard navigation -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-link">{{ t.a11y.skipToContent }}</a>
 
     {% include transition-overlay.html %}
 
@@ -20,6 +28,8 @@
     {{ content }}
 
     {% include footer.html %}
+
+    {% include back-to-top.html %}
 
     {% unless page.body_class == 'not-found-page' %}
     {% include navigation-hint.html %}
