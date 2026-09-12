@@ -3,6 +3,8 @@
 Guidelines and project map for AI agents working on this site.
 Luca Palomba's personal portfolio — a static site generated with Jekyll, deployed on GitHub Pages.
 
+**This file is the single source of truth for any AI agent working on this repo (Claude Code, Cursor, Copilot, etc.).**
+
 ## Stack
 
 - **Jekyll** (`github-pages` gem) as static site generator; Liquid templating.
@@ -16,6 +18,21 @@ Luca Palomba's personal portfolio — a static site generated with Jekyll, deplo
 - **Comments, file names, and commit messages must always be in English.** Never write comments, name files, or write commit messages in Italian.
 - **Italian is acceptable only in two places:** (1) conversations with the AI agent, and (2) the site's UI/translated content for visitors (`translations/it.json` and any in-prose Italian shown on the site).
 - This also applies to documentation files tracked by the repo: keep them in English.
+
+## Workflow rules
+
+Every AI agent session working on this repository MUST follow these rules. No exceptions.
+
+### Worktrees only
+
+- Start every task in a git worktree (e.g. under `.claude/worktrees/` for Claude Code), based on `origin/main` — never commit directly on `main`.
+- Do not work, commit, or touch the `main` checkout during regular work.
+
+### Pull requests, never local merges
+
+- All changes go through a pull request to `main`: push the branch and open the PR. Never finish work with local `git merge` / `git rebase main`.
+- Merging always happens on GitHub (e.g. `gh pr merge`) — never with local git commands, even when explicitly asked to merge.
+- Never use `git push` to fast-forward or otherwise modify `main` directly.
 
 ## Local commands
 
