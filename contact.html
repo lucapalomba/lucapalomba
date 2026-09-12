@@ -42,30 +42,9 @@ body_class: contact-page
     </div>
 </main>
 <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ContactPage",
-      "mainEntity": {
-        "@type": "Person",
-        "name": "Luca Palomba",
-        "url": "https://lucapalomba.github.io/",
-        "jobTitle": "Engineering Manager, Team Leader & Web Developer",
-        "description": "Software engineer with tech-debt-demolisher super-powers: I walk into chaos, straighten things out, and help everyone go home stress-free. Clear goals, clean commits, and no Friday deploys.",
-        "image": "https://github.com/lucapalomba.png",
-        "email": "mailto:luca.palomba.developer@gmail.com",
-        "sameAs": [
-          "https://www.linkedin.com/in/lucapalomba/",
-          "https://github.com/lucapalomba"
-        ],
-        "knowsAbout": [
-          "Full Stack Development",
-          "Team Leadership",
-          "R&D Management",
-          "Web Development",
-          "Software Architecture",
-          "SCRUM",
-          "Engineering management"
-        ]
-      }
-    }
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "mainEntity": { {% include jsonld-person-props.html %} }
+}
 </script>
