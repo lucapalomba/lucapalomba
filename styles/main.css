@@ -258,6 +258,66 @@ a.resume-btn {
   outline-offset: 2px;
 }
 
+/* Navbar action cluster: the sound toggle (home page only) and the hamburger.
+   The auto left margin keeps the cluster pinned right now that it is a single
+   flex child of the space-between navbar, and the gap spaces the two buttons
+   on mobile without moving the hamburger off the right edge, because it stays
+   the last element in the cluster. */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-left: auto;
+}
+
+/* Only >768px: below that .nav-links is hidden, and the hamburger must stay
+   flush with the navbar's own padding. */
+.nav-links {
+  margin-left: 20px;
+}
+
+.sound-toggle {
+  display: flex;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  color: var(--accent-color);
+  transition: all 0.3s ease;
+  justify-content: center;
+  align-items: center;
+}
+
+.sound-toggle svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+}
+
+.sound-toggle:hover {
+  color: var(--text-primary);
+}
+
+.sound-toggle:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* The two glyphs are swapped by state, so the button needs no class juggling */
+.sound-toggle .sound-toggle-icon--off {
+  display: none;
+}
+
+.sound-toggle[aria-pressed="true"] .sound-toggle-icon--on {
+  display: none;
+}
+
+.sound-toggle[aria-pressed="true"] .sound-toggle-icon--off {
+  display: block;
+}
+
 /* Hamburger Menu Button */
 .hamburger-menu {
   display: none;

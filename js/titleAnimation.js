@@ -56,8 +56,24 @@ class TitleAnimator {
     const initialConfig = currentLangSteps[0];
     this.updateContent(this.getTextArray(initialConfig.text, initialConfig.highlights), !this.prefersReducedMotion);
 
-    // Pre-create audio pool for better performance
-    this.initSoundPool();
+    // Pre-create audio pool for better performance. Skipped entirely while
+    // muted so a muted visitor never allocates an Audio element at all.
+    if (!this.isMuted()) {
+      this.initSoundPool();
+    }
+
+    // Rebuild the pool when the visitor toggles the navbar control: dropping
+    // it is what makes muting instant, since playKeySound() already returns
+    // early on an empty pool.
+    document.addEventListener('sound:muteChanged', (e) => {
+      const nowMuted = !!(e.detail && e.detail.muted);
+      if (nowMuted) {
+        this.typingSoundPool = [];
+        this.erasingSoundPool = [];
+      } else if (this.typingSoundPool.length === 0) {
+        this.initSoundPool();
+      }
+    });
 
     // Add click listener to restart animation
     this.titleElement.style.cursor = 'pointer';
@@ -80,9 +96,17 @@ class TitleAnimator {
     }, this.INTRO_ANIMATION_DURATION);
   }
 
+  // The mute preference lives in js/soundMute.js so the navbar toggle and this
+  // animator share one source of truth. Absent that module (it is only loaded
+  // on the home page, alongside this script) the sounds stay enabled.
+  isMuted() {
+    return !!(window.soundMute && window.soundMute.isMuted());
+  }
+
   initSoundPool() {
     // Reduced-motion users never hear the typewriter, so no audio pool.
     if (this.prefersReducedMotion) return;
+    if (this.isMuted()) return;
     try {
       // Init typing sounds
       for (let i = 0; i < this.SOUND_POOL_SIZE; i++) {
