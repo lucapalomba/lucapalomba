@@ -31,6 +31,8 @@ Thumbs.db
 .ruby-lsp/
 # Commit .claude/settings.json to share it; settings.local.json is per-machine
 .claude/settings.local.json
+# Git worktrees are full repo copies and must never be committed
+.claude/worktrees/
 
 # Local UAT / CDP tooling (automated browser-test scripts)
 scratch/
