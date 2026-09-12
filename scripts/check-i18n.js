@@ -130,9 +130,21 @@ function* walkFiles(dir) {
 
 /** Strip comments so a `t.…` mentioned in prose is not treated as a reference. */
 function stripComments(source) {
-  return source
-    .replace(/\{%-?\s*comment\s*-?%\}[\s\S]*?\{%-?\s*endcomment\s*-?%\}/g, '')
-    .replace(/<!--[\s\S]*?-->/g, '');
+  const patterns = [
+    /\{%-?\s*comment\s*-?%\}[\s\S]*?\{%-?\s*endcomment\s*-?%\}/g,
+    /<!--[\s\S]*?-->/g
+  ];
+  // Repeat to a fixed point rather than once: a single pass removes the
+  // outermost match only, so a nested or overlapping construct can leave a
+  // stray `<!--` / `{% comment %}` behind and the scan would then read prose as
+  // a reference. (CodeQL js/incomplete-multi-character-sanitization.)
+  let stripped = source;
+  let previous;
+  do {
+    previous = stripped;
+    for (const pattern of patterns) stripped = stripped.replace(pattern, '');
+  } while (stripped !== previous);
+  return stripped;
 }
 
 /** Jekyll's default page permalink: index.html collapses to its directory. */
