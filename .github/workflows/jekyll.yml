@@ -2,6 +2,8 @@ name: Deploy Jekyll site to Pages
 
 on:
   push:
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -10,8 +12,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -47,13 +49,17 @@ jobs:
         run: bundle exec htmlproofer ./_site --disable-external --swap-urls "^${{ steps.pages.outputs.base_path }}/:/"
 
       - name: Build for Lighthouse CI
+        # Lighthouse only pays for main and pull requests targeting main;
+        # plain feature-branch pushes get build + htmlproofer only.
+        if: ${{ github.event_name == 'pull_request' || github.ref == 'refs/heads/main' }}
         run: bundle exec jekyll build --baseurl "" --destination ./_site_lhci
         env:
           JEKYLL_ENV: production
 
       - name: Run Lighthouse CI
+        if: ${{ github.event_name == 'pull_request' || github.ref == 'refs/heads/main' }}
         run: |
-          npm install -g @lhci/cli
+          npm install -g @lhci/cli@0.15.1
           echo "Starting Mobile Audit (Default)..."
           lhci autorun --collect.staticDistDir=./_site_lhci
           echo "Starting Desktop Audit..."
