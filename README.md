@@ -1,53 +1,40 @@
-# Luca Palomba
+# Ciao! 👋 I'm Luca Palomba
+
+```text
+> whoami
+Full Stack Developer & Team Lead — I build things for the web,
+lead the people who build them, and let AI agents do the boring parts.
+```
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-live-brightgreen)](https://lucapalomba.github.io/lucapalomba)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Luca%20Palomba-0A66C2?logo=linkedin&logoColor=white)](https://linkedin.com/in/lucapalomba)
+[![Email](https://img.shields.io/badge/Email-Say%20hi!-EA4335?logo=gmail&logoColor=white)](mailto:luca.palomba.developer@gmail.com)
 
-Full Stack Developer & Team Lead, Engineering leadership experience
+## 🧑‍💻 About me
 
-## 🔗 Useful Links
+I'm a Full Stack Developer and Team Lead with a soft spot for clean code, good DX, and shipping things that actually work. My natural habitat is somewhere between the browser and the whiteboard — writing code in the morning, unblocking people in the afternoon.
 
-- 💼 [LinkedIn](https://linkedin.com/in/lucapalomba)
-- 📫 [Email](mailto:luca.palomba.developer@gmail.com)
+## 🤖 Humans + AI, best team ever
 
-## Description
+This very repo is my playground for AI-assisted development. I don't just talk about it — I run it:
 
-Welcome to my personal portfolio, a Jekyll-powered website built while testing support for different AI models! This site showcases my skills and expertise in web development and engineering management. The project has evolved from a static HTML site to a modular Jekyll structure, making it easier to add new features, Easter eggs, and test AI companion integrations.
+- 🦙 **Local-first**: open models via **Ollama** on my own machine (Windows, RTX 3060 doing the heavy lifting)
+- 🤖 **Agentic workflows**: **Claude Code** as my autonomous coding agent — it plans, refactors, writes commits (conventional ones, obviously), and even migrated the CI pipeline to Node 24 without me touching a thing
+- 🎨 **AI for design too**: used Stitch (by Google) to refactor my site's graphics into a unified, consistent style guide
 
-## Local Development Environment
+Spoiler: the AI wrote most of the boring boilerplate. The fun parts are still mine.
 
-For this project, I experiment with AI-assisted development using open-source models. The environment includes:
+## 🛠️ Toolbox
 
-- **Machine Specification**: CPU i7-7700, RAM 16GB, OS Windows, GPU Nvidia RTX 3060 12GB
-- **Ollama**: model runtime used to run **GLM 5.2**
-- **VS Code**: integrated development environment used alongside Ollama
+**Languages & Frontend**
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
 
-## AI Agent: Claude Code
+**Tooling & Infra**
+![Jekyll](https://img.shields.io/badge/Jekyll-CC0000?logo=jekyll&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white)
+![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?logo=visualstudiocode&logoColor=white)
 
-For this project I use **Claude Code** as my autonomous coding agent, powered by the **GLM 5.2** model. Claude Code provides:
-
-- Agentic workflow with autonomous task planning and execution
-- Multi-step code refactoring and implementation
-- Intelligent codebase understanding and navigation
-- Automated testing and CI verification (e.g., the Node 24 migration of the GitHub Actions pipeline)
-- Git commit message generation following conventional commit standards
-- Documentation writing and technical content refinement
-
-Claude Code acts as the agent that drives the work, while GLM 5.2 is the model powering it.
-
-## Technologies Used
-
-- **Jekyll** - Static site generator for modular, maintainable structure
-- HTML with Liquid templating
-- CSS (Styling with keyframes for animations)
-- JavaScript
-- GitHub Actions for automated deployment
-
-## Using Stitch (by Google) to Refactor Website Graphics
-
-I recently refactored the graphics of my first website using a tool called Stitch (by Google). This tool helped me streamline the design process by automating certain tasks, improving visual consistency, and enhancing overall project efficiency. Below is a brief summary of the changes:
-
-- **Consolidated Images:** I consolidated all images into a single folder to reduce redundancy and improve maintainability.
-- **Unified Styles:** All common graphical elements were moved into a unified style guide to ensure consistency across the website.
-- **Optimized Image Formats:** The image formats were optimized for better performance, reducing file sizes without compromising quality.
-
-These changes not only improved the organization of my graphics but also made it easier for me to maintain and update the visual design of the website in the future.
+**Wanna chat?** My inbox is always open — [LinkedIn](https://linkedin.com/in/lucapalomba) or [email](mailto:luca.palomba.developer@gmail.com). Let's build something fun.
