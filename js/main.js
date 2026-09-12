@@ -96,10 +96,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Show content after a delay (Fade in)
-  setTimeout(function () {
-    document.body.style.opacity = '1';
-  }, 300);
+  // Entry fade-in is a pure CSS animation (body-fade-in in main.css) — no JS
+  // opacity juggling, so it can never leave the page stuck hidden.
 
   // Hide loader overlay if present
   const overlay = document.querySelector('.transition-overlay');
