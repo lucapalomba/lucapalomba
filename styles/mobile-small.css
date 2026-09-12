@@ -5,6 +5,10 @@
 
 .content-wrapper {
     padding-top: 110px;
+    /* Only the home hero uses .content-wrapper. Keep its content at the top:
+       main.css centres it (align-items: center), which - now that .hero no
+       longer fills the box - would push the CTA back below the fold. */
+    align-items: flex-start;
 }
 
 .container {
@@ -23,10 +27,27 @@
     font-size: 14px;
 }
 
+/* Hero vertical rhythm, trimmed so the CTA stays inside the first viewport
+   on a 390x844 phone (main.css: .hero-intro margin 0 0 30px,
+   .hero-subtitle 20px / margin 0 0 20px, .hero-bio margin 20px 0 50px). */
+.hero-intro {
+    margin-bottom: 12px;
+}
+
+.hero-subtitle {
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
 .hero-bio {
     font-size: 16px;
+    margin: 12px 0 24px;
 }
 
 .hero {
     justify-content: flex-start;
+    /* main.css declares min-height: 100vh here too, nested inside
+       .content-wrapper's own 100vh plus 110px of padding: together they made
+       the hero box ~1064px tall on a 390x844 phone. Size to the content. */
+    min-height: auto;
 }
