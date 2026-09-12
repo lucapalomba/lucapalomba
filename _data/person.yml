@@ -1,0 +1,23 @@
+# Canonical Person data for the JSON-LD structured data.
+# Single source of truth shared by head.html (root Person) and
+# contact.html (nested as mainEntity).
+name: "Luca Palomba"
+url: "/"
+jobTitle: "Engineering Manager, Team Leader & Web Developer"
+description: "Software engineer with tech-debt-demolisher super-powers: I walk into chaos, straighten things out, and help everyone go home stress-free. Clear goals, clean commits, and no Friday deploys."
+image: "/images/icon-512.png"
+email: "mailto:luca.palomba.developer@gmail.com"
+sameAs:
+  - "https://www.linkedin.com/in/lucapalomba/"
+  - "https://github.com/lucapalomba"
+knowsAbout:
+  - "Full Stack Development"
+  - "Team Leadership"
+  - "R&D Management"
+  - "Web Development"
+  - "Software Architecture"
+  - "SCRUM"
+  - "Engineering management"
+workLocation:
+  "@type": "Place"
+  name: "Remote"
