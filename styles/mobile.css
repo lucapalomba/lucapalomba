@@ -1,7 +1,10 @@
 /* Styles for max-width: 768px */
 .hero-title {
-    min-height: 4em;
-    /* set minimum height to 2 lines on mobile devices */
+    /* Reserve three lines: that is what the longest localized claim step
+       ("Addestro team e AI per i processi.", 35 chars) wraps to at every
+       supported width with the fluid size below, so the typewriter cannot
+       shift the layout while it types. */
+    min-height: 3.3em;
 }
 
 .navbar {
@@ -28,7 +31,10 @@
 
 .hero-name,
 .hero-title {
-    font-size: 40px;
+    /* Fluid display type: at a flat 40px the name and the animated claim
+       wrapped so much on a phone that the CTA fell below the fold. The clamp
+       only bites under ~500px, so tablets keep the 40px of the design. */
+    font-size: clamp(26px, 8vw, 40px);
 }
 
 .container {
