@@ -1,0 +1,20 @@
+{
+  // markdownlint-cli2 config — https://github.com/DavidAnson/markdownlint-cli2
+  // Rule severity lives in .markdownlint.json (portable across editors).
+  "globs": [
+    "**/*.md"
+  ],
+  "ignores": [
+    // Jekyll build output (generated, gitignored)
+    "_site/**",
+    "_site_lhci/**",
+    // Node dependencies, at any depth (.opencode/ vendors its own)
+    "**/node_modules/**",
+    // Git worktrees: AGENTS.md mandates working here, so every worktree would
+    // otherwise contribute a full duplicate copy of AGENTS.md/README.md to the lint.
+    ".claude/worktrees/**",
+    // Local tooling / assistant state (gitignored)
+    ".opencode/**",
+    "scratch/**"
+  ]
+}

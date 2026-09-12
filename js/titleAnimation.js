@@ -7,6 +7,8 @@ class TitleAnimator {
     this.WORD_ERASE_SPEED = 300; // Speed of erasing words in ms
     this.isAnimating = false; // Track if animation is in progress
     this.currentLanguage = document.documentElement.lang || 'en';
+    // Users who prefer reduced motion get a static, fully rendered title.
+    this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     this.typingSoundPool = [];
     this.typingSoundIndex = 0;
@@ -48,10 +50,11 @@ class TitleAnimator {
       this.currentLanguage = 'en';
     }
 
-    // Apply highlights to the initial text immediately
+    // Apply highlights to the initial text immediately (no typing
+    // indicator for reduced-motion users: the claim stays fully rendered)
     const currentLangSteps = this.steps[this.currentLanguage] || this.steps['en'];
     const initialConfig = currentLangSteps[0];
-    this.updateContent(this.getTextArray(initialConfig.text, initialConfig.highlights), true);
+    this.updateContent(this.getTextArray(initialConfig.text, initialConfig.highlights), !this.prefersReducedMotion);
 
     // Pre-create audio pool for better performance
     this.initSoundPool();
@@ -78,6 +81,8 @@ class TitleAnimator {
   }
 
   initSoundPool() {
+    // Reduced-motion users never hear the typewriter, so no audio pool.
+    if (this.prefersReducedMotion) return;
     try {
       // Init typing sounds
       for (let i = 0; i < this.SOUND_POOL_SIZE; i++) {
@@ -100,6 +105,8 @@ class TitleAnimator {
   }
 
   startSequence() {
+    // Reduced motion: keep the first fully rendered claim, no auto-cycling.
+    if (this.prefersReducedMotion) return;
     // Already at step 0 (initial text). Schedule transition to step 1.
     this.stepIndex = 0;
     this.scheduleNextStep();
@@ -154,8 +161,11 @@ class TitleAnimator {
     const initialText = currentLangSteps[0].text;
 
     this.titleElement.textContent = initialText;
-    this.updateContent(this.getTextArray(initialText, currentLangSteps[0].highlights), true);
+    this.updateContent(this.getTextArray(initialText, currentLangSteps[0].highlights), !this.prefersReducedMotion);
     this.stepIndex = 0;
+
+    // Reduced motion: re-render statically, never replay the typewriter.
+    if (this.prefersReducedMotion) return;
 
     setTimeout(() => {
       if (token !== this.animationToken) return;
