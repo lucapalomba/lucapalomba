@@ -1,5 +1,7 @@
-document.addEventListener('DOMContentLoaded', function () {
-  // Initialize Particles.js
+// Initializes the hero particles. Kept in its own function so it can be
+// deferred to an idle callback: the library is self-hosted (see #83) but
+// starting the canvas is still non-urgent at first paint.
+function initParticles() {
   if (window.particlesJS) {
     // Detect if on mobile/tablet
     const isMobile = window.innerWidth <= 768;
@@ -94,6 +96,16 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       "retina_detect": true
     });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Defer particles until the main thread is idle; fall straight to init when
+  // idle callbacks are not supported. A timeout keeps it from starving.
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(initParticles, { timeout: 2000 });
+  } else {
+    initParticles();
   }
 
   // Entry fade-in is a pure CSS animation (body-fade-in in main.css) — no JS
