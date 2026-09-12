@@ -9,8 +9,31 @@ document.addEventListener('DOMContentLoaded', function () {
     </svg>
   `;
     backToTopBtn.className = 'back-to-top-btn';
+    // aria-label is translated; keep an English fallback until i18n loads.
+    backToTopBtn.setAttribute('data-i18n-aria', 'backToTop');
     backToTopBtn.setAttribute('aria-label', 'Go to top');
     document.body.appendChild(backToTopBtn);
+
+    // Translate text + aria-label at creation AND on every language event.
+    // i18n:ready may already have fired before this handler runs (translations
+    // load async), so the immediate call covers the initial load.
+    const applyTranslation = () => {
+        if (!window.i18n || !window.i18n.translations) return;
+        const textSpan = backToTopBtn.querySelector('[data-i18n]');
+        if (textSpan) {
+            const translation = window.i18n.t('backToTop');
+            if (translation && translation !== 'backToTop') {
+                textSpan.textContent = translation;
+            }
+        }
+        const aria = window.i18n.t('backToTop');
+        if (aria && aria !== 'backToTop') {
+            backToTopBtn.setAttribute('aria-label', aria);
+        }
+    };
+    applyTranslation();
+    document.addEventListener('i18n:ready', applyTranslation);
+    document.addEventListener('i18n:languageChanged', applyTranslation);
 
     // Show/hide button based on scroll position
     const toggleVisibility = () => {
@@ -23,23 +46,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Scroll to top when clicked
     backToTopBtn.addEventListener('click', () => {
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         window.scrollTo({
             top: 0,
-            behavior: 'smooth'
+            behavior: reducedMotion ? 'auto' : 'smooth'
         });
     });
 
-    // Listen for scroll events
-    window.addEventListener('scroll', toggleVisibility);
-
-    // Trigger translation if i18n is available
-    if (window.i18n) {
-        const textSpan = backToTopBtn.querySelector('[data-i18n]');
-        if (textSpan) {
-            const translation = window.i18n.t('backToTop');
-            if (translation && translation !== 'backToTop') {
-                textSpan.textContent = translation;
-            }
-        }
-    }
+    // Listen for scroll events (passive: nothing to preventDefault)
+    window.addEventListener('scroll', toggleVisibility, { passive: true });
 });
