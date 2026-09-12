@@ -20,17 +20,22 @@ class PageTransition {
   }
 
   setupLinks() {
-    document.querySelectorAll('a:not([target="_blank"]):not(.skip-link)').forEach(link => {
-      link.addEventListener('click', (e) => {
-        // Let modifier-key / middle-click open in a new tab natively.
-        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-        // Same-page anchor: let the browser scroll natively, no transition.
-        if (link.pathname === window.location.pathname && link.hash) return;
-        if (link.hostname === window.location.hostname) {
-          e.preventDefault();
-          this.transitionToPage(link.href);
-        }
-      });
+    // Single delegated listener: one handler on document covers every link,
+    // including links injected after load (e.g. the timeline rebuilt by
+    // i18n.js on language switch or future dynamic content).
+    document.addEventListener('click', (e) => {
+      // Let modifier-key / middle-click open in a new tab natively.
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+
+      const link = e.target.closest('a[href]');
+      if (!link) return;
+      if (link.target === '_blank' || link.classList.contains('skip-link')) return;
+      if (link.hostname !== window.location.hostname) return;
+      // Same-page anchor: let the browser scroll natively, no transition.
+      if (link.pathname === window.location.pathname && link.hash) return;
+
+      e.preventDefault();
+      this.transitionToPage(link.href);
     });
   }
 
