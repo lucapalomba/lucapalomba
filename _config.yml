@@ -14,7 +14,10 @@ plugins:
 
 # Minifier settings
 jekyll-minifier:
-  exclude: ['robots.txt','sitemap.xml']  # Files to exclude from minification
+  # js/particles.min.js and sw.js are vendored pre-minified artifacts: leave
+  # them byte-identical to their upstream release (re-minifying would both be
+  # wasteful and diverge from the verified SRI).
+  exclude: ['robots.txt','sitemap.xml','js/particles.min.js','sw.js']  # Files to exclude from minification
   uglifier_args:
     harmony: true          # Enable ES6+ support
   compress_css: true       # Minify CSS
