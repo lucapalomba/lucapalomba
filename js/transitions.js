@@ -22,6 +22,10 @@ class PageTransition {
   setupLinks() {
     document.querySelectorAll('a:not([target="_blank"]):not(.skip-link)').forEach(link => {
       link.addEventListener('click', (e) => {
+        // Let modifier-key / middle-click open in a new tab natively.
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+        // Same-page anchor: let the browser scroll natively, no transition.
+        if (link.pathname === window.location.pathname && link.hash) return;
         if (link.hostname === window.location.hostname) {
           e.preventDefault();
           this.transitionToPage(link.href);
