@@ -139,7 +139,7 @@
     },
     "backToTop": "Torna in cima",
     "navigation": {
-        "hintTouch": "Scorri <kbd>←</kbd> <kbd>→</kbd> per navigare",
+        "hintTouch": "Scorri ← → per navigare",
         "hintKeyboard": "Usa le frecce <kbd>←</kbd> <kbd>→</kbd> per navigare"
     }
 }

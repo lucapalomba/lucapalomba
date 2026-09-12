@@ -77,33 +77,51 @@ document.addEventListener('DOMContentLoaded', () => {
     // Navigation Hint Logic
     const navHint = document.getElementById('navigation-hint');
     if (navHint) {
-        const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        // Show at most once per session. sessionStorage can throw in
+        // restrictive/privacy contexts, so guard every access.
+        let alreadyShown = false;
+        try {
+            alreadyShown = sessionStorage.getItem('navHintShown') === '1';
+        } catch (e) { /* ignore */ }
 
-        // Apply the translated hint (kbd markup lives in the locale file).
-        // Re-applied on i18n:ready (first load) and i18n:languageChanged (switch).
-        const applyHint = () => {
-            const key = isTouch ? 'navigation.hintTouch' : 'navigation.hintKeyboard';
-            const fallback = isTouch
-                ? 'Swipe <kbd>←</kbd> <kbd>→</kbd> to navigate'
-                : 'Use keyboard arrows <kbd>←</kbd> <kbd>→</kbd> to navigate';
-            const translation = window.i18n ? window.i18n.t(key) : null;
-            navHint.innerHTML = (translation && translation !== key) ? translation : fallback;
-        };
-        applyHint();
-        document.addEventListener('i18n:ready', applyHint);
-        document.addEventListener('i18n:languageChanged', applyHint);
+        if (alreadyShown) {
+            // The element starts aria-hidden but is visible via CSS, so it
+            // must be removed rather than just left in place.
+            navHint.remove();
+        } else {
+            try { sessionStorage.setItem('navHintShown', '1'); } catch (e) { /* ignore */ }
 
-        // Show the hint
-        navHint.setAttribute('aria-hidden', 'false');
+            const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-        // Fade out and remove after 5 seconds
-        setTimeout(() => {
-            navHint.classList.add('fade-out');
+            // Apply the translated hint (kbd markup lives in the locale file).
+            // Re-applied on i18n:ready (first load) and i18n:languageChanged (switch).
+            const applyHint = () => {
+                const key = isTouch ? 'navigation.hintTouch' : 'navigation.hintKeyboard';
+                const fallback = isTouch
+                    ? 'Swipe ← → to navigate'
+                    : 'Use keyboard arrows <kbd>←</kbd> <kbd>→</kbd> to navigate';
+                const translation = window.i18n ? window.i18n.t(key) : null;
+                navHint.innerHTML = (translation && translation !== key) ? translation : fallback;
+            };
+            applyHint();
+            document.addEventListener('i18n:ready', applyHint);
+            document.addEventListener('i18n:languageChanged', applyHint);
 
-            // Remove from DOM after transition (1s)
+            // Show the hint
+            navHint.setAttribute('aria-hidden', 'false');
+
+            // Dismiss on click/tap
+            navHint.addEventListener('click', () => navHint.remove());
+
+            // Fade out and remove after 5 seconds
             setTimeout(() => {
-                navHint.remove();
-            }, 1000);
-        }, 5000);
+                navHint.classList.add('fade-out');
+
+                // Remove from DOM after transition (1s)
+                setTimeout(() => {
+                    navHint.remove();
+                }, 1000);
+            }, 5000);
+        }
     }
 });
