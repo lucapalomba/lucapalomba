@@ -138,6 +138,10 @@
         "homeButton": "Go back home"
     },
     "backToTop": "Go to Top",
+    "sound": {
+        "mute": "Mute keyboard sounds",
+        "unmute": "Unmute keyboard sounds"
+    },
     "navigation": {
         "hintTouch": "Swipe ← → to navigate",
         "hintKeyboard": "Use keyboard arrows <kbd>←</kbd> <kbd>→</kbd> to navigate"

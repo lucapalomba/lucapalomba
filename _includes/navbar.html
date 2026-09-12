@@ -3,15 +3,41 @@
         <a href="index.html">&lt;LP /&gt;</a>
     </div>
     {% unless page.hide_nav_links %}
-    <button class="hamburger-menu" id="hamburger-toggle" aria-label="Toggle navigation menu" aria-expanded="false"
-        aria-controls="mobile-nav">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-    </button>
+    <div class="nav-actions">
+        {% if page.url == "/" or page.url == "/index.html" %}
+        {% comment %}
+        Home only: it is the only page whose hero runs the typewriter, so a
+        control anywhere else would mute nothing. js/soundMute.js owns the
+        aria-label (it is state dependent); the data-i18n-aria attribute below
+        only supplies the initial "not muted" wording, and check-i18n.js uses
+        it to verify the key exists in both locales.
+        {% endcomment %}
+        <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="false"
+            aria-label="Mute keyboard sounds" data-i18n-aria="sound.mute">
+            <svg class="sound-toggle-icon sound-toggle-icon--on" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+            </svg>
+            <svg class="sound-toggle-icon sound-toggle-icon--off" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <line x1="23" y1="9" x2="17" y2="15"></line>
+                <line x1="17" y1="9" x2="23" y2="15"></line>
+            </svg>
+        </button>
+        {% endif %}
+        <button class="hamburger-menu" id="hamburger-toggle" aria-label="Toggle navigation menu" aria-expanded="false"
+            aria-controls="mobile-nav">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+    </div>
     <div class="nav-links" aria-label="Main navigation">
         <ol>
             <li><a href="index.html" {% if page.url=="/" or page.url=="/index.html" %}aria-current="page" {% endif
