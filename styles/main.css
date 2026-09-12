@@ -14,7 +14,7 @@
   /* For rgba usage */
   --accent-hover: rgba(157, 80, 187, 0.1);
   --nav-bg: rgba(10, 10, 15, 0.85);
-  --mobile-nav-bg: rgba(10, 10, 15, 0.95);
+  --mobile-nav-bg: #0d0d14;
 
   /* Fonts */
   --font-main: 'Roboto Mono', 'Menlo', 'Consolas', 'Monaco', 'Liberation Mono', 'Lucida Console', monospace;
