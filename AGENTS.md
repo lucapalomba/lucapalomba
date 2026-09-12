@@ -15,7 +15,7 @@ Luca Palomba's personal portfolio — a static site generated with Jekyll, deplo
 
 ## Language conventions
 
-- **Comments, file names, and commit messages must always be in English.** Never write comments, name files, or write commit messages in Italian.
+- **Comments, file names, commit messages, and PR titles/descriptions must always be in English.** Never write comments, name files, or write commit messages / PR descriptions in Italian.
 - **Italian is acceptable only in two places:** (1) conversations with the AI agent, and (2) the site's UI/translated content for visitors (`translations/it.json` and any in-prose Italian shown on the site).
 - This also applies to documentation files tracked by the repo: keep them in English.
 
