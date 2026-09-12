@@ -139,7 +139,7 @@
     },
     "backToTop": "Go to Top",
     "navigation": {
-        "hintTouch": "Swipe <kbd>←</kbd> <kbd>→</kbd> to navigate",
+        "hintTouch": "Swipe ← → to navigate",
         "hintKeyboard": "Use keyboard arrows <kbd>←</kbd> <kbd>→</kbd> to navigate"
     }
 }
