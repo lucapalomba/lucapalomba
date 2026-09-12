@@ -1,24 +1,38 @@
-# Jekyll
+# Jekyll build artifacts
 _site/
 .sass-cache/
 .jekyll-cache/
 .jekyll-metadata
+
+# Local config override (machine-specific, never committed)
 _config_local.yml
 
 # Bundler
 .bundle/
 vendor/
 
+# Node tooling
+node_modules/
+
+# Lighthouse CI local runs
+.lighthouseci/
+
 # OS files
 .DS_Store
 Thumbs.db
 
-# IDE
+# Editors / IDE
 .vscode/
 .idea/
 .zed/
 
-# Local UAT tooling
+# Editor / assistant machine-local state
+.opencode/
+.ruby-lsp/
+# Commit .claude/settings.json to share it; settings.local.json is per-machine
+.claude/settings.local.json
+
+# Local UAT / CDP tooling (automated browser-test scripts)
 scratch/
 
 # Logs
