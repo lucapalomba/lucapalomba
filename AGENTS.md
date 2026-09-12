@@ -1,90 +1,113 @@
 # AGENTS.md
 
-Linee guida e mappa del progetto per gli agent AI che lavorano su questo sito.
-Portfolio personale di Luca Palomba — static site generato con Jekyll, deployato su GitHub Pages.
+Guidelines and project map for AI agents working on this site.
+Luca Palomba's personal portfolio — a static site generated with Jekyll, deployed on GitHub Pages.
+
+**This file is the single source of truth for any AI agent working on this repo (Claude Code, Cursor, Copilot, etc.).**
 
 ## Stack
 
-- **Jekyll** (gem `github-pages`) come static site generator; templating Liquid.
-- **CSS vanilla** in `styles/` (fonts, transitions, main, mobile, mobile-small, reduced-motion, print-experiences). Nessun framework, nessun build step.
-- **JavaScript vanilla** modulare (moduli ES-ish, caricati via `<script defer>`), niente bundler.
-- **i18n custom** (`js/i18n.js`) basato su attributi `data-i18n` + file JSON in `translations/`.
-- **Deploy**: GitHub Actions → GitHub Pages. Lighthouse CI + htmlproofer nel workflow.
+- **Jekyll** (`github-pages` gem) as static site generator; Liquid templating.
+- **Vanilla CSS** in `styles/` (fonts, transitions, main, mobile, mobile-small, reduced-motion, print-experiences). No framework, no build step.
+- **Vanilla modular JavaScript** (ES-ish modules, loaded via `<script defer>`), no bundler.
+- **Custom i18n** (`js/i18n.js`) based on `data-i18n` attributes + JSON files in `translations/`.
+- **Deploy**: GitHub Actions → GitHub Pages. Lighthouse CI + htmlproofer in the workflow.
 
-## Comandi locali
+## Language conventions
 
-L'ambiente ha Ruby 3.4 + Bundler, ma c'è un conflitto `public_suffix` (7 installata, Gemfile ne richiede 5). **Usa sempre `bundle exec`** per i comandi Jekyll.
+- **Comments, file names, and commit messages must always be in English.** Never write comments, name files, or write commit messages in Italian.
+- **Italian is acceptable only in two places:** (1) conversations with the AI agent, and (2) the site's UI/translated content for visitors (`translations/it.json` and any in-prose Italian shown on the site).
+- This also applies to documentation files tracked by the repo: keep them in English.
 
-- Build produzione: `bundle exec jekyll build`
-- Dev server locale: `bundle exec jekyll serve --config _config.yml,_config_local.yml --livereload`
-  - `_config_local.yml` azzera `baseurl` (in produzione è `/lucapalomba`) così i link funzionano su `http://127.0.0.1:4000/`.
-- Check link: `bundle exec htmlproofer ./_site --disable-external`
+## Workflow rules
 
-## Convenzioni chiave
+Every AI agent session working on this repository MUST follow these rules. No exceptions.
 
-- **Config duale**: `_config.yml` (prod, `baseurl: /lucapalomba`) + `_config_local.yml` (locale, `baseurl: ""`). I link nel markup sono relativi (`index.html`, `experiences.html`) e vengono risolti da Jekyll via `relative_url`.
-- **i18n**: ogni stringa UI ha `data-i18n="chiave.puntata"` (es. `nav.whoami`, `index.hero.title`); le traduzioni vivono in `translations/en.json` e `it.json`. Per gli `aria-label` si usa `data-i18n-aria`. Il linguaggio è scelto da `localStorage('preferredLanguage')` poi da `navigator.language`, e salvato su switch manuale.
-- **Front matter delle pagine**: supporta `page_scripts` (lista di path JS aggiuntivi caricati in fondo) e `hide_nav_scripts` (disabilita `navigation.js`/`hamburger.js`). `body_class` marca la pagina (es. `experiences-page`, `technologies-page`, `contact-page`) — usato da `i18n.js` per i meta tag e da `techProgress.js` per attivare le animazioni.
-- **Design system**: tema dark "terminal/developer" — sfondo `#0a0a0f`, testo `#e6e6ef`, accento viola `#B77EF1` (particles `#6e48aa`), font monospace Roboto Mono (locale in `fonts/`). Animazioni CSS keyframes (hero, typing dots, transizioni).
-- **Commit (OBBLIGATORIO)**: **ogni** commit deve usare lo standard Conventional Commits come tipologia di messaggio — `feat:`, `fix:`, `chore:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`, `build:`, `ci:`, `revert:` ecc. Niente commit senza prefisso tipo. Lavorare su branch separati / PR; il deploy avviene solo da `main`.
+### Worktrees only
 
-## Mappa del progetto
+- Start every task in a git worktree (e.g. under `.claude/worktrees/` for Claude Code), based on `origin/main` — never commit directly on `main`.
+- Do not work, commit, or touch the `main` checkout during regular work.
+
+### Pull requests, never local merges
+
+- All changes go through a pull request to `main`: push the branch and open the PR. Never finish work with local `git merge` / `git rebase main`.
+- Merging always happens on GitHub (e.g. `gh pr merge`) — never with local git commands, even when explicitly asked to merge.
+- Never use `git push` to fast-forward or otherwise modify `main` directly.
+
+## Local commands
+
+The environment has Ruby 3.4 + Bundler, but there is a `public_suffix` conflict (7 installed, Gemfile requires 5). **Always use `bundle exec`** for Jekyll commands.
+
+- Production build: `bundle exec jekyll build`
+- Local dev server: `bundle exec jekyll serve --config _config.yml,_config_local.yml --livereload`
+  - `_config_local.yml` resets `baseurl` (in production it is `/lucapalomba`) so links work on `http://127.0.0.1:4000/`.
+- Link check: `bundle exec htmlproofer ./_site --disable-external`
+
+## Key conventions
+
+- **Dual config**: `_config.yml` (prod, `baseurl: /lucapalomba`) + `_config_local.yml` (local, `baseurl: ""`). Links in markup are relative (`index.html`, `experiences.html`) and are resolved by Jekyll via `relative_url`.
+- **i18n**: every UI string has `data-i18n="dotted.key"` (e.g. `nav.whoami`, `index.hero.title`); translations live in `translations/en.json` and `it.json`. For `aria-label`s use `data-i18n-aria`. The language is chosen from `localStorage('preferredLanguage')` then `navigator.language`, and saved on manual switch.
+- **Page front matter**: supports `page_scripts` (list of additional JS paths loaded at the bottom) and `hide_nav_scripts` (disables `navigation.js`/`hamburger.js`). `body_class` marks the page (e.g. `experiences-page`, `technologies-page`, `contact-page`) — used by `i18n.js` for meta tags and by `techProgress.js` to activate animations.
+- **Design system**: dark "terminal/developer" theme — background `#0a0a0f`, text `#e6e6ef`, violet accent `#B77EF1` (particles `#6e48aa`), monospace Roboto Mono (local in `fonts/`). CSS keyframe animations (hero, typing dots, transitions).
+- **Commits (REQUIRED)**: **every** commit must use Conventional Commits as the message type — `feat:`, `fix:`, `chore:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`, `build:`, `ci:`, `revert:`, etc. No commits without a type prefix. Work on separate branches / PRs; deploy happens only from `main`.
+
+## Project map
 
 ### Config & build
-- `_config.yml` — config Jekyll di produzione (titolo, baseurl, plugins, jekyll-minifier, SEO/social).
-- `_config_local.yml` — override per dev locale (baseurl vuoto).
-- `Gemfile` / `Gemfile.lock` — dipendenze Ruby (`github-pages` + plugin jekyll). Usa `bundle exec`.
-- `lighthouserc.json` — config Lighthouse CI (usato dal workflow).
+- `_config.yml` — production Jekyll config (title, baseurl, plugins, jekyll-minifier, SEO/social).
+- `_config_local.yml` — dev-local overrides (empty baseurl).
+- `Gemfile` / `Gemfile.lock` — Ruby dependencies (`github-pages` + jekyll plugin). Use `bundle exec`.
+- `lighthouserc.json` — Lighthouse CI config (used by the workflow).
 - `manifest.webmanifest` — PWA manifest.
-- `.github/workflows/jekyll.yml` — CI: build Jekyll → htmlproofer → build per Lighthouse (mobile+desktop) → upload artifact → deploy su Pages (solo da `main`).
+- `.github/workflows/jekyll.yml` — CI: Jekyll build → htmlproofer → build for Lighthouse (mobile+desktop) → upload artifact → deploy to Pages (only from `main`).
 
 ### Layout & includes (Jekyll)
-- `_layouts/default.html` — layout base: html `dark`, skip-link, overlay transizione, navbar, `{{ content }}`, footer, scripts. Tutte le pagine usano `layout: default`.
-- `_includes/head.html` — `<head>`: meta, favicon (da GitHub avatar), font Roboto Mono locale, SEO/OG/Twitter, JSON-LD `Person`, stylesheet (`fonts`, `transitions`, `main`, `mobile`, `mobile-small`, `reduced-motion`, `print-experiences`).
-- `_includes/navbar.html` — navbar sticky con logo, link desktop (stato attivo via confronto `page.url`), hamburger + drawer mobile, CTA "Curriculum" (link LinkedIn). Contiene la logica toggle del drawer.
-- `_includes/footer.html` — footer: copyright, link GitHub/LinkedIn, indicatore "STATUS: NOMINAL".
-- `_includes/scripts.html` — carica i JS core (`i18n`, `main`, `transitions`) + condizionali (`navigation`, `hamburger` salvo `hide_nav_scripts`) + `page_scripts` + `backToTop`.
-- `_includes/transition-overlay.html` — markup dell'overlay a tutto schermo per le transizioni fra pagine (color-fill + smoke).
-- `_includes/navigation-hint.html` — div placeholder per l'hint "usa ← → / swipe" mostrato da `navigation.js`.
+- `_layouts/default.html` — base layout: `html` dark, skip-link, transition overlay, navbar, `{{ content }}`, footer, scripts. All pages use `layout: default`.
+- `_includes/head.html` — `<head>`: meta, favicon (from GitHub avatar), local Roboto Mono font, SEO/OG/Twitter, JSON-LD `Person`, stylesheets (`fonts`, `transitions`, `main`, `mobile`, `mobile-small`, `reduced-motion`, `print-experiences`).
+- `_includes/navbar.html` — sticky navbar with logo, desktop links (active state via `page.url` comparison), hamburger + mobile drawer, "Curriculum" CTA (LinkedIn link). Contains the drawer toggle logic.
+- `_includes/footer.html` — footer: copyright, GitHub/LinkedIn links, "STATUS: NOMINAL" indicator.
+- `_includes/scripts.html` — loads core JS (`i18n`, `main`, `transitions`) + conditionals (`navigation`, `hamburger` unless `hide_nav_scripts`) + `page_scripts` + `backToTop`.
+- `_includes/transition-overlay.html` — markup for the full-screen overlay used for page transitions (color-fill + smoke).
+- `_includes/navigation-hint.html` — placeholder div for the "use ← → / swipe" hint shown by `navigation.js`.
 
-### Pagine
-- `index.html` — home: hero (nome + titolo animato + CTA). Carica `titleAnimation.js` via `page_scripts`.
-- `experiences.html` — timeline esperienze lavorative. Struttura `.timeline` / `.timeline-item` con `.date`, `h2`, `.job-description`, `.key-project`, `.tech-stack`. Popolata dinamicamente da `i18n.js` (array `experiences.jobs`). Ha bottone stampa + CSS printabile.
-- `technologies.html` — grid tecnologie con barre di avanzamento (`.tech-progress-fill` con `data-progress`) animate da `techProgress.js`. `body_class: technologies-page`.
-- `contact.html` — pagina contatti con form/links. `body_class: contact-page`.
-- `404.html` — pagina di errore personalizzata.
+### Pages
+- `index.html` — home: hero (name + animated title + CTA). Loads `titleAnimation.js` via `page_scripts`.
+- `experiences.html` — work experience timeline. Structure `.timeline` / `.timeline-item` with `.date`, `h2`, `.job-description`, `.key-project`, `.tech-stack`. Populated dynamically by `i18n.js` (array `experiences.jobs`). Has a print button + printable CSS.
+- `technologies.html` — technologies grid with progress bars (`.tech-progress-fill` with `data-progress`) animated by `techProgress.js`. `body_class: technologies-page`.
+- `contact.html` — contact page with form/links. `body_class: contact-page`.
+- `404.html` — custom error page.
 
 ### JavaScript (`js/`)
-- `i18n.js` — classe `I18n` (esposta come `window.i18n`): detection lingua (localStorage → browser), fetch `translations/<lang>.json`, traduzione elementi `data-i18n` / `data-i18n-aria`, aggiornamento meta tag (title/description per pagina), render della timeline esperienze, easter egg in console, `switchLanguage()` + `getCurrentLanguage()`.
-- `main.js` — init post-DOMContentLoaded: marca l'overlay di transizione come `finished` dopo l'entry (le animazioni vivono in CSS).
-- `transitions.js` — classe `PageTransition`: intercetta i click su link interni (esclusi `target="_blank"` e skip-link), mostra l'overlay, attende ~660ms poi naviga. Animazione exit gestita via classe `active`.
-- `navigation.js` — navigazione circolare tra le 4 pagine con frecce ← → (keyboard) e swipe (touch, soglia 100px + guard orizzontale). Mostra e fa sparire l'hint di navigazione dopo 5s.
-- `hamburger.js` — classe `HamburgerMenu`: toggle drawer mobile, chiusura su link interno / Escape / click esterno, blocca scroll body quando aperto.
-- `backToTop.js` — crea il pulsante "Go to top", lo mostra dopo 300px di scroll, scroll smooth, integra traduzione `backToTop`.
-- `titleAnimation.js` — classe `TitleAnimator`: effetto macchina da scrivere sul `.hero-title` con 4 step multilingua, evidenziazione parole, suoni tastiera (pool di 3 audio per tipo da `sounds/`), riavvio al click e al cambio lingua (evento `i18n:languageChanged`). Rimuove `data-i18n` per non essere sovrascritto.
-- `techProgress.js` — anima la larghezza delle `.tech-progress-fill` al `data-progress`% dopo il load, solo su `technologies-page`.
+- `i18n.js` — `I18n` class (exposed as `window.i18n`): language detection (localStorage → browser), fetch `translations/<lang>.json`, translate `data-i18n` / `data-i18n-aria` elements, update meta tags (title/description per page), render the experiences timeline, console easter egg, `switchLanguage()` + `getCurrentLanguage()`.
+- `main.js` — post-DOMContentLoaded init: marks the transition overlay as `finished` after the entry (animations live in CSS).
+- `transitions.js` — `PageTransition` class: intercepts clicks on internal links (excluding `target="_blank"` and skip-link), shows the overlay, waits ~660ms then navigates. Exit animation handled via the `active` class.
+- `navigation.js` — circular navigation between the 4 pages with ← → arrows (keyboard) and swipe (touch, 100px threshold + horizontal guard). Shows and hides the navigation hint after 5s.
+- `hamburger.js` — `HamburgerMenu` class: mobile drawer toggle, closes on internal link / Escape / outside click, locks body scroll when open.
+- `backToTop.js` — creates the "Go to top" button, shows it after 300px of scroll, smooth scroll, integrates the `backToTop` translation.
+- `titleAnimation.js` — `TitleAnimator` class: typewriter effect on `.hero-title` with 4 multilingual steps, keyword highlighting, keyboard sounds (pool of 3 audio per type from `sounds/`), restarts on click and language change (`i18n:languageChanged` event). Removes `data-i18n` so it is not overwritten.
+- `techProgress.js` — animates the width of `.tech-progress-fill` to `data-progress`% after load, only on `technologies-page`.
 
-### Stili (`styles/`)
-- `main.css` — stili globali principali (layout componenti, timeline, keyframes, back-to-top, navigation-hint, ecc.).
-- `transitions.css` — animazioni dell'overlay di transizione (color-fill, smoke, fade body in entrata).
-- `reduced-motion.css` — caricato solo con `prefers-reduced-motion: reduce`; disabilita animazioni/transizioni.
-- `print-experiences.css` — stylesheet `media="print"` per la versione stampabile del CV (experiences).
-- `mobile.css` / `mobile-small.css` — override responsive per schermi piccoli.
-- `fonts.css` — definizioni/override font.
+### Styles (`styles/`)
+- `main.css` — main global styles (component layout, timeline, keyframes, back-to-top, navigation-hint, etc.).
+- `transitions.css` — transition overlay animations (color-fill, smoke, body fade-in).
+- `reduced-motion.css` — loaded only with `prefers-reduced-motion: reduce`; disables animations/transitions.
+- `print-experiences.css` — `media="print"` stylesheet for the printable CV version (experiences).
+- `mobile.css` / `mobile-small.css` — responsive overrides for small screens.
+- `fonts.css` — font definitions/overrides.
 
-### Traduzioni (`translations/`)
-- `en.json` — dizionario inglese (nav, hero, experiences.jobs[], technologies, contact, title/description per pagina, consoleEasterEgg, backToTop).
-- `it.json` — dizionario italiano, stessa struttura.
+### Translations (`translations/`)
+- `en.json` — English dictionary (nav, hero, experiences.jobs[], technologies, contact, title/description per page, consoleEasterEgg, backToTop).
+- `it.json` — Italian dictionary, same structure.
 
-### Risorse
-- `images/` — immagini del sito.
-- `fonts/` — font locali (se presenti).
-- `sounds/` — clip audio per `titleAnimation.js` (`keyboard-click.mp3`, `keyboard-click-delete.mp3`).
-- `_site/` — output di build (generato, non committare modifiche manuali).
+### Assets
+- `images/` — site images.
+- `fonts/` — local fonts (if present).
+- `sounds/` — audio clips for `titleAnimation.js` (`keyboard-click.mp3`, `keyboard-click-delete.mp3`).
+- `_site/` — build output (generated; do not commit manual edits).
 
-## Note / insidie
+## Notes / gotchas
 
-- **`bundle exec` obbligatorio** per evitare il conflitto `public_suffix` 7 vs 5.
-- Aggiungere una nuova pagina: crea il `.html` con front matter `layout: default` + `body_class` + voce in `navigation.js` (array `pages`) + link in `navbar.html` + traduzioni in entrambi i `translations/*.json` + meta key `${page}.${titleKey}`/`description`.
-- Le stringhe nuove vanno aggiunte in **entrambi** `en.json` e `it.json`, altrimenti `i18n.js` mostra la chiave grezza.
-- Il ramo `graphical-review` (PR #68, draft) contiene un refactor grafico WIP (Tailwind CDN, selettore lingua EN/IT, design "kinetic") **non ancora su main**. Se lavori su main, ignora quelle sezioni; se lavori su `graphical-review`, AGENTS.md andrà riallineato a quel ramo.
+- **`bundle exec` required** to avoid the `public_suffix` 7 vs 5 conflict.
+- Adding a new page: create the `.html` with front matter `layout: default` + `body_class` + entry in `navigation.js` (`pages` array) + link in `navbar.html` + translations in both `translations/*.json` + meta keys `${page}.${titleKey}`/`description`.
+- New strings must be added to **both** `en.json` and `it.json`, otherwise `i18n.js` shows the raw key.
+- The `graphical-review` branch (PR #68, draft) contains a WIP graphical refactor (Tailwind CDN, EN/IT language selector, "kinetic" design) **not yet on main**. When working on main, ignore those sections; when working on `graphical-review`, AGENTS.md must be realigned to that branch.
