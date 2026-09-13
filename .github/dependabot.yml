@@ -1,0 +1,73 @@
+# Dependabot version updates.
+#
+# Scope: this file controls *scheduled version* updates only. Security updates
+# are a repository setting (already enabled here) and are not configured by this
+# file. Note that neither mechanism could have resolved Dependabot alert #26,
+# where smol-toml was pinned to an exact version by its parent: Dependabot will
+# not override a parent's constraint. That class of alert still needs a manual
+# `overrides` entry in package.json.
+#
+# Grouping protects the one-PR-at-a-time validation workflow: minor and patch
+# bumps arrive as a single PR per ecosystem, while major bumps stay out of the
+# groups and arrive alone for a deliberate review. That is intentional --
+# html-proofer and jekyll-minifier both have majors that break the CI gate.
+#
+# The commit prefix is explicit because Dependabot's default commit messages are
+# derived from the repository's history rather than being fixed, so they would
+# not reliably satisfy the Conventional Commits rule.
+
+version: 2
+updates:
+  # The workflows that build, test and deploy the site.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 2
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    labels: ["dependencies"]
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # Jekyll gems. CI runs `bundle exec jekyll build`, not the native Pages build,
+  # so every gem PR goes through the real gate: build, htmlproofer, Lighthouse.
+  - package-ecosystem: "bundler"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 2
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    labels: ["dependencies", "ruby"]
+    groups:
+      gems-patch:
+        patterns: ["*"]
+        update-types: ["patch"]
+      gems-minor:
+        patterns: ["*"]
+        update-types: ["minor"]
+
+  # Dev-only tooling: markdownlint-cli2 and its tree.
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 2
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    labels: ["dependencies"]
+    groups:
+      npm-patch:
+        patterns: ["*"]
+        update-types: ["patch"]
+      npm-minor:
+        patterns: ["*"]
+        update-types: ["minor"]
