@@ -1,0 +1,312 @@
+/* ---------------------------------------------------------------------------
+   Component primitives — "Obsidian Precision"
+
+   Plain CSS classes matching the design spec: layout container and grid,
+   section header, card, chip, badge, stat tile, key-value row, buttons,
+   status dot, progress bar and sparkline. Loaded after tokens.css, before
+   main.css, so page-specific rules can still override.
+
+   Depth comes from surface luminance and 1px micro-borders, not shadows.
+   Pills are excluded on purpose (DESIGN.md); circular radii only for avatars
+   and status dots.
+   --------------------------------------------------------------------------- */
+
+/* --- Layout ------------------------------------------------------------- */
+.container {
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+  padding-inline: var(--margin);
+  box-sizing: border-box;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gutter);
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+
+/* Column spans, desktop-first via the 12-col grid. */
+.col-3 { grid-column: span 12; }
+.col-4 { grid-column: span 12; }
+.col-6 { grid-column: span 12; }
+.col-8 { grid-column: span 12; }
+.col-9 { grid-column: span 12; }
+
+@media (min-width: 768px) {
+  .col-3 { grid-column: span 4; }
+  .col-4 { grid-column: span 4; }
+  .col-6 { grid-column: span 8; }
+  .col-8 { grid-column: span 8; }
+  .col-9 { grid-column: span 8; }
+}
+
+@media (min-width: 1024px) {
+  .col-3 { grid-column: span 3; }
+  .col-4 { grid-column: span 4; }
+  .col-6 { grid-column: span 6; }
+  .col-8 { grid-column: span 8; }
+  .col-9 { grid-column: span 9; }
+}
+
+/* --- Section header ------------------------------------------------------ */
+/* Mono `NN.N //` kicker above a headline, the spec's structural marker. */
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.section-header .kicker {
+  font-family: var(--font-mono);
+  font-size: var(--label-md-size);
+  font-weight: var(--label-md-weight);
+  letter-spacing: var(--label-md-tracking);
+  text-transform: uppercase;
+  color: var(--outline);
+}
+
+.section-header .kicker .accent {
+  color: var(--primary);
+}
+
+.section-header h2,
+.section-header .headline {
+  font-family: var(--font-ui);
+  font-size: var(--headline-lg-size);
+  line-height: var(--headline-lg-line);
+  font-weight: var(--headline-lg-weight);
+  letter-spacing: var(--headline-lg-tracking);
+  color: var(--on-surface);
+  margin: 0;
+}
+
+/* --- Surfaces ------------------------------------------------------------ */
+.card {
+  background: var(--surface-container-low);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-sizing: border-box;
+}
+
+.card--interactive {
+  transition: border-color var(--duration-base) ease,
+    background-color var(--duration-base) ease,
+    box-shadow var(--duration-base) ease;
+}
+
+.card--interactive:hover {
+  background: var(--surface-container);
+  border-color: var(--border-strong);
+  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.5);
+}
+
+/* --- Chip & badge -------------------------------------------------------- */
+.chip,
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+  font-weight: var(--label-sm-weight);
+  letter-spacing: var(--label-sm-tracking);
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+  background: var(--surface-container-low);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: 0.25rem 0.5rem;
+  line-height: 1;
+}
+
+.badge--accent {
+  color: var(--primary);
+  border-color: var(--border-interactive);
+}
+
+/* --- Status dot ---------------------------------------------------------- */
+.ping-dot {
+  position: relative;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--tertiary);
+  flex-shrink: 0;
+}
+
+/* A single ping cycle per DESIGN.md, not the infinite Tailwind animate-ping. */
+.ping-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: inherit;
+  animation: ping-once 2s var(--ease-expo-out) 1;
+}
+
+/* --- Stat tile ----------------------------------------------------------- */
+.stat-tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding: var(--space-md);
+  background: var(--surface-container-low);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.stat-tile .stat-label {
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+  letter-spacing: var(--label-sm-tracking);
+  text-transform: uppercase;
+  color: var(--outline);
+}
+
+.stat-tile .stat-value {
+  font-family: var(--font-mono);
+  font-size: var(--headline-md-size);
+  line-height: 1;
+  color: var(--on-surface);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-tile .stat-sub {
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+  color: var(--on-surface-variant);
+}
+
+/* --- Key-value row ------------------------------------------------------- */
+.kv-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.kv-row:last-child {
+  border-bottom: none;
+}
+
+.kv-row .kv-key {
+  font-family: var(--font-mono);
+  font-size: var(--label-md-size);
+  color: var(--outline);
+}
+
+.kv-row .kv-value {
+  font-family: var(--font-mono);
+  font-size: var(--body-sm-size);
+  color: var(--on-surface);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+/* --- Buttons ------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--duration-base) ease,
+    border-color var(--duration-base) ease,
+    color var(--duration-base) ease,
+    opacity var(--duration-base) ease;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--primary-container);
+  outline-offset: 2px;
+}
+
+.btn--primary {
+  background: var(--primary-container);
+  color: var(--on-primary);
+}
+
+.btn--primary:hover {
+  background: var(--primary);
+}
+
+.btn--secondary {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--border-strong);
+  color: var(--on-surface);
+}
+
+.btn--secondary:hover {
+  background: var(--surface-container);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--on-surface-variant);
+}
+
+.btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--on-surface);
+}
+
+/* --- Progress ------------------------------------------------------------ */
+.progress {
+  width: 100%;
+  height: 6px;
+  background: var(--surface-container-high);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.progress .progress-fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--primary);
+  border-radius: inherit;
+  transition: width var(--duration-slow) var(--ease-expo-out);
+}
+
+/* --- Sparkline ----------------------------------------------------------- */
+.sparkline {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--primary);
+}
+
+.sparkline path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
