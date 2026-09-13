@@ -338,6 +338,7 @@ DEPENDENCIES
   jekyll-minifier
   jekyll-seo-tag
   jekyll-sitemap
+  json (< 3)
 
 CHECKSUMS
   Ascii85 (2.0.1) sha256=15cb5d941808543cbb9e7e6aea3c8ec3877f154c3461e8b3673e97f7ecedbe5a
