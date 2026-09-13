@@ -142,6 +142,13 @@ The environment has Ruby 3.4 + Bundler, but there is a `public_suffix` conflict 
 - `sounds/` — audio clips for `titleAnimation.js` (`keyboard-click.mp3`, `keyboard-click-delete.mp3`).
 - `_site/` — build output (generated; do not commit manual edits).
 
+### Docs (`docs/`)
+
+Repo documentation. Excluded from the Jekyll build in `_config.yml`, because it is not site content and the vendored design export is ~3 MB.
+
+- `design-system-revamp.md` — the plan and subtask checklist for replacing the current theme with the "Obsidian Precision" design system. Read this before any visual work: it records the design tokens, the gap analysis, the decisions that need Luca's call, and the dead code in the mockups that must not be ported.
+- `design/stitch/` — the vendored Google Stitch export the plan refers to: one `code.html` mockup + `screen.png` per screen, plus `obsidian_precision/DESIGN.md` (the token spec). Committed verbatim from the export; do not reformat it. It is ignored by markdownlint for that reason, and it is reference material, not a codebase — see the plan for what is dead code in it.
+
 ## Notes / gotchas
 
 - **`bundle exec` required** to avoid the `public_suffix` 7 vs 5 conflict.
