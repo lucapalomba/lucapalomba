@@ -83,24 +83,33 @@
                 {
                     "label": "Tech Debt Burn",
                     "value": "85%",
+                    "counter": "85",
+                    "suffix": "%",
                     "sub": "Meno ritardo nel refactoring",
                     "subTone": "tertiary"
                 },
                 {
                     "label": "Deploy del venerdì",
                     "value": "0.00",
+                    "badge": "SAFE",
                     "sub": "100% weekend tranquilli",
                     "tone": "primary"
                 },
                 {
                     "label": "Velocità dello sprint",
                     "value": "+42%",
+                    "counter": "42",
+                    "prefix": "+",
+                    "suffix": "%",
                     "sub": "Dopo il reset architetturale",
                     "subTone": "tertiary"
                 },
                 {
                     "label": "Salute build CI",
                     "value": "99.8%",
+                    "counter": "99.8",
+                    "decimals": "1",
+                    "suffix": "%",
                     "sub": "Build su main sempre verdi",
                     "tone": "tertiary"
                 }
@@ -178,9 +187,6 @@
             "cta": "Esplora le esperienze"
         }
     },
-    "hero": {
-        "availability": "Disponibile per H2 2025"
-    },
     "experiences": {
         "title": "Esperienze lavorative",
         "pageTitle": "Esperienze lavorative — Luca Palomba",
@@ -204,12 +210,16 @@
                 { "key": "LEADERSHIP_MAX", "value": "20 ingegneri / 4 squadre", "tone": "primary" },
                 { "key": "OPEX_REDUCTION", "value": "~50% in 12 mesi", "tone": "tertiary" },
                 { "key": "METHODOLOGY", "value": "SCRUM / CI-CD / AI-Assisted", "tone": "plain" },
-                { "key": "R&D_SPECIALIZATION", "value": "Openware PSIM e sistemi distribuiti", "tone": "primary" }
+                { "key": "R&D_SPECIALIZATION", "value": "Sistemi distribuiti in business continuity", "tone": "primary" }
             ]
         },
         "philosophy": {
             "kicker": "Filosofia di carriera",
             "quote": "L'architettura tecnica raggiunge il suo massimo solo se unita a coordinamento umano intenzionale, empatia e automazione pragmatica."
+        },
+        "printCta": {
+            "claim": "Ti piace ciò che vedi? Stampalo come un CV",
+            "button": "Stampa Curriculum"
         },
         "nextPhase": {
             "kicker": "Esplora lo stack core",

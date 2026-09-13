@@ -6,30 +6,36 @@ layout: default
 <main class="page" id="main-content">
   <div class="container">
 
+    <!-- Print-only CV masthead: name, role, contact. Hidden on screen, shown by
+         the print stylesheet. Kept here (not in CSS) so it can use the real
+         Person data from _data/person.yml. -->
+    <header class="cv-header" aria-hidden="true">
+      <h1 class="cv-name">{{ site.data.person.name }}</h1>
+      <p class="cv-role">{{ site.data.person.jobTitle }}</p>
+      <p class="cv-contact">
+        <span>{{ site.data.person.email | remove: 'mailto:' }}</span>
+        <span aria-hidden="true"> · </span>
+        <span>linkedin.com/in/lucapalomba</span>
+        <span aria-hidden="true"> · </span>
+        <span>github.com/lucapalomba</span>
+      </p>
+    </header>
+
     <!-- Section header: kicker, big title, lead, telemetry pill -->
     <div class="page-head reveal">
       <div class="page-head-copy">
         <p class="kicker"><span class="accent">//</span> {{ t.experiences.kicker }}</p>
-        <h1 class="page-title"><span class="section-number">02.</span><span>{{ t.experiences.title }}</span>
-          <button class="print-btn" onclick="event.preventDefault(); handlePrint();" aria-label="{{ t.a11y.print }}">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="6 9 6 2 18 2 18 9"></polyline>
-              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-              <rect x="6" y="14" width="12" height="8"></rect>
-            </svg>
-          </button>
-        </h1>
+        <h1 class="page-title"><span class="section-number">02.</span><span>{{ t.experiences.title }}</span></h1>
         <p class="page-lead">{{ t.experiences.lead }}</p>
       </div>
       <div class="telemetry-pill">
         <div class="telemetry-pill-cell">
-          <span class="stat-label">{{ t.experiences.telemetry.tenureLabel }}</span>
+          <span class="telemetry-pill-label">{{ t.experiences.telemetry.tenureLabel }}</span>
           <span class="telemetry-pill-value telemetry-pill-value--tertiary">{{ t.experiences.telemetry.tenureValue }}<span class="telemetry-pill-unit"> {{ t.experiences.telemetry.tenureUnit }}</span></span>
         </div>
         <div class="telemetry-pill-cell">
-          <span class="stat-label">{{ t.experiences.telemetry.teamsLabel }}</span>
-          <span class="telemetry-pill-value telemetry-pill-value--primary"><span class="telemetry-pill-pre">{{ t.experiences.telemetry.teamsPre }}</span> {{ t.experiences.telemetry.teamsValue }}<span class="telemetry-pill-unit"> {{ t.experiences.telemetry.teamsUnit }}</span></span>
+          <span class="telemetry-pill-label">{{ t.experiences.telemetry.teamsLabel }}</span>
+          <span class="telemetry-pill-value telemetry-pill-value--primary">{{ t.experiences.telemetry.teamsPre }} {{ t.experiences.telemetry.teamsValue }}<span class="telemetry-pill-unit"> {{ t.experiences.telemetry.teamsUnit }}</span></span>
         </div>
       </div>
     </div>
@@ -96,7 +102,7 @@ layout: default
               <text class="tl-label" x="2" y="20">Sys2000</text>
               <text class="tl-label" x="75" y="20">Venture</text>
               <text class="tl-label tl-label--primary" x="140" y="16">Novigo</text>
-              <text class="tl-label tl-label--tertiary" x="205" y="12">P&amp;B / R&amp;D</text>
+              <text class="tl-label tl-label--tertiary" x="205" y="12">P&amp;B / COGEN</text>
             </svg>
           </div>
 
@@ -107,6 +113,14 @@ layout: default
               <span class="metric-value metric-value--{{ metric.tone | default: 'plain' }}">{{ metric.value }}</span>
             </div>
             {%- endfor %}
+          </div>
+
+          <div class="print-cta">
+            <p class="print-cta-claim">{{ t.experiences.printCta.claim }}</p>
+            <button class="btn btn--secondary print-btn" onclick="event.preventDefault(); handlePrint();" aria-label="{{ t.a11y.print }}">
+              {% include icon.html name="description" %}
+              <span>{{ t.experiences.printCta.button }}</span>
+            </button>
           </div>
 
           <div class="philosophy-callout">

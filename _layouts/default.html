@@ -20,7 +20,18 @@
 
     {% include transition-overlay.html %}
 
+    <!-- Ambient backdrop: the animated obsidian grid + flowing energy curves
+         from the design export, reimplemented in js/backdrop.js. Decorative,
+         aria-hidden, and replaced by a static gradient under reduced motion. -->
+    <canvas id="backdrop" class="backdrop" aria-hidden="true"></canvas>
+    <div class="backdrop-scrim" aria-hidden="true"></div>
+
+    <!-- The 404 is deliberately header-less: it is reached from a bad link and
+         has no in-page navigation contract, so the quick-jump links in the page
+         body are the way back. -->
+    {% unless page.body_class == 'not-found-page' %}
     {% include navbar.html %}
+    {% endunless %}
 
     {{ content }}
 
