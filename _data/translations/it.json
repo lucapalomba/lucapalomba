@@ -74,26 +74,35 @@
         },
         "telemetry": {
             "title": "Telemetria principale",
+            "version": "v4.18.0",
+            "reliability": "INDICE DI AFFIDABILITÀ",
+            "slo": "SLO 99.95%",
+            "commits": "Solo commit atomici",
+            "bisect": "Pronto per git bisect",
             "tiles": [
                 {
                     "label": "Tech Debt Burn",
                     "value": "85%",
-                    "sub": "Meno ritardo nel refactoring"
+                    "sub": "Meno ritardo nel refactoring",
+                    "subTone": "tertiary"
                 },
                 {
                     "label": "Deploy del venerdì",
                     "value": "0.00",
-                    "sub": "SICURO 100% weekend tranquilli"
+                    "sub": "100% weekend tranquilli",
+                    "tone": "primary"
                 },
                 {
                     "label": "Velocità dello sprint",
                     "value": "+42%",
-                    "sub": "Dopo il reset architetturale"
+                    "sub": "Dopo il reset architetturale",
+                    "subTone": "tertiary"
                 },
                 {
                     "label": "Salute build CI",
                     "value": "99.8%",
-                    "sub": "Build su main sempre verdi"
+                    "sub": "Build su main sempre verdi",
+                    "tone": "tertiary"
                 }
             ]
         },
@@ -105,22 +114,28 @@
                 {
                     "number": "Pilastro 01",
                     "icon": "groups",
+                    "tone": "primary",
                     "title": "Leadership tecnica e Team Lead",
                     "body": "Coordino squadre cross-funzionali, affino i ritmi SCRUM e guido la R&D con priorità chiare, così gli sviluppatori rilasciano senza attrito.",
+                    "capLabel": "Capacità",
                     "capabilities": ["Mentorship", "Architettura agile", "Allineamento stakeholder"]
                 },
                 {
                     "number": "Pilastro 02",
                     "icon": "auto_fix_high",
+                    "tone": "tertiary",
                     "title": "Abbattimento debito tecnico e architettura",
                     "body": "Smonto monoliti fragili, introduco una governance pulita dei commit, costruisco test automatici completi e tutelo weekend tranquilli.",
+                    "capLabel": "Framework",
                     "capabilities": ["CI zero-regressioni", "Sistemi disaccoppiati", "0 deploy il venerdì"]
                 },
                 {
                     "number": "Pilastro 03",
                     "icon": "hub",
+                    "tone": "primary",
                     "title": "AI Enabler e full stack moderno",
                     "body": "Porto in produzione flussi di lavoro pragmatici con agenti LLM. Costruisco frontend web reattivi e resilienti con backend Node.js e Cloud ad alto throughput.",
+                    "capLabel": "Ecosistema",
                     "capabilities": ["React / Next", "Node.js / TS", "Flussi LLM"]
                 }
             ]
@@ -132,21 +147,29 @@
             "items": [
                 {
                     "step": "01",
-                    "text": "Entro in codebase caotiche e porto chiarezza. Diagnostico i collo di bottiglia sistemici entro 72 ore, prioritizzando percorsi di stabilizzazione a basso rischio e alto rendimento."
+                    "tone": "tertiary",
+                    "title": "Entro in codebase caotiche e porto chiarezza",
+                    "body": "Diagnostico i collo di bottiglia sistemici entro 72 ore, prioritizzando percorsi di stabilizzazione a basso rischio e alto rendimento."
                 },
                 {
                     "step": "02",
-                    "text": "Patto rigoroso \"zero deploy il venerdì\". I deploy avvengono da lunedì a giovedì prima delle 15:00 UTC con canary e rollback automatici. Tutelo il tempo libero degli ingegneri."
+                    "tone": "primary",
+                    "title": "Patto rigoroso \"zero deploy il venerdì\"",
+                    "body": "I deploy avvengono da lunedì a giovedì prima delle 15:00 UTC con canary e rollback automatici. Tutelo il tempo libero degli ingegneri."
                 },
                 {
                     "step": "03",
-                    "text": "Rendo le persone più efficaci con LLM e acceleratori DevEx. Aumento la generazione di test, le migrazioni di schema e la documentazione con strumenti AI strutturati."
+                    "tone": "tertiary",
+                    "title": "Rendo le persone più efficaci con LLM e DevEx",
+                    "body": "Aumento la generazione di test, le migrazioni di schema e la documentazione con strumenti AI strutturati."
                 }
             ]
         },
         "philosophy": {
+            "kicker": "Filosofia",
             "title": "La leadership tecnica è prima di tutto abilitare le persone",
-            "body": "L'architettura più pulita non vale nulla se il team è esausto. Definendo specifiche tecniche chiarissime, automatizzando i controlli di qualità ripetitivi e disaccoppiando le dipendenze complesse, lo sviluppo torna piacevole."
+            "body": "L'architettura più pulita non vale nulla se il team è esausto. Definendo specifiche tecniche chiarissime, automatizzando i controlli di qualità ripetitivi e disaccoppiando le dipendenze complesse, lo sviluppo torna piacevole.",
+            "cta": "Guarda il percorso e le metriche"
         },
         "nextStep": {
             "kicker": "Prossimo passo",
@@ -154,6 +177,9 @@
             "body": "Esplora le tappe di leadership senior, le revisioni architetturali e la delivery full-stack.",
             "cta": "Esplora le esperienze"
         }
+    },
+    "hero": {
+        "availability": "Disponibile per H2 2025"
     },
     "experiences": {
         "title": "Esperienze lavorative",
@@ -164,23 +190,30 @@
         "back": "← Indietro",
         "keyProject": "Progetto chiave:",
         "telemetry": {
-            "title": "Leadership",
+            "title": "Telemetria // Leadership",
             "tenureLabel": "Anzianità cumulativa",
             "tenureValue": "18+",
-            "tenureSub": "Anni di attività",
+            "tenureUnit": "Anni di attività",
             "teamsLabel": "Team guidati",
+            "teamsPre": "Fino a",
             "teamsValue": "20",
-            "teamsSub": "Ingegneri",
+            "teamsUnit": "Ing",
+            "timelineSpan": "Arco temporale",
+            "timelineRange": "2007 → 2026+",
             "metrics": [
-                { "key": "LEADERSHIP_MAX", "value": "20 ingegneri / 4 squadre" },
-                { "key": "OPEX_REDUCTION", "value": "~50% in 12 mesi" },
-                { "key": "METHODOLOGY", "value": "SCRUM / CI-CD / AI-Assisted" },
-                { "key": "R&D_SPECIALIZATION", "value": "Openware PSIM e sistemi distribuiti" }
+                { "key": "LEADERSHIP_MAX", "value": "20 ingegneri / 4 squadre", "tone": "primary" },
+                { "key": "OPEX_REDUCTION", "value": "~50% in 12 mesi", "tone": "tertiary" },
+                { "key": "METHODOLOGY", "value": "SCRUM / CI-CD / AI-Assisted", "tone": "plain" },
+                { "key": "R&D_SPECIALIZATION", "value": "Openware PSIM e sistemi distribuiti", "tone": "primary" }
             ]
         },
         "philosophy": {
             "kicker": "Filosofia di carriera",
             "quote": "L'architettura tecnica raggiunge il suo massimo solo se unita a coordinamento umano intenzionale, empatia e automazione pragmatica."
+        },
+        "nextPhase": {
+            "kicker": "Esplora lo stack core",
+            "body": "Rivedi la padronanza dei framework, gli strumenti infrastrutturali, i linguaggi e i benchmark di orchestrazione."
         },
         "nextStep": "Vedi le tecnologie",
         "jobs": [
@@ -314,32 +347,33 @@
         "description": "Esplora le tecnologie con cui Luca Palomba ha esperienza e quelle che è entusiasta di imparare.",
         "lead": "Una lista di tecnologie, da quelle che uso tutti i giorni a quelle che ormai fanno parte di me. Ma attenzione: il futuro cambia in fretta, e questa lista con lui.",
         "experiencedTitle": "Esperienza tecnologica",
-        "activeDomains": "Domini attivi",
-        "primarySynthesis": "Sintesi principale",
+        "kicker": "Audit dello stack e vettori tecnici",
+        "rev": "REV_2025.04",
+        "activeDomains": "DOMINI_ATTIVI",
+        "activeDomainsValue": "10 vettori",
+        "primarySynthesis": "SINTESI_PRIMARIA",
+        "primarySynthesisValue": "TypeScript & AI",
         "filterLabel": "Filtra le tecnologie per categoria",
+        "filterMeta": "Indice: risonanza tecnica",
         "filters": {
             "all": "Matrice completa (10)",
             "core": "Competenza core (≥80%)",
             "architecture": "Architettura e cloud",
-            "frontier": "R&D e frontiera",
-            "count": "{count} visualizzate"
+            "frontier": "R&D e frontiera"
         },
         "emptyState": "Nessuna tecnologia in questa categoria per ora.",
-        "categories": {
-            "core": "Runtime core",
-            "architecture": "Infra e scalabilità",
-            "frontier": "Frontiera R&D"
-        },
         "spectrumTitle": "Spettro di distribuzione delle competenze",
+        "spectrumMeta": "Indice di esperienza aggregato",
         "spectrumLegend": [
-            { "label": "Stack core (TS, PHP)", "tone": "core" },
-            { "label": "AI e pipeline", "tone": "ai" },
-            { "label": "Sistemi e K8s", "tone": "architecture" },
-            { "label": "WASM e frontiera", "tone": "frontier" }
+            { "label": "Stack core (TS, PHP)", "tone": "tertiary" },
+            { "label": "AI e pipeline", "tone": "primary" },
+            { "label": "Sistemi e K8s", "tone": "secondary" },
+            { "label": "WASM e frontiera", "tone": "muted" }
         ],
         "nextChapter": {
             "kicker": "Prossimo capitolo",
-            "title": "Pronto a parlare di system design o di collaborazioni staff?"
+            "title": "Pronto a parlare di system design o di collaborazioni staff?",
+            "cta": "Contattami"
         },
         "tech": {
             "aiAgents": "Agenti di sviluppo LLM & Documentazione per AI",
@@ -370,8 +404,13 @@
         "title": "Mettiti in contatto",
         "pageTitle": "Contatti — Luca Palomba",
         "description": "Sono attualmente aperto a nuove opportunità e collaborazioni. Sentiti libero di contattarmi — la mia casella di posta è sempre aperta, che tu abbia una domanda o voglia solo salutare.",
+        "channelNumber": "04.",
+        "channelLabel": "Canale di trasmissione",
+        "node": "# NODE: CONTACT_STREAM // OK",
         "dispatch": {
-            "title": "Dispatch principale — in ascolto",
+            "title": "Dispatch principale",
+            "active": "In ascolto",
+            "directAddress": "Indirizzo diretto",
             "compose": "Scrivi una email",
             "copy": "Copia",
             "copied": "Copiato!"

@@ -5,10 +5,10 @@
 // the first trigger so off-screen bars do no work. Users with
 // prefers-reduced-motion get the final widths immediately.
 //
-// The filter is a proper control, unlike the export's filterTech(): it keeps a
-// live count, announces results, exposes aria-pressed, and shows an empty
-// state. It also keeps the bars of newly revealed cards filled, since those
-// cards were display:none (and therefore never observed) while hidden.
+// The filter is a proper control, unlike the export's filterTech(): it exposes
+// aria-pressed, hides non-matching cards, and shows an empty state. A card
+// revealed by the filter was display:none (and therefore never observed), so
+// its bar is filled explicitly.
 document.addEventListener('DOMContentLoaded', () => {
   if (!document.body.classList.contains('technologies-page')) return;
 
@@ -45,9 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Filter -------------------------------------------------------------
   const buttons = Array.from(document.querySelectorAll('.filter-btn'));
   const cards = Array.from(document.querySelectorAll('.tech-card'));
-  const countEl = document.querySelector('.tech-count');
   const emptyEl = document.querySelector('.tech-empty');
-  const countTemplate = countEl ? countEl.getAttribute('data-count-template') : '';
 
   if (!buttons.length || !cards.length) return;
 
@@ -61,18 +59,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     buttons.forEach((button) => {
-      button.setAttribute('aria-pressed', button === activeButton ? 'true' : 'false');
+      const active = button === activeButton;
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+      button.classList.toggle('filter-btn--active', active);
     });
 
-    if (countEl) {
-      countEl.textContent = countTemplate.replace('{count}', String(visible));
-    }
     if (emptyEl) {
       emptyEl.hidden = visible !== 0;
     }
 
     // A card revealed by the filter was display:none and never observed, so
-    // fill it now (instantly if the visitor prefers reduced motion).
+    // fill it now.
     cards.forEach((card) => {
       if (!card.hidden) {
         card.classList.add('in');

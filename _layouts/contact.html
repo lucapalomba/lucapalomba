@@ -3,23 +3,34 @@ layout: default
 ---
 {%- assign t = site.data.translations[page.lang] %}
 <!-- Main Content -->
-<main class="page contact-content" id="main-content">
-    <div class="container">
-        <div class="section-header">
-            <p class="kicker"><span class="accent">04. Transmission Channel //</span></p>
-            <h1 class="section-title"><span class="section-number">04.</span> <span class="section-title-text">{{ t.contact.title }}</span></h1>
-            <p class="contact-description">{{ t.contact.description }}</p>
-        </div>
+<main class="page" id="main-content">
+    <div class="container contact-page">
 
-        <div class="grid contact-grid">
-            <div class="card col-6 contact-dispatch">
-                <p class="telemetry-title">{% include icon.html name="alternate_email" %} {{ t.contact.dispatch.title }}</p>
-                <a href="mailto:luca.palomba.developer@gmail.com" class="contact-email">
-                    luca.palomba.developer@gmail.com
-                </a>
-                <div class="contact-actions">
-                    <a href="mailto:luca.palomba.developer@gmail.com" class="btn btn--primary">{{ t.contact.dispatch.compose }}
-                        {% include icon.html name="arrow_outward" %}</a>
+        <header class="contact-header reveal">
+            <div class="contact-header-label">
+                <span class="accent-text">{{ t.contact.channelNumber }}</span>
+                <span class="kicker">{{ t.contact.channelLabel }}</span>
+                <span class="dot-tertiary"></span>
+            </div>
+            <h1 class="page-title page-title--display"><span class="section-number section-number--lg">04.</span><span>{{ t.contact.title }}</span></h1>
+            <p class="contact-description">{{ t.contact.description }}</p>
+        </header>
+
+        <div class="contact-cards">
+            <!-- Primary Dispatch -->
+            <div class="card contact-dispatch reveal">
+                <div class="dispatch-head">
+                    <span class="dispatch-title">{% include icon.html name="alternate_email" %}{{ t.contact.dispatch.title }}</span>
+                    <span class="dispatch-status"><span class="dot-tertiary"></span>{{ t.contact.dispatch.active }}</span>
+                </div>
+                <div class="dispatch-address">
+                    <span class="dispatch-address-label">{{ t.contact.dispatch.directAddress }}</span>
+                    <span class="dispatch-address-value" id="target-email">luca.palomba.developer@gmail.com</span>
+                </div>
+                <div class="dispatch-actions">
+                    <a href="mailto:luca.palomba.developer@gmail.com" class="btn btn--primary">
+                        <span>{{ t.contact.dispatch.compose }}</span>{% include icon.html name="arrow_outward" %}
+                    </a>
                     <button type="button" class="btn btn--secondary" id="copy-email"
                         data-copied-label="{{ t.contact.dispatch.copied }}"
                         data-copy-failed="{{ t.contactScript.copyFailed }}">
@@ -30,34 +41,41 @@ layout: default
                 </div>
             </div>
 
-            <div class="col-6 contact-side">
-                <div class="contact-tiles">
-                    <div class="stat-tile">
-                        <span class="stat-label">{{ t.contact.tiles.timezoneLabel }}</span>
-                        <span class="stat-value">{{ t.contact.tiles.timezoneValue }}</span>
-                        <span class="stat-sub"><span class="ping-dot"></span> {{ t.contact.tiles.timezoneSub }}</span>
-                    </div>
-                    <div class="stat-tile">
-                        <span class="stat-label">{{ t.contact.tiles.latencyLabel }}</span>
-                        <span class="stat-value">{{ t.contact.tiles.latencyValue }}</span>
-                        <span class="stat-sub">{{ t.contact.tiles.latencySub }}</span>
-                    </div>
+            <div class="contact-tiles reveal">
+                <div class="card contact-tile">
+                    <span class="stat-label">{{ t.contact.tiles.timezoneLabel }}</span>
+                    <span class="contact-tile-value">{{ t.contact.tiles.timezoneValue }}</span>
+                    <span class="contact-tile-sub"><span class="dot-tertiary"></span>{{ t.contact.tiles.timezoneSub }}</span>
                 </div>
+                <div class="card contact-tile">
+                    <span class="stat-label">{{ t.contact.tiles.latencyLabel }}</span>
+                    <span class="contact-tile-value">{{ t.contact.tiles.latencyValue }}</span>
+                    <span class="contact-tile-sub">{% include icon.html name="check_circle" %}{{ t.contact.tiles.latencySub }}</span>
+                </div>
+            </div>
 
-                <h2 class="contact-subhead">{{ t.contact.network.title }}</h2>
+            <!-- Network Profiles -->
+            <div class="card contact-network reveal">
+                <p class="contact-subhead">{{ t.contact.network.title }}</p>
                 <ul class="network-list">
-                    <li class="kv-row">
-                        <span class="kv-key">{% include icon.html name="github" %} github.com/lucapalomba</span>
-                        <a class="kv-value" href="https://github.com/lucapalomba" target="_blank" rel="noopener noreferrer">{{ t.contact.network.githubSub }} {% include icon.html name="arrow_outward" %}</a>
+                    <li class="network-row">
+                        <span class="network-id">{% include icon.html name="github" %}github.com/lucapalomba</span>
+                        <a class="network-link" href="https://github.com/lucapalomba" target="_blank" rel="noopener noreferrer">{{ t.contact.network.githubSub }} {% include icon.html name="arrow_outward" %}</a>
                     </li>
-                    <li class="kv-row">
-                        <span class="kv-key">{% include icon.html name="linkedin" %} linkedin.com/in/lucapalomba/</span>
-                        <a class="kv-value" href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer">{{ t.contact.network.linkedinSub }} {% include icon.html name="arrow_outward" %}</a>
+                    <li class="network-row">
+                        <span class="network-id">{% include icon.html name="linkedin" %}linkedin.com/in/lucapalomba/</span>
+                        <a class="network-link" href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer">{{ t.contact.network.linkedinSub }} {% include icon.html name="arrow_outward" %}</a>
                     </li>
                 </ul>
-                <p class="placement chip">{{ t.contact.placement }}</p>
             </div>
+
+            <p class="contact-placement">{{ t.contact.placement }}</p>
         </div>
+
+        <div class="contact-provenance reveal">
+            <span class="kicker">{{ t.contact.node }}</span>
+        </div>
+
     </div>
 </main>
 <!-- ContactPage structured data. The Person properties come from the shared

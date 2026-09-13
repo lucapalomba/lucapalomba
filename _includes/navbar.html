@@ -1,58 +1,63 @@
 {%- comment -%}
   Shell navbar, restyled to the Obsidian Precision spec (R05).
 
-  All labels come from the locale dictionary (`t`, assigned by the layout), and
-  the current page is marked from `page.i18n_key` instead of comparing
-  `page.url` — which is what lets one navbar serve both /en and /it pages.
-  Links stay relative ("experiences.html") so they resolve inside whichever
-  language directory the page lives in.
+  Three groups inside a 1200px track: brand + availability badge, the numbered
+  nav, and the actions (Curriculum CTA + language switch + hamburger). All
+  labels come from the locale dictionary, and the current page is marked from
+  `page.i18n_key` so one navbar serves both languages.
 
-  Two controls the design has no place for, kept here on purpose:
+  Two controls the design has no place for, kept on purpose:
   - the language switcher (`.lang-toggle.lang-switch`), a glyph link to
     `page.alt_url` in BOTH the desktop row and the mobile drawer, because
-    js/langPref.js listens for `.lang-switch` clicks and the `hreflang`
-    attribute drives the alternates;
+    js/langPref.js listens for `.lang-switch` clicks and `hreflang` drives the
+    alternates;
   - the hamburger, because the motion export has no mobile navigation at all
     (D8), so the existing drawer is the only working mobile affordance.
 
-  The sound toggle is gone: the typewriter audio was removed per D6, which
-  retired js/soundMute.js and sounds/.
+  The typewriter sound toggle is gone (D6), which retired js/soundMute.js and
+  sounds/.
 {%- endcomment -%}
 <nav class="navbar">
-    <div class="logo">
-        <a href="index.html" aria-label="{{ t.a11y.brand }}"><span class="logo-mark">&lt;LP /&gt;</span></a>
-    </div>
-    <div class="nav-actions">
-        <button class="hamburger-menu" id="hamburger-toggle" aria-label="{{ t.a11y.toggleMenu }}" aria-expanded="false"
-            aria-controls="mobile-nav">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
-        </button>
-    </div>
-    <div class="nav-links" aria-label="{{ t.a11y.mainNav }}">
-        <ol>
-            <li><a href="index.html" {% if page.i18n_key == 'index' %}aria-current="page" {% endif %}><span
-                        class="nav-number">01.</span> <span>{{ t.nav.whoami }}</span></a>
-            </li>
-            <li><a href="experiences.html" {% if page.i18n_key == 'experiences' %}aria-current="page" {% endif %}><span
-                        class="nav-number">02.</span> <span>{{ t.nav.experience }}</span></a></li>
-            <li><a href="technologies.html" {% if page.i18n_key == 'technologies' %}aria-current="page" {% endif %}><span
-                        class="nav-number">03.</span> <span>{{ t.nav.technologies }}</span></a></li>
-            <li><a href="contact.html" {% if page.i18n_key == 'contact' %}aria-current="page" {% endif %}><span
-                        class="nav-number">04.</span> <span>{{ t.nav.contact }}</span></a>
-            </li>
-        </ol>
-        <span class="status-badge"><span class="ping-dot"></span>{{ t.nav.availability }}</span>
-        <a href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer" class="resume-btn"
-            aria-label="{{ t.a11y.curriculum }}">{{ t.nav.curriculum }}</a>
-        {%- if page.alt_url %}
-        <a class="lang-toggle lang-switch" href="{{ page.alt_url | relative_url }}" hreflang="{{ page.alt_lang }}"
-            aria-label="{{ t.nav.langSwitch }}">{{ t.nav.langCode }}</a>
-        {%- endif %}
+    <div class="navbar-inner">
+        <div class="navbar-brand">
+            <a href="index.html" class="brand-link" aria-label="{{ t.a11y.brand }}">
+                <span class="brand-bracket">&lt;</span>LP <span class="brand-bracket">/&gt;</span>
+            </a>
+            <span class="status-badge"><span class="ping-dot"></span>{{ t.nav.availability }}</span>
+        </div>
+        <div class="nav-links" aria-label="{{ t.a11y.mainNav }}">
+            <ol>
+                <li><a href="index.html" {% if page.i18n_key == 'index' %}aria-current="page" {% endif %}><span
+                            class="nav-number">01.</span> <span>{{ t.nav.whoami }}</span></a>
+                </li>
+                <li><a href="experiences.html" {% if page.i18n_key == 'experiences' %}aria-current="page" {% endif %}><span
+                            class="nav-number">02.</span> <span>{{ t.nav.experience }}</span></a></li>
+                <li><a href="technologies.html" {% if page.i18n_key == 'technologies' %}aria-current="page" {% endif %}><span
+                            class="nav-number">03.</span> <span>{{ t.nav.technologies }}</span></a></li>
+                <li><a href="contact.html" {% if page.i18n_key == 'contact' %}aria-current="page" {% endif %}><span
+                            class="nav-number">04.</span> <span>{{ t.nav.contact }}</span></a>
+                </li>
+            </ol>
+        </div>
+        <div class="navbar-actions">
+            <a href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer" class="resume-btn"
+                aria-label="{{ t.a11y.curriculum }}">
+                {% include icon.html name="description" %}<span>{{ t.nav.curriculum }}</span>{% include icon.html name="arrow_outward" %}
+            </a>
+            {%- if page.alt_url %}
+            <a class="lang-toggle lang-switch" href="{{ page.alt_url | relative_url }}" hreflang="{{ page.alt_lang }}"
+                aria-label="{{ t.nav.langSwitch }}">{{ t.nav.langCode }}</a>
+            {%- endif %}
+            <button class="hamburger-menu" id="hamburger-toggle" aria-label="{{ t.a11y.toggleMenu }}" aria-expanded="false"
+                aria-controls="mobile-nav">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
     </div>
     <div class="mobile-nav" id="mobile-nav" role="navigation" aria-label="{{ t.a11y.mobileNav }}">
         <ol>

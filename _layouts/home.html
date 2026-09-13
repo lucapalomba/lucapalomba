@@ -5,95 +5,157 @@ layout: default
 {%- assign hero_steps = t.index.hero.steps %}
 {%- assign first_step = hero_steps[0] %}
 <!-- Main Content -->
-<main class="content-wrapper" id="main-content">
-  <div class="container">
-    <div class="grid home-grid">
-      <section class="hero col-8">
-        <p class="hero-meta">
-          <span class="chip">{{ t.home.meta.role }}</span>
-          <span class="chip">{{ t.home.meta.location }}</span>
-        </p>
-        <p class="hero-intro">{{ t.index.hero.intro }}</p>
-        <h1 class="hero-name" fetchpriority="high">{{ t.index.hero.name }}</h1>
-        <h2 class="hero-title">{{ first_step.text }}</h2>
-        <h3 class="hero-subtitle">{{ t.index.subtitle }}</h3>
-        <p class="hero-bio">{{ t.index.hero.bio }}</p>
-        <div class="hero-cta-row">
-          <a href="experiences.html" class="btn btn--primary">{{ t.index.hero.cta }}</a>
-          <a href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer"
-            class="btn btn--secondary">{% include icon.html name="arrow_outward" %} {{ t.home.meta.reviewCurriculum }}</a>
-        </div>
-      </section>
+<main class="home-main" id="main-content">
+  <div class="stack">
 
-      <aside class="telemetry col-4 reveal" aria-label="{{ t.home.telemetry.title }}">
-        <p class="telemetry-title">{% include icon.html name="memory" %} {{ t.home.telemetry.title }}</p>
-        <div class="telemetry-list">
-          {%- for tile in t.home.telemetry.tiles %}
-          <div class="stat-tile">
-            <span class="stat-label">{{ tile.label }}</span>
-            <span class="stat-value">{{ tile.value }}</span>
-            <span class="stat-sub">{{ tile.sub }}</span>
+    <!-- Hero: 12-col grid, 8-col typographic canvas + 4-col telemetry cockpit -->
+    <section class="band--flush hero-section">
+      <div class="container">
+        <div class="hero-meta-track reveal">
+          <span class="meta-chip">
+            <span class="meta-dot"></span>{{ t.home.meta.role }}
+          </span>
+          <span class="meta-chip meta-chip--icon">{% include icon.html name="terminal" %}{{ t.home.meta.location }}</span>
+        </div>
+
+        <div class="grid home-grid">
+          <div class="col-8 hero-copy reveal">
+            <span class="hero-intro">{{ t.index.hero.intro }}</span>
+            <h1 class="hero-name">{{ t.index.hero.name }}</h1>
+            <h2 class="hero-title">{{ first_step.text }}</h2>
+            <h3 class="hero-subtitle">{{ t.index.subtitle }}</h3>
+            <p class="hero-bio">{{ t.index.hero.bio }}</p>
+            <div class="hero-cta-row">
+              <a href="experiences.html" class="btn btn--primary">
+                <span>{{ t.index.hero.cta }}</span>{% include icon.html name="arrow_forward" %}
+              </a>
+              <a href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer"
+                class="btn btn--secondary">
+                {% include icon.html name="verified_user" %}<span>{{ t.home.meta.reviewCurriculum }}</span>{% include icon.html name="arrow_outward" %}
+              </a>
+              <span class="availability-inline"><span class="dot-tertiary"></span>{{ t.hero.availability }}</span>
+            </div>
           </div>
+
+          <div class="col-4 reveal">
+            <div class="card telemetry-card">
+              <div class="telemetry-head">
+                <span class="telemetry-head-title">{% include icon.html name="memory" %}{{ t.home.telemetry.title }}</span>
+                <span class="version-chip">{{ t.home.telemetry.version }}</span>
+              </div>
+              <div class="telemetry-grid">
+                {%- for tile in t.home.telemetry.tiles %}
+                <div class="telemetry-tile">
+                  <span class="telemetry-tile-label">{{ tile.label }}</span>
+                  <span class="telemetry-tile-value{% if tile.tone %} telemetry-tile-value--{{ tile.tone }}{% endif %}">{{ tile.value }}</span>
+                  <span class="telemetry-tile-sub{% if tile.subTone %} telemetry-tile-sub--{{ tile.subTone }}{% endif %}">{{ tile.sub }}</span>
+                </div>
+                {%- endfor %}
+              </div>
+              <div class="telemetry-spark">
+                <div class="spark-head">
+                  <span class="spark-label"><span class="dot-tertiary"></span>{{ t.home.telemetry.reliability }}</span>
+                  <span class="spark-slo">{{ t.home.telemetry.slo }}</span>
+                </div>
+                <svg class="sparkline sparkline-draw" viewBox="0 0 300 48" fill="none" preserveAspectRatio="none" aria-hidden="true">
+                  <path d="M0 38 L30 35 L60 37 L90 28 L120 30 L150 20 L180 22 L210 12 L240 14 L270 8 L300 6 L300 48 L0 48 Z"
+                    fill="currentColor" fill-opacity="0.1" stroke="none"></path>
+                  <path d="M0 38 L30 35 L60 37 L90 28 L120 30 L150 20 L180 22 L210 12 L240 14 L270 8 L300 6"></path>
+                  <circle cx="300" cy="6" r="3.5" fill="#4cd7f6"></circle>
+                </svg>
+              </div>
+              <div class="telemetry-foot">
+                <span class="telemetry-foot-item">{% include icon.html name="commit" %}{{ t.home.telemetry.commits }}</span>
+                <span class="telemetry-foot-value">{{ t.home.telemetry.bisect }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key pillars: full-bleed band, header row + 3-up bento -->
+    <section class="band band--raised">
+      <div class="container">
+        <div class="band-head reveal">
+          <div class="band-head-copy">
+            <p class="kicker"><span class="accent">01.1 //</span> {{ t.home.pillars.kicker }}</p>
+            <h2 class="headline">{{ t.home.pillars.title }}</h2>
+          </div>
+          <p class="band-head-lead">{{ t.home.pillars.lead }}</p>
+        </div>
+        <div class="pillar-grid">
+          {%- for pillar in t.home.pillars.items %}
+          <article class="card card--interactive pillar reveal" style="--reveal-delay: {{ forloop.index0 | times: 100 }}ms">
+            <div class="pillar-top">
+              <span class="pillar-icon pillar-icon--{{ pillar.tone }}">{% include icon.html name=pillar.icon %}</span>
+              <span class="pillar-number">{{ pillar.number }}</span>
+            </div>
+            <h3 class="pillar-title">{{ pillar.title }}</h3>
+            <p class="pillar-body">{{ pillar.body }}</p>
+            <div class="pillar-capabilities">
+              <p class="pillar-cap-label">{{ pillar.capLabel }}</p>
+              <div class="pillar-chips">
+                {%- for cap in pillar.capabilities %}
+                <span class="chip chip--solid">{{ cap }}</span>
+                {%- endfor %}
+              </div>
+            </div>
+          </article>
           {%- endfor %}
         </div>
-      </aside>
-    </div>
-
-    <section class="home-section reveal">
-      <div class="section-header">
-        <p class="kicker"><span class="accent">01.1 //</span> {{ t.home.pillars.kicker }}</p>
-        <h2 class="headline">{{ t.home.pillars.title }}</h2>
-        <p class="lead">{{ t.home.pillars.lead }}</p>
-      </div>
-      <div class="grid pillar-grid">
-        {%- for pillar in t.home.pillars.items %}
-        <article class="card col-4 pillar" style="--reveal-delay: {{ forloop.index0 | times: 100 }}ms">
-          <span class="pillar-icon">{% include icon.html name=pillar.icon %}</span>
-          <p class="pillar-number">{{ pillar.number }}</p>
-          <h3 class="pillar-title">{{ pillar.title }}</h3>
-          <p class="pillar-body">{{ pillar.body }}</p>
-          <ul class="pillar-chips">
-            {%- for cap in pillar.capabilities %}
-            <li class="chip">{{ cap }}</li>
-            {%- endfor %}
-          </ul>
-        </article>
-        {%- endfor %}
       </div>
     </section>
 
-    <section class="home-section reveal">
-      <div class="section-header">
-        <p class="kicker"><span class="accent">01.2 //</span> {{ t.home.charter.kicker }}</p>
-      </div>
-      <div class="ledger card">
-        <p class="ledger-title">{% include icon.html name="terminal" %} {{ t.home.charter.title }}
-          <span class="chip badge--accent">{{ t.home.charter.status }}</span>
-        </p>
-        <ol class="ledger-list">
-          {%- for item in t.home.charter.items %}
-          <li>
-            <span class="ledger-step">{{ item.step }}</span>
-            <span class="ledger-text">{{ item.text }}</span>
-          </li>
-          {%- endfor %}
-        </ol>
+    <!-- Charter ledger + philosophy: 7/5 split -->
+    <section class="band--flush charter-section">
+      <div class="container">
+        <div class="grid charter-grid">
+          <div class="col-7 reveal">
+            <div class="card ledger">
+              <div class="ledger-head">
+                <span class="ledger-head-title">{% include icon.html name="terminal" %}{{ t.home.charter.title }}</span>
+                <span class="ledger-status">{{ t.home.charter.status }}</span>
+              </div>
+              <div class="ledger-list">
+                {%- for item in t.home.charter.items %}
+                <div class="ledger-row">
+                  <span class="ledger-step ledger-step--{{ item.tone }}">{{ item.step }}</span>
+                  <div>
+                    <span class="ledger-title-text">{{ item.title }}</span>
+                    <p class="ledger-body">{{ item.body }}</p>
+                  </div>
+                </div>
+                {%- endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="col-5 philosophy reveal">
+            <p class="kicker kicker--icon">{% include icon.html name="psychology" %}{{ t.home.philosophy.kicker }}</p>
+            <h3 class="philosophy-title">{{ t.home.philosophy.title }}</h3>
+            <p class="philosophy-body">{{ t.home.philosophy.body }}</p>
+            <a href="experiences.html" class="btn--ghost">{% include icon.html name="arrow_forward" %}<span>{{ t.home.philosophy.cta }}</span></a>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="home-section reveal philosophy">
-      <span class="pillar-icon">{% include icon.html name="psychology" %}</span>
-      <h2 class="headline">{{ t.home.philosophy.title }}</h2>
-      <p class="lead">{{ t.home.philosophy.body }}</p>
+    <!-- Bottom forward callout: full-bleed band -->
+    <section class="band band--top">
+      <div class="container">
+        <div class="card cta-band reveal">
+          <div class="cta-band-copy">
+            <span class="kicker accent-text">{{ t.home.nextStep.kicker }}</span>
+            <h3 class="headline">{{ t.home.nextStep.title }}</h3>
+            <p class="cta-band-body">{{ t.home.nextStep.body }}</p>
+          </div>
+          <a href="experiences.html" class="btn btn--primary">
+            <span>{{ t.home.nextStep.cta }}</span>{% include icon.html name="arrow_forward" %}
+          </a>
+        </div>
+      </div>
     </section>
 
-    <section class="home-section cta-band reveal">
-      <p class="kicker">{{ t.home.nextStep.kicker }}</p>
-      <h2 class="headline">{{ t.home.nextStep.title }}</h2>
-      <p class="lead">{{ t.home.nextStep.body }}</p>
-      <a href="experiences.html" class="btn btn--primary">{{ t.home.nextStep.cta }}
-        {% include icon.html name="arrow_forward" %}</a>
-    </section>
   </div>
 </main>
 
