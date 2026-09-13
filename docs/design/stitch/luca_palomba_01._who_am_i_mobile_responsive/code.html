@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    @layer base {
+      html, body {
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        overscroll-behavior: none;
+      }
+      .pb-safe {
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      .pt-safe {
+        padding-top: env(safe-area-inset-top, 0px);
+      }
+      main > :first-child {
+        margin-top: 0 !important;
+      }
+      main > :last-child {
+        margin-bottom: 0 !important;
+      }
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "error": "#ffb4ab",
+            "on-error": "#690005",
+            "on-secondary-container": "#e6ecff",
+            "surface-bright": "#373940",
+            "on-surface-variant": "#bcc9cd",
+            "on-primary": "#003640",
+            "tertiary-container": "#1bbd85",
+            "surface-container-low": "#191b22",
+            "secondary-fixed": "#d8e2ff",
+            "primary-container": "#06b6d4",
+            "outline": "#869397",
+            "primary": "#4cd7f6",
+            "primary-fixed": "#acedff",
+            "surface-container-lowest": "#0c0e14",
+            "on-primary-fixed-variant": "#004e5c",
+            "on-tertiary-fixed": "#002113",
+            "surface": "#111319",
+            "inverse-surface": "#e2e2ea",
+            "surface-tint": "#4cd7f6",
+            "on-background": "#e2e2ea",
+            "tertiary-fixed": "#6ffbbe",
+            "on-tertiary-container": "#00452e",
+            "on-surface": "#e2e2ea",
+            "on-secondary-fixed-variant": "#004395",
+            "surface-container-high": "#282a30",
+            "surface-container-highest": "#33343b",
+            "secondary": "#adc6ff",
+            "inverse-primary": "#00687a",
+            "on-primary-container": "#00424f",
+            "on-error-container": "#ffdad6",
+            "surface-dim": "#111319",
+            "outline-variant": "#3d494c",
+            "surface-variant": "#33343b",
+            "on-secondary": "#002e6a",
+            "background": "#111319",
+            "surface-container": "#1d1f26",
+            "secondary-container": "#0566d9",
+            "on-tertiary": "#003824",
+            "primary-fixed-dim": "#4cd7f6",
+            "error-container": "#93000a",
+            "tertiary": "#4edea3",
+            "on-tertiary-fixed-variant": "#005236",
+            "secondary-fixed-dim": "#adc6ff",
+            "tertiary-fixed-dim": "#4edea3",
+            "on-primary-fixed": "#001f26",
+            "on-secondary-fixed": "#001a42",
+            "inverse-on-surface": "#2e3037"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "margin": "2rem",
+            "gutter": "1.5rem",
+            "space-sm": "0.5rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "space-xl": "2.5rem"
+          },
+          "fontFamily": {
+            "code-block": ["JetBrains Mono"],
+            "headline-lg-mobile": ["Geist"],
+            "label-sm": ["JetBrains Mono"],
+            "headline-md": ["Geist"],
+            "body-sm": ["Geist"],
+            "body-lg": ["Geist"],
+            "display-mobile": ["Geist"],
+            "display": ["Geist"],
+            "headline-lg": ["Geist"],
+            "body-md": ["Geist"],
+            "code-inline": ["JetBrains Mono"],
+            "label-md": ["JetBrains Mono"],
+            "headline-sm": ["Geist"]
+          },
+          "fontSize": {
+            "code-block": ["0.875rem", { "lineHeight": "1.6", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+            "headline-lg-mobile": ["1.75rem", { "lineHeight": "1.25", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "label-sm": ["0.6875rem", { "lineHeight": "1.3", "letterSpacing": "0.06em", "fontWeight": "500" }],
+            "headline-md": ["1.5rem", { "lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "500" }],
+            "body-sm": ["0.8125rem", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+            "body-lg": ["1.125rem", { "lineHeight": "1.6", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+            "display-mobile": ["2.25rem", { "lineHeight": "1.2", "letterSpacing": "-0.025em", "fontWeight": "600" }],
+            "display": ["3.5rem", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "600" }],
+            "headline-lg": ["2.25rem", { "lineHeight": "1.2", "letterSpacing": "-0.025em", "fontWeight": "600" }],
+            "body-md": ["0.9375rem", { "lineHeight": "1.6", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "code-inline": ["0.8125rem", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+            "label-md": ["0.75rem", { "lineHeight": "1.4", "letterSpacing": "0.04em", "fontWeight": "500" }],
+            "headline-sm": ["1.125rem", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500" }]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-background font-body-md text-body-md text-on-surface flex flex-col min-h-screen antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- Mobile Header -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe">
+<div class="h-16 px-space-md flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<a class="flex items-center font-label-md text-label-md tracking-tight text-on-surface" href="#">
+<span class="text-primary mr-space-xs">&lt;</span>LP <span class="text-primary ml-space-xs">/&gt;</span>
+</a>
+<div class="flex items-center gap-space-xs px-2 py-0.5 rounded bg-surface-container-low">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+</span>
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant">Available for Staff Roles</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<a class="px-2.5 py-1 rounded bg-surface-container-low hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all flex items-center gap-1" href="https://linkedin.com" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[15px] text-primary">description</span>
+<span class="text-xs">Curriculum</span>
+<span class="material-symbols-outlined text-[13px] text-on-surface-variant">arrow_outward</span>
+</a>
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-background">
+<!-- Hero Section -->
+<section class="relative w-full overflow-hidden px-space-md pt-space-md pb-space-xl">
+<!-- Ambient Radial Gradient Scrim -->
+<div class="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full h-[360px] bg-gradient-to-b from-primary/5 via-primary/[0.015] to-transparent blur-2xl opacity-70"></div>
+<div class="relative flex flex-col gap-space-md">
+<!-- Top Meta Track / Identity Badges -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex flex-wrap items-center gap-space-xs">
+<div class="inline-flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low">
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">ARCH_SPEC :: STAFF_IC / LEAD</span>
+</div>
+<div class="inline-flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low">
+<span class="material-symbols-outlined text-primary text-[14px]">terminal</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">LOC: REMOTE / EU (UTC+1)</span>
+</div>
+</div>
+</div>
+<!-- Main Typographic Canvas -->
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary font-medium tracking-wide">Hi, my name is</span>
+<h1 class="font-display-mobile text-display-mobile text-on-surface font-semibold tracking-tight leading-[1.08] mt-1">
+            Luca Palomba.
+          </h1>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface-variant tracking-tight mt-1 font-normal">
+            I build things for the web.
+          </h2>
+<div class="mt-space-sm">
+<h3 class="font-headline-sm text-headline-sm text-primary tracking-normal font-medium">
+              Full Stack Developer &amp; Team Lead, Engineering leadership experience
+            </h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant/90 mt-space-sm leading-relaxed">
+            Software engineer with tech-debt-demolisher super-powers: I walk into chaos, straighten things out, and help everyone go home stress-free. Clear goals, clean commits, and no Friday deploys.
+          </p>
+<!-- Executive CTA Row (stacked on mobile) -->
+<div class="flex flex-col gap-space-sm mt-space-md">
+<a class="w-full inline-flex items-center justify-center gap-space-sm px-space-md py-space-sm rounded bg-on-surface text-surface font-body-md text-body-md font-medium active:scale-[0.99] transition-all shadow-sm group" href="#experience">
+<span>Check out my experiences!</span>
+<span class="material-symbols-outlined text-[18px] transition-transform duration-200 group-hover:translate-x-1">arrow_forward</span>
+</a>
+<a class="w-full inline-flex items-center justify-center gap-space-xs px-space-md py-space-sm rounded bg-surface-container-low text-on-surface hover:bg-surface-container active:scale-[0.99] transition-colors font-body-md text-body-md" href="https://www.linkedin.com/in/lucapalomba/" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
+<span>Review Curriculum</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[14px]">arrow_outward</span>
+</a>
+<div class="flex items-center justify-center gap-space-xs py-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="h-1.5 w-1.5 rounded-full bg-tertiary"></span>
+<span>Available for H2 2025</span>
+</div>
+</div>
+</div>
+<!-- Telemetry Sidebar / Engineering Cockpit Card -->
+<div class="w-full rounded-xl bg-surface-container-low p-space-md shadow-sm flex flex-col gap-space-md mt-space-xs">
+<div class="flex items-center justify-between pb-space-xs border-b border-surface-container">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">memory</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface">Core Telemetry</span>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-code-inline text-label-sm text-tertiary">v4.18.0</span>
+</div>
+<!-- Metric Stats Grid -->
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="bg-surface-container p-space-sm rounded flex flex-col justify-between">
+<span class="font-label-sm text-[11px] text-on-surface-variant uppercase">Tech Debt Burn</span>
+<span class="font-code-block text-headline-sm text-on-surface mt-0.5 font-medium">85%</span>
+<span class="font-label-sm text-[10px] text-tertiary mt-1">Reduced refactor lag</span>
+</div>
+<div class="bg-surface-container p-space-sm rounded flex flex-col justify-between">
+<span class="font-label-sm text-[11px] text-on-surface-variant uppercase">Friday Deploys</span>
+<span class="font-code-block text-headline-sm text-primary mt-0.5 font-medium">0.00</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant mt-1">100% Weekend Peace</span>
+</div>
+<div class="bg-surface-container p-space-sm rounded flex flex-col justify-between">
+<span class="font-label-sm text-[11px] text-on-surface-variant uppercase">Sprint Velocity</span>
+<span class="font-code-block text-headline-sm text-on-surface mt-0.5 font-medium">+42%</span>
+<span class="font-label-sm text-[10px] text-tertiary mt-1">Post-architecture reset</span>
+</div>
+<div class="bg-surface-container p-space-sm rounded flex flex-col justify-between">
+<span class="font-label-sm text-[11px] text-on-surface-variant uppercase">CI Build Health</span>
+<span class="font-code-block text-headline-sm text-tertiary mt-0.5 font-medium">99.8%</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant mt-1">Green main builds</span>
+</div>
+</div>
+<!-- Sparkline Visual Component -->
+<div class="bg-surface-container p-space-sm rounded flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="text-[11px]">SYSTEM RELIABILITY INDEX</span>
+<span class="text-tertiary font-code-inline text-[11px]">SLO 99.95%</span>
+</div>
+<svg class="w-full h-11 text-primary" fill="none" preserveaspectratio="none" viewbox="0 0 300 48">
+<path d="M0 38 L30 35 L60 37 L90 28 L120 30 L150 20 L180 22 L210 12 L240 14 L270 8 L300 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+<path d="M0 38 L30 35 L60 37 L90 28 L120 30 L150 20 L180 22 L210 12 L240 14 L270 8 L300 6 L300 48 L0 48 Z" fill="currentColor" fill-opacity="0.08"></path>
+</svg>
+</div>
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant pt-space-xs">
+<span class="flex items-center gap-1 text-[11px]">
+<span class="material-symbols-outlined text-[14px] text-primary">commit</span>
+<span>Atomic commits only</span>
+</span>
+<span class="text-on-surface text-[11px]">Git bisect ready</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Key Pillars Section -->
+<section class="w-full bg-surface-container-lowest py-space-xl px-space-md">
+<div class="flex flex-col space-y-space-md">
+<!-- Section Header -->
+<div class="flex flex-col space-y-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="text-primary font-code-inline text-code-inline">01.1 //</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Core Practice Areas</span>
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-semibold">
+            Engineered for high-stakes certainty.
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            A disciplined synthesis of hands-on software craft, organizational clarity, and pragmatic AI execution.
+          </p>
+</div>
+<!-- 3 Pillars Stacked Cards -->
+<div class="flex flex-col gap-space-md pt-space-xs">
+<!-- Pillar 1: Leadership & Team Lead -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="w-10 h-10 rounded bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">groups</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Pillar 01</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-space-xs">
+                Engineering Leadership &amp; Team Lead
+              </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Coordinating cross-functional squads, fine-tuning SCRUM rhythms, and steering R&amp;D with clear prioritization so developers ship without friction.
+              </p>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-lowest/40 p-space-sm rounded">
+<div class="font-label-sm text-label-sm uppercase text-on-surface-variant mb-space-xs">Capabilities</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface">Squad Mentorship</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface">Agile Architecture</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface">Stakeholder Sync</span>
+</div>
+</div>
+</div>
+<!-- Pillar 2: Tech Debt & Architecture -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="w-10 h-10 rounded bg-surface-container flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[22px]">auto_fix_high</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Pillar 02</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-space-xs">
+                Tech Debt Demolition &amp; Architecture
+              </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Dismantling brittle monoliths, introducing clean commit governance, establishing comprehensive automated testing, and safeguarding calm weekends.
+              </p>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-lowest/40 p-space-sm rounded">
+<div class="font-label-sm text-label-sm uppercase text-on-surface-variant mb-space-xs">Frameworks</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface">Zero-Regression CI</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface">Decoupled Systems</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-tertiary font-medium">0 Friday Deploys</span>
+</div>
+</div>
+</div>
+<!-- Pillar 3: AI Enabler & Modern Full Stack -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="w-10 h-10 rounded bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">hub</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Pillar 03</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-space-xs">
+                AI Enabler &amp; Modern Full Stack
+              </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Deploying pragmatic LLM agent workflows into production applications. Building resilient, reactive web frontends with high-throughput Node.js &amp; Cloud backends.
+              </p>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-lowest/40 p-space-sm rounded">
+<div class="font-label-sm text-label-sm uppercase text-on-surface-variant mb-space-xs">Ecosystem</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface">React / Next</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface">Node.js / TS</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface">LLM Workflows</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Technical Operating Principles / Manifest Section -->
+<section class="w-full py-space-xl px-space-md">
+<div class="flex flex-col gap-space-lg">
+<!-- Visual Architecture Ledger Card -->
+<div class="bg-surface-container-low rounded-xl p-space-md">
+<div class="flex items-center justify-between pb-space-sm mb-space-sm border-b border-surface-container">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">terminal</span>
+<span class="font-code-block text-code-block text-on-surface font-medium">architecture_charter.manifest</span>
+</div>
+<span class="font-label-sm text-[10px] text-on-surface-variant">LOCKED // PROD-STABLE</span>
+</div>
+<div class="flex flex-col gap-space-sm font-code-block text-body-sm text-on-surface-variant">
+<div class="flex items-start gap-space-sm p-space-sm rounded bg-surface-container">
+<span class="text-tertiary font-bold">01</span>
+<div>
+<span class="text-on-surface font-medium">Walk into chaotic codebases, deliver clarity</span>
+<p class="text-on-surface-variant text-[13px] mt-0.5 leading-relaxed">Diagnose systemic bottlenecks within 72 hours, prioritize low-risk high-yield stabilization paths.</p>
+</div>
+</div>
+<div class="flex items-start gap-space-sm p-space-sm rounded bg-surface-container">
+<span class="text-primary font-bold">02</span>
+<div>
+<span class="text-on-surface font-medium">Strict "Zero Friday Deploys" Covenant</span>
+<p class="text-on-surface-variant text-[13px] mt-0.5 leading-relaxed">Deploys run Mon-Thu before 15:00 UTC with automated canary rollback gates. Protect engineers' time off.</p>
+</div>
+</div>
+<div class="flex items-start gap-space-sm p-space-sm rounded bg-surface-container">
+<span class="text-tertiary font-bold">03</span>
+<div>
+<span class="text-on-surface font-medium">Empower humans via LLM &amp; DevEx accelerators</span>
+<p class="text-on-surface-variant text-[13px] mt-0.5 leading-relaxed">Augment test generation, schema migrations, and documentation using structured AI tooling.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Contextual Bio Quote / Engineering Philosophy -->
+<div class="flex flex-col bg-surface-container-low/50 p-space-md rounded-xl">
+<div class="flex items-center gap-space-xs mb-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[18px]">psychology</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Philosophy</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight mb-space-xs">
+            Engineering leadership is human enablement first.
+          </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-space-md">
+            The cleanest architecture means nothing if the team is burning out. By setting crystal-clear technical specifications, automating repetitive quality checks, and decoupling complex dependencies, development becomes enjoyable again.
+          </p>
+<div>
+<a class="inline-flex items-center gap-space-xs font-label-md text-label-md text-primary hover:underline underline-offset-4" href="#experience">
+<span>View track record &amp; metrics</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Milestone CTA Box -->
+<section class="w-full bg-surface-container-lowest py-space-xl px-space-md">
+<div class="rounded-xl bg-surface-container-low p-space-md flex flex-col gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase text-primary tracking-wider">Next Step</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold tracking-tight">Ready to see the code &amp; impact?</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Explore senior leadership milestones, architectural overhauls, and full-stack technical delivery.</p>
+</div>
+<div>
+<a class="w-full inline-flex items-center justify-between px-space-md py-space-sm rounded bg-on-surface text-surface font-body-md text-body-md font-medium active:scale-[0.99] transition-opacity" href="#experience">
+<span>Explore Experiences</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Footer matching Desktop SCREEN_18 -->
+<footer class="w-full bg-surface-container-lowest px-space-md py-space-lg border-t border-surface-container">
+<div class="flex flex-col items-center text-center gap-space-md">
+<p class="font-label-md text-label-md text-on-surface-variant">Designed &amp; Built by Luca Palomba — System Architecture &amp; Engineering</p>
+<div class="flex items-center gap-space-lg">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-space-xs" href="https://github.com" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+<span>GitHub</span>
+</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-space-xs" href="https://linkedin.com" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[16px]">hub</span>
+<span>LinkedIn</span>
+</a>
+<span class="font-label-sm text-label-sm text-on-surface-variant">© 2025 Luca Palomba</span>
+</div>
+</div>
+</footer>
+</main>
+<!-- Mobile Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl border-t border-surface-container" data-active-classes="text-primary font-headline-sm">
+<div class="flex justify-around items-center h-16 px-space-sm">
+<a aria-current="page" class="flex flex-col items-center justify-center min-w-[48px] min-h-[44px] transition-colors text-primary" data-path="who-am-i" href="#">
+<span class="material-symbols-outlined text-[20px]">terminal</span>
+<span class="font-label-sm text-[11px] mt-0.5 font-medium">Overview</span>
+</a>
+<a class="flex flex-col items-center justify-center min-w-[48px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="experience" href="#">
+<span class="material-symbols-outlined text-[20px]">account_tree</span>
+<span class="font-label-sm text-[11px] mt-0.5">Systems</span>
+</a>
+<a class="flex flex-col items-center justify-center min-w-[48px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="technologies" href="#">
+<span class="material-symbols-outlined text-[20px]">layers</span>
+<span class="font-label-sm text-[11px] mt-0.5">Stack</span>
+</a>
+<a class="flex flex-col items-center justify-center min-w-[48px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="contact" href="#">
+<span class="material-symbols-outlined text-[20px]">alternate_email</span>
+<span class="font-label-sm text-[11px] mt-0.5">Contact</span>
+</a>
+</div>
+</nav>
+</body></html>

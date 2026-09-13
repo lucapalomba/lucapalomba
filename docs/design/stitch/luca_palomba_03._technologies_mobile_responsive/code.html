@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+  @layer base {
+    html, body {
+      width: 100vw;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      overscroll-behavior: none;
+    }
+    .pb-safe {
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    .pt-safe {
+      padding-top: env(safe-area-inset-top, 0px);
+    }
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "secondary-fixed": "#d8e2ff",
+          "on-background": "#e2e2ea",
+          "background": "#111319",
+          "on-secondary": "#002e6a",
+          "surface-variant": "#33343b",
+          "secondary-container": "#0566d9",
+          "tertiary-container": "#1bbd85",
+          "outline-variant": "#3d494c",
+          "on-error-container": "#ffdad6",
+          "surface-container-low": "#191b22",
+          "on-tertiary-fixed": "#002113",
+          "inverse-primary": "#00687a",
+          "on-primary-container": "#00424f",
+          "tertiary-fixed-dim": "#4edea3",
+          "primary-fixed-dim": "#4cd7f6",
+          "secondary": "#adc6ff",
+          "primary": "#4cd7f6",
+          "primary-fixed": "#acedff",
+          "surface-container-highest": "#33343b",
+          "on-tertiary-fixed-variant": "#005236",
+          "outline": "#869397",
+          "primary-container": "#06b6d4",
+          "tertiary-fixed": "#6ffbbe",
+          "on-primary-fixed-variant": "#004e5c",
+          "surface-tint": "#4cd7f6",
+          "on-primary": "#003640",
+          "on-secondary-fixed": "#001a42",
+          "secondary-fixed-dim": "#adc6ff",
+          "on-secondary-fixed-variant": "#004395",
+          "on-surface-variant": "#bcc9cd",
+          "inverse-on-surface": "#2e3037",
+          "surface-dim": "#111319",
+          "on-surface": "#e2e2ea",
+          "surface": "#111319",
+          "surface-container": "#1d1f26",
+          "on-error": "#690005",
+          "surface-container-lowest": "#0c0e14",
+          "on-tertiary": "#003824",
+          "error": "#ffb4ab",
+          "on-primary-fixed": "#001f26",
+          "inverse-surface": "#e2e2ea",
+          "surface-container-high": "#282a30",
+          "on-tertiary-container": "#00452e",
+          "surface-bright": "#373940",
+          "tertiary": "#4edea3",
+          "on-secondary-container": "#e6ecff",
+          "error-container": "#93000a"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "space-xs": "0.25rem",
+          "space-xl": "2.5rem",
+          "space-lg": "1.5rem",
+          "space-sm": "0.5rem",
+          "gutter": "1.5rem",
+          "margin": "2rem",
+          "space-md": "1rem"
+        },
+        "fontFamily": {
+          "headline-md": ["Geist", "sans-serif"],
+          "code-inline": ["JetBrains Mono", "monospace"],
+          "display-mobile": ["Geist", "sans-serif"],
+          "display": ["Geist", "sans-serif"],
+          "headline-lg-mobile": ["Geist", "sans-serif"],
+          "headline-sm": ["Geist", "sans-serif"],
+          "headline-lg": ["Geist", "sans-serif"],
+          "body-md": ["Geist", "sans-serif"],
+          "label-sm": ["JetBrains Mono", "monospace"],
+          "body-lg": ["Geist", "sans-serif"],
+          "body-sm": ["Geist", "sans-serif"],
+          "label-md": ["JetBrains Mono", "monospace"],
+          "code-block": ["JetBrains Mono", "monospace"]
+        },
+        "fontSize": {
+          "headline-md": ["1.5rem", { "lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "500" }],
+          "code-inline": ["0.8125rem", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+          "display-mobile": ["2.25rem", { "lineHeight": "1.2", "letterSpacing": "-0.025em", "fontWeight": "600" }],
+          "display": ["3.5rem", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "600" }],
+          "headline-lg-mobile": ["1.75rem", { "lineHeight": "1.25", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+          "headline-sm": ["1.125rem", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+          "headline-lg": ["2.25rem", { "lineHeight": "1.2", "letterSpacing": "-0.025em", "fontWeight": "600" }],
+          "body-md": ["0.9375rem", { "lineHeight": "1.6", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+          "label-sm": ["0.6875rem", { "lineHeight": "1.3", "letterSpacing": "0.06em", "fontWeight": "500" }],
+          "body-lg": ["1.125rem", { "lineHeight": "1.6", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+          "body-sm": ["0.8125rem", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+          "label-md": ["0.75rem", { "lineHeight": "1.4", "letterSpacing": "0.04em", "fontWeight": "500" }],
+          "code-block": ["0.875rem", { "lineHeight": "1.6", "letterSpacing": "-0.01em", "fontWeight": "400" }]
+        }
+      }
+    }
+  };
+</script>
+</head>
+<body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+<!-- Header -->
+<header class="fixed top-0 w-full z-50 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe">
+<div class="h-16 px-gutter flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<a class="flex items-center font-label-md text-label-md tracking-tight text-on-surface hover:text-primary transition-colors" href="#">
+<span class="text-primary mr-space-xs">&lt;</span>LP<span class="text-primary ml-space-xs">/&gt;</span>
+</a>
+<div class="flex items-center gap-space-xs px-space-sm py-0.5 rounded bg-surface-container-low">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+</span>
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant">Available for Staff Roles</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<a class="px-space-sm py-1 rounded bg-surface-container-low hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-all flex items-center gap-1" href="https://linkedin.com" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[14px] text-primary">description</span>
+<span>Curriculum</span>
+<span class="material-symbols-outlined text-[12px] text-on-surface-variant">arrow_outward</span>
+</a>
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface">
+<div class="flex flex-col w-full px-gutter pt-space-md pb-space-lg gap-space-lg">
+<!-- Section Header & Narrative Intro -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase text-primary tracking-widest">Stack Audit &amp; Technical Vectors</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">//</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">REV_2025.04</span>
+</div>
+<h1 class="font-display-mobile text-display-mobile text-on-surface tracking-tight">
+<span class="text-primary font-headline-lg-mobile mr-space-xs">03.</span>Technologies
+      </h1>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+        “A list of technologies — from the ones I use every day to the ones that are now part of me. But mind you: the future changes fast, and so does this list with it.”
+      </p>
+<!-- Stat boxes / Telemetry Summary Widget -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex items-center justify-between gap-space-md mt-space-xs border border-outline-variant/20">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">ACTIVE_DOMAINS</span>
+<span class="font-code-block text-headline-sm text-on-surface font-semibold">10 Vectors</span>
+</div>
+<div class="w-px h-8 bg-surface-container-high"></div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">PRIMARY_SYNTHESIS</span>
+<span class="font-code-block text-headline-sm text-tertiary font-semibold">TypeScript &amp; AI</span>
+</div>
+</div>
+</div>
+<!-- Filter Bar / Switcher -->
+<div class="flex flex-col gap-space-xs bg-surface-container-lowest rounded-xl p-space-sm border border-outline-variant/20">
+<div class="flex items-center gap-space-xs overflow-x-auto no-scrollbar py-1" id="filter-controls">
+<button class="filter-btn shrink-0 px-space-md py-space-xs rounded font-label-md text-label-md bg-surface-container-high text-on-surface transition-all" data-filter="all" onclick="filterTech('all')">
+          All Matrix (10)
+        </button>
+<button class="filter-btn shrink-0 px-space-md py-space-xs rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all" data-filter="core" onclick="filterTech('core')">
+          Core Proficiency (≥80%)
+        </button>
+<button class="filter-btn shrink-0 px-space-md py-space-xs rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all" data-filter="systems" onclick="filterTech('systems')">
+          Architecture &amp; Cloud
+        </button>
+<button class="filter-btn shrink-0 px-space-md py-space-xs rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all" data-filter="frontier" onclick="filterTech('frontier')">
+          R&amp;D &amp; Frontier
+        </button>
+</div>
+<div class="flex items-center gap-space-xs px-space-sm pt-1 border-t border-outline-variant/10">
+<span class="material-symbols-outlined text-[14px] text-tertiary">tune</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Index: Engineering Resonance</span>
+</div>
+</div>
+<!-- 10 Technology Vector Cards -->
+<div class="flex flex-col gap-space-md" id="tech-matrix">
+<!-- Card 1: LLM Development Agents & AI Documentation (85%) -->
+<div class="tech-card flex flex-col justify-between bg-surface-container-low rounded-xl p-space-md shadow-sm border border-outline-variant/20 gap-space-md" data-category="core frontier">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm min-w-0">
+<span class="p-2 rounded bg-surface-container-high text-primary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+</span>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider block">AI_AGENTIC_SYSTEMS</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-tight">LLM Development Agents &amp; AI Documentation</h2>
+</div>
+</div>
+<span class="font-code-block text-headline-md font-semibold text-primary shrink-0">85%</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full transition-all duration-700" style="width: 85%;"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            I design and orchestrate LLM-based development agents and write AI-friendly documentation, bridging the human team and AI tooling in the development workflow.
+          </p>
+</div>
+<div class="pt-space-xs flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant bg-surface-container-lowest/60 px-space-md py-space-xs rounded">
+<span>VECTOR: Workflow Automation</span>
+<span class="text-tertiary flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-tertiary"></span> Active Daily</span>
+</div>
+</div>
+<!-- Card 2: JavaScript (Node.js + TypeScript) (90%) -->
+<div class="tech-card flex flex-col justify-between bg-surface-container-low rounded-xl p-space-md shadow-sm border border-outline-variant/20 gap-space-md" data-category="core">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm min-w-0">
+<span class="p-2 rounded bg-surface-container-high text-primary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">data_object</span>
+</span>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider block">CORE_RUNTIME</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-tight">JavaScript (Node.js + TypeScript)</h2>
+</div>
+</div>
+<span class="font-code-block text-headline-md font-semibold text-tertiary shrink-0">90%</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full transition-all duration-700" style="width: 90%;"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            It's the language/stack that recurs throughout my career: backend, automation, integrations, cloud projects, PWA, orchestration. Maybe I don't know everything and TypeScript surprises me every time, but by now JS is my home.
+          </p>
+</div>
+<div class="pt-space-xs flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant bg-surface-container-lowest/60 px-space-md py-space-xs rounded">
+<span>VECTOR: Full-Stack &amp; Orchestration</span>
+<span class="text-tertiary flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-tertiary"></span> Native Stack</span>
+</div>
+</div>
+<!-- Card 3: CI/CD & Automation (Jenkins, GitLab, Bamboo) (80%) -->
+<div class="tech-card flex flex-col justify-between bg-surface-container-low rounded-xl p-space-md shadow-sm border border-outline-variant/20 gap-space-md" data-category="core systems">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm min-w-0">
+<span class="p-2 rounded bg-surface-container-high text-primary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">sync_alt</span>
+</span>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider block">PIPELINE_ORCHESTRATION</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-tight">CI/CD &amp; Automation (Jenkins, GitLab, Bamboo)</h2>
+</div>
+</div>
+<span class="font-code-block text-headline-md font-semibold text-on-surface shrink-0">80%</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full transition-all duration-700" style="width: 80%;"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            I've introduced automations, selected tools, optimized pipelines and internal processes. Solid competence, both in processes and R&amp;D.
+          </p>
+</div>
+<div class="pt-space-xs flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant bg-surface-container-lowest/60 px-space-md py-space-xs rounded">
+<span>VECTOR: Release Engineering</span>
+<span class="text-on-surface-variant">Production Hardened</span>
+</div>
+</div>
+<!-- Card 4: Frontend Architecture (React.js, Angular, Vanilla JS) (80%) -->
+<div class="tech-card flex flex-col justify-between bg-surface-container-low rounded-xl p-space-md shadow-sm border border-outline-variant/20 gap-space-md" data-category="core">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm min-w-0">
+<span class="p-2 rounded bg-surface-container-high text-primary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">layers</span>
+</span>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider block">CLIENT_TOPOLOGY</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-tight">Frontend Architecture (React.js, Angular, Vanilla JS)</h2>
+</div>
+</div>
+<span class="font-code-block text-headline-md font-semibold text-on-surface shrink-0">80%</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full transition-all duration-700" style="width: 80%;"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            I've led frontend teams, defined RAD components, re-engineered products, developed PWAs. I know lifecycle, rendering, and structuring complex UI architectures.
+          </p>
+</div>
+<div class="pt-space-xs flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant bg-surface-container-lowest/60 px-space-md py-space-xs rounded">
+<span>VECTOR: Design Systems &amp; UX Perf</span>
+<span class="text-on-surface-variant">Staff Experience</span>
+</div>
+</div>
+<!-- Card 5: PHP (Symfony, Zend, legacy-to-modern) (85%) -->
+<div class="tech-card flex flex-col justify-between bg-surface-container-low rounded-xl p-space-md shadow-sm border border-outline-variant/20 gap-space-md" data-category="core systems">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm min-w-0">
+<span class="p-2 rounded bg-surface-container-high text-primary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">dns</span>
+</span>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider block">ENTERPRISE_LEGACY_MODERN</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-tight">PHP (Symfony, Zend, legacy-to-modern)</h2>
+</div>
+</div>
+<span class="font-code-block text-headline-md font-semibold text-on-surface shrink-0">85%</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full transition-all duration-700" style="width: 85%;"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            I've developed and maintained Zend APIs for years. Recently I worked with Symfony on medium-sized projects. Even if it's less central for me today, the level is definitely expert.
+          </p>
+</div>
+<div class="pt-space-xs flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant bg-surface-container-lowest/60 px-space-md py-space-xs rounded">
+<span>VECTOR: Enterprise Migration</span>
+<span class="text-on-surface-variant">High Maturity</span>
+</div>
+</div>
+<!-- Card 6: Advanced Architectures (DDD, Event-Driven, CQRS) (65%) -->
+<div class="tech-card flex flex-col justify-between bg-surface-container-low rounded-xl p-space-md shadow-sm border border-outline-variant/20 gap-space-md" data-category="systems">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm min-w-0">
+<span class="p-2 rounded bg-surface-container-high text-primary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">account_tree</span>
+</span>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider block">DOMAIN_STRATEGY</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-tight">Advanced Architectures (DDD, Event-Driven, CQRS)</h2>
+</div>
+</div>
+<span class="font-code-block text-headline-md font-semibold text-on-surface shrink-0">65%</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full transition-all duration-700" style="width: 65%;"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Studying advanced architectures to increase robustness, scalability and clarity of complex systems I manage, improving quality of technical decisions and design processes.
+          </p>
+</div>
+<div class="pt-space-xs flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant bg-surface-container-lowest/60 px-space-md py-space-xs rounded">
+<span>VECTOR: Distributed Patterns</span>
+<span class="text-primary flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Active Focus</span>
+</div>
+</div>
+<!-- Card 7: Cloud & Distributed Systems (Docker, Kubernetes) (60%) -->
+<div class="tech-card flex flex-col justify-between bg-surface-container-low rounded-xl p-space-md shadow-sm border border-outline-variant/20 gap-space-md" data-category="systems">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm min-w-0">
+<span class="p-2 rounded bg-surface-container-high text-primary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+</span>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider block">INFRA_SCALING</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-tight">Cloud &amp; Distributed Systems (Docker, Kubernetes)</h2>
+</div>
+</div>
+<span class="font-code-block text-headline-md font-semibold text-on-surface shrink-0">60%</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full transition-all duration-700" style="width: 60%;"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            In my recent experiences I brought a product natively distributed on K8s with 100+ machines, pipelines, containerization and business continuity. I'm not a pure DevOps, but I have concrete experience with real architectures.
+          </p>
+</div>
+<div class="pt-space-xs flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant bg-surface-container-lowest/60 px-space-md py-space-xs rounded">
+<span>VECTOR: 100+ Nodes Multi-Cluster</span>
+<span class="text-on-surface-variant">Applied Production</span>
+</div>
+</div>
+<!-- Card 8: Cloud Provider Deep Dive (AWS, GCP, Azure) (50%) -->
+<div class="tech-card flex flex-col justify-between bg-surface-container-low rounded-xl p-space-md shadow-sm border border-outline-variant/20 gap-space-md" data-category="systems">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm min-w-0">
+<span class="p-2 rounded bg-surface-container-high text-primary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">cloud</span>
+</span>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider block">HYPERSCALER_ECOSYSTEMS</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-tight">Cloud Provider Deep Dive (AWS, GCP, Azure)</h2>
+</div>
+</div>
+<span class="font-code-block text-headline-md font-semibold text-on-surface shrink-0">50%</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full transition-all duration-700" style="width: 50%;"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Deepening knowledge of major cloud providers to consolidate architectural skills on managed services, security, networking and scalability, fundamental for supporting modern enterprise solutions.
+          </p>
+</div>
+<div class="pt-space-xs flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant bg-surface-container-lowest/60 px-space-md py-space-xs rounded">
+<span>VECTOR: Enterprise IAM &amp; Networking</span>
+<span class="text-secondary flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-secondary"></span> Ongoing Study</span>
+</div>
+</div>
+<!-- Card 9: Machine Learning (40%) -->
+<div class="tech-card flex flex-col justify-between bg-surface-container-low rounded-xl p-space-md shadow-sm border border-outline-variant/20 gap-space-md" data-category="frontier">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm min-w-0">
+<span class="p-2 rounded bg-surface-container-high text-primary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">model_training</span>
+</span>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider block">APPLIED_INTELLIGENCE</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-tight">Machine Learning</h2>
+</div>
+</div>
+<span class="font-code-block text-headline-md font-semibold text-on-surface shrink-0">40%</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full transition-all duration-700" style="width: 40%;"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Focusing on Machine Learning to enhance predictive and analytical capabilities of products I oversee, integrating intelligence into decision-making flows and internal automations.
+          </p>
+</div>
+<div class="pt-space-xs flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant bg-surface-container-lowest/60 px-space-md py-space-xs rounded">
+<span>VECTOR: Predictive Analytics &amp; Flows</span>
+<span class="text-secondary flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-secondary"></span> Exploratory</span>
+</div>
+</div>
+<!-- Card 10: WebAssembly (WASM) (20%) -->
+<div class="tech-card flex flex-col justify-between bg-surface-container-low rounded-xl p-space-md shadow-sm border border-outline-variant/20 gap-space-md" data-category="frontier">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm min-w-0">
+<span class="p-2 rounded bg-surface-container-high text-primary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">memory</span>
+</span>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider block">LOW_LEVEL_SANDBOX</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-tight">WebAssembly (WASM)</h2>
+</div>
+</div>
+<span class="font-code-block text-headline-md font-semibold text-on-surface shrink-0">20%</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-surface-container-highest h-full rounded-full transition-all duration-700" style="width: 20%;"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Studying WebAssembly to evaluate new high-performance solutions in the browser and server-side contexts, with the goal of bringing efficiency and portability to distributed and real-time scenarios.
+          </p>
+</div>
+<div class="pt-space-xs flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant bg-surface-container-lowest/60 px-space-md py-space-xs rounded">
+<span>VECTOR: Native Client Compute</span>
+<span class="text-on-surface-variant flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-surface-container-highest"></span> Early Research</span>
+</div>
+</div>
+</div>
+<!-- Telemetry Spectrum Visual Breakdown -->
+<div class="w-full bg-surface-container-low rounded-xl p-space-md flex flex-col gap-space-md border border-outline-variant/20">
+<div class="flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">query_stats</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Proficiency Distribution Spectrum</span>
+</div>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
+        Aggregated Experience Index
+      </div>
+<!-- Segmented Bar Visualization -->
+<div class="w-full h-3 rounded-full bg-surface-container-lowest overflow-hidden flex gap-0.5 p-0.5">
+<div class="h-full bg-tertiary rounded-l-full" style="width: 40%;" title="Core Stack (TS, PHP) (40%)"></div>
+<div class="h-full bg-primary" style="width: 30%;" title="AI &amp; Pipelines (30%)"></div>
+<div class="h-full bg-secondary" style="width: 20%;" title="Systems &amp; K8s (20%)"></div>
+<div class="h-full bg-surface-bright rounded-r-full" style="width: 10%;" title="WASM &amp; Frontiers (10%)"></div>
+</div>
+<!-- 2x2 Legend on mobile -->
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="h-2 w-2 rounded-full bg-tertiary shrink-0"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Core Stack (TS, PHP)</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="h-2 w-2 rounded-full bg-primary shrink-0"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">AI &amp; Pipelines</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="h-2 w-2 rounded-full bg-secondary shrink-0"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Systems &amp; K8s</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="h-2 w-2 rounded-full bg-surface-bright shrink-0"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">WASM &amp; Frontiers</span>
+</div>
+</div>
+</div>
+<!-- Bottom Inter-Section Transition Anchor -->
+<div class="flex flex-col gap-space-md bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/20">
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">terminal</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Next Chapter</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-medium leading-snug">Ready to discuss system design or staff collaborations?</span>
+</div>
+</div>
+<a class="w-full py-space-sm rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-md text-label-md transition-all flex items-center justify-center gap-space-xs border border-outline-variant/30" data-path="contact" href="#contact">
+<span class="text-primary font-code-inline">04.</span>
+<span>Get in Touch</span>
+<span class="material-symbols-outlined text-[16px] text-primary">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Mobile Footer -->
+<footer class="w-full bg-surface-container-lowest border-t border-outline-variant/30 mt-space-md">
+<div class="px-gutter py-6 flex flex-col items-center gap-4 text-center">
+<p class="font-label-md text-label-md text-on-surface-variant">
+        Designed &amp; Built by Luca Palomba — System Architecture &amp; Engineering
+      </p>
+<div class="flex items-center gap-6">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" href="https://github.com" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+<span>GitHub</span>
+</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" href="https://linkedin.com" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[16px]">hub</span>
+<span>LinkedIn</span>
+</a>
+<span class="font-label-sm text-label-sm text-on-surface-variant/70">© 2025 Luca Palomba</span>
+</div>
+</div>
+</footer>
+</main>
+<!-- Bottom Navigation for Mobile iOS -->
+<nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/85 backdrop-blur-xl border-t border-outline-variant/20 shadow-[0_-1px_8px_rgba(0,0,0,0.15)]" data-active-classes="text-primary font-headline-sm">
+<div class="flex justify-around items-center h-16 px-gutter">
+<a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="who-am-i" href="#">
+<span class="material-symbols-outlined text-[20px]">person</span>
+<span class="font-label-sm text-[11px] mt-0.5">Who am I</span>
+</a>
+<a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="experience" href="#">
+<span class="material-symbols-outlined text-[20px]">account_tree</span>
+<span class="font-label-sm text-[11px] mt-0.5">Experience</span>
+</a>
+<a aria-current="page" class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] text-primary transition-colors font-medium" data-path="technologies" href="#">
+<span class="material-symbols-outlined text-[20px]">layers</span>
+<span class="font-label-sm text-[11px] mt-0.5">Stack</span>
+</a>
+<a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="contact" href="#">
+<span class="material-symbols-outlined text-[20px]">alternate_email</span>
+<span class="font-label-sm text-[11px] mt-0.5">Contact</span>
+</a>
+</div>
+</nav>
+<!-- Interactive Filtering Logic -->
+<script>
+  function filterTech(category) {
+    const cards = document.querySelectorAll('#tech-matrix .tech-card');
+    const buttons = document.querySelectorAll('#filter-controls .filter-btn');
+
+    buttons.forEach((btn) => {
+      if (btn.getAttribute('data-filter') === category) {
+        btn.className = 'filter-btn shrink-0 px-space-md py-space-xs rounded font-label-md text-label-md bg-surface-container-high text-on-surface transition-all';
+      } else {
+        btn.className = 'filter-btn shrink-0 px-space-md py-space-xs rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all';
+      }
+    });
+
+    cards.forEach((card) => {
+      const itemCategories = card.getAttribute('data-category') || '';
+      if (category === 'all' || itemCategories.includes(category)) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
+</body></html>

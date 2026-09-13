@@ -43,7 +43,11 @@ jekyll-minifier:
 # cannot parse, and it is not site content. scratch/ holds CDP/UAT scripts
 # and screenshots — with `jekyll serve --livereload` every write there would
 # trigger a rebuild and reload the very page an automated browser session is
-# driving. .zed/ is editor config, not site content.
+# driving. docs/ holds the design reference (design-system-revamp.md plus the
+# vendored Stitch export: ~3 MB of mockup HTML and PNGs) — repo documentation,
+# not site content, and far too heavy to copy into _site on every build,
+# where htmlproofer and Lighthouse would also have to walk it. .zed/ is editor
+# config, not site content.
 exclude:
   - Gemfile
   - Gemfile.lock
@@ -55,6 +59,7 @@ exclude:
   - AGENTS.md
   - scripts
   - scratch
+  - docs
   - .zed
 
 # SEO settings

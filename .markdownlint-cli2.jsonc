@@ -15,6 +15,12 @@
     ".claude/worktrees/**",
     // Local tooling / assistant state (gitignored)
     ".opencode/**",
-    "scratch/**"
+    "scratch/**",
+    // Vendored third-party design export (docs/design-system-revamp.md documents it).
+    // Committed verbatim from the Google Stitch export, so it is not ours to reformat:
+    // DESIGN.md alone trips ~35 default rules (no top-level heading, headings and lists
+    // without surrounding blank lines, no trailing newline). Fixing it in place would make
+    // it drift from the export it is meant to record.
+    "docs/design/stitch/**"
   ]
 }

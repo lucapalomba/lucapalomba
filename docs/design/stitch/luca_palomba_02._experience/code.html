@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { 'colors': { 'error': '#ffb4ab', 'on-error': '#690005', 'on-secondary-container': '#e6ecff', 'surface-bright': '#373940', 'on-surface-variant': '#bcc9cd', 'on-primary': '#003640', 'tertiary-container': '#1bbd85', 'surface-container-low': '#191b22', 'secondary-fixed': '#d8e2ff', 'primary-container': '#06b6d4', 'outline': '#869397', 'primary': '#4cd7f6', 'primary-fixed': '#acedff', 'surface-container-lowest': '#0c0e14', 'on-primary-fixed-variant': '#004e5c', 'on-tertiary-fixed': '#002113', 'surface': '#111319', 'inverse-surface': '#e2e2ea', 'surface-tint': '#4cd7f6', 'on-background': '#e2e2ea', 'tertiary-fixed': '#6ffbbe', 'on-tertiary-container': '#00452e', 'on-surface': '#e2e2ea', 'on-secondary-fixed-variant': '#004395', 'surface-container-high': '#282a30', 'surface-container-highest': '#33343b', 'secondary': '#adc6ff', 'inverse-primary': '#00687a', 'on-primary-container': '#00424f', 'on-error-container': '#ffdad6', 'surface-dim': '#111319', 'outline-variant': '#3d494c', 'surface-variant': '#33343b', 'on-secondary': '#002e6a', 'background': '#111319', 'surface-container': '#1d1f26', 'secondary-container': '#0566d9', 'on-tertiary': '#003824', 'primary-fixed-dim': '#4cd7f6', 'error-container': '#93000a', 'tertiary': '#4edea3', 'on-tertiary-fixed-variant': '#005236', 'secondary-fixed-dim': '#adc6ff', 'tertiary-fixed-dim': '#4edea3', 'on-primary-fixed': '#001f26', 'on-secondary-fixed': '#001a42', 'inverse-on-surface': '#2e3037' }, 'borderRadius': { 'DEFAULT': '0.125rem', 'lg': '0.25rem', 'xl': '0.5rem', 'full': '0.75rem' }, 'spacing': { 'space-lg': '1.5rem', 'margin': '2rem', 'gutter': '1.5rem', 'space-sm': '0.5rem', 'space-xs': '0.25rem', 'space-md': '1rem', 'space-xl': '2.5rem' }, 'fontFamily': { 'code-block': ['JetBrains Mono', 'monospace'], 'headline-lg-mobile': ['Geist', 'sans-serif'], 'label-sm': ['JetBrains Mono', 'monospace'], 'headline-md': ['Geist', 'sans-serif'], 'body-sm': ['Geist', 'sans-serif'], 'body-lg': ['Geist', 'sans-serif'], 'display-mobile': ['Geist', 'sans-serif'], 'display': ['Geist', 'sans-serif'], 'headline-lg': ['Geist', 'sans-serif'], 'body-md': ['Geist', 'sans-serif'], 'code-inline': ['JetBrains Mono', 'monospace'], 'label-md': ['JetBrains Mono', 'monospace'], 'headline-sm': ['Geist', 'sans-serif'] }, 'fontSize': { 'code-block': ['0.875rem', { 'lineHeight': '1.6', 'letterSpacing': '-0.01em', 'fontWeight': '400' }], 'headline-lg-mobile': ['1.75rem', { 'lineHeight': '1.25', 'letterSpacing': '-0.02em', 'fontWeight': '600' }], 'label-sm': ['0.6875rem', { 'lineHeight': '1.3', 'letterSpacing': '0.06em', 'fontWeight': '500' }], 'headline-md': ['1.5rem', { 'lineHeight': '1.3', 'letterSpacing': '-0.02em', 'fontWeight': '500' }], 'body-sm': ['0.8125rem', { 'lineHeight': '1.5', 'letterSpacing': '0', 'fontWeight': '400' }], 'body-lg': ['1.125rem', { 'lineHeight': '1.6', 'letterSpacing': '-0.01em', 'fontWeight': '400' }], 'display-mobile': ['2.25rem', { 'lineHeight': '1.2', 'letterSpacing': '-0.025em', 'fontWeight': '600' }], 'display': ['3.5rem', { 'lineHeight': '1.1', 'letterSpacing': '-0.03em', 'fontWeight': '600' }], 'headline-lg': ['2.25rem', { 'lineHeight': '1.2', 'letterSpacing': '-0.025em', 'fontWeight': '600' }], 'body-md': ['0.9375rem', { 'lineHeight': '1.6', 'letterSpacing': '-0.005em', 'fontWeight': '400' }], 'code-inline': ['0.8125rem', { 'lineHeight': '1.4', 'letterSpacing': '-0.01em', 'fontWeight': '400' }], 'label-md': ['0.75rem', { 'lineHeight': '1.4', 'letterSpacing': '0.04em', 'fontWeight': '500' }], 'headline-sm': ['1.125rem', { 'lineHeight': '1.4', 'letterSpacing': '-0.01em', 'fontWeight': '500' }] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/90 backdrop-blur-xl border-b border-white/[0.04]"><div class="h-16 max-w-[1200px] mx-auto px-margin flex items-center justify-between"><div class="flex items-center gap-space-lg"><a class="flex items-center font-label-md text-label-md tracking-tight text-on-surface hover:text-primary transition-colors" data-path="who-am-i" href="#"><span class="text-primary mr-space-xs">&lt;</span>LP <span class="text-primary ml-space-xs">/&gt;</span></a><div class="hidden sm:flex items-center gap-space-xs px-space-sm py-0.5 rounded bg-surface-container-low border border-white/[0.04]"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span><span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Available for Staff Roles</span></div></div><nav class="hidden md:flex items-center gap-space-md"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="who-am-i" href="#"><span class="text-primary font-code-inline text-code-inline mr-1">01.</span>Who am I</a><a aria-current="page" class="font-label-md text-label-md text-on-surface bg-surface-container-high px-space-sm py-space-xs rounded transition-colors whitespace-nowrap" data-path="experience" href="#"><span class="text-primary font-code-inline text-code-inline mr-1">02.</span>Experience</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="technologies" href="#"><span class="text-primary font-code-inline text-code-inline mr-1">03.</span>Technologies</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="contact" href="#"><span class="text-primary font-code-inline text-code-inline mr-1">04.</span>Contact</a></nav><div class="flex items-center gap-space-md"><a class="px-space-md py-space-xs rounded bg-surface-container-low hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all flex items-center gap-space-xs border border-white/[0.04]" href="https://linkedin.com" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[16px] text-primary">description</span><span>Curriculum</span><span class="material-symbols-outlined text-[14px] text-on-surface-variant">arrow_outward</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-background min-h-screen"><div class="flex flex-col w-full">
+<!-- Ambient Light Well / Canvas Glow -->
+<div class="relative w-full overflow-hidden">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[850px] h-[360px] bg-gradient-to-b from-primary/5 via-tertiary/5 to-transparent blur-3xl pointer-events-none -z-10"></div>
+<div class="max-w-[1200px] mx-auto px-margin py-space-xl">
+<!-- Section Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-xl pb-space-lg border-b border-white/[0.06]">
+<div><div class="flex items-center gap-space-xs mb-space-xs"><span class="font-code-inline text-label-sm text-primary">//</span><span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Trace &amp; Milestones // Career Vector</span></div><h1 class="text-[2.75rem] md:text-[3.5rem] leading-[1.1] font-bold text-on-surface tracking-tight flex items-baseline gap-x-3 mb-1"><span class="text-primary font-code-inline font-semibold">02.</span><span class="text-on-surface">Work experiences</span></h1><p class="font-body-lg text-body-lg text-on-surface-variant mt-space-xs max-w-xl">Selected roles and projects across my career, from distributed software architecture to team leadership and AI-augmented engineering.</p></div>
+<!-- Telemetry Summary Metric Pill -->
+<div class="flex items-center gap-space-sm p-space-sm bg-surface-container-low rounded-lg shadow-sm border border-white/[0.05]">
+<div class="px-space-md py-space-xs rounded bg-surface-container">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant block">Cumulative Tenure</span>
+<span class="font-label-md text-label-md text-tertiary font-code-inline">18+ Years Active</span>
+</div>
+<div class="px-space-md py-space-xs rounded bg-surface-container">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant block">Teams Scaled</span>
+<span class="font-label-md text-label-md text-primary font-code-inline">Up to 20 Eng</span>
+</div>
+</div>
+</div>
+<!-- Main Layout: 12-column architecture (8 cols timeline, 4 cols executive telemetry) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left: Chronological Experience Feed (8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-space-lg">
+<!-- Experience Card 1: Vigilate SRL -->
+<div class="rounded-xl bg-surface-container-low p-space-lg shadow-sm border border-white/[0.06] hover:border-white/[0.14] transition-all flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-xs pb-space-sm border-b border-white/[0.04]">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-baseline flex-wrap gap-x-2">
+<span>Senior Full Stack Developer • AI Enabler</span>
+<span class="text-primary font-body-md font-medium">@ Vigilate SRL</span>
+</h2>
+<span class="font-code-inline text-label-sm text-tertiary whitespace-nowrap">Feb 2026 — Present</span>
+</div>
+<ul class="space-y-space-xs text-on-surface-variant font-body-md text-body-md">
+<li class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span>Analyzing and redesigning development processes to optimize human/AI coordination across the product engineering lifecycle.</span>
+</li>
+<li class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span>Redesigning and maintaining automation development and continuous deployment pipelines (CI/CD).</span>
+</li>
+<li class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span>Keeping software quality, reliability guarantees, and computing resource utilization strictly coordinated.</span>
+</li>
+</ul>
+<div class="flex flex-wrap gap-space-xs pt-space-sm border-t border-white/[0.04]">
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">AI Process Design</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">Automation</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">CI/CD</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">Full Stack</span>
+</div>
+</div>
+<!-- Experience Card 2: P&B Linking / CO.GEN -->
+<div class="rounded-xl bg-surface-container-low p-space-lg shadow-sm border border-white/[0.06] hover:border-white/[0.14] transition-all flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-xs pb-space-sm border-b border-white/[0.04]">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-baseline flex-wrap gap-x-2">
+<span>Senior Full Stack Developer • Head of R&amp;D</span>
+<span class="text-primary font-body-md font-medium">@ P&amp;B Linking / CO.GEN</span>
+</h2>
+<span class="font-code-inline text-label-sm text-on-surface-variant whitespace-nowrap">Dec 2020 — May 2025</span>
+</div>
+<ul class="space-y-space-xs text-on-surface-variant font-body-md text-body-md">
+<li class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span>Led R&amp;D activities for the Openware PSIM enterprise platform and structured high-bandwidth coordination bridges between core engineering and stakeholders.</span>
+</li>
+<li class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span>Organized workflow through disciplined SCRUM ceremonies, cutting delivery friction and cycle drift.</span>
+</li>
+<li class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span>Reduced infrastructure and tooling operational expenses by ~50% within a single calendar year through architectural consolidation.</span>
+</li>
+<li class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span>Led product research, technical analysis, and architectural roadmaps, managing up to 20 engineers across 4 cross-functional product squads.</span>
+</li>
+</ul>
+<!-- Key Project Callout -->
+<div class="p-space-md rounded bg-surface-container border-l-2 border-primary">
+<div class="flex items-center gap-space-xs mb-1">
+<span class="font-code-inline text-label-sm text-primary uppercase">Key project: Openware PSIM</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">Physical Security Information Management platform coordinating mission-critical enterprise security subsystems.</p>
+</div>
+<div class="flex flex-wrap gap-space-xs pt-space-sm border-t border-white/[0.04]">
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">Cloud Architecture</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">Leading</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">Docker</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">Kubernetes</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">SCRUM</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">React</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">Node.js</span>
+</div>
+</div>
+<!-- Experience Card 3: Novigo-Consulting -->
+<div class="rounded-xl bg-surface-container-low p-space-lg shadow-sm border border-white/[0.06] hover:border-white/[0.14] transition-all flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-xs pb-space-sm border-b border-white/[0.04]">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-baseline flex-wrap gap-x-2">
+<span>Full Stack Developer • Team Lead</span>
+<span class="text-primary font-body-md font-medium">@ Novigo-Consulting</span>
+</h2>
+<span class="font-code-inline text-label-sm text-on-surface-variant whitespace-nowrap">Nov 2016 — Nov 2020</span>
+</div>
+<ul class="space-y-space-xs text-on-surface-variant font-body-md text-body-md">
+<li class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span>Designed and implemented enterprise application architecture utilizing robust Zend APIs, performant React frontends, and automated Node.js workflows.</span>
+</li>
+<li class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span>Served as project and engineering team lead for national and international development groups, managing up to 20 people.</span>
+</li>
+<li class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span>Oversaw third-party software/service selection, integration verification, and regression pipelines in the capacity of R&amp;D Manager.</span>
+</li>
+</ul>
+<div class="flex flex-wrap gap-space-xs pt-space-sm border-t border-white/[0.04]">
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">Leading</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">React</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">Node.js</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">PHP / Zend Framework</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">Automation</span>
+</div>
+</div>
+<!-- Experience Card 4: Publidesign s.r.l. -->
+<div class="rounded-xl bg-surface-container-low p-space-lg shadow-sm border border-white/[0.06] hover:border-white/[0.14] transition-all flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-xs pb-space-sm border-b border-white/[0.04]">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-baseline flex-wrap gap-x-2">
+<span>CTO • Full Stack Developer</span>
+<span class="text-primary font-body-md font-medium">@ Publidesign s.r.l.</span>
+</h2>
+<span class="font-code-inline text-label-sm text-on-surface-variant whitespace-nowrap">2015 — 2016</span>
+</div>
+<ul class="space-y-space-xs text-on-surface-variant font-body-md text-body-md">
+<li class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span>Architected and delivered custom enterprise solutions and plugins for WordPress client ecosystems.</span>
+</li>
+<li class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span>Served as Chief Technology Officer for the Baucoin venture incubator.</span>
+</li>
+</ul>
+<!-- Key Project Callout -->
+<div class="p-space-md rounded bg-surface-container border-l-2 border-primary">
+<div class="flex items-center gap-space-xs mb-1">
+<span class="font-code-inline text-label-sm text-primary uppercase">Key project: Baucoin</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">Platform for managing credits for circular economy based on services for pets.</p>
+</div>
+<div class="flex flex-wrap gap-space-xs pt-space-sm border-t border-white/[0.04]">
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">WordPress</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">Startup</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">Leading</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">PHP</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">Node.js</span>
+</div>
+</div>
+<!-- Experience Card 5: TargatoBS -->
+<div class="rounded-xl bg-surface-container-low p-space-lg shadow-sm border border-white/[0.06] hover:border-white/[0.14] transition-all flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-xs pb-space-sm border-b border-white/[0.04]">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-baseline flex-wrap gap-x-2">
+<span>Founder • Startupper • Pitcher</span>
+<span class="text-primary font-body-md font-medium">@ TargatoBS</span>
+</h2>
+<span class="font-code-inline text-label-sm text-on-surface-variant whitespace-nowrap">2012 — 2016</span>
+</div>
+<ul class="space-y-space-xs text-on-surface-variant font-body-md text-body-md">
+<li class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span>Explored creative technical and entrepreneurial avenues to drive personal expression and community innovation.</span>
+</li>
+<li class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span>Competed in hackathons and startup contests, won awards, presented at tech gatherings, and graduated business school modules.</span>
+</li>
+<li class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span>Formative realization: grounding pure technical prowess with deep soft skills and communicative empathy.</span>
+</li>
+</ul>
+<!-- Key Project Callout -->
+<div class="p-space-md rounded bg-surface-container border-l-2 border-primary">
+<div class="flex items-center gap-space-xs mb-1">
+<span class="font-code-inline text-label-sm text-primary uppercase">Key project: BREIM</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">Product for the management of real estate sales.</p>
+</div>
+<div class="flex flex-wrap gap-space-xs pt-space-sm border-t border-white/[0.04]">
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">Startup</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">Soft Skills</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">Public Speaking</span>
+</div>
+</div>
+<!-- Experience Card 6: DuckMa s.r.l. -->
+<div class="rounded-xl bg-surface-container-low p-space-lg shadow-sm border border-white/[0.06] hover:border-white/[0.14] transition-all flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-xs pb-space-sm border-b border-white/[0.04]">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-baseline flex-wrap gap-x-2">
+<span>Full Stack Developer</span>
+<span class="text-primary font-body-md font-medium">@ DuckMa s.r.l.</span>
+</h2>
+<span class="font-code-inline text-label-sm text-on-surface-variant whitespace-nowrap">Oct 2013 — 2014</span>
+</div>
+<ul class="space-y-space-xs text-on-surface-variant font-body-md text-body-md">
+<li class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span>Engineered robust RESTful backend APIs with low latency response times using Node.js and PHP.</span>
+</li>
+<li class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span>Pioneered early Progressive Web App (PWA) workflows and hybrid mobile setups using Apache Cordova and Ionic.</span>
+</li>
+<li class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span>Contributed key architectural UI/UX wireframes and interaction patterns for PHONOTTO launcher.</span>
+</li>
+</ul>
+<div class="flex flex-wrap gap-space-xs pt-space-sm border-t border-white/[0.04]">
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">Node.js</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">PHP</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">Ionic</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">PWA</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">UI/UX</span>
+</div>
+</div>
+<!-- Experience Card 7: System 2000 s.r.l. -->
+<div class="rounded-xl bg-surface-container-low p-space-lg shadow-sm border border-white/[0.06] hover:border-white/[0.14] transition-all flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-xs pb-space-sm border-b border-white/[0.04]">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-baseline flex-wrap gap-x-2">
+<span>Web Developer</span>
+<span class="text-primary font-body-md font-medium">@ System 2000 s.r.l.</span>
+</h2>
+<span class="font-code-inline text-label-sm text-on-surface-variant whitespace-nowrap">Dec 2007 — Sep 2012</span>
+</div>
+<ul class="space-y-space-xs text-on-surface-variant font-body-md text-body-md">
+<li class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span>Delivered mission-critical IT consultancy for multi-tier regional and national infrastructure projects.</span>
+</li>
+<li class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span>Developed high-reliability healthcare record and clinical management systems on the .NET framework.</span>
+</li>
+<li class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span>Created dynamic biomedical data visualization dashboards for the VIGILO telemetry and wearable sensor platform.</span>
+</li>
+</ul>
+<div class="flex flex-wrap gap-space-xs pt-space-sm border-t border-white/[0.04]">
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">.NET</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">C#</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest">Data Visualization</span>
+</div>
+</div>
+</div>
+<!-- Right: Executive Telemetry & Technical Insights Sidebar (4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-space-lg">
+<!-- Career Architecture Snapshot -->
+<div class="rounded-xl bg-surface-container-low p-space-lg shadow-sm border border-white/[0.06] sticky top-24">
+<div class="flex items-center justify-between pb-space-sm border-b border-white/[0.04] mb-space-md">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider">Telemetry // Leadership</span>
+<span class="material-symbols-outlined text-[18px] text-primary">query_stats</span>
+</div>
+<!-- SVG Career Timeline Distribution Graphic -->
+<div class="p-space-sm rounded bg-surface-container-lowest border border-white/[0.04] mb-space-md">
+<div class="flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant mb-2">
+<span>Timeline Span</span>
+<span class="font-code-inline text-tertiary">2007 → 2026+</span>
+</div>
+<svg class="w-full h-14" fill="none" viewbox="0 0 280 44" xmlns="http://www.w3.org/2000/svg">
+<!-- Grid lines -->
+<line class="text-outline-variant/40" stroke="currentColor" stroke-width="1" x1="0" x2="280" y1="36" y2="36"></line>
+<line class="text-outline-variant/20" stroke="currentColor" stroke-dasharray="2 2" stroke-width="1" x1="70" x2="70" y1="10" y2="36"></line>
+<line class="text-outline-variant/20" stroke="currentColor" stroke-dasharray="2 2" stroke-width="1" x1="140" x2="140" y1="10" y2="36"></line>
+<line class="text-outline-variant/20" stroke="currentColor" stroke-dasharray="2 2" stroke-width="1" x1="210" x2="210" y1="10" y2="36"></line>
+<!-- Timeline segments -->
+<rect class="text-on-surface-variant/40" fill="currentColor" height="4" rx="2" width="70" x="0" y="32"></rect>
+<rect class="text-secondary" fill="currentColor" height="6" rx="2" width="55" x="75" y="30"></rect>
+<rect class="text-primary" fill="currentColor" height="8" rx="2" width="60" x="135" y="28"></rect>
+<rect class="text-tertiary" fill="currentColor" height="12" rx="2" width="65" x="200" y="24"></rect>
+<circle class="text-tertiary animate-pulse" cx="268" cy="30" fill="currentColor" r="3"></circle>
+<!-- Text labels -->
+<text class="text-[9px] font-label-sm text-on-surface-variant" fill="currentColor" x="2" y="20">Sys2000</text>
+<text class="text-[9px] font-label-sm text-on-surface-variant" fill="currentColor" x="75" y="20">Venture</text>
+<text class="text-[9px] font-label-sm text-primary" fill="currentColor" x="140" y="16">Novigo</text>
+<text class="text-[9px] font-label-sm text-tertiary" fill="currentColor" x="205" y="12">P&amp;B / R&amp;D</text>
+</svg>
+</div>
+<!-- Key Metric Rows -->
+<div class="space-y-space-xs font-label-md text-label-md">
+<div class="flex items-center justify-between py-space-xs border-b border-white/[0.03]">
+<span class="text-on-surface-variant font-code-inline">LEADERSHIP_MAX:</span>
+<span class="text-on-surface font-code-inline">20 Engineers / 4 Squads</span>
+</div>
+<div class="flex items-center justify-between py-space-xs border-b border-white/[0.03]">
+<span class="text-on-surface-variant font-code-inline">OPEX_REDUCTION:</span>
+<span class="text-tertiary font-code-inline">~50% in 12 Months</span>
+</div>
+<div class="flex items-center justify-between py-space-xs border-b border-white/[0.03]">
+<span class="text-on-surface-variant font-code-inline">METHODOLOGY:</span>
+<span class="text-on-surface font-code-inline">SCRUM / CI-CD / AI-Assisted</span>
+</div>
+<div class="flex items-center justify-between py-space-xs border-b border-white/[0.03]">
+<span class="text-on-surface-variant font-code-inline">R&amp;D_SPECIALIZATION:</span>
+<span class="text-primary font-code-inline">Openware PSIM &amp; Distributed Systems</span>
+</div>
+</div>
+<!-- Architectural Quote Callout -->
+<div class="mt-space-md p-space-md rounded bg-surface-container-highest/60">
+<span class="font-code-inline text-[11px] text-tertiary uppercase tracking-wider block mb-1">// Career Philosophy</span>
+<p class="font-body-sm text-body-sm text-on-surface italic">
+  “Realizing technical architecture reaches its highest ceiling only when paired with intentional human coordination, empathy, and pragmatic automation.”
+</p>
+</div>
+<!-- Next Phase Action Card -->
+<div class="mt-space-lg p-space-md rounded-xl bg-gradient-to-br from-surface-container to-surface-container-high border border-white/[0.08]">
+<div class="flex items-center gap-space-xs mb-space-xs">
+<span class="font-code-inline text-code-inline text-primary">03.</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface">Explore Core Stack</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">
+  Review specific framework mastery, infrastructure tools, languages, and orchestration benchmarks.
+</p>
+<a class="w-full py-space-xs px-space-md bg-on-surface text-surface font-label-md text-label-md rounded flex items-center justify-center gap-space-xs hover:opacity-90 transition-opacity" data-path="technologies" href="#">
+<span>View Technologies</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Progression Strip -->
+<div class="mt-space-xl pt-space-lg border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-space-xs" data-path="who-am-i" href="#">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+<span>01. Who am I</span>
+</a>
+<a class="font-label-md text-label-md text-primary hover:text-on-surface transition-colors flex items-center gap-space-xs" data-path="technologies" href="#">
+<span>03. Technologies</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div></main><footer class="w-full bg-surface-container-lowest border-t border-white/[0.04]"><div class="max-w-[1200px] mx-auto px-margin py-space-xl flex flex-col md:flex-row items-center justify-between gap-space-lg"><div class="flex flex-col items-center md:items-start gap-space-xs"><p class="font-label-md text-label-md text-on-surface-variant">Designed &amp; Built by Luca Palomba — System Architecture &amp; Engineering</p></div><div class="flex items-center gap-space-md font-label-md text-label-md text-on-surface-variant"><a class="hover:text-primary transition-colors flex items-center gap-space-xs" href="https://github.com" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[16px]">terminal</span><span>GitHub</span></a><span class="text-outline-variant">·</span><a class="hover:text-primary transition-colors flex items-center gap-space-xs" href="https://linkedin.com" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[16px]">hub</span><span>LinkedIn</span></a><span class="text-outline-variant">·</span><span class="font-label-sm text-label-sm text-on-surface-variant">© 2025 Luca Palomba</span></div></div></footer></body></html>
