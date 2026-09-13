@@ -53,6 +53,7 @@ const PRECACHE_URLS = [
   './404.html',
   './manifest.webmanifest',
   './styles/fonts.css',
+  './styles/tokens.css',
   './styles/transitions.css',
   './styles/main.css',
   './styles/mobile.css',
