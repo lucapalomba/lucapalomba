@@ -1,0 +1,109 @@
+/* ---------------------------------------------------------------------------
+   Motion layer — "Obsidian Precision"
+
+   Authored here rather than ported: DESIGN.md defines no durations, easings or
+   choreography, and the export's per-file prototypes share no vocabulary, are
+   never scroll-triggered and contain no prefers-reduced-motion handling.
+
+   The vocabulary: one earned entrance reveal (`fadeSlideUp`) for section
+   headers and cards, a one-shot `sparkline-draw` on the telemetry line, a
+   one-shot `timelineFill` on the career timeline, and exactly one live signal
+   (the single-cycle status ping, defined with `.ping-dot` in components.css).
+
+   Elements are hidden until `js/motion.js` adds `.in` when they enter the
+   viewport, so nothing animates off-screen. Under `prefers-reduced-motion`
+   the base state is fully visible with no transform, and motion.js does not
+   observe at all.
+   --------------------------------------------------------------------------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.reveal.in {
+  animation: fade-slide-up var(--duration-slow) var(--ease-expo-out) forwards;
+}
+
+/* Stagger: set --reveal-delay on the element (or its parent) in the markup. */
+.reveal.in {
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+@keyframes fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Telemetry sparkline self-draw, one shot. */
+.sparkline-draw path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+
+.sparkline-draw.in path {
+  animation: sparkline-draw 2.4s var(--ease-expo-out) forwards;
+}
+
+@keyframes sparkline-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Career timeline bars grow from their own left edge.
+   `transform-box: fill-box` is required for SVG: the initial value is
+   `view-box`, which would resolve `transform-origin: left` to the viewBox's
+   edge instead of each element's own — the export ships this bug. */
+.timeline-fill {
+  transform-box: fill-box;
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.timeline-fill.in {
+  animation: timeline-fill 1.4s var(--ease-expo-out) forwards;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+@keyframes timeline-fill {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Single-cycle status ping (not the export's infinite animate-ping). */
+@keyframes ping-once {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .reveal,
+  .sparkline-draw path,
+  .timeline-fill {
+    opacity: 1;
+    transform: none;
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+
+  .ping-dot::after {
+    animation: none;
+  }
+}
