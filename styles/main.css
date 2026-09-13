@@ -51,19 +51,6 @@ html.js body {
   top: 0;
 }
 
-/* Particles Container */
-#particles-js {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  /* auto: lets particles.js receive mousemove for the on-hover "grab" effect.
-     Set to none by accident in 0ca2d9d (404-page refactor); restored here. */
-  pointer-events: auto;
-}
-
 /* Typography & Shared Components */
 h1 {
   /* Default h1 style from experiences.html, can be overridden */
@@ -110,8 +97,8 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 50px;
-  height: 100px;
+  padding: 0 var(--margin);
+  height: var(--nav-height);
   position: fixed;
   top: 0;
   width: 100%;
@@ -120,15 +107,34 @@ h1 {
   pointer-events: auto;
   background: var(--nav-bg);
   backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .logo a {
-  color: var(--accent-color);
-  font-family: var(--font-main);
-  font-size: 1.5rem;
-  font-weight: 700;
+  color: var(--primary);
+  font-family: var(--font-mono);
+  font-size: 1.125rem;
+  font-weight: 600;
   text-decoration: none;
   letter-spacing: 1px;
+}
+
+/* Availability badge in the navbar: status dot + label, mono, uppercase. */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+  font-weight: var(--label-sm-weight);
+  letter-spacing: var(--label-sm-tracking);
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+  background: var(--surface-container-low);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.5rem;
+  white-space: nowrap;
 }
 
 .nav-links {
@@ -146,32 +152,32 @@ h1 {
 }
 
 .nav-links a {
-  color: var(--text-primary);
+  color: var(--on-surface);
   text-decoration: none;
   font-size: 13px;
-  font-family: var(--font-main);
+  font-family: var(--font-ui);
   transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: var(--accent-color);
+  color: var(--primary);
 }
 
 .nav-links a:focus {
-  outline: 2px solid var(--accent-color);
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
 /* Indicate current page for screen readers and keyboard users */
 .nav-links a[aria-current="page"] {
-  border-bottom: 2px solid var(--accent-color);
+  border-bottom: 2px solid var(--primary);
   padding-bottom: 4px;
 }
 
 .nav-number {
-  color: var(--accent-color);
+  color: var(--primary);
   margin-right: 5px;
-  font-family: var(--font-main);
+  font-family: var(--font-mono);
 }
 
 /* Button Utilities (Common styles) */
@@ -179,15 +185,16 @@ a.resume-btn,
 a.mobile-resume-btn,
 a.hero-cta,
 a.home-btn {
-  color: var(--text-tertiary);
-  border: 1px solid var(--accent-color);
-  border-radius: 4px;
-  padding: 0.75rem 1rem;
-  font-family: var(--font-main);
+  color: var(--on-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  padding: 0.5rem 1rem;
+  font-family: var(--font-ui);
+  font-size: 13px;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.2);
+  background: rgba(255, 255, 255, 0.03);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -197,16 +204,16 @@ a.resume-btn:hover,
 a.mobile-resume-btn:hover,
 a.hero-cta:hover,
 a.home-btn:hover {
-  background: rgba(var(--accent-color-rgb), 0.1);
-  box-shadow: 0 0 20px rgba(var(--accent-color-rgb), 0.4);
-  color: var(--text-primary);
+  background: var(--surface-container);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--on-surface);
 }
 
 a.resume-btn:focus,
 a.mobile-resume-btn:focus,
 a.hero-cta:focus,
 a.home-btn:focus {
-  outline: 2px solid var(--accent-color);
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
@@ -215,23 +222,11 @@ a.resume-btn {
   margin-left: 15px;
 }
 
-
-
-/* Navbar glyph buttons: the sound toggle (home page only) and the language
-   switcher. Deliberately the same control — a 30x30 bare glyph in the accent
-   colour — so the two read as a pair, and the "Curriculum" CTA stays the only
-   bordered button in the navbar, which is the one that matters. Same shape as
-   the hamburger, which is the third member of the family.
-
-   The switcher's label stays text ("IT"/"EN") rather than becoming an icon: a
-   flag or a globe is ambiguous about which language you are switching *to*, and
-   the full wording is already in its `aria-label` and `hreflang`.
-
-   This is the shared box; `.sound-toggle`'s own block below adds only what is
-   specific to it (the svg sizing and the state-driven icon swap), and the
-   switcher's container-specific values are in its own section at the end of the
-   sheet, where they can outrank `.nav-links a` / `.mobile-nav a`. */
-.sound-toggle,
+/* Navbar glyph buttons: the language switcher. A 30x30 bare glyph in the
+   accent colour, the same shape as the hamburger, which is the other member of
+   the family. (The sound toggle that used to sit here was removed with the
+   typewriter audio, D6.) Same shape as the hamburger, which is the third member
+   of the family. */
 .lang-toggle {
   display: flex;
   background: transparent;
@@ -240,34 +235,30 @@ a.resume-btn {
   padding: 0;
   width: 30px;
   height: 30px;
-  color: var(--accent-color);
+  color: var(--primary);
   transition: all 0.3s ease;
   justify-content: center;
   align-items: center;
 }
 
 .lang-toggle {
-  font-family: var(--font-main);
+  font-family: var(--font-mono);
   font-size: 13px;
   line-height: 1;
+  text-decoration: none;
 }
 
-.sound-toggle:hover,
 .lang-toggle:hover {
-  color: var(--text-primary);
+  color: var(--on-surface);
 }
 
-.sound-toggle:focus,
 .lang-toggle:focus {
-  outline: 2px solid var(--accent-color);
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
-/* Navbar action cluster: the sound toggle (home page only) and the hamburger.
-   The auto left margin keeps the cluster pinned right now that it is a single
-   flex child of the space-between navbar, and the gap spaces the two buttons
-   on mobile without moving the hamburger off the right edge, because it stays
-   the last element in the cluster. */
+/* Navbar action cluster: the hamburger. The auto left margin keeps the cluster
+   pinned right now that it is a single flex child of the space-between navbar. */
 .nav-actions {
   display: flex;
   align-items: center;
@@ -279,27 +270,6 @@ a.resume-btn {
    flush with the navbar's own padding. */
 .nav-links {
   margin-left: 20px;
-}
-
-/* Sound-toggle specifics. The button itself is styled by the shared "Navbar
-   glyph buttons" rule above. */
-.sound-toggle svg {
-  width: 24px;
-  height: 24px;
-  stroke: currentColor;
-}
-
-/* The two glyphs are swapped by state, so the button needs no class juggling */
-.sound-toggle .sound-toggle-icon--off {
-  display: none;
-}
-
-.sound-toggle[aria-pressed="true"] .sound-toggle-icon--on {
-  display: none;
-}
-
-.sound-toggle[aria-pressed="true"] .sound-toggle-icon--off {
-  display: block;
 }
 
 /* Hamburger Menu Button */
@@ -352,7 +322,7 @@ a.resume-btn {
 .mobile-nav {
   display: none;
   position: fixed;
-  top: 70px;
+  top: var(--nav-height);
   left: 0;
   right: 0;
   background: var(--mobile-nav-bg);
@@ -362,7 +332,7 @@ a.resume-btn {
   padding: 20px 25px;
   gap: 20px;
   z-index: 9;
-  max-height: calc(100vh - 70px);
+  max-height: calc(100vh - var(--nav-height));
   overflow-y: auto;
 }
 
@@ -484,14 +454,21 @@ a.mobile-resume-btn {
 
 /* Footer */
 .footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  color: var(--text-secondary);
-  font-family: var(--font-main);
+  padding: var(--space-xl) var(--margin);
+  color: var(--on-surface-variant);
+  font-family: var(--font-ui);
   font-size: 12px;
   text-align: center;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
 }
 
 .footer p {
@@ -499,14 +476,32 @@ a.mobile-resume-btn {
   line-height: 1.6;
 }
 
+.footer-provenance {
+  color: var(--outline);
+}
+
+.footer-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+}
+
+.footer-sep {
+  color: var(--outline-variant);
+}
+
 .footer a {
-  color: #ffffff;
+  color: var(--on-surface-variant);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .footer a:hover {
-  color: var(--text-tertiary);
+  color: var(--primary);
 }
 
 /* Experiences Page Specifics */
@@ -794,7 +789,7 @@ p.lead {
 
 .tech-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #6e48aa, var(--accent-color));
+  background: linear-gradient(90deg, var(--primary-container), var(--primary));
   border-radius: 10px;
   width: 0%;
   transition: width 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);

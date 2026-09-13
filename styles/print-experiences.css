@@ -81,7 +81,7 @@
     display: block;
     font-size: 16pt;
     font-weight: bold;
-    color: #8b5cf6 !important;
+    color: #0e7490 !important;
     line-height: 1.1;
   }
   
@@ -111,7 +111,7 @@
     font-size: 12pt;
     font-weight: bold;
     margin-bottom: 0.2em;
-    color: #8b5cf6 !important;
+    color: #0e7490 !important;
   }
   
   .section-number {
@@ -197,7 +197,7 @@
   }
   
   .kp-project-name {
-    color: #8b5cf6 !important;
+    color: #0e7490 !important;
   }
   
   .kp-description {
@@ -214,21 +214,21 @@
   /* Ultra specific selector to override main.css */
   .timeline-item .timeline-content .tech-stack span {
     display: inline-block !important;
-    background: #B77EF1 !important;
-    background-color: #B77EF1 !important;
+    background: #0e7490 !important;
+    background-color: #0e7490 !important;
     background-image: none !important;
     color: white !important;
     padding: 2px 6px !important;
     margin: 2px !important;
     font-size: 9pt !important;
-    border: 1px solid #B77EF1 !important;
+    border: 1px solid #0e7490 !important;
     border-radius: 3px !important;
   }
   
   /* Fallback - catch any tech-stack span */
   .tech-stack span {
-    background: #B77EF1 !important;
-    background-color: #B77EF1 !important;
+    background: #0e7490 !important;
+    background-color: #0e7490 !important;
     background-image: none !important;
     color: white !important;
   }

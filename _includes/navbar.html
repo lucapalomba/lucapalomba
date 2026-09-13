@@ -1,41 +1,28 @@
 {%- comment -%}
+  Shell navbar, restyled to the Obsidian Precision spec (R05).
+
   All labels come from the locale dictionary (`t`, assigned by the layout), and
   the current page is marked from `page.i18n_key` instead of comparing
   `page.url` — which is what lets one navbar serve both /en and /it pages.
   Links stay relative ("experiences.html") so they resolve inside whichever
   language directory the page lives in.
+
+  Two controls the design has no place for, kept here on purpose:
+  - the language switcher (`.lang-toggle.lang-switch`), a glyph link to
+    `page.alt_url` in BOTH the desktop row and the mobile drawer, because
+    js/langPref.js listens for `.lang-switch` clicks and the `hreflang`
+    attribute drives the alternates;
+  - the hamburger, because the motion export has no mobile navigation at all
+    (D8), so the existing drawer is the only working mobile affordance.
+
+  The sound toggle is gone: the typewriter audio was removed per D6, which
+  retired js/soundMute.js and sounds/.
 {%- endcomment -%}
 <nav class="navbar">
     <div class="logo">
-        <a href="index.html">&lt;LP /&gt;</a>
+        <a href="index.html" aria-label="{{ t.a11y.brand }}"><span class="logo-mark">&lt;LP /&gt;</span></a>
     </div>
-    {% unless page.hide_nav_links %}
     <div class="nav-actions">
-        {% if page.i18n_key == 'index' %}
-        {% comment %}
-        Home only: it is the only page whose hero runs the typewriter, so a
-        control anywhere else would mute nothing. Both wordings are rendered
-        here, at build time, from the locale dictionary — js/soundMute.js swaps
-        between them with the data-label-* attributes, since the correct label
-        depends on the mute state rather than on the language alone. Keys are
-        checked in both locales by check-i18n.js.
-        {% endcomment %}
-        <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="false"
-            aria-label="{{ t.sound.mute }}" data-label-mute="{{ t.sound.mute }}" data-label-unmute="{{ t.sound.unmute }}">
-            <svg class="sound-toggle-icon sound-toggle-icon--on" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
-            </svg>
-            <svg class="sound-toggle-icon sound-toggle-icon--off" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                <line x1="23" y1="9" x2="17" y2="15"></line>
-                <line x1="17" y1="9" x2="23" y2="15"></line>
-            </svg>
-        </button>
-        {% endif %}
         <button class="hamburger-menu" id="hamburger-toggle" aria-label="{{ t.a11y.toggleMenu }}" aria-expanded="false"
             aria-controls="mobile-nav">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -59,6 +46,7 @@
                         class="nav-number">04.</span> <span>{{ t.nav.contact }}</span></a>
             </li>
         </ol>
+        <span class="status-badge"><span class="ping-dot"></span>{{ t.nav.availability }}</span>
         <a href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer" class="resume-btn"
             aria-label="{{ t.a11y.curriculum }}">{{ t.nav.curriculum }}</a>
         {%- if page.alt_url %}
@@ -78,6 +66,7 @@
                         class="nav-number">04.</span> <span>{{ t.nav.contact }}</span></a>
             </li>
         </ol>
+        <span class="status-badge"><span class="ping-dot"></span>{{ t.nav.availability }}</span>
         <a href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer"
             class="mobile-resume-btn" aria-label="{{ t.a11y.curriculum }}">{{ t.nav.curriculum }}</a>
         {%- if page.alt_url %}
@@ -85,5 +74,4 @@
             aria-label="{{ t.nav.langSwitch }}">{{ t.nav.langCode }}</a>
         {%- endif %}
     </div>
-    {% endunless %}
 </nav>

@@ -68,8 +68,6 @@ const PRECACHE_URLS = [
   './js/motion.js',
   './js/titleAnimation.js',
   './js/techProgress.js',
-  './js/soundMute.js',
-  './js/particles.min.js',
   './fonts/Geist/Geist-Regular.woff2',
   './fonts/Geist/Geist-Medium.woff2',
   './fonts/Geist/Geist-SemiBold.woff2',

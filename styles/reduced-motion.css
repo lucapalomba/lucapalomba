@@ -8,10 +8,6 @@ body {
     display: none !important;
 }
 
-#particles-js {
-    display: none !important;
-}
-
 /* Kill every remaining infinite CSS animation under reduced motion so no
    element keeps looping — an accessibility win and a battery win. */
 .tech-progress-fill {
