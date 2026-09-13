@@ -1,4 +1,4 @@
----
+﻿---
 layout: default
 ---
 {%- comment -%}
@@ -11,7 +11,7 @@ layout: default
   contradicted), so here a card's bucket always matches the row.
 {%- endcomment -%}
 {%- assign t = site.data.translations[page.lang] %}
-{%- assign tech_rows = "aiAgents:85:primary:core:AI_AGENTIC_SYSTEMS:Workflow Automation:Active Daily|jsNode:90:tertiary:core:CORE_RUNTIME:Full-Stack & Orchestration:Native Stack|cicd:80:primary:systems:PIPELINE_ORCHESTRATION:Release Engineering:Production Hardened|react:80:primary:core:CLIENT_TOPOLOGY:Design Systems & UX Perf:Staff Experience|php:85:primary:core:ENTERPRISE_LEGACY_MODERN:Enterprise Migration:High Maturity|architectures:65:secondary:systems:DOMAIN_STRATEGY:Distributed Patterns:Active Focus|cloudK8s:60:primary:systems:INFRA_SCALING:100+ Nodes Multi-Cluster:Applied Production|cloud:50:secondary:systems:HYPERSCALER_ECOSYSTEMS:Enterprise IAM & Networking:Ongoing Study|ml:40:secondary:frontier:APPLIED_INTELLIGENCE:Predictive Analytics & Flows:Exploratory|wasm:20:neutral:frontier:LOW_LEVEL_SANDBOX:Native Client Compute:Early Research" | split: "|" %}
+{%- assign tech_rows = "aiAgents:85:primary:core:AI_AGENTIC_SYSTEMS:Workflow Automation:Active Daily:12|jsNode:90:tertiary:core:CORE_RUNTIME:Full-Stack & Orchestration:Native Stack:0|cicd:80:primary:systems:PIPELINE_ORCHESTRATION:Release Engineering:Production Hardened:8|react:80:primary:core:CLIENT_TOPOLOGY:Design Systems & UX Perf:Staff Experience:4|php:85:primary:core:ENTERPRISE_LEGACY_MODERN:Enterprise Migration:High Maturity:0|architectures:65:secondary:systems:DOMAIN_STRATEGY:Distributed Patterns:Active Focus:2|cloudK8s:60:primary:systems:INFRA_SCALING:100+ Nodes Multi-Cluster:Applied Production:0|cloud:50:secondary:systems:HYPERSCALER_ECOSYSTEMS:Enterprise IAM & Networking:Ongoing Study:0|ml:40:secondary:frontier:APPLIED_INTELLIGENCE:Predictive Analytics & Flows:Exploratory:0|wasm:20:neutral:frontier:LOW_LEVEL_SANDBOX:Native Client Compute:Early Research:0" | split: "|" %}
 <!-- Main Content -->
 <main class="page" id="main-content">
     <div class="container tech-stack-page">
@@ -64,6 +64,7 @@ layout: default
             {%- assign tech_domain = f[4] %}
             {%- assign tech_vector = f[5] %}
             {%- assign tech_status = f[6] %}
+            {%- assign tech_rise = f[7] %}
             <article class="glass-panel tech-card reveal" data-category="{{ tech_cat }}"
                 style="--reveal-delay: {{ forloop.index0 | times: 60 }}ms">
                 <div class="tech-card-body">
@@ -79,6 +80,9 @@ layout: default
                     </div>
                     <div class="progress">
                         <span class="progress-fill tech-progress-fill progress-fill--{{ tech_tone }}" data-progress="{{ tech_percent }}"></span>
+                        {%- if tech_rise != '0' %}
+                        <span class="tech-rise" style="left: {{ tech_percent }}%" aria-hidden="true">{% for i in (1..tech_rise) %}<i></i>{% endfor %}</span>
+                        {%- endif %}
                     </div>
                     <p class="tech-description">{{ t.technologies.desc[tech_key] }}</p>
                 </div>
@@ -91,16 +95,16 @@ layout: default
         </div>
         <p class="tech-empty" hidden>{{ t.technologies.emptyState }}</p>
 
-        <section class="glass-panel tech-spectrum reveal">
+        <section class="glass-panel tech-spectrum reveal" data-spectrum>
             <div class="tech-spectrum-head">
                 <span class="tech-spectrum-title">{% include icon.html name="query_stats" %}{{ t.technologies.spectrumTitle }}</span>
                 <span class="tech-spectrum-meta">{{ t.technologies.spectrumMeta }}</span>
             </div>
-            <div class="spectrum" aria-hidden="true">
-                <span class="spectrum-seg spectrum-seg--tertiary" style="width: 40%"></span>
-                <span class="spectrum-seg spectrum-seg--primary" style="width: 30%"></span>
-                <span class="spectrum-seg spectrum-seg--secondary" style="width: 20%"></span>
-                <span class="spectrum-seg spectrum-seg--muted" style="width: 10%"></span>
+            <div class="spectrum" data-spectrum-bar aria-hidden="true">
+                <span class="spectrum-seg spectrum-seg--tertiary" style="--seg-width: 40%; --reveal-delay: 0ms"></span>
+                <span class="spectrum-seg spectrum-seg--primary" style="--seg-width: 30%; --reveal-delay: 120ms"></span>
+                <span class="spectrum-seg spectrum-seg--secondary" style="--seg-width: 20%; --reveal-delay: 240ms"></span>
+                <span class="spectrum-seg spectrum-seg--muted" style="--seg-width: 10%; --reveal-delay: 360ms"></span>
             </div>
             <ul class="spectrum-legend">
                 {%- for item in t.technologies.spectrumLegend %}

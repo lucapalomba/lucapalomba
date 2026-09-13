@@ -33,7 +33,7 @@ layout: default
                 class="btn btn--secondary">
                 {% include icon.html name="verified_user" %}<span>{{ t.home.meta.reviewCurriculum }}</span>{% include icon.html name="arrow_outward" %}
               </a>
-              <span class="availability-inline"><span class="dot-tertiary"></span>{{ t.hero.availability }}</span>
+              <span class="availability-inline"><span class="dot-tertiary"></span>{{ t.nav.availability }}</span>
             </div>
           </div>
 
@@ -47,8 +47,14 @@ layout: default
                 {%- for tile in t.home.telemetry.tiles %}
                 <div class="telemetry-tile">
                   <span class="telemetry-tile-label">{{ tile.label }}</span>
-                  <span class="telemetry-tile-value{% if tile.tone %} telemetry-tile-value--{{ tile.tone }}{% endif %}">{{ tile.value }}</span>
-                  <span class="telemetry-tile-sub{% if tile.subTone %} telemetry-tile-sub--{{ tile.subTone }}{% endif %}">{{ tile.sub }}</span>
+                  <span class="telemetry-tile-value{% if tile.tone %} telemetry-tile-value--{{ tile.tone }}{% endif %}"
+                    {% if tile.counter %}data-counter="{{ tile.counter }}"{% endif %}
+                    {% if tile.suffix %}data-suffix="{{ tile.suffix }}"{% endif %}
+                    {% if tile.prefix %}data-prefix="{{ tile.prefix }}"{% endif %}
+                    {% if tile.decimals %}data-decimals="{{ tile.decimals }}"{% endif %}>{{ tile.value }}</span>
+                  <span class="telemetry-tile-sub{% if tile.subTone %} telemetry-tile-sub--{{ tile.subTone }}{% endif %}">
+                    {%- if tile.badge %}<span class="telemetry-badge">{{ tile.badge }}</span>{% endif -%}
+                    {{ tile.sub }}</span>
                 </div>
                 {%- endfor %}
               </div>

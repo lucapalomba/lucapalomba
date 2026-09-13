@@ -81,24 +81,33 @@
                 {
                     "label": "Tech Debt Burn",
                     "value": "85%",
+                    "counter": "85",
+                    "suffix": "%",
                     "sub": "Reduced refactor lag",
                     "subTone": "tertiary"
                 },
                 {
                     "label": "Friday Deploys",
                     "value": "0.00",
+                    "badge": "SAFE",
                     "sub": "100% Weekend Peace",
                     "tone": "primary"
                 },
                 {
                     "label": "Sprint Velocity",
                     "value": "+42%",
+                    "counter": "42",
+                    "prefix": "+",
+                    "suffix": "%",
                     "sub": "Post-architecture reset",
                     "subTone": "tertiary"
                 },
                 {
                     "label": "CI Build Health",
                     "value": "99.8%",
+                    "counter": "99.8",
+                    "decimals": "1",
+                    "suffix": "%",
                     "sub": "Green main builds",
                     "tone": "tertiary"
                 }
@@ -176,9 +185,6 @@
             "cta": "Explore Experiences"
         }
     },
-    "hero": {
-        "availability": "Available for H2 2025"
-    },
     "experiences": {
         "title": "Work Experiences",
         "pageTitle": "Work Experiences — Luca Palomba",
@@ -202,12 +208,16 @@
                 { "key": "LEADERSHIP_MAX", "value": "20 Engineers / 4 Squads", "tone": "primary" },
                 { "key": "OPEX_REDUCTION", "value": "~50% in 12 Months", "tone": "tertiary" },
                 { "key": "METHODOLOGY", "value": "SCRUM / CI-CD / AI-Assisted", "tone": "plain" },
-                { "key": "R&D_SPECIALIZATION", "value": "Openware PSIM & Distributed Systems", "tone": "primary" }
+                { "key": "R&D_SPECIALIZATION", "value": "Distributed Systems in business continuity", "tone": "primary" }
             ]
         },
         "philosophy": {
             "kicker": "Career Philosophy",
             "quote": "Realizing technical architecture reaches its highest ceiling only when paired with intentional human coordination, empathy, and pragmatic automation."
+        },
+        "printCta": {
+            "claim": "Like what you see? Print it as a CV",
+            "button": "Print CV"
         },
         "nextPhase": {
             "kicker": "Explore Core Stack",

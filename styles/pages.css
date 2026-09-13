@@ -159,6 +159,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+  background: rgba(25, 27, 34, 0.8);
+  border: 1px solid rgba(61, 73, 76, 0.2);
 }
 
 .telemetry-head {
@@ -741,7 +743,7 @@
 
 .telemetry-pill {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: var(--space-sm);
   padding: var(--space-sm);
   background: rgba(17, 19, 25, 0.8);
@@ -753,27 +755,41 @@
 .telemetry-pill-cell {
   display: flex;
   flex-direction: column;
+  gap: 0.125rem;
   padding: var(--space-xs) var(--space-md);
   border-radius: var(--radius);
   background: rgba(29, 31, 38, 0.7);
   border: 1px solid rgba(61, 73, 76, 0.1);
 }
 
+/* Row 1: small mono uppercase label. Row 2: the value, mono semibold, with its
+   unit inline in the same weight but a muted colour — matches the export's
+   `font-label-sm` label over a `font-label-md` value. */
+.telemetry-pill-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+  font-weight: var(--label-sm-weight);
+  letter-spacing: var(--label-sm-tracking);
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
 .telemetry-pill-value {
+  display: block;
   font-family: var(--font-mono);
   font-size: var(--label-md-size);
   font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 2px;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .telemetry-pill-value--tertiary { color: var(--tertiary); }
 .telemetry-pill-value--primary { color: var(--primary); }
 
-.telemetry-pill-unit,
-.telemetry-pill-pre {
-  font-weight: 400;
+.telemetry-pill-unit {
+  font-weight: 600;
   color: var(--on-surface-variant);
 }
 
@@ -1431,7 +1447,24 @@
 
 .spectrum-seg {
   height: 100%;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
+  /* Spectrum segments fill from 0 to their inline width when the panel enters
+     the viewport (motion.js adds .in to the [data-spectrum] ancestor). */
+  width: 0 !important;
+  transition: width 1.2s var(--ease-expo-out);
+}
+
+.spectrum[data-spectrum-bar].in .spectrum-seg,
+[data-spectrum].in .spectrum-seg {
+  width: var(--seg-width, 0) !important;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spectrum-seg {
+    width: var(--seg-width, 0) !important;
+    transition: none;
+  }
 }
 
 .spectrum-seg--tertiary { background: var(--tertiary); }
@@ -1641,6 +1674,8 @@
 }
 
 /* --- 404 ----------------------------------------------------------------- */
+/* No navbar on this page (see _layouts/default.html), so the top padding does
+   not reserve the nav height — only breathing room. */
 .error-page {
   display: flex;
   flex-direction: column;
@@ -1648,7 +1683,7 @@
   justify-content: center;
   min-height: 100vh;
   text-align: center;
-  padding: calc(var(--nav-height) + var(--space-xl)) var(--margin) var(--space-xl);
+  padding: var(--space-xl) var(--margin);
 }
 
 .error-inner {
@@ -1948,4 +1983,126 @@
   .network-link {
     text-align: left;
   }
+}
+
+/* Rising-fast indicator on the technologies progress bars: a row of green
+   right-pointing chevrons (">>>") starting at the fill's right tip, the number
+   encoding momentum. `left` is set inline per card to match data-progress; a
+   right-edge mask fades the trailing end, and the float animation nudges them.
+   Restored from the previous version; clipped to the track so they never spill
+   outside the card. */
+.tech-card .progress {
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-rise {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+  pointer-events: none;
+  z-index: 2;
+  animation: tech-rise-float 1.6s ease-in-out infinite;
+  -webkit-mask-image: linear-gradient(to right, #000 70%, transparent);
+  mask-image: linear-gradient(to right, #000 70%, transparent);
+}
+
+.tech-rise i {
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-top: 2px solid #22c55e;
+  border-right: 2px solid #22c55e;
+  transform: rotate(45deg);
+  filter: drop-shadow(0 0 2px rgba(34, 197, 94, 0.7));
+}
+
+@keyframes tech-rise-float {
+
+  0%,
+  100% {
+    transform: translate(0, -50%);
+  }
+
+  50% {
+    transform: translate(6px, -50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-rise {
+    animation: none;
+  }
+
+  .tech-rise i {
+    filter: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .tech-rise {
+    gap: 1px;
+  }
+
+  .tech-rise i {
+    width: 3px;
+    height: 3px;
+  }
+}
+
+/* Telemetry "SAFE" badge on the Friday Deploys tile (and any tile with a badge). */
+.telemetry-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 0.375rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1.5;
+  background: rgba(78, 222, 163, 0.15);
+  color: var(--tertiary);
+  border: 1px solid rgba(78, 222, 163, 0.3);
+  margin-right: var(--space-xs);
+  vertical-align: middle;
+}
+
+/* The Friday Deploys tile lays its value and badge on one row. */
+.telemetry-tile .telemetry-tile-value + .telemetry-tile-sub .telemetry-badge {
+  margin-left: 0;
+}
+
+/* Print CTA block in the experience sidebar, above the philosophy callout. */
+.print-cta {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  border-radius: var(--radius-lg);
+  background: rgba(12, 14, 20, 0.5);
+  border: 1px solid rgba(61, 73, 76, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.print-cta-claim {
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+  color: var(--on-surface-variant);
+  margin: 0;
+}
+
+.print-cta .print-btn {
+  margin: 0;
+  width: 100%;
+  padding: 0.5rem 1.25rem;
+  font-size: var(--body-md-size);
+}
+
+.print-cta .print-btn svg {
+  width: 16px;
+  height: 16px;
 }
