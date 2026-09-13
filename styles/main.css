@@ -232,27 +232,47 @@ a.resume-btn {
 
 
 
-/* Language Toggle */
+/* Navbar glyph buttons: the sound toggle (home page only) and the language
+   switcher. Deliberately the same control — a 30x30 bare glyph in the accent
+   colour — so the two read as a pair, and the "Curriculum" CTA stays the only
+   bordered button in the navbar, which is the one that matters. Same shape as
+   the hamburger, which is the third member of the family.
+
+   The switcher's label stays text ("IT"/"EN") rather than becoming an icon: a
+   flag or a globe is ambiguous about which language you are switching *to*, and
+   the full wording is already in its `aria-label` and `hreflang`.
+
+   This is the shared box; `.sound-toggle`'s own block below adds only what is
+   specific to it (the svg sizing and the state-driven icon swap), and the
+   switcher's container-specific values are in its own section at the end of the
+   sheet, where they can outrank `.nav-links a` / `.mobile-nav a`. */
+.sound-toggle,
 .lang-toggle {
+  display: flex;
   background: transparent;
-  border: 1px solid var(--accent-color);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
   color: var(--accent-color);
-  border-radius: 4px;
-  padding: 0.5rem 0.8rem;
+  transition: all 0.3s ease;
+  justify-content: center;
+  align-items: center;
+}
+
+.lang-toggle {
   font-family: var(--font-main);
   font-size: 13px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-left: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  line-height: 1;
 }
 
+.sound-toggle:hover,
 .lang-toggle:hover {
-  background: var(--accent-hover);
+  color: var(--text-primary);
 }
 
+.sound-toggle:focus,
 .lang-toggle:focus {
   outline: 2px solid var(--accent-color);
   outline-offset: 2px;
@@ -276,33 +296,12 @@ a.resume-btn {
   margin-left: 20px;
 }
 
-.sound-toggle {
-  display: flex;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  width: 30px;
-  height: 30px;
-  color: var(--accent-color);
-  transition: all 0.3s ease;
-  justify-content: center;
-  align-items: center;
-}
-
+/* Sound-toggle specifics. The button itself is styled by the shared "Navbar
+   glyph buttons" rule above. */
 .sound-toggle svg {
   width: 24px;
   height: 24px;
   stroke: currentColor;
-}
-
-.sound-toggle:hover {
-  color: var(--text-primary);
-}
-
-.sound-toggle:focus {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 2px;
 }
 
 /* The two glyphs are swapped by state, so the button needs no class juggling */
@@ -1301,10 +1300,35 @@ p.lead {
 /* ---------------------------------------------------------------------------
    Language switcher and server-rendered navigation hint.
 
-   `.lang-toggle` above is reused as-is for the switcher — it only needs
-   different spacing when it sits in the mobile panel (a column, not a row).
+   The switcher reuses the shared glyph styling of `.sound-toggle` ("Navbar
+   glyph buttons" above), but it is an `<a>` sitting inside two containers whose
+   generic link rules are *more* specific than a bare `.lang-toggle`:
+   `.nav-links a` and `.mobile-nav a` both set `color`, and the drawer's also
+   sets `font-size` and `padding`. Restating the glyph's own values on a
+   two-class selector is what makes it win in both places, so the switcher
+   really is the same control as the sound toggle rather than a link that
+   happens to have a border-like box in one container and not the other.
    --------------------------------------------------------------------------- */
-.mobile-nav .lang-toggle {
+.nav-links a.lang-toggle,
+.mobile-nav a.lang-toggle {
+  color: var(--accent-color);
+  font-size: 13px;
+  padding: 0;
+  /* No global `a` reset in this sheet — only the button utilities at the top
+     have one — so the underline has to go explicitly. */
+  text-decoration: none;
+}
+
+.nav-links a.lang-toggle {
+  margin-left: 15px;
+}
+
+.nav-links a.lang-toggle:hover,
+.mobile-nav a.lang-toggle:hover {
+  color: var(--text-primary);
+}
+
+.mobile-nav a.lang-toggle {
   margin-left: 0;
   align-self: flex-start;
 }
@@ -1338,11 +1362,4 @@ p.lead {
   .hint-keyboard {
     display: none;
   }
-}
-
-/* `.lang-toggle` was written for a <button> and never wired up; used as a link
-   it also needs the underline removed, since the sheet has no global `a` reset
-   (only the button utilities at the top do). */
-a.lang-toggle {
-  text-decoration: none;
 }
