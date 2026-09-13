@@ -6,6 +6,7 @@
         "technologies": "Technologies",
         "contact": "Contact",
         "curriculum": "Curriculum",
+        "availability": "Available for Staff Roles",
         "langSwitch": "Switch to Italian",
         "langCode": "IT"
     },
@@ -17,7 +18,8 @@
         "print": "Print this page",
         "github": "GitHub profile",
         "linkedin": "LinkedIn profile",
-        "curriculum": "Curriculum — opens in a new window"
+        "curriculum": "Curriculum — opens in a new window",
+        "brand": "Luca Palomba — home"
     },
     "index": {
         "pageTitle": "Luca Palomba - Engineering Manager & Web Developer",
@@ -238,6 +240,9 @@
         "homeButton": "Go back home"
     },
     "backToTop": "Go to Top",
+    "footer": {
+        "provenance": "Designed & Built by Luca Palomba — System Architecture & Engineering"
+    },
     "sound": {
         "mute": "Mute keyboard sounds",
         "unmute": "Unmute keyboard sounds"

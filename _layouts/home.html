@@ -19,12 +19,9 @@ layout: default
 <!-- Typewriter configuration for titleAnimation.js. The steps are the locale's
      own headline variants — rendering them here is what keeps the hero in one
      place (they used to live in JavaScript, in both languages, next to a
-     `data-i18n` headline that said something slightly different). `soundBase` is
-     absolute on purpose: the sounds are fetched relative to this page, and under
-     /it/ a bare "sounds/…" would resolve to /it/sounds/…, which does not exist. -->
+     `data-i18n` headline that said something slightly different). -->
 <script type="application/json" id="hero-animation">
   {
-    "steps": {{ hero_steps | jsonify }},
-    "soundBase": {{ '/sounds/' | relative_url | jsonify }}
+    "steps": {{ hero_steps | jsonify }}
   }
 </script>

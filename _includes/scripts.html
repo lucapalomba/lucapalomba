@@ -1,8 +1,6 @@
 <!-- Language preference: remembers which language the visitor picked with the switcher -->
 <script src="{{ '/js/langPref.js' | relative_url }}" defer></script>
 
-<!-- Non-critical: Defer particles and animations until after page is interactive -->
-<script src="{{ '/js/particles.min.js' | relative_url }}" defer></script>
 <script src="{{ '/js/main.js' | relative_url }}" defer></script>
 <script src="{{ '/js/transitions.js' | relative_url }}" defer></script>
 
@@ -24,7 +22,7 @@
      fetched by the old client-side i18n loader, so the right language is always
      printed and no request is needed for it. -->
 <script>
-  console.log('%c' + {{ t.consoleEasterEgg | jsonify }}, 'font-size: 14px; font-family: monospace; color: #6e48aa; padding: 10px; border: 2px solid #6e48aa; border-radius: 5px;');
+  console.log('%c' + {{ t.consoleEasterEgg | jsonify }}, 'font-size: 14px; font-family: monospace; color: #06b6d4; padding: 10px; border: 2px solid #06b6d4; border-radius: 5px;');
 </script>
 
 <!-- Service worker (PWA installability + offline shell). The `?v=` carries the
