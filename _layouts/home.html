@@ -27,15 +27,15 @@ layout: default
 
       <aside class="telemetry col-4 reveal" aria-label="{{ t.home.telemetry.title }}">
         <p class="telemetry-title">{% include icon.html name="memory" %} {{ t.home.telemetry.title }}</p>
-        <dl class="telemetry-list">
+        <div class="telemetry-list">
           {%- for tile in t.home.telemetry.tiles %}
           <div class="stat-tile">
-            <dt class="stat-label">{{ tile.label }}</dt>
-            <dd class="stat-value">{{ tile.value }}</dd>
-            <dd class="stat-sub">{{ tile.sub }}</dd>
+            <span class="stat-label">{{ tile.label }}</span>
+            <span class="stat-value">{{ tile.value }}</span>
+            <span class="stat-sub">{{ tile.sub }}</span>
           </div>
           {%- endfor %}
-        </dl>
+        </div>
       </aside>
     </div>
 

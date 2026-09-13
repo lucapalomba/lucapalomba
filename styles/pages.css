@@ -631,7 +631,7 @@
 }
 
 .error-quickjump a {
-  font-family: var(--font-body, var(--font-ui));
+  font-family: var(--font-ui);
   font-size: var(--body-sm-size);
   color: var(--on-surface-variant);
   text-decoration: none;

@@ -67,14 +67,14 @@ layout: default
           <span class="stat-value">{{ t.experiences.telemetry.teamsValue }}</span>
           <span class="stat-sub">{{ t.experiences.telemetry.teamsSub }}</span>
         </div>
-        <dl class="telemetry-metrics">
+        <div class="telemetry-metrics">
           {%- for metric in t.experiences.telemetry.metrics %}
           <div class="kv-row">
-            <dt class="kv-key">{{ metric.key }}</dt>
-            <dd class="kv-value">{{ metric.value }}</dd>
+            <span class="kv-key">{{ metric.key }}</span>
+            <span class="kv-value">{{ metric.value }}</span>
           </div>
           {%- endfor %}
-        </dl>
+        </div>
       </aside>
     </div>
 
