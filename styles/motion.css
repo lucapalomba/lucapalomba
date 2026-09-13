@@ -11,22 +11,24 @@
    (the single-cycle status ping, defined with `.ping-dot` in components.css).
 
    Elements are hidden until `js/motion.js` adds `.in` when they enter the
-   viewport, so nothing animates off-screen. Under `prefers-reduced-motion`
-   the base state is fully visible with no transform, and motion.js does not
-   observe at all.
+   viewport, so nothing animates off-screen. The hidden base state is scoped to
+   `html.js` (set by head.html before CSS applies) so a visitor without
+   JavaScript sees the content instead of an invisible page. Under
+   `prefers-reduced-motion` the base state is fully visible with no transform,
+   and motion.js does not observe at all.
    --------------------------------------------------------------------------- */
 
-.reveal {
+html.js .reveal {
   opacity: 0;
   transform: translateY(18px);
 }
 
-.reveal.in {
+html.js .reveal.in {
   animation: fade-slide-up var(--duration-slow) var(--ease-expo-out) forwards;
 }
 
 /* Stagger: set --reveal-delay on the element (or its parent) in the markup. */
-.reveal.in {
+html.js .reveal.in {
   animation-delay: var(--reveal-delay, 0ms);
 }
 
@@ -43,12 +45,12 @@
 }
 
 /* Telemetry sparkline self-draw, one shot. */
-.sparkline-draw path {
+html.js .sparkline-draw path {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
 }
 
-.sparkline-draw.in path {
+html.js .sparkline-draw.in path {
   animation: sparkline-draw 2.4s var(--ease-expo-out) forwards;
 }
 
@@ -62,13 +64,13 @@
    `transform-box: fill-box` is required for SVG: the initial value is
    `view-box`, which would resolve `transform-origin: left` to the viewBox's
    edge instead of each element's own — the export ships this bug. */
-.timeline-fill {
+html.js .timeline-fill {
   transform-box: fill-box;
   transform-origin: left center;
   transform: scaleX(0);
 }
 
-.timeline-fill.in {
+html.js .timeline-fill.in {
   animation: timeline-fill 1.4s var(--ease-expo-out) forwards;
   animation-delay: var(--reveal-delay, 0ms);
 }
@@ -94,9 +96,9 @@
 
 @media (prefers-reduced-motion: reduce) {
 
-  .reveal,
-  .sparkline-draw path,
-  .timeline-fill {
+  html.js .reveal,
+  html.js .sparkline-draw path,
+  html.js .timeline-fill {
     opacity: 1;
     transform: none;
     stroke-dashoffset: 0;
