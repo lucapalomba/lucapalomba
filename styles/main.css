@@ -39,8 +39,8 @@ html.js body {
   position: absolute;
   top: -40px;
   left: 0;
-  background: var(--accent-color);
-  color: var(--bg-color);
+  background: var(--primary);
+  color: var(--on-primary);
   padding: 8px 16px;
   text-decoration: none;
   z-index: 100;
@@ -49,6 +49,13 @@ html.js body {
 
 .skip-link:focus {
   top: 0;
+}
+
+/* One visible focus ring across the revamp (2px offset cyan, per DESIGN.md).
+   Controls with their own :focus-visible rule override it. */
+:focus-visible {
+  outline: 2px solid var(--primary-container);
+  outline-offset: 2px;
 }
 
 /* Typography & Shared Components */
