@@ -1,25 +1,10 @@
 /* Fonts */
 /* Note: Font loading is handled via <link> in HTML for performance */
 
-/* Global Styles */
-:root {
-  /* Colors */
-  --bg-color: #0a0a0f;
-  --text-primary: #e6e6ef;
-  --text-secondary: #8892b0;
-  --text-tertiary: #ccd6f6;
-  --text-date: #a8b2d1;
-  --accent-color: #B77EF1;
-  --accent-color-rgb: 183, 126, 241;
-  /* For rgba usage */
-  --accent-hover: rgba(157, 80, 187, 0.1);
-  --nav-bg: rgba(10, 10, 15, 0.85);
-  --mobile-nav-bg: #0d0d14;
-
-  /* Fonts */
-  --font-main: 'Roboto Mono', 'Menlo', 'Consolas', 'Monaco', 'Liberation Mono', 'Lucida Console', monospace;
-
-}
+/* Global Styles
+   Colour, spacing, radii, typography and motion tokens live in tokens.css,
+   which is loaded before this sheet. The old custom-property names are kept
+   there as deprecated aliases so the rules below keep working unchanged. */
 
 body {
   margin: 0;
