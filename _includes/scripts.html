@@ -18,3 +18,21 @@
 {% endif %}
 
 <script src="{{ '/js/backToTop.js' | relative_url }}" defer></script>
+
+<!-- Service worker (PWA installability + offline shell). The `?v=` carries the
+     build timestamp: a changed script URL is a new registration, so the browser
+     installs the new worker and sw.js's activate step drops the old cache. No
+     version constant to bump by hand. `relative_url` is required — baseurl is
+     /lucapalomba on Pages but "" in the Lighthouse build and on localhost.
+     Inline and in ES5 on purpose: jekyll-minifier runs this through Uglifier. -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker
+        .register('{{ "/sw.js" | relative_url }}?v={{ site.time | date: "%s" }}')
+        .catch(function (error) {
+          console.warn('[sw] registration failed', error);
+        });
+    });
+  }
+</script>
