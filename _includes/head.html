@@ -54,8 +54,11 @@
 <link rel="shortcut icon" href="{{ '/images/favicon-32.png' | relative_url }}">
 <meta name="theme-color" content="#0a0a0f">
 
-<!-- Preload critical fonts and CSS -->
-<link rel="preload" href="{{ '/fonts/Roboto_Mono/static/RobotoMono-Variable.woff2' | relative_url }}" as="font"
+<!-- Preload critical fonts and CSS. Geist Regular is the narrative face; JetBrains
+     Mono Regular is the technical face, so both are on the first paint. -->
+<link rel="preload" href="{{ '/fonts/Geist/Geist-Regular.woff2' | relative_url }}" as="font"
+  type="font/woff2" crossorigin>
+<link rel="preload" href="{{ '/fonts/JetBrains_Mono/JetBrainsMono-Regular.woff2' | relative_url }}" as="font"
   type="font/woff2" crossorigin>
 <link rel="preload" href="{{ '/styles/main.css' | relative_url }}" as="style">
 
