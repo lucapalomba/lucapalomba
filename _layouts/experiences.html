@@ -5,84 +5,123 @@ layout: default
 <!-- Main Content -->
 <main class="page" id="main-content">
   <div class="container">
-    <div class="section-header">
-      <p class="kicker"><span class="accent">// Trace &amp; Milestones //</span> {{ t.experiences.kicker }}</p>
-      <h1 class="section-title"><span class="section-number">02.</span> <span class="section-title-text">{{ t.experiences.title }}</span>
-        <button class="print-btn" onclick="event.preventDefault(); handlePrint();" aria-label="{{ t.a11y.print }}">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 6 2 18 2 18 9"></polyline>
-            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-            <rect x="6" y="14" width="12" height="8"></rect>
-          </svg>
-        </button>
-      </h1>
-      <p class="lead">{{ t.experiences.lead }}</p>
+
+    <!-- Section header: kicker, big title, lead, telemetry pill -->
+    <div class="page-head reveal">
+      <div class="page-head-copy">
+        <p class="kicker"><span class="accent">//</span> {{ t.experiences.kicker }}</p>
+        <h1 class="page-title"><span class="section-number">02.</span><span>{{ t.experiences.title }}</span>
+          <button class="print-btn" onclick="event.preventDefault(); handlePrint();" aria-label="{{ t.a11y.print }}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+              <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+          </button>
+        </h1>
+        <p class="page-lead">{{ t.experiences.lead }}</p>
+      </div>
+      <div class="telemetry-pill">
+        <div class="telemetry-pill-cell">
+          <span class="stat-label">{{ t.experiences.telemetry.tenureLabel }}</span>
+          <span class="telemetry-pill-value telemetry-pill-value--tertiary">{{ t.experiences.telemetry.tenureValue }}<span class="telemetry-pill-unit"> {{ t.experiences.telemetry.tenureUnit }}</span></span>
+        </div>
+        <div class="telemetry-pill-cell">
+          <span class="stat-label">{{ t.experiences.telemetry.teamsLabel }}</span>
+          <span class="telemetry-pill-value telemetry-pill-value--primary"><span class="telemetry-pill-pre">{{ t.experiences.telemetry.teamsPre }}</span> {{ t.experiences.telemetry.teamsValue }}<span class="telemetry-pill-unit"> {{ t.experiences.telemetry.teamsUnit }}</span></span>
+        </div>
+      </div>
     </div>
 
-    <div class="grid experiences-grid">
-      <div class="col-8">
-        <ul class="timeline">
-          {%- for job in t.experiences.jobs %}
-          {%- assign title_parts = job.title | split: ' — ' %}
-          <li class="timeline-item reveal">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <h2>{{ title_parts[0] }} <span class="company">@ {{ title_parts[1] }}</span></h2>
-              <div class="date">{{ job.date }}</div>
-              <ul class="job-description">
-                {%- for sentence in job.description %}
-                <li>{{ sentence }}</li>
-                {%- endfor %}
-              </ul>
-              {%- if job.keyProject %}
-              <div class="key-project">
-                <div class="kp-title">
-                  <span class="kp-label">{{ t.experiences.keyProject }}</span>
-                  <span class="kp-project-name">{{ job.keyProjectTitle }}</span>
-                </div>
-                <div class="kp-description">{{ job.keyProject }}</div>
-              </div>
-              {%- endif %}
-              <div class="tech-stack">
-                {%- for tech in job.techStack %}
-                <span>{{ tech }}</span>
-                {%- endfor %}
-              </div>
-            </div>
-          </li>
-          {%- endfor %}
-        </ul>
+    <!-- 12-col: 8-col chronological feed + 4-col executive telemetry -->
+    <div class="grid exp-grid">
+      <div class="col-8 exp-feed">
+        {%- for job in t.experiences.jobs %}
+        {%- assign title_parts = job.title | split: ' — ' %}
+        <article class="card card--interactive exp-card reveal" style="--reveal-delay: {{ forloop.index0 | times: 80 }}ms">
+          <div class="exp-card-head">
+            <h2 class="exp-role"><span>{{ title_parts[0] }}</span><span class="exp-company">@ {{ title_parts[1] }}</span></h2>
+            <span class="exp-date">{{ job.date }}</span>
+          </div>
+          <ul class="exp-bullets">
+            {%- for sentence in job.description %}
+            <li>{% include icon.html name="arrow_right" %}<span>{{ sentence }}</span></li>
+            {%- endfor %}
+          </ul>
+          {%- if job.keyProject %}
+          <div class="exp-keyproject">
+            <p class="exp-kp-label">{% include icon.html name="terminal" %}{{ t.experiences.keyProject }} {{ job.keyProjectTitle }}</p>
+            <p class="exp-kp-body">{{ job.keyProject }}</p>
+          </div>
+          {%- endif %}
+          <div class="exp-chips">
+            {%- for tech in job.techStack %}
+            <span class="chip chip--solid">{{ tech }}</span>
+            {%- endfor %}
+          </div>
+        </article>
+        {%- endfor %}
       </div>
 
-      <aside class="col-4 telemetry telemetry--sticky reveal" aria-label="{{ t.experiences.telemetry.title }}">
-        <p class="telemetry-title">{% include icon.html name="query_stats" %} {{ t.experiences.telemetry.title }}</p>
-        <div class="stat-tile">
-          <span class="stat-label">{{ t.experiences.telemetry.tenureLabel }}</span>
-          <span class="stat-value">{{ t.experiences.telemetry.tenureValue }}</span>
-          <span class="stat-sub">{{ t.experiences.telemetry.tenureSub }}</span>
-        </div>
-        <div class="stat-tile">
-          <span class="stat-label">{{ t.experiences.telemetry.teamsLabel }}</span>
-          <span class="stat-value">{{ t.experiences.telemetry.teamsValue }}</span>
-          <span class="stat-sub">{{ t.experiences.telemetry.teamsSub }}</span>
-        </div>
-        <div class="telemetry-metrics">
-          {%- for metric in t.experiences.telemetry.metrics %}
-          <div class="kv-row">
-            <span class="kv-key">{{ metric.key }}</span>
-            <span class="kv-value">{{ metric.value }}</span>
+      <!-- Executive telemetry sidebar -->
+      <aside class="col-4 exp-side reveal">
+        <div class="card telemetry-side">
+          <div class="telemetry-side-head">
+            <span class="telemetry-side-title"><span class="dot-primary"></span>{{ t.experiences.telemetry.title }}</span>
+            {% include icon.html name="query_stats" %}
           </div>
-          {%- endfor %}
+
+          <div class="timeline-viz">
+            <div class="timeline-viz-head">
+              <span>{{ t.experiences.telemetry.timelineSpan }}</span>
+              <span class="timeline-viz-range">{{ t.experiences.telemetry.timelineRange }}</span>
+            </div>
+            <svg class="timeline-svg" viewBox="0 0 280 44" fill="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="timelineGrad" x1="0" x2="1" y1="0" y2="0">
+                  <stop offset="0%" stop-color="#4cd7f6" stop-opacity="0.8"></stop>
+                  <stop offset="100%" stop-color="#6ffbbe" stop-opacity="1"></stop>
+                </linearGradient>
+              </defs>
+              <line class="tl-grid" x1="0" x2="280" y1="36" y2="36"></line>
+              <line class="tl-grid tl-grid--dashed" x1="70" x2="70" y1="10" y2="36"></line>
+              <line class="tl-grid tl-grid--dashed" x1="140" x2="140" y1="10" y2="36"></line>
+              <line class="tl-grid tl-grid--dashed" x1="210" x2="210" y1="10" y2="36"></line>
+              <rect class="timeline-fill tl-seg tl-seg--muted" height="4" rx="2" width="70" x="0" y="32" style="--reveal-delay: 0.1s"></rect>
+              <rect class="timeline-fill tl-seg tl-seg--secondary" height="6" rx="2" width="55" x="75" y="30" style="--reveal-delay: 0.3s"></rect>
+              <rect class="timeline-fill tl-seg tl-seg--primary" height="8" rx="2" width="60" x="135" y="28" style="--reveal-delay: 0.5s"></rect>
+              <rect class="timeline-fill tl-seg" fill="url(#timelineGrad)" height="12" rx="2" width="65" x="200" y="24" style="--reveal-delay: 0.7s"></rect>
+              <circle class="tl-beacon" cx="268" cy="30" r="3.5" fill="#4edea3"></circle>
+              <text class="tl-label" x="2" y="20">Sys2000</text>
+              <text class="tl-label" x="75" y="20">Venture</text>
+              <text class="tl-label tl-label--primary" x="140" y="16">Novigo</text>
+              <text class="tl-label tl-label--tertiary" x="205" y="12">P&amp;B / R&amp;D</text>
+            </svg>
+          </div>
+
+          <div class="telemetry-metrics">
+            {%- for metric in t.experiences.telemetry.metrics %}
+            <div class="metric-row">
+              <span class="metric-key">{{ metric.key }}:</span>
+              <span class="metric-value metric-value--{{ metric.tone | default: 'plain' }}">{{ metric.value }}</span>
+            </div>
+            {%- endfor %}
+          </div>
+
+          <div class="philosophy-callout">
+            <p class="philosophy-callout-label"><span class="accent">//</span> {{ t.experiences.philosophy.kicker }}</p>
+            <p class="philosophy-callout-quote">{{ t.experiences.philosophy.quote }}</p>
+          </div>
+
+          <div class="next-phase">
+            <p class="next-phase-kicker"><span class="accent">03.</span> {{ t.experiences.nextPhase.kicker }}</p>
+            <p class="next-phase-body">{{ t.experiences.nextPhase.body }}</p>
+            <a href="technologies.html" class="btn btn--primary btn--block">{{ t.experiences.nextStep }} {% include icon.html name="arrow_forward" %}</a>
+          </div>
         </div>
       </aside>
     </div>
-
-    <section class="home-section reveal">
-      <p class="kicker">{{ t.experiences.philosophy.kicker }}</p>
-      <p class="lead quote">{{ t.experiences.philosophy.quote }}</p>
-      <a href="technologies.html" class="btn btn--secondary">{{ t.experiences.nextStep }} {% include icon.html name="arrow_forward" %}</a>
-    </section>
   </div>
 </main>
 

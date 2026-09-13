@@ -122,6 +122,9 @@
   --label-sm-weight: 500;
   --label-sm-tracking: 0.06em;
 
+  --code-inline-size: 0.8125rem;
+  --code-block-size: 0.875rem;
+
   /* Motion — authored here, not ported (DESIGN.md defines none). */
   --duration-fast: 150ms;
   --duration-base: 300ms;
