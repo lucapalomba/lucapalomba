@@ -5,9 +5,5 @@ i18n_key: index
 alt_url: /
 alt_lang: en
 page_scripts:
-# soundMute.js must come first: titleAnimation.js reads window.soundMute when
-# it builds its audio pool, and the navbar toggle (rendered by the home layout
-# in both languages) has no click handler without it.
-- /js/soundMute.js
 - /js/titleAnimation.js
 ---

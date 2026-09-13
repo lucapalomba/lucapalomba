@@ -6,6 +6,7 @@
         "technologies": "Technologies",
         "contact": "Contact",
         "curriculum": "Curriculum",
+        "availability": "Available for Staff Roles",
         "langSwitch": "Switch to Italian",
         "langCode": "IT"
     },
@@ -17,7 +18,8 @@
         "print": "Print this page",
         "github": "GitHub profile",
         "linkedin": "LinkedIn profile",
-        "curriculum": "Curriculum — opens in a new window"
+        "curriculum": "Curriculum — opens in a new window",
+        "brand": "Luca Palomba — home"
     },
     "index": {
         "pageTitle": "Luca Palomba - Engineering Manager & Web Developer",
@@ -62,13 +64,166 @@
         }
     },
     "consoleEasterEgg": "If you are reading this message, it means you do the same job as me. Why don't you contact me and we have a coffee?",
+    "home": {
+        "meta": {
+            "role": "ARCH_SPEC :: STAFF_IC / LEAD",
+            "location": "LOC: REMOTE / EU (UTC+1)",
+            "reviewCurriculum": "Review Curriculum"
+        },
+        "telemetry": {
+            "title": "Core Telemetry",
+            "version": "v4.18.0",
+            "reliability": "SYSTEM RELIABILITY INDEX",
+            "slo": "SLO 99.95%",
+            "commits": "Atomic commits only",
+            "bisect": "Git bisect ready",
+            "tiles": [
+                {
+                    "label": "Tech Debt Burn",
+                    "value": "85%",
+                    "counter": "85",
+                    "suffix": "%",
+                    "sub": "Reduced refactor lag",
+                    "subTone": "tertiary"
+                },
+                {
+                    "label": "Friday Deploys",
+                    "value": "0.00",
+                    "badge": "SAFE",
+                    "sub": "100% Weekend Peace",
+                    "tone": "primary"
+                },
+                {
+                    "label": "Sprint Velocity",
+                    "value": "+42%",
+                    "counter": "42",
+                    "prefix": "+",
+                    "suffix": "%",
+                    "sub": "Post-architecture reset",
+                    "subTone": "tertiary"
+                },
+                {
+                    "label": "CI Build Health",
+                    "value": "99.8%",
+                    "counter": "99.8",
+                    "decimals": "1",
+                    "suffix": "%",
+                    "sub": "Green main builds",
+                    "tone": "tertiary"
+                }
+            ]
+        },
+        "pillars": {
+            "kicker": "Core Practice Areas",
+            "title": "Engineered for high-stakes certainty",
+            "lead": "A disciplined synthesis of hands-on software craft, organizational clarity, and pragmatic AI execution.",
+            "items": [
+                {
+                    "number": "Pillar 01",
+                    "icon": "groups",
+                    "tone": "primary",
+                    "title": "Engineering Leadership & Team Lead",
+                    "body": "Coordinating cross-functional squads, fine-tuning SCRUM rhythms, and steering R&D with clear prioritization so developers ship without friction.",
+                    "capLabel": "Capabilities",
+                    "capabilities": ["Squad Mentorship", "Agile Architecture", "Stakeholder Sync"]
+                },
+                {
+                    "number": "Pillar 02",
+                    "icon": "auto_fix_high",
+                    "tone": "tertiary",
+                    "title": "Tech Debt Demolition & Architecture",
+                    "body": "Dismantling brittle monoliths, introducing clean commit governance, establishing comprehensive automated testing, and safeguarding calm weekends.",
+                    "capLabel": "Frameworks",
+                    "capabilities": ["Zero-Regression CI", "Decoupled Systems", "0 Friday Deploys"]
+                },
+                {
+                    "number": "Pillar 03",
+                    "icon": "hub",
+                    "tone": "primary",
+                    "title": "AI Enabler & Modern Full Stack",
+                    "body": "Deploying pragmatic LLM agent workflows into production applications. Building resilient, reactive web frontends with high-throughput Node.js & Cloud backends.",
+                    "capLabel": "Ecosystem",
+                    "capabilities": ["React / Next", "Node.js / TS", "LLM Workflows"]
+                }
+            ]
+        },
+        "charter": {
+            "kicker": "Architecture Charter",
+            "title": "architecture_charter.manifest",
+            "status": "LOCKED // PROD-STABLE",
+            "items": [
+                {
+                    "step": "01",
+                    "tone": "tertiary",
+                    "title": "Walk into chaotic codebases, deliver clarity",
+                    "body": "Diagnose systemic bottlenecks within 72 hours, prioritize low-risk high-yield stabilization paths."
+                },
+                {
+                    "step": "02",
+                    "tone": "primary",
+                    "title": "Strict \"Zero Friday Deploys\" Covenant",
+                    "body": "Deploys run Mon-Thu before 15:00 UTC with automated canary rollback gates. Protect engineers' time off."
+                },
+                {
+                    "step": "03",
+                    "tone": "tertiary",
+                    "title": "Empower humans via LLM & DevEx accelerators",
+                    "body": "Augment test generation, schema migrations, and documentation using structured AI tooling."
+                }
+            ]
+        },
+        "philosophy": {
+            "kicker": "Philosophy",
+            "title": "Engineering leadership is human enablement first",
+            "body": "The cleanest architecture means nothing if the team is burning out. By setting crystal-clear technical specifications, automating repetitive quality checks, and decoupling complex dependencies, development becomes enjoyable again.",
+            "cta": "View track record & metrics"
+        },
+        "nextStep": {
+            "kicker": "Next Step",
+            "title": "Ready to see the code & impact?",
+            "body": "Explore senior leadership milestones, architectural overhauls, and full-stack technical delivery.",
+            "cta": "Explore Experiences"
+        }
+    },
     "experiences": {
         "title": "Work Experiences",
         "pageTitle": "Work Experiences — Luca Palomba",
         "description": "Explore Luca Palomba's work experiences, including roles as Senior Full Stack Developer, R&D Manager, and Team Lead.",
-        "lead": "Selected roles and projects across my career.",
+        "kicker": "Career Vector",
+        "lead": "Selected roles and projects across my career, from distributed software architecture to team leadership and AI-augmented engineering.",
         "back": "← Back",
         "keyProject": "Key project:",
+        "telemetry": {
+            "title": "Telemetry // Leadership",
+            "tenureLabel": "Cumulative Tenure",
+            "tenureValue": "18+",
+            "tenureUnit": "Years Active",
+            "teamsLabel": "Teams Scaled",
+            "teamsPre": "Up to",
+            "teamsValue": "20",
+            "teamsUnit": "Eng",
+            "timelineSpan": "Timeline Span",
+            "timelineRange": "2007 → 2026+",
+            "metrics": [
+                { "key": "LEADERSHIP_MAX", "value": "20 Engineers / 4 Squads", "tone": "primary" },
+                { "key": "OPEX_REDUCTION", "value": "~50% in 12 Months", "tone": "tertiary" },
+                { "key": "METHODOLOGY", "value": "SCRUM / CI-CD / AI-Assisted", "tone": "plain" },
+                { "key": "R&D_SPECIALIZATION", "value": "Distributed Systems in business continuity", "tone": "primary" }
+            ]
+        },
+        "philosophy": {
+            "kicker": "Career Philosophy",
+            "quote": "Realizing technical architecture reaches its highest ceiling only when paired with intentional human coordination, empathy, and pragmatic automation."
+        },
+        "printCta": {
+            "claim": "Like what you see? Print it as a CV",
+            "button": "Print CV"
+        },
+        "nextPhase": {
+            "kicker": "Explore Core Stack",
+            "body": "Review specific framework mastery, infrastructure tools, languages, and orchestration benchmarks."
+        },
+        "nextStep": "View Technologies",
         "jobs": [
             {
                 "date": "Feb 2026 — Present",
@@ -200,6 +355,34 @@
         "description": "Explore the technologies Luca Palomba has experience with and those he's eager to learn.",
         "lead": "A list of technologies — from the ones I use every day to the ones that are now part of me. But mind you: the future changes fast, and so does this list with it.",
         "experiencedTitle": "Technological Experience",
+        "kicker": "Stack Audit & Technical Vectors",
+        "rev": "REV_2025.04",
+        "activeDomains": "ACTIVE_DOMAINS",
+        "activeDomainsValue": "10 Vectors",
+        "primarySynthesis": "PRIMARY_SYNTHESIS",
+        "primarySynthesisValue": "TypeScript & AI",
+        "filterLabel": "Filter technologies by category",
+        "filterMeta": "Index: Engineering Resonance",
+        "filters": {
+            "all": "All Matrix (10)",
+            "core": "Core Proficiency (≥80%)",
+            "architecture": "Architecture & Cloud",
+            "frontier": "R&D & Frontier"
+        },
+        "emptyState": "No technologies in this category yet.",
+        "spectrumTitle": "Proficiency Distribution Spectrum",
+        "spectrumMeta": "Aggregated Experience Index",
+        "spectrumLegend": [
+            { "label": "Core Stack (TS, PHP)", "tone": "tertiary" },
+            { "label": "AI & Pipelines", "tone": "primary" },
+            { "label": "Systems & K8s", "tone": "secondary" },
+            { "label": "WASM & Frontiers", "tone": "muted" }
+        ],
+        "nextChapter": {
+            "kicker": "Next Chapter",
+            "title": "Ready to discuss system design or staff collaborations?",
+            "cta": "Get in Touch"
+        },
         "tech": {
             "aiAgents": "LLM Development Agents & AI Documentation",
             "jsNode": "JavaScript (Node.js + TypeScript)",
@@ -228,16 +411,49 @@
     "contact": {
         "title": "Get In Touch",
         "pageTitle": "Contact — Luca Palomba",
-        "description": "I'm currently open to new opportunities and collaborations. Feel free to reach out — my inbox is always open, whether you have a question or just want to say hi."
+        "description": "I'm currently open to new opportunities and collaborations. Feel free to reach out — my inbox is always open, whether you have a question or just want to say hi.",
+        "channelNumber": "04.",
+        "channelLabel": "Transmission Channel",
+        "node": "# NODE: CONTACT_STREAM // OK",
+        "dispatch": {
+            "title": "Primary Dispatch",
+            "active": "Active Listener",
+            "directAddress": "Direct Address",
+            "compose": "Compose Email",
+            "copy": "Copy",
+            "copied": "Copied!"
+        },
+        "tiles": {
+            "timezoneLabel": "Timezone / Loc",
+            "timezoneValue": "EU / UTC+1",
+            "timezoneSub": "Active Response",
+            "latencyLabel": "Latency",
+            "latencyValue": "< 24 Hours",
+            "latencySub": "SLA p99: Nominal"
+        },
+        "network": {
+            "title": "Network Profiles",
+            "githubSub": "Open Source Commit Logs & Architectures",
+            "linkedinSub": "Professional History & Network"
+        },
+        "placement": "Target Placement: Staff / Lead IC · Distributed Systems · System Architecture"
     },
     "notFound": {
         "pageTitle": "404 - Page Not Found | Luca Palomba",
         "code": "404",
         "title": "Page Not Found",
-        "description": "It's not a bug, it's a feature… that we can't find it. Let's back on track",
-        "homeButton": "Go back home"
+        "description": "The requested route does not exist or has been relocated to another branch. Looks like you wandered into uncommitted territory — clear goals, clean commits, but no endpoint configured here.",
+        "homeButton": "Return to Overview",
+        "browseButton": "Browse Technologies",
+        "quickJump": "Quick jump"
     },
     "backToTop": "Go to Top",
+    "footer": {
+        "provenance": "Designed & Built by Luca Palomba — System Architecture & Engineering"
+    },
+    "contactScript": {
+        "copyFailed": "Could not copy — please copy the address manually."
+    },
     "sound": {
         "mute": "Mute keyboard sounds",
         "unmute": "Unmute keyboard sounds"

@@ -1,7 +1,11 @@
 <footer class="footer">
-    <p>
-        Designed and Built by Luca Palomba using <a href="https://stitch.withgoogle.com/" target="_blank"
-            rel="noopener noreferrer">Stitch</a>.<br>
-        Inspired by the web's coolest nerds.
-    </p>
+    <div class="footer-inner">
+        <p class="footer-provenance">{{ t.footer.provenance }}</p>
+        <div class="footer-meta">
+            <a href="https://github.com/lucapalomba" target="_blank" rel="noopener noreferrer">{% include icon.html name="terminal" %}<span>GitHub</span></a>
+            <a href="https://www.linkedin.com/in/lucapalomba/" target="_blank"
+                rel="noopener noreferrer">{% include icon.html name="hub" %}<span>LinkedIn</span></a>
+            <span>© {{ site.time | date: "%Y" }} Luca Palomba</span>
+        </div>
+    </div>
 </footer>

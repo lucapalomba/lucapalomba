@@ -14,16 +14,9 @@ class TitleAnimator {
     // keeps its own copies of both languages' strings.
     const config = this.readConfig();
 
-    this.typingSoundPool = [];
-    this.typingSoundIndex = 0;
-    this.erasingSoundPool = [];
-    this.erasingSoundIndex = 0;
-    this.SOUND_POOL_SIZE = 3; // Pre-allocate 3 audio instances per type
-
     this.stepIndex = 0;
     this.animationToken = 0; // Incremented to invalidate in-flight animation timers on restart
     this.steps = config.steps;
-    this.soundBase = config.soundBase;
 
     this.init();
   }
@@ -33,15 +26,14 @@ class TitleAnimator {
   // of an exception — the page itself has already been rendered by then, so
   // nothing is lost.
   readConfig() {
-    const empty = { steps: [], soundBase: '' };
+    const empty = { steps: [] };
     const element = document.getElementById('hero-animation');
     if (!element) return empty;
 
     try {
       const config = JSON.parse(element.textContent);
       return {
-        steps: Array.isArray(config.steps) ? config.steps : [],
-        soundBase: typeof config.soundBase === 'string' ? config.soundBase : ''
+        steps: Array.isArray(config.steps) ? config.steps : []
       };
     } catch (e) {
       console.warn('Hero animation config is not valid JSON:', e);
@@ -57,25 +49,6 @@ class TitleAnimator {
     // is already in the page's language — this only wraps the highlighted words.
     const initialConfig = this.steps[0];
     this.updateContent(this.getTextArray(initialConfig.text, initialConfig.highlights), !this.prefersReducedMotion);
-
-    // Pre-create audio pool for better performance. Skipped entirely while
-    // muted so a muted visitor never allocates an Audio element at all.
-    if (!this.isMuted()) {
-      this.initSoundPool();
-    }
-
-    // Rebuild the pool when the visitor toggles the navbar control: dropping
-    // it is what makes muting instant, since playKeySound() already returns
-    // early on an empty pool.
-    document.addEventListener('sound:muteChanged', (e) => {
-      const nowMuted = !!(e.detail && e.detail.muted);
-      if (nowMuted) {
-        this.typingSoundPool = [];
-        this.erasingSoundPool = [];
-      } else if (this.typingSoundPool.length === 0) {
-        this.initSoundPool();
-      }
-    });
 
     // Add click listener to restart animation
     this.titleElement.style.cursor = 'pointer';
@@ -93,37 +66,9 @@ class TitleAnimator {
     }, this.INTRO_ANIMATION_DURATION);
   }
 
-  // The mute preference lives in js/soundMute.js so the navbar toggle and this
-  // animator share one source of truth. Absent that module (it is only loaded
-  // on the home page, alongside this script) the sounds stay enabled.
-  isMuted() {
-    return !!(window.soundMute && window.soundMute.isMuted());
-  }
-
-  initSoundPool() {
-    // Reduced-motion users never hear the typewriter, so no audio pool.
-    if (this.prefersReducedMotion) return;
-    if (this.isMuted()) return;
-    try {
-      // Init typing sounds
-      for (let i = 0; i < this.SOUND_POOL_SIZE; i++) {
-        const audio = new Audio(this.soundBase + 'keyboard-click.mp3');
-        audio.preload = 'auto';
-        audio.volume = 0.2;
-        this.typingSoundPool.push(audio);
-      }
-
-      // Init erasing sounds
-      for (let i = 0; i < this.SOUND_POOL_SIZE; i++) {
-        const audio = new Audio(this.soundBase + 'keyboard-click-delete.mp3');
-        audio.preload = 'auto';
-        audio.volume = 0.2;
-        this.erasingSoundPool.push(audio);
-      }
-    } catch (e) {
-      console.warn('Audio initialization failed:', e);
-    }
-  }
+  // The typewriter runs silently: the keyboard audio and its mute control were
+  // removed with the Obsidian Precision revamp (D6 in
+  // docs/design-system-revamp.md), which retired js/soundMute.js and sounds/.
 
   startSequence() {
     // Reduced motion: keep the first fully rendered claim, no auto-cycling.
@@ -212,11 +157,6 @@ class TitleAnimator {
       // Update content using the array slice, preserving HTML structure
       this.updateContent(textArray.slice(0, position));
 
-      // Play sound
-      if (this.erasingSoundPool.length > 0) {
-        this.playKeySound('erase');
-      }
-
       if (position === 0) {
         clearInterval(eraseInterval);
         callback();
@@ -240,10 +180,6 @@ class TitleAnimator {
       }
 
       if (position < textArray.length) {
-        // Play keyboard sound for each character (except spaces)
-        if (textArray[position].char !== ' ' && this.typingSoundPool.length > 0) {
-          this.playKeySound('type');
-        }
         // Update the content with the current position
         this.updateContent(textArray.slice(0, position + 1));
         position++;
@@ -256,35 +192,6 @@ class TitleAnimator {
         if (callback) callback();
       }
     }, this.TYPEWRITER_SPEED);
-  }
-
-  playKeySound(type = 'type') {
-    try {
-      let sound, index;
-
-      if (type === 'erase') {
-        if (this.erasingSoundPool.length === 0) return;
-        sound = this.erasingSoundPool[this.erasingSoundIndex];
-        this.erasingSoundIndex = (this.erasingSoundIndex + 1) % this.erasingSoundPool.length;
-      } else {
-        if (this.typingSoundPool.length === 0) return;
-        sound = this.typingSoundPool[this.typingSoundIndex];
-        this.typingSoundIndex = (this.typingSoundIndex + 1) % this.typingSoundPool.length;
-      }
-
-      // Reset and play
-      sound.currentTime = 0;
-      sound.volume = 0.2;
-
-      const playPromise = sound.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(err => {
-          console.debug('Could not play keyboard sound:', err.message);
-        });
-      }
-    } catch (e) {
-      console.debug('Error playing keyboard sound:', e.message);
-    }
   }
 
   getTextArray(text, highlights) {

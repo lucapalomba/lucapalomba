@@ -1,51 +1,71 @@
 /* Styles for max-width: 768px */
-.hero-title {
-    /* Reserve three lines: that is what the longest localized claim step
-       ("Addestro team e AI per i processi.", 35 chars) wraps to at every
-       supported width with the fluid size below, so the typewriter cannot
-       shift the layout while it types. */
-    min-height: 3.3em;
-}
 
+/* The desktop nav (numbered links + Curriculum CTA + lang) collapses into the
+   drawer; the navbar keeps the brand and the hamburger. The badge and the
+   Curriculum button live in the drawer at this size, as in the mockups. */
 .navbar {
-    padding: 0 25px;
-    height: 70px;
+    padding: 0;
 }
 
-.hamburger-menu {
-    display: flex;
+.navbar-inner {
+    padding-inline: 25px;
+}
+
+.navbar-brand .status-badge,
+.navbar-actions .resume-btn {
+    display: none;
 }
 
 .nav-links {
     display: none;
 }
 
-.content-wrapper {
-    padding: 110px 40px;
+.hamburger-menu {
+    display: flex;
 }
 
-.hero {
-    padding: 0;
-    max-width: 100%;
+.page-title,
+.page-title--display {
+    font-size: var(--display-mobile-size);
+    letter-spacing: var(--display-mobile-tracking);
 }
 
 .hero-name,
 .hero-title {
-    /* Fluid display type: at a flat 40px the name and the animated claim
-       wrapped so much on a phone that the CTA fell below the fold. The clamp
-       only bites under ~500px, so tablets keep the 40px of the design. */
-    font-size: clamp(26px, 8vw, 40px);
-}
-
-.container {
-    padding: 0 40px;
-}
-
-.page {
-    padding: 60px 40px;
-    margin-top: 70px;
+    /* Fluid display type: at a flat 56px the name and the animated claim wrap
+       so much on a phone that the CTA falls below the fold. */
+    font-size: clamp(28px, 8vw, var(--display-mobile-size));
+    letter-spacing: var(--display-mobile-tracking);
 }
 
 .hero-bio {
     line-height: 1.5;
+}
+
+/* Full-bleed bands collapse their side padding to the mobile margin. */
+.container {
+    padding-inline: var(--space-md);
+}
+
+.page-head,
+.page-head-copy,
+.tech-header-row {
+    gap: var(--space-sm);
+}
+
+.tech-filter {
+    /* Let the filter row scroll horizontally instead of pushing the page wide. */
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+}
+
+.tech-filterbar {
+    flex-wrap: wrap;
+}
+
+.tech-filter-meta {
+    display: none;
 }

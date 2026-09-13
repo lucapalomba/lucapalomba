@@ -3,35 +3,79 @@ layout: default
 ---
 {%- assign t = site.data.translations[page.lang] %}
 <!-- Main Content -->
-<main class="page contact-content" id="main-content">
-    <div class="container">
-        <h1 class="section-title"><span class="section-number">04.</span> <span class="section-title-text">{{ t.contact.title }}</span></h1>
-        <p class="contact-description">{{ t.contact.description }}</p>
+<main class="page" id="main-content">
+    <div class="container contact-page">
 
-        <a href="mailto:luca.palomba.developer@gmail.com" class="contact-email">
-            luca.palomba.developer@gmail.com
-        </a>
+        <header class="contact-header reveal">
+            <div class="contact-header-label">
+                <span class="accent-text">{{ t.contact.channelNumber }}</span>
+                <span class="kicker">{{ t.contact.channelLabel }}</span>
+                <span class="dot-tertiary"></span>
+            </div>
+            <h1 class="page-title page-title--display"><span class="section-number section-number--lg">04.</span><span>{{ t.contact.title }}</span></h1>
+            <p class="contact-description">{{ t.contact.description }}</p>
+        </header>
 
-        <div class="social-links">
-            <a href="https://github.com/lucapalomba" target="_blank" rel="noopener noreferrer"
-                aria-label="{{ t.a11y.github }}">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path
-                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                    </path>
-                </svg>
-            </a>
-            <a href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer"
-                aria-label="{{ t.a11y.linkedin }}">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                    <rect x="2" y="9" width="4" height="12"></rect>
-                    <circle cx="4" cy="4" r="2"></circle>
-                </svg>
-            </a>
+        <div class="contact-cards">
+            <!-- Primary Dispatch -->
+            <div class="card contact-dispatch reveal">
+                <div class="dispatch-head">
+                    <span class="dispatch-title">{% include icon.html name="alternate_email" %}{{ t.contact.dispatch.title }}</span>
+                    <span class="dispatch-status"><span class="dot-tertiary"></span>{{ t.contact.dispatch.active }}</span>
+                </div>
+                <div class="dispatch-address">
+                    <span class="dispatch-address-label">{{ t.contact.dispatch.directAddress }}</span>
+                    <span class="dispatch-address-value" id="target-email">luca.palomba.developer@gmail.com</span>
+                </div>
+                <div class="dispatch-actions">
+                    <a href="mailto:luca.palomba.developer@gmail.com" class="btn btn--primary">
+                        <span>{{ t.contact.dispatch.compose }}</span>{% include icon.html name="arrow_outward" %}
+                    </a>
+                    <button type="button" class="btn btn--secondary" id="copy-email"
+                        data-copied-label="{{ t.contact.dispatch.copied }}"
+                        data-copy-failed="{{ t.contactScript.copyFailed }}">
+                        {% include icon.html name="content_copy" %}
+                        <span class="copy-label">{{ t.contact.dispatch.copy }}</span>
+                    </button>
+                    <span class="visually-hidden" id="copy-status" aria-live="polite"></span>
+                </div>
+            </div>
+
+            <div class="contact-tiles reveal">
+                <div class="card contact-tile">
+                    <span class="stat-label">{{ t.contact.tiles.timezoneLabel }}</span>
+                    <span class="contact-tile-value">{{ t.contact.tiles.timezoneValue }}</span>
+                    <span class="contact-tile-sub"><span class="dot-tertiary"></span>{{ t.contact.tiles.timezoneSub }}</span>
+                </div>
+                <div class="card contact-tile">
+                    <span class="stat-label">{{ t.contact.tiles.latencyLabel }}</span>
+                    <span class="contact-tile-value">{{ t.contact.tiles.latencyValue }}</span>
+                    <span class="contact-tile-sub">{% include icon.html name="check_circle" %}{{ t.contact.tiles.latencySub }}</span>
+                </div>
+            </div>
+
+            <!-- Network Profiles -->
+            <div class="card contact-network reveal">
+                <p class="contact-subhead">{{ t.contact.network.title }}</p>
+                <ul class="network-list">
+                    <li class="network-row">
+                        <span class="network-id">{% include icon.html name="github" %}github.com/lucapalomba</span>
+                        <a class="network-link" href="https://github.com/lucapalomba" target="_blank" rel="noopener noreferrer">{{ t.contact.network.githubSub }} {% include icon.html name="arrow_outward" %}</a>
+                    </li>
+                    <li class="network-row">
+                        <span class="network-id">{% include icon.html name="linkedin" %}linkedin.com/in/lucapalomba/</span>
+                        <a class="network-link" href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer">{{ t.contact.network.linkedinSub }} {% include icon.html name="arrow_outward" %}</a>
+                    </li>
+                </ul>
+            </div>
+
+            <p class="contact-placement">{{ t.contact.placement }}</p>
         </div>
+
+        <div class="contact-provenance reveal">
+            <span class="kicker">{{ t.contact.node }}</span>
+        </div>
+
     </div>
 </main>
 <!-- ContactPage structured data. The Person properties come from the shared

@@ -1,47 +1,130 @@
----
+﻿---
 layout: default
 ---
 {%- comment -%}
-  Each row is "dictionary key : percentage : number of rising particles". The keys
-  are looked up in the locale's `technologies.tech` and `technologies.desc` maps
-  rather than written out, so the names and descriptions stay in the dictionary
-  like every other string. The row order is editorial (strongest first), which is
-  why it lives here and not in JSON — and the particle counts reproduce the
-  hand-tuned `.tech-rise` density the page had before.
+  Each row is "dictionary key : percentage : tone : category : domain label :
+  vector label : status". The keys are looked up in the locale's
+  `technologies.tech` and `technologies.desc` maps rather than written out, so
+  the names and descriptions stay in the dictionary like every other string.
+  The category drives the filter; the export's own filter was inconsistent
+  (PHP 85% and Advanced Architectures 65% sat in buckets their scores
+  contradicted), so here a card's bucket always matches the row.
 {%- endcomment -%}
 {%- assign t = site.data.translations[page.lang] %}
-{%- assign tech_rows = "aiAgents:85:12|cicd:80:8|react:80:4|architectures:65:2|jsNode:90:0|php:85:0|cloudK8s:60:0|cloud:50:0|ml:40:0|wasm:20:0" | split: "|" %}
+{%- assign tech_rows = "aiAgents:85:primary:core:AI_AGENTIC_SYSTEMS:Workflow Automation:Active Daily:12|jsNode:90:tertiary:core:CORE_RUNTIME:Full-Stack & Orchestration:Native Stack:0|cicd:80:primary:systems:PIPELINE_ORCHESTRATION:Release Engineering:Production Hardened:8|react:80:primary:core:CLIENT_TOPOLOGY:Design Systems & UX Perf:Staff Experience:4|php:85:primary:core:ENTERPRISE_LEGACY_MODERN:Enterprise Migration:High Maturity:0|architectures:65:secondary:systems:DOMAIN_STRATEGY:Distributed Patterns:Active Focus:2|cloudK8s:60:primary:systems:INFRA_SCALING:100+ Nodes Multi-Cluster:Applied Production:0|cloud:50:secondary:systems:HYPERSCALER_ECOSYSTEMS:Enterprise IAM & Networking:Ongoing Study:0|ml:40:secondary:frontier:APPLIED_INTELLIGENCE:Predictive Analytics & Flows:Exploratory:0|wasm:20:neutral:frontier:LOW_LEVEL_SANDBOX:Native Client Compute:Early Research:0" | split: "|" %}
 <!-- Main Content -->
 <main class="page" id="main-content">
-    <div class="container">
-        <h1 class="section-title"><span class="section-number">03.</span> <span class="section-title-text">{{ t.technologies.title }}</span></h1>
-        <p class="lead">{{ t.technologies.lead }}</p>
+    <div class="container tech-stack-page">
 
-        <!-- Experienced Technologies -->
-        <section class="tech-section">
-            <h2 class="tech-section-title">{{ t.technologies.experiencedTitle }}</h2>
-            <div class="tech-progress-list">
-                {%- for row in tech_rows %}
-                {%- assign fields = row | split: ":" %}
-                {%- assign tech_key = fields[0] %}
-                {%- assign tech_percent = fields[1] %}
-                {%- assign tech_rise = fields[2] %}
-                <div class="tech-progress-item">
-                    <div class="tech-progress-header">
-                        <span class="tech-name">{{ t.technologies.tech[tech_key] }}</span>
-                        <span class="tech-percentage">{{ tech_percent }}%</span>
+        <header class="tech-header reveal">
+            <div class="tech-header-label">
+                <span class="accent-text">{{ t.technologies.kicker }}</span>
+                <span class="tech-header-sep">//</span>
+                <span class="tech-header-rev">{{ t.technologies.rev }}</span>
+            </div>
+            <div class="tech-header-row">
+                <div class="tech-header-copy">
+                    <h1 class="page-title page-title--display"><span class="section-number section-number--lg">03.</span><span>{{ t.technologies.title }}</span></h1>
+                    <p class="page-lead">{{ t.technologies.lead }}</p>
+                </div>
+                <div class="glass-panel tech-summary">
+                    <div class="tech-summary-cell">
+                        <span class="stat-label">{{ t.technologies.activeDomains }}</span>
+                        <span class="tech-summary-value">{{ t.technologies.activeDomainsValue }}</span>
                     </div>
-                    <div class="tech-progress-bar">
-                        <div class="tech-progress-fill" data-progress="{{ tech_percent }}"></div>
+                    <span class="tech-summary-divider"></span>
+                    <div class="tech-summary-cell">
+                        <span class="stat-label">{{ t.technologies.primarySynthesis }}</span>
+                        <span class="tech-summary-value tech-summary-value--tertiary">{{ t.technologies.primarySynthesisValue }}</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="glass-panel tech-filterbar reveal">
+            <div class="tech-filter" role="group" aria-label="{{ t.technologies.filterLabel }}">
+                <button type="button" class="filter-btn filter-btn--active" data-filter="all" aria-pressed="true">{{ t.technologies.filters.all }}</button>
+                <button type="button" class="filter-btn" data-filter="core" aria-pressed="false">{{ t.technologies.filters.core }}</button>
+                <button type="button" class="filter-btn" data-filter="systems" aria-pressed="false">{{ t.technologies.filters.architecture }}</button>
+                <button type="button" class="filter-btn" data-filter="frontier" aria-pressed="false">{{ t.technologies.filters.frontier }}</button>
+            </div>
+            <div class="tech-filter-meta">
+                {% include icon.html name="tune" %}
+                <span>{{ t.technologies.filterMeta }}</span>
+            </div>
+        </div>
+
+        <div class="tech-matrix">
+            {%- for row in tech_rows %}
+            {%- assign f = row | split: ":" %}
+            {%- assign tech_key = f[0] %}
+            {%- assign tech_percent = f[1] %}
+            {%- assign tech_tone = f[2] %}
+            {%- assign tech_cat = f[3] %}
+            {%- assign tech_domain = f[4] %}
+            {%- assign tech_vector = f[5] %}
+            {%- assign tech_status = f[6] %}
+            {%- assign tech_rise = f[7] %}
+            <article class="glass-panel tech-card reveal" data-category="{{ tech_cat }}"
+                style="--reveal-delay: {{ forloop.index0 | times: 60 }}ms">
+                <div class="tech-card-body">
+                    <div class="tech-card-top">
+                        <div class="tech-card-id">
+                            <span class="tech-card-icon tech-card-icon--{{ tech_tone }}">{% include icon.html name="memory" %}</span>
+                            <div>
+                                <span class="tech-domain">{{ tech_domain }}</span>
+                                <h2 class="tech-name">{{ t.technologies.tech[tech_key] }}</h2>
+                            </div>
+                        </div>
+                        <span class="tech-percentage tech-percentage--{{ tech_tone }}">{{ tech_percent }}%</span>
+                    </div>
+                    <div class="progress">
+                        <span class="progress-fill tech-progress-fill progress-fill--{{ tech_tone }}" data-progress="{{ tech_percent }}"></span>
                         {%- if tech_rise != '0' %}
                         <span class="tech-rise" style="left: {{ tech_percent }}%" aria-hidden="true">{% for i in (1..tech_rise) %}<i></i>{% endfor %}</span>
                         {%- endif %}
                     </div>
                     <p class="tech-description">{{ t.technologies.desc[tech_key] }}</p>
                 </div>
-                {%- endfor %}
+                <div class="tech-card-foot">
+                    <span>VECTOR: {{ tech_vector }}</span>
+                    <span class="tech-status tech-status--{{ tech_tone }}"><span class="dot-{{ tech_tone }}"></span>{{ tech_status }}</span>
+                </div>
+            </article>
+            {%- endfor %}
+        </div>
+        <p class="tech-empty" hidden>{{ t.technologies.emptyState }}</p>
+
+        <section class="glass-panel tech-spectrum reveal" data-spectrum>
+            <div class="tech-spectrum-head">
+                <span class="tech-spectrum-title">{% include icon.html name="query_stats" %}{{ t.technologies.spectrumTitle }}</span>
+                <span class="tech-spectrum-meta">{{ t.technologies.spectrumMeta }}</span>
             </div>
+            <div class="spectrum" data-spectrum-bar aria-hidden="true">
+                <span class="spectrum-seg spectrum-seg--tertiary" style="--seg-width: 40%; --reveal-delay: 0ms"></span>
+                <span class="spectrum-seg spectrum-seg--primary" style="--seg-width: 30%; --reveal-delay: 120ms"></span>
+                <span class="spectrum-seg spectrum-seg--secondary" style="--seg-width: 20%; --reveal-delay: 240ms"></span>
+                <span class="spectrum-seg spectrum-seg--muted" style="--seg-width: 10%; --reveal-delay: 360ms"></span>
+            </div>
+            <ul class="spectrum-legend">
+                {%- for item in t.technologies.spectrumLegend %}
+                <li><span class="legend-dot legend-dot--{{ item.tone }}"></span>{{ item.label }}</li>
+                {%- endfor %}
+            </ul>
         </section>
+
+        <div class="glass-panel next-chapter reveal">
+            <div class="next-chapter-id">
+                <span class="next-chapter-icon">{% include icon.html name="terminal" %}</span>
+                <div>
+                    <span class="stat-label">{{ t.technologies.nextChapter.kicker }}</span>
+                    <span class="next-chapter-title">{{ t.technologies.nextChapter.title }}</span>
+                </div>
+            </div>
+            <a href="contact.html" class="btn btn--secondary">
+                <span class="accent-text">04.</span> {{ t.technologies.nextChapter.cta }} {% include icon.html name="arrow_forward" %}
+            </a>
+        </div>
 
     </div>
 </main>

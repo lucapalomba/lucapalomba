@@ -67,7 +67,7 @@ The environment has Ruby 3.4 + Bundler, but there is a `public_suffix` conflict 
 - **i18n (server-side)**: every string is rendered by Jekyll, so the HTML is complete before any JavaScript runs (no text flash, crawler-visible). All copy lives in `_data/translations/{en,it}.json` and layouts render it as `{{ t.a.dotted.key }}` — never hardcode a string in markup, and never reintroduce `data-i18n` attributes. The active dictionary is `t`, assigned at the top of `_layouts/default.html` and of every page layout; the language is `page.lang`.
 - **Language pairing (front matter)**: `lang` (`en`/`it`) selects the dictionary; `i18n_key` selects the copy block and drives `<title>`/description via `t[page.i18n_key]`; `alt_url` + `alt_lang` point at the page's counterpart in the other language and are emitted as `hreflang`. The pairing is mutual — the counterpart must point back. `no_alternate: true` marks a page with no counterpart (the 404). `scripts/check-i18n.js` enforces all of this.
 - **Page front matter**: also supports `page_scripts` (list of additional JS paths loaded at the bottom), `hide_nav_scripts` (disables `navigation.js`/`hamburger.js`) and `body_class` (`technologies-page` is what `techProgress.js` looks for; `not-found-page` suppresses the navigation hint). Client-side scripts that need to know which page they are on read `document.body.dataset.page` (the `i18n_key`), not the URL.
-- **Design system**: dark "terminal/developer" theme — background `#0a0a0f`, text `#e6e6ef`, violet accent `#B77EF1` (particles `#6e48aa`), monospace Roboto Mono (local in `fonts/`). CSS keyframe animations (hero, typing dots, transitions).
+- **Design system**: dark "Obsidian Precision" theme — surfaces from `--surface-container-lowest` `#0c0e14` up to `--surface-container-highest` `#33343b`, page `#111319`; text `--on-surface` `#e2e2ea`; cyan accent `--primary` `#4cd7f6` (text/icons) + `--primary-container` `#06b6d4` (fills). Geist and JetBrains Mono are self-hosted **variable** fonts (Latin + Latin-Ext subsets, ~60 KB total) in `fonts/`. Tokens live in `styles/tokens.css` (the old `--bg-color` / `--accent-color` / `--font-main` names are deprecated aliases there); components in `styles/components.css`, motion in `styles/motion.css`. Styles are bundled at build time: `styles/app.css` concatenates the shared sheets, and each page loads one `styles/page-*.css` selected by the `i18n_key` switch in `_includes/head.html`; the sources stay separate for editing. Icons are inline SVG via `_includes/icon.html`, not an icon font. The plan is `docs/design-system-revamp.md`.
 - **Commits (REQUIRED)**: **every** commit must use Conventional Commits as the message type — `feat:`, `fix:`, `chore:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`, `build:`, `ci:`, `revert:`, etc. No commits without a type prefix. Work on separate branches / PRs; deploy happens only from `main`.
 
 ## Project map
@@ -92,9 +92,10 @@ The environment has Ruby 3.4 + Bundler, but there is a `public_suffix` conflict 
 
 - `_layouts/default.html` — base layout: `<html lang>`, skip-link, transition overlay, navbar, `{{ content }}`, footer, back-to-top, navigation hint, scripts. All pages use it. It assigns `t = site.data.translations[page.lang]` — a Jekyll `include` gets its own Liquid scope, so any file that renders a translated string must assign `t` itself rather than rely on the caller.
 - `_layouts/{home,experiences,technologies,contact,error}.html` — one layout per page, holding that page's markup **once**, translated. The EN and IT pages are thin front-matter files that both point at the same layout, so there is no duplicated markup between languages.
-- `_includes/head.html` — `<head>`: title/description/OG/Twitter/JSON-LD built from `t[page.i18n_key]`, `og:locale` + `og:locale:alternate`, a self-referential canonical and the `hreflang` alternates, local favicon + PWA icons (declared `sizes` match the real files), local Roboto Mono font, JSON-LD `Person` (props from `_data/person.yml` via `_includes/jsonld-person-props.html`, shared with `_layouts/contact.html`), manifest link, stylesheets (`fonts`, `transitions`, `main`, `mobile`, `mobile-small`, `reduced-motion`, `print-experiences`), and the inline ES5 language hand-off (see below).
-- `_includes/navbar.html` — sticky navbar with logo, server-rendered links (active state via `page.i18n_key`), the sound-mute toggle (rendered on the home page only, with both wordings from `t.sound.*` in `data-label-mute`/`data-label-unmute` for `soundMute.js`), the language switcher (from `page.alt_url`, rendered in both the desktop row and the mobile drawer), hamburger + mobile drawer, "Curriculum" CTA (LinkedIn link). Contains the drawer toggle logic.
-- `_includes/footer.html` — footer: copyright, GitHub/LinkedIn links, "STATUS: NOMINAL" indicator.
+- `_includes/head.html` — `<head>`: title/description/OG/Twitter/JSON-LD built from `t[page.i18n_key]`, `og:locale` + `og:locale:alternate`, a self-referential canonical and the `hreflang` alternates, local favicon + PWA icons (declared `sizes` match the real files), the self-hosted Geist/JetBrains Mono preloads, JSON-LD `Person` (props from `_data/person.yml` via `_includes/jsonld-person-props.html`, shared with `_layouts/contact.html`), manifest link, stylesheets (`fonts`, `tokens`, `components`, `transitions`, `main`, `motion`, `pages`, `mobile`, `mobile-small`, `reduced-motion`, `print-experiences`), and the inline ES5 language hand-off (see below).
+- `_includes/icon.html` — inline SVG icon sprite. `{% include icon.html name="terminal" %}` renders a 24x24 `currentColor` stroke icon, `aria-hidden`; an unknown name renders nothing. Line-art from Lucide (ISC), so no icon font request.
+- `_includes/navbar.html` — sticky navbar with the `<LP />` brand, server-rendered links (active state via `page.i18n_key`), the availability badge with a single-cycle ping, the language switcher (from `page.alt_url`, rendered in both the desktop row and the mobile drawer), hamburger + mobile drawer, "Curriculum" CTA (LinkedIn link). Contains the drawer toggle logic. The typewriter sound toggle and its audio were removed with the revamp (D6), so `js/soundMute.js` and `sounds/` are gone.
+- `_includes/footer.html` — footer: provenance line, GitHub/LinkedIn links (real URLs from `_data/person.yml`), and a copyright year rendered from `site.time` so it cannot go stale.
 - `_includes/back-to-top.html` — the "back to top" button, server-rendered and translated (CSS keeps it hidden until scrolled).
 - `_includes/scripts.html` — loads core JS (`langPref`, `main`, `transitions`) + conditionals (`navigation`, `hamburger` unless `hide_nav_scripts`) + `page_scripts` + `backToTop`, prints the console easter egg from `t.consoleEasterEgg`, then the inline service-worker registration (baseurl-aware, cache version from `site.time`).
 - `_includes/transition-overlay.html` — markup for the full-screen overlay used for page transitions (color-fill + smoke).
@@ -117,18 +118,25 @@ The environment has Ruby 3.4 + Bundler, but there is a `public_suffix` conflict 
 - `navigation.js` — circular navigation between the 4 pages with ← → arrows (keyboard) and swipe (touch, 100px threshold + horizontal guard), staying inside the current language. Reads the current page from `document.body.dataset.page` and navigates through relative URLs, so it works from `/it/` too. Reveals the navigation hint (once per session) and fades it after 5s.
 - `hamburger.js` — `HamburgerMenu` class: mobile drawer toggle, closes on internal link / Escape / outside click, locks body scroll when open.
 - `backToTop.js` — drives the server-rendered `.back-to-top-btn`: adds `.visible` past 300px of scroll, scrolls to top honouring `prefers-reduced-motion`.
-- `soundMute.js` — persisted mute state (`localStorage.soundMuted`) for the typewriter's keyboard sounds, exposed as `window.soundMute` (`isMuted`/`setMuted`/`toggle`). Loaded before `titleAnimation.js`, which reads it when it builds its audio pool; the navbar toggle drives it. Its two labels come from the page (`data-label-mute`/`data-label-unmute`), so it has no dependency on any translation layer.
-- `titleAnimation.js` — `TitleAnimator` class: typewriter effect on `.hero-title`, keyword highlighting, keyboard sounds (pool of 3 audio per type from `sounds/`), restarts on click. Its steps and its sound base come from the `#hero-animation` JSON rendered by the home layout, so it plays the page's own language and loads sounds from an absolute path that is correct on `/it/` as well.
-- `techProgress.js` — animates the width of `.tech-progress-fill` to `data-progress`% after load, only on `technologies-page`.
+- `motion.js` — adds `.in` to `.reveal`, `.sparkline-draw` and `.timeline-fill` the first time they enter the viewport (IntersectionObserver, same pattern as `techProgress.js`), then unobserves. Skips observing entirely under `prefers-reduced-motion`; the motion vocabulary itself lives in `styles/motion.css`.
+- `contactCopy.js` — contact page: copies the email address with a visible label swap and an `aria-live` announcement, plus a non-blocking failure path.
+- `techProgress.js` — animates `.tech-progress-fill` widths on scroll and drives the technologies category filter (live count, `aria-pressed`, empty state), refilling cards the filter reveals.
+- `titleAnimation.js` — `TitleAnimator` class: typewriter effect on `.hero-title`, keyword highlighting, restarts on click. Its steps come from the `#hero-animation` JSON rendered by the home layout, so it plays the page's own language. Audio was removed with the revamp (D6).
 
 ### Styles (`styles/`)
 
-- `main.css` — main global styles (component layout, timeline, keyframes, back-to-top, navigation-hint, etc.).
-- `transitions.css` — transition overlay animations (color-fill, smoke, body fade-in).
+- `tokens.css` — design tokens (surfaces, text, accents, spacing, radii, type scale, motion) plus the deprecated aliases for the old token names. Loaded first.
+- `components.css` — layout container/grid and the component primitives (section header, card, chip, badge, stat tile, kv-row, buttons, ping-dot, progress, sparkline).
+- `main.css` — global and component styles that predate the primitives (navbar, mobile drawer, timeline, back-to-top, console/hint, etc.).
+- `app.css` — the shared bundle, concatenated at build time from tokens, fonts, components, transitions, main, motion and `shared-atoms.css` via `include_relative`. Every page loads this one file.
+- `page-index.css` / `page-experiences.css` / `page-technologies.css` / `page-contact.css` / `page-404.css` — one small sheet per page composition, selected by the `i18n_key` switch in `_includes/head.html`, so a page never downloads another page's rules.
+- `shared-atoms.css` — atoms used across pages (kicker, lead, page title, print button).
+- `motion.css` — the authored motion layer (reveal, sparkline draw, timeline fill, single-cycle ping), all reduced-motion aware.
+- `transitions.css` — the short opacity page-transition overlay.
 - `reduced-motion.css` — loaded only with `prefers-reduced-motion: reduce`; disables animations/transitions.
 - `print-experiences.css` — `media="print"` stylesheet for the printable CV version (experiences).
 - `mobile.css` / `mobile-small.css` — responsive overrides for small screens.
-- `fonts.css` — font definitions/overrides.
+- `fonts.css` — self-hosted variable `@font-face` definitions for Geist and JetBrains Mono, subset to Latin + Latin-Ext.
 
 ### Translations (`_data/translations/`)
 
@@ -139,7 +147,7 @@ The environment has Ruby 3.4 + Bundler, but there is a `public_suffix` conflict 
 
 - `images/` — site images: the PWA icons (`icon-192.png`, `icon-512.png`, `icon-maskable-512.png`) and `favicon-32.png`, all generated by `scripts/generate-icons.js` — never hand-edit them.
 - `fonts/` — local fonts (if present).
-- `sounds/` — audio clips for `titleAnimation.js` (`keyboard-click.mp3`, `keyboard-click-delete.mp3`).
+- `sounds/` — removed with the revamp; the typewriter no longer plays audio (D6).
 - `_site/` — build output (generated; do not commit manual edits).
 
 ### Docs (`docs/`)
