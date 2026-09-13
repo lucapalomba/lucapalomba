@@ -72,7 +72,7 @@
     display: none !important;
   }
   
-  h1.section-title [data-i18n="experiences.title"] {
+  h1.section-title .section-title-text {
     display: none !important;
   }
   

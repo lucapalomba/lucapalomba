@@ -1,0 +1,30 @@
+---
+layout: default
+---
+{%- assign t = site.data.translations[page.lang] %}
+{%- assign hero_steps = t.index.hero.steps %}
+{%- assign first_step = hero_steps[0] %}
+<!-- Main Content -->
+<main class="content-wrapper" id="main-content">
+  <section class="hero">
+    <p class="hero-intro">{{ t.index.hero.intro }}</p>
+    <h1 class="hero-name" fetchpriority="high">{{ t.index.hero.name }}</h1>
+    <h2 class="hero-title">{{ first_step.text }}</h2>
+    <h3 class="hero-subtitle">{{ t.index.subtitle }}</h3>
+    <p class="hero-bio">{{ t.index.hero.bio }}</p>
+    <a href="experiences.html" class="hero-cta">{{ t.index.hero.cta }}</a>
+  </section>
+</main>
+
+<!-- Typewriter configuration for titleAnimation.js. The steps are the locale's
+     own headline variants — rendering them here is what keeps the hero in one
+     place (they used to live in JavaScript, in both languages, next to a
+     `data-i18n` headline that said something slightly different). `soundBase` is
+     absolute on purpose: the sounds are fetched relative to this page, and under
+     /it/ a bare "sounds/…" would resolve to /it/sounds/…, which does not exist. -->
+<script type="application/json" id="hero-animation">
+  {
+    "steps": {{ hero_steps | jsonify }},
+    "soundBase": {{ '/sounds/' | relative_url | jsonify }}
+  }
+</script>

@@ -1,21 +1,64 @@
 {
+    "ogLocale": "en_US",
     "nav": {
         "whoami": "Who am I",
         "experience": "Experience",
         "technologies": "Technologies",
         "contact": "Contact",
-        "curriculum": "Curriculum"
+        "curriculum": "Curriculum",
+        "langSwitch": "Switch to Italian",
+        "langCode": "IT"
+    },
+    "a11y": {
+        "skipToContent": "Skip to main content",
+        "toggleMenu": "Toggle navigation menu",
+        "mainNav": "Main navigation",
+        "mobileNav": "Mobile navigation",
+        "print": "Print this page",
+        "github": "GitHub profile",
+        "linkedin": "LinkedIn profile",
+        "curriculum": "Curriculum — opens in a new window"
     },
     "index": {
-        "title": "Luca Palomba - Engineering Manager & Web Developer",
+        "pageTitle": "Luca Palomba - Engineering Manager & Web Developer",
         "description": "Portfolio of Luca Palomba, an Engineering Manager, Team Lead, and Web Developer specializing in full-stack development and R&D.",
         "subtitle": "Full Stack Developer & Team Lead, Engineering leadership experience",
         "hero": {
             "intro": "Hi, my name is",
             "name": "Luca Palomba.",
-            "title": "I build things for the web.",
             "bio": "Software engineer with tech-debt-demolisher super-powers: I walk into chaos, straighten things out, and help everyone go home stress-free. Clear goals, clean commits, and no Friday deploys.",
-            "cta": "Check out my experiences!"
+            "cta": "Check out my experiences!",
+            "steps": [
+                {
+                    "text": "I build things for the web",
+                    "highlights": [
+                        "things",
+                        "web"
+                    ]
+                },
+                {
+                    "text": "I build teams for Companies",
+                    "highlights": [
+                        "teams",
+                        "Companies"
+                    ]
+                },
+                {
+                    "text": "I lead teams for goals.",
+                    "highlights": [
+                        "teams",
+                        "goals"
+                    ]
+                },
+                {
+                    "text": "I train teams and AI for processes.",
+                    "highlights": [
+                        "teams",
+                        "AI",
+                        "processes"
+                    ]
+                }
+            ]
         }
     },
     "consoleEasterEgg": "If you are reading this message, it means you do the same job as me. Why don't you contact me and we have a coffee?",
@@ -30,7 +73,11 @@
             {
                 "date": "Feb 2026 — Present",
                 "title": "Senior Full Stack Developer • AI Enabler — Vigilate SRL",
-                "description": "Analyzing and redesigning development processes to optimize human/AI coordination. Redesigning and maintaining automation development — CI/CD. Keeping software quality and resource usage coordinated.",
+                "description": [
+                    "Analyzing and redesigning development processes to optimize human/AI coordination.",
+                    "Redesigning and maintaining automation development — CI/CD.",
+                    "Keeping software quality and resource usage coordinated."
+                ],
                 "keyProject": null,
                 "techStack": [
                     "AI",
@@ -42,21 +89,50 @@
             {
                 "date": "Dec 2020 — May 2025",
                 "title": "Senior Full Stack Developer • Head of R&D — P&B Linking / Openware PSIM / COGEN S.p.a.S.U",
-                "description": "Led R&D activities and coordinated teams with stakeholders. Organized work using SCRUM. Reduced tooling costs by ~50% within one year. Led product research, analysis, and design. Managed up to 20 people across 4 product teams (onsite & remote).",
+                "description": [
+                    "Led R&D activities and coordinated teams with stakeholders.",
+                    "Organized work using SCRUM.",
+                    "Reduced tooling costs by ~50% within one year.",
+                    "Led product research, analysis, and design.",
+                    "Managed up to 20 people across 4 product teams (onsite & remote)."
+                ],
                 "keyProject": "Re-engineered the product for cloud distribution (Docker on K8s) in business continuity.",
-                "keyProjectTitle": "Openware 3.0"
+                "keyProjectTitle": "Openware 3.0",
+                "techStack": [
+                    "Cloud Architecture",
+                    "Leading",
+                    "Docker",
+                    "Kubernetes",
+                    "SCRUM",
+                    "React",
+                    "Node.js"
+                ]
             },
             {
                 "date": "Nov 2016 — Nov 2020",
                 "title": "Full Stack Developer • Team Lead • R&D Manager — Novigo-Consulting",
-                "description": "Designed and implemented application architecture (Zend APIs, React frontends, Node.js automation). Served as project and team lead for national and international teams, managing up to 20 people. As R&D Manager, oversaw software/service selection and integration testing.",
+                "description": [
+                    "Designed and implemented application architecture (Zend APIs, React frontends, Node.js automation).",
+                    "Served as project and team lead for national and international teams, managing up to 20 people.",
+                    "As R&D Manager, oversaw software/service selection and integration testing."
+                ],
                 "keyProject": "Developed RAD automation components used across products.",
-                "keyProjectTitle": "Internal Core Components"
+                "keyProjectTitle": "Internal Core Components",
+                "techStack": [
+                    "Leading",
+                    "React",
+                    "Node.js",
+                    "PHP / Zend Framework",
+                    "Automation"
+                ]
             },
             {
                 "date": "2015 — 2016",
                 "title": "CTO • Full Stack Developer — Publidesign s.r.l.",
-                "description": "Developed customizations for WordPress projects. CTO for Baucoin startup.",
+                "description": [
+                    "Developed customizations for WordPress projects.",
+                    "CTO for Baucoin startup."
+                ],
                 "keyProject": "Platform for managing credits for circular economy based on services for pets",
                 "keyProjectTitle": "Baucoin",
                 "techStack": [
@@ -70,7 +146,11 @@
             {
                 "date": "2012 — 2016",
                 "title": "Founder • Startupper • Pitcher — TargatoBS",
-                "description": "I was looking for a way to express myself better. I did some contests, won some prizes, presented at a few events, tried to found a startup, participated in a business school and founded some communities. In the end I realized I was a developer who had to work on his soft skills",
+                "description": [
+                    "I was looking for a way to express myself better.",
+                    "I did some contests, won some prizes, presented at a few events, tried to found a startup, participated in a business school and founded some communities.",
+                    "In the end I realized I was a developer who had to work on his soft skills."
+                ],
                 "keyProject": "Product for the management of real estate sales",
                 "keyProjectTitle": "BREIM",
                 "techStack": [
@@ -83,14 +163,34 @@
             {
                 "date": "Oct 2013 — 2014",
                 "title": "Full Stack Developer — DuckMa s.r.l.",
-                "description": "Backend API development (Node.js, PHP). Hybrid Application development with PWA and Ionic. UI/UX designer for PHONOTTO.",
-                "keyProject": null
+                "description": [
+                    "Backend API development (Node.js, PHP).",
+                    "Hybrid Application development with PWA and Ionic.",
+                    "UI/UX designer for PHONOTTO."
+                ],
+                "keyProject": null,
+                "techStack": [
+                    "Node.js",
+                    "PHP",
+                    "Ionic",
+                    "PWA",
+                    "UI/UX"
+                ]
             },
             {
                 "date": "Dec 2007 — Sep 2012",
                 "title": "Web Developer — System 2000 s.r.l. / Associati s.r.l.",
-                "description": "IT consultancy for regional/national projects. .NET development for healthcare management systems. Data analyst for the VIGILO wearable sensors project.",
-                "keyProject": null
+                "description": [
+                    "IT consultancy for regional/national projects.",
+                    ".NET development for healthcare management systems.",
+                    "Data analyst for the VIGILO wearable sensors project."
+                ],
+                "keyProject": null,
+                "techStack": [
+                    ".NET",
+                    "C#",
+                    "Data Visualization"
+                ]
             }
         ]
     },

@@ -1,0 +1,47 @@
+---
+layout: default
+---
+{%- comment -%}
+  Each row is "dictionary key : percentage : number of rising particles". The keys
+  are looked up in the locale's `technologies.tech` and `technologies.desc` maps
+  rather than written out, so the names and descriptions stay in the dictionary
+  like every other string. The row order is editorial (strongest first), which is
+  why it lives here and not in JSON — and the particle counts reproduce the
+  hand-tuned `.tech-rise` density the page had before.
+{%- endcomment -%}
+{%- assign t = site.data.translations[page.lang] %}
+{%- assign tech_rows = "aiAgents:85:12|cicd:80:8|react:80:4|architectures:65:2|jsNode:90:0|php:85:0|cloudK8s:60:0|cloud:50:0|ml:40:0|wasm:20:0" | split: "|" %}
+<!-- Main Content -->
+<main class="page" id="main-content">
+    <div class="container">
+        <h1 class="section-title"><span class="section-number">03.</span> <span class="section-title-text">{{ t.technologies.title }}</span></h1>
+        <p class="lead">{{ t.technologies.lead }}</p>
+
+        <!-- Experienced Technologies -->
+        <section class="tech-section">
+            <h2 class="tech-section-title">{{ t.technologies.experiencedTitle }}</h2>
+            <div class="tech-progress-list">
+                {%- for row in tech_rows %}
+                {%- assign fields = row | split: ":" %}
+                {%- assign tech_key = fields[0] %}
+                {%- assign tech_percent = fields[1] %}
+                {%- assign tech_rise = fields[2] %}
+                <div class="tech-progress-item">
+                    <div class="tech-progress-header">
+                        <span class="tech-name">{{ t.technologies.tech[tech_key] }}</span>
+                        <span class="tech-percentage">{{ tech_percent }}%</span>
+                    </div>
+                    <div class="tech-progress-bar">
+                        <div class="tech-progress-fill" data-progress="{{ tech_percent }}"></div>
+                        {%- if tech_rise != '0' %}
+                        <span class="tech-rise" style="left: {{ tech_percent }}%" aria-hidden="true">{% for i in (1..tech_rise) %}<i></i>{% endfor %}</span>
+                        {%- endif %}
+                    </div>
+                    <p class="tech-description">{{ t.technologies.desc[tech_key] }}</p>
+                </div>
+                {%- endfor %}
+            </div>
+        </section>
+
+    </div>
+</main>

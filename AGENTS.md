@@ -10,13 +10,13 @@ Luca Palomba's personal portfolio — a static site generated with Jekyll, deplo
 - **Jekyll** (`github-pages` gem) as static site generator; Liquid templating.
 - **Vanilla CSS** in `styles/` (fonts, transitions, main, mobile, mobile-small, reduced-motion, print-experiences). No framework, no build step.
 - **Vanilla modular JavaScript** (ES-ish modules, loaded via `<script defer>`), no bundler.
-- **Custom i18n** (`js/i18n.js`) based on `data-i18n` attributes + JSON files in `translations/`.
+- **Custom i18n, rendered by Jekyll** from `_data/translations/{en,it}.json`. There is no client-side translation layer: every string is in the HTML of the page it belongs to.
 - **Deploy**: GitHub Actions → GitHub Pages. Lighthouse CI + htmlproofer in the workflow.
 
 ## Language conventions
 
-- **Comments, file names, and commit messages must always be in English.** Never write comments, name files, or write commit messages in Italian.
-- **Italian is acceptable only in two places:** (1) conversations with the AI agent, and (2) the site's UI/translated content for visitors (`translations/it.json` and any in-prose Italian shown on the site).
+- **Comments, file names, commit messages, and PR titles/descriptions must always be in English.** Never write comments, name files, or write commit messages / PR descriptions in Italian.
+- **Italian is acceptable only in two places:** (1) conversations with the AI agent, and (2) the site's UI/translated content for visitors (`_data/translations/it.json` and any in-prose Italian shown on the site).
 - This also applies to documentation files tracked by the repo: keep them in English.
 
 ## Workflow rules
@@ -59,12 +59,14 @@ The environment has Ruby 3.4 + Bundler, but there is a `public_suffix` conflict 
 - Link check: `bundle exec htmlproofer ./_site --disable-external`
 - Markdown lint: `npm run lint:md` (requires `npm ci` once; CI uses the same command)
 - Markdown lint, auto-fix: `npm run lint:md:fix`
+- i18n integrity check: `node scripts/check-i18n.js` (also runs in CI, before the build)
 
 ## Key conventions
 
 - **Dual config**: `_config.yml` (prod, `baseurl: /lucapalomba`) + `_config_local.yml` (local, `baseurl: ""`). Links in markup are relative (`index.html`, `experiences.html`) and are resolved by Jekyll via `relative_url`.
-- **i18n**: every UI string has `data-i18n="dotted.key"` (e.g. `nav.whoami`, `index.hero.title`); translations live in `translations/en.json` and `it.json`. For `aria-label`s use `data-i18n-aria`. The language is chosen from `localStorage('preferredLanguage')` then `navigator.language`, and saved on manual switch.
-- **Page front matter**: supports `page_scripts` (list of additional JS paths loaded at the bottom) and `hide_nav_scripts` (disables `navigation.js`/`hamburger.js`). `body_class` marks the page (e.g. `experiences-page`, `technologies-page`, `contact-page`) — used by `i18n.js` for meta tags and by `techProgress.js` to activate animations.
+- **i18n (server-side)**: every string is rendered by Jekyll, so the HTML is complete before any JavaScript runs (no text flash, crawler-visible). All copy lives in `_data/translations/{en,it}.json` and layouts render it as `{{ t.a.dotted.key }}` — never hardcode a string in markup, and never reintroduce `data-i18n` attributes. The active dictionary is `t`, assigned at the top of `_layouts/default.html` and of every page layout; the language is `page.lang`.
+- **Language pairing (front matter)**: `lang` (`en`/`it`) selects the dictionary; `i18n_key` selects the copy block and drives `<title>`/description via `t[page.i18n_key]`; `alt_url` + `alt_lang` point at the page's counterpart in the other language and are emitted as `hreflang`. The pairing is mutual — the counterpart must point back. `no_alternate: true` marks a page with no counterpart (the 404). `scripts/check-i18n.js` enforces all of this.
+- **Page front matter**: also supports `page_scripts` (list of additional JS paths loaded at the bottom), `hide_nav_scripts` (disables `navigation.js`/`hamburger.js`) and `body_class` (`technologies-page` is what `techProgress.js` looks for; `not-found-page` suppresses the navigation hint). Client-side scripts that need to know which page they are on read `document.body.dataset.page` (the `i18n_key`), not the URL.
 - **Design system**: dark "terminal/developer" theme — background `#0a0a0f`, text `#e6e6ef`, violet accent `#B77EF1` (particles `#6e48aa`), monospace Roboto Mono (local in `fonts/`). CSS keyframe animations (hero, typing dots, transitions).
 - **Commits (REQUIRED)**: **every** commit must use Conventional Commits as the message type — `feat:`, `fix:`, `chore:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`, `build:`, `ci:`, `revert:`, etc. No commits without a type prefix. Work on separate branches / PRs; deploy happens only from `main`.
 
@@ -88,31 +90,35 @@ The environment has Ruby 3.4 + Bundler, but there is a `public_suffix` conflict 
 
 ### Layout & includes (Jekyll)
 
-- `_layouts/default.html` — base layout: `html` dark, skip-link, transition overlay, navbar, `{{ content }}`, footer, scripts. All pages use `layout: default`.
-- `_includes/head.html` — `<head>`: meta, local favicon + PWA icons (declared `sizes` match the real files), local Roboto Mono font, SEO/OG/Twitter, JSON-LD `Person`, manifest link, stylesheets (`fonts`, `transitions`, `main`, `mobile`, `mobile-small`, `reduced-motion`, `print-experiences`).
-- `_includes/navbar.html` — sticky navbar with logo, desktop links (active state via `page.url` comparison), hamburger + mobile drawer, "Curriculum" CTA (LinkedIn link). Contains the drawer toggle logic.
+- `_layouts/default.html` — base layout: `<html lang>`, skip-link, transition overlay, navbar, `{{ content }}`, footer, back-to-top, navigation hint, scripts. All pages use it. It assigns `t = site.data.translations[page.lang]` — a Jekyll `include` gets its own Liquid scope, so any file that renders a translated string must assign `t` itself rather than rely on the caller.
+- `_layouts/{home,experiences,technologies,contact,error}.html` — one layout per page, holding that page's markup **once**, translated. The EN and IT pages are thin front-matter files that both point at the same layout, so there is no duplicated markup between languages.
+- `_includes/head.html` — `<head>`: title/description/OG/Twitter/JSON-LD built from `t[page.i18n_key]`, `og:locale` + `og:locale:alternate`, a self-referential canonical and the `hreflang` alternates, local favicon + PWA icons (declared `sizes` match the real files), local Roboto Mono font, JSON-LD `Person` (props from `_data/person.yml` via `_includes/jsonld-person-props.html`, shared with `_layouts/contact.html`), manifest link, stylesheets (`fonts`, `transitions`, `main`, `mobile`, `mobile-small`, `reduced-motion`, `print-experiences`), and the inline ES5 language hand-off (see below).
+- `_includes/navbar.html` — sticky navbar with logo, server-rendered links (active state via `page.i18n_key`), the sound-mute toggle (rendered on the home page only, with both wordings from `t.sound.*` in `data-label-mute`/`data-label-unmute` for `soundMute.js`), the language switcher (from `page.alt_url`, rendered in both the desktop row and the mobile drawer), hamburger + mobile drawer, "Curriculum" CTA (LinkedIn link). Contains the drawer toggle logic.
 - `_includes/footer.html` — footer: copyright, GitHub/LinkedIn links, "STATUS: NOMINAL" indicator.
-- `_includes/scripts.html` — loads core JS (`i18n`, `main`, `transitions`) + conditionals (`navigation`, `hamburger` unless `hide_nav_scripts`) + `page_scripts` + `backToTop`, then the inline service-worker registration (baseurl-aware, cache version from `site.time`).
+- `_includes/back-to-top.html` — the "back to top" button, server-rendered and translated (CSS keeps it hidden until scrolled).
+- `_includes/scripts.html` — loads core JS (`langPref`, `main`, `transitions`) + conditionals (`navigation`, `hamburger` unless `hide_nav_scripts`) + `page_scripts` + `backToTop`, prints the console easter egg from `t.consoleEasterEgg`, then the inline service-worker registration (baseurl-aware, cache version from `site.time`).
 - `_includes/transition-overlay.html` — markup for the full-screen overlay used for page transitions (color-fill + smoke).
-- `_includes/navigation-hint.html` — placeholder div for the "use ← → / swipe" hint shown by `navigation.js`.
+- `_includes/navigation-hint.html` — both hint variants server-rendered (keyboard and touch, switched by a CSS media query); `navigation.js` only toggles `aria-hidden`.
 
 ### Pages
 
-- `index.html` — home: hero (name + animated title + CTA). Loads `titleAnimation.js` via `page_scripts`.
-- `experiences.html` — work experience timeline. Structure `.timeline` / `.timeline-item` with `.date`, `h2`, `.job-description`, `.key-project`, `.tech-stack`. Populated dynamically by `i18n.js` (array `experiences.jobs`). Has a print button + printable CSS.
-- `technologies.html` — technologies grid with progress bars (`.tech-progress-fill` with `data-progress`) animated by `techProgress.js`. `body_class: technologies-page`.
-- `contact.html` — contact page with form/links. `body_class: contact-page`.
-- `404.html` — custom error page.
+- `index.html` — home: `layout: home`, `i18n_key: index`. Hero (intro, name, animated title, subtitle, bio, CTA) plus a `#hero-animation` JSON blob carrying the typewriter steps and the sound base. Loads `titleAnimation.js` via `page_scripts`.
+- `experiences.html` — work experience timeline. Structure `.timeline` / `.timeline-item` with `.date`, `h2`, `.job-description`, `.key-project`, `.tech-stack`, rendered by Jekyll from the `t.experiences.jobs` array. Has a print button + printable CSS.
+- `technologies.html` — technologies grid with progress bars (`.tech-progress-fill` with `data-progress`) animated by `techProgress.js`. The editorial order, percentage and particle count per row live in the layout as a `key:percentage:particles` table.
+- `contact.html` — contact page with links. `layout: contact`.
+- `404.html` — custom error page, `layout: error` and `no_alternate: true` (there is deliberately no Italian 404: GitHub Pages serves a second one with HTTP 200, i.e. a soft 404).
+- `it/{index,experiences,technologies,contact}.html` — the Italian counterparts of the four pages: `lang: it`, same `i18n_key`, and `alt_url` pointing back at the English file.
 
 ### JavaScript (`js/`)
 
-- `i18n.js` — `I18n` class (exposed as `window.i18n`): language detection (localStorage → browser), fetch `translations/<lang>.json`, translate `data-i18n` / `data-i18n-aria` elements, update meta tags (title/description per page), render the experiences timeline, console easter egg, `switchLanguage()` + `getCurrentLanguage()`.
+- `langPref.js` — records the visitor's manual language choice (`localStorage.preferredLanguage`) when a `.lang-switch` link is clicked; the hand-off script in `head.html` reads it on the next visit to the language root. Nothing else.
 - `main.js` — post-DOMContentLoaded init: marks the transition overlay as `finished` after the entry (animations live in CSS).
 - `transitions.js` — `PageTransition` class: intercepts clicks on internal links (excluding `target="_blank"` and skip-link), shows the overlay, waits ~660ms then navigates. Exit animation handled via the `active` class.
-- `navigation.js` — circular navigation between the 4 pages with ← → arrows (keyboard) and swipe (touch, 100px threshold + horizontal guard). Shows and hides the navigation hint after 5s.
+- `navigation.js` — circular navigation between the 4 pages with ← → arrows (keyboard) and swipe (touch, 100px threshold + horizontal guard), staying inside the current language. Reads the current page from `document.body.dataset.page` and navigates through relative URLs, so it works from `/it/` too. Reveals the navigation hint (once per session) and fades it after 5s.
 - `hamburger.js` — `HamburgerMenu` class: mobile drawer toggle, closes on internal link / Escape / outside click, locks body scroll when open.
-- `backToTop.js` — creates the "Go to top" button, shows it after 300px of scroll, smooth scroll, integrates the `backToTop` translation.
-- `titleAnimation.js` — `TitleAnimator` class: typewriter effect on `.hero-title` with 4 multilingual steps, keyword highlighting, keyboard sounds (pool of 3 audio per type from `sounds/`), restarts on click and language change (`i18n:languageChanged` event). Removes `data-i18n` so it is not overwritten.
+- `backToTop.js` — drives the server-rendered `.back-to-top-btn`: adds `.visible` past 300px of scroll, scrolls to top honouring `prefers-reduced-motion`.
+- `soundMute.js` — persisted mute state (`localStorage.soundMuted`) for the typewriter's keyboard sounds, exposed as `window.soundMute` (`isMuted`/`setMuted`/`toggle`). Loaded before `titleAnimation.js`, which reads it when it builds its audio pool; the navbar toggle drives it. Its two labels come from the page (`data-label-mute`/`data-label-unmute`), so it has no dependency on any translation layer.
+- `titleAnimation.js` — `TitleAnimator` class: typewriter effect on `.hero-title`, keyword highlighting, keyboard sounds (pool of 3 audio per type from `sounds/`), restarts on click. Its steps and its sound base come from the `#hero-animation` JSON rendered by the home layout, so it plays the page's own language and loads sounds from an absolute path that is correct on `/it/` as well.
 - `techProgress.js` — animates the width of `.tech-progress-fill` to `data-progress`% after load, only on `technologies-page`.
 
 ### Styles (`styles/`)
@@ -124,10 +130,10 @@ The environment has Ruby 3.4 + Bundler, but there is a `public_suffix` conflict 
 - `mobile.css` / `mobile-small.css` — responsive overrides for small screens.
 - `fonts.css` — font definitions/overrides.
 
-### Translations (`translations/`)
+### Translations (`_data/translations/`)
 
-- `en.json` — English dictionary (nav, hero, experiences.jobs[], technologies, contact, title/description per page, consoleEasterEgg, backToTop).
-- `it.json` — Italian dictionary, same structure.
+- `en.json` — English dictionary: `nav`, `a11y`, `index` (incl. `hero.steps[]`), `experiences.jobs[]`, `technologies` (`tech` + `desc` keyed by tech id), `contact`, `notFound`, `consoleEasterEgg`, `backToTop`, `navigation`, plus `pageTitle`/`description` per page and `ogLocale`.
+- `it.json` — Italian dictionary, same structure. Both must change together: `scripts/check-i18n.js` compares the two shapes and fails if a `t.…` reference resolves in one language only.
 
 ### Assets
 
@@ -141,6 +147,7 @@ The environment has Ruby 3.4 + Bundler, but there is a `public_suffix` conflict 
 - **`bundle exec` required** to avoid the `public_suffix` 7 vs 5 conflict.
 - `sw.js` must stay listed in `jekyll-minifier.exclude`. It is a static file (no front matter), so the minifier would otherwise hand it to Uglifier, which cannot parse its `async`/`await`. The minifier only runs when `JEKYLL_ENV=production`, so getting this wrong breaks the Pages deploy and nothing else — a local `jekyll build` will not catch it.
 - The service worker is registered from `_includes/scripts.html` with `{{ "/sw.js" | relative_url }}` and a `?v=` taken from `site.time`. Both halves matter: without `relative_url` the registration 404s in the Lighthouse build and locally (`baseurl: ""`), and without a changing `?v=` a deployed worker would never update.
-- Adding a new page: create the `.html` with front matter `layout: default` + `body_class` + entry in `navigation.js` (`pages` array) + link in `navbar.html` + translations in both `translations/*.json` + meta keys `${page}.${titleKey}`/`description`. Also add it to `PRECACHE_URLS` in `sw.js`, or it will be unavailable offline.
-- New strings must be added to **both** `en.json` and `it.json`, otherwise `i18n.js` shows the raw key.
+- Adding a new page: add a page layout holding the markup with `{{ t.… }}`, then the thin EN page and its IT counterpart with `lang` + `i18n_key` + reciprocal `alt_url`/`alt_lang`, an entry in `navigation.js` (`pages` array), a link in `navbar.html`, and `pageTitle` + `description` for the new `i18n_key` in both dictionaries. `scripts/check-i18n.js` fails until the pairing is reciprocal. Also add the page to `PRECACHE_URLS` in `sw.js`, in both languages, or it will be unavailable offline.
+- New strings must be added to **both** `_data/translations/en.json` and `it.json`; `scripts/check-i18n.js` fails the build when a `t.…` reference resolves in one language only.
+- The language root (`/`) is English and carries the only language hand-off: a tiny ES5 script that reads `localStorage.preferredLanguage`, then `navigator.language`, and redirects Italian visitors to `/it/`. It must stay ES5 (the CI minifier parses it as ES5) and must never run on a deep page — an unrequested redirect there would cost the visitor their link and the crawler the canonical.
 - The `graphical-review` branch (PR #68, draft) contains a WIP graphical refactor (Tailwind CDN, EN/IT language selector, "kinetic" design) **not yet on main**. When working on main, ignore those sections; when working on `graphical-review`, AGENTS.md must be realigned to that branch.

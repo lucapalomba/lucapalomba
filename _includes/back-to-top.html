@@ -1,0 +1,15 @@
+{%- comment -%}
+  Rendered server-side (and translated with it) instead of being built in
+  JavaScript: the button used to exist only after `backToTop.js` ran, which meant
+  it — and its label — was missing until the deferred script executed. It is safe
+  to pre-render because `.back-to-top-btn` is `opacity: 0; visibility: hidden`
+  until the script adds `.visible`, so there is no flash and no dead control.
+{%- endcomment -%}
+<button class="back-to-top-btn" aria-label="{{ t.backToTop }}">
+    <span class="btn-text">{{ t.backToTop }}</span>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="19" x2="12" y2="5"></line>
+        <polyline points="5 12 12 5 19 12"></polyline>
+    </svg>
+</button>

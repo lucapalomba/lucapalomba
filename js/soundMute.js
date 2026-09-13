@@ -6,8 +6,9 @@
  * module with a small API instead of inside the animator. Load this file
  * before titleAnimation.js (see `page_scripts` in index.html).
  *
- * Storage follows the js/i18n.js idiom: localStorage throws in restrictive
- * contexts, and a missing or unexpected value just means "not muted".
+ * Storage follows the same defensive idiom as js/langPref.js: localStorage
+ * throws in restrictive contexts, and a missing or unexpected value just means
+ * "not muted".
  */
 (function () {
     'use strict';
@@ -33,17 +34,17 @@
 
     let muted = readStored();
 
-    // The label is state dependent, so it is resolved here rather than left
-    // to the button's data-i18n-aria attribute: that attribute only carries
-    // the initial wording, and i18n.js would otherwise overwrite it with the
-    // same string on every language change.
+    // Both wordings are rendered server-side into the button
+    // (data-label-mute / data-label-unmute, from the locale dictionary), so the
+    // correct one can just be picked here: the label depends on the mute state,
+    // not on the language, and the page already arrived in the right language.
+    // Nothing has to wait for a translation pass or react to a language change —
+    // the old window.i18n lookup went away with the client-side i18n layer.
     const applyLabels = () => {
         document.querySelectorAll('.sound-toggle').forEach((button) => {
             button.setAttribute('aria-pressed', muted ? 'true' : 'false');
-            if (!window.i18n || !window.i18n.translations) return;
-            const key = muted ? 'sound.unmute' : 'sound.mute';
-            const label = window.i18n.t(key);
-            if (label && label !== key) {
+            const label = muted ? button.dataset.labelUnmute : button.dataset.labelMute;
+            if (label) {
                 button.setAttribute('aria-label', label);
             }
         });
@@ -67,11 +68,6 @@
             button.addEventListener('click', () => window.soundMute.toggle());
         });
 
-        // i18n.js runs its own translate() before dispatching these, and it
-        // dispatches from an async fetch that may already have resolved, so
-        // apply once immediately and again on both events.
         applyLabels();
-        document.addEventListener('i18n:ready', applyLabels);
-        document.addEventListener('i18n:languageChanged', applyLabels);
     });
 })();

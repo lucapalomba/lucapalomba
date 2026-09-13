@@ -26,20 +26,30 @@
 const VERSION = new URL(self.location.href).searchParams.get('v') || 'dev';
 const CACHE_NAME = 'lucapalomba-' + VERSION;
 
-// The shell: every page, the stylesheets and scripts they need, and the
-// variable font that `styles/fonts.css` asks for first and `_includes/head.html`
-// preloads. The `RobotoMono-Regular.ttf` fallback in that same `src` list is not
-// worth its 88 KB here: the browser only reaches for it when it cannot take the
-// woff2, which no service-worker-capable browser does. Deliberately NOT the
-// icons (~200 KB each) or the typewriter sounds (~2 mp3): those are
-// runtime-cached on first use instead of costing every visitor a download
-// before they have asked for anything.
+// The shell: every page in both languages, the stylesheets and scripts they
+// need, and the variable font that `styles/fonts.css` asks for first and
+// `_includes/head.html` preloads. The `RobotoMono-Regular.ttf` fallback in that
+// same `src` list is not worth its 88 KB here: the browser only reaches for it
+// when it cannot take the woff2, which no service-worker-capable browser does.
+// Deliberately NOT the icons (~200 KB each) or the typewriter sounds (~2 mp3):
+// those are runtime-cached on first use instead of costing every visitor a
+// download before they have asked for anything.
+//
+// There is no `translations/*.json` entry and no `js/i18n.js`: since issue #82
+// the copy is rendered by Jekyll from `_data/translations/` at build time, so
+// those two were only ever fetched by the client-side i18n layer that is gone.
+// The Italian pages take their place — they are real files now, and each one is
+// the entry point to that language offline.
 const PRECACHE_URLS = [
   './',
   './index.html',
   './experiences.html',
   './technologies.html',
   './contact.html',
+  './it/index.html',
+  './it/experiences.html',
+  './it/technologies.html',
+  './it/contact.html',
   './404.html',
   './manifest.webmanifest',
   './styles/fonts.css',
@@ -49,7 +59,7 @@ const PRECACHE_URLS = [
   './styles/mobile-small.css',
   './styles/reduced-motion.css',
   './styles/print-experiences.css',
-  './js/i18n.js',
+  './js/langPref.js',
   './js/main.js',
   './js/transitions.js',
   './js/navigation.js',
@@ -59,14 +69,13 @@ const PRECACHE_URLS = [
   './js/techProgress.js',
   './js/soundMute.js',
   './js/particles.min.js',
-  './translations/en.json',
-  './translations/it.json',
   './fonts/Roboto_Mono/static/RobotoMono-Variable.woff2'
 ];
 
-// Served for a navigation that is neither cached nor reachable. The home page
-// is the one URL guaranteed to be in the precache, and a visitor who lands on
-// it can reach everything else once they are back online.
+// Served for a navigation that is neither cached nor reachable. Every page of
+// the site is in the precache above, so this only catches URLs that do not
+// exist at all — there is no per-language variant to pick, and the English home
+// is the one page that reaches everything else once the visitor is back online.
 const OFFLINE_FALLBACK = './index.html';
 
 self.addEventListener('install', (event) => {
