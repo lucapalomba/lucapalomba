@@ -1,0 +1,769 @@
+<!DOCTYPE html><html class="dark" lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style id="obsidian-motion-engine">
+/* === Obsidian Motion Engine Unified Suite === */
+@keyframes techReveal {
+  0% {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+}
+
+@keyframes techGradientShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.tech-reveal {
+  animation: techReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.tech-shimmer-cyan {
+  background: linear-gradient(110deg, #ffffff 0%, #4cd7f6 35%, #06b6d4 50%, #acedff 70%, #ffffff 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: techGradientShimmer 6s ease infinite;
+}
+
+/* Card Cascade Staggered Entrance */
+@keyframes cardCascade {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.985);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.card-cascade {
+  opacity: 0;
+  animation: cardCascade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
+}
+
+/* Obsidian Spotlight Glow with cyan boundary */
+.glass-panel {
+  background: rgba(17, 19, 25, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(61, 73, 76, 0.38);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  top: var(--mouse-y, -250px);
+  left: var(--mouse-x, -250px);
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(76, 215, 246, 0.16) 0%, rgba(6, 182, 212, 0.05) 45%, rgba(6, 182, 212, 0) 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+}
+
+.glass-panel:hover::before {
+  opacity: 1;
+}
+
+.glass-panel:hover {
+  border-color: rgba(76, 215, 246, 0.6);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.75), 0 0 28px -2px rgba(76, 215, 246, 0.22);
+}
+
+.progress-bar-fill {
+  width: 0%;
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: width;
+}
+</style><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }
+
+/* Grid texture and fluid background styling */
+.tech-grid-bg {
+  background-image: linear-gradient(to right, rgba(61, 73, 76, 0.12) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(61, 73, 76, 0.12) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Shimmer & glow animations */
+@keyframes subtlePulse {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 6px currentColor); }
+  50% { opacity: 0.75; filter: drop-shadow(0 0 2px currentColor); }
+}
+.pulse-glow {
+  animation: subtlePulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes shimmerLoop {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.animate-shimmer {
+  background-size: 200% 100%;
+  animation: shimmerLoop 4s linear infinite;
+}
+
+/* Card glassmorphism + dynamic spotlight cursor border */
+.glass-panel {
+  background: rgba(17, 19, 25, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(61, 73, 76, 0.38);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  top: var(--mouse-y, -200px);
+  left: var(--mouse-x, -200px);
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(76, 215, 246, 0.12) 0%, rgba(6, 182, 212, 0) 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.glass-panel:hover::before {
+  opacity: 1;
+}
+
+.glass-panel:hover {
+  border-color: rgba(76, 215, 246, 0.45);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.65), 0 0 24px -2px rgba(6, 182, 212, 0.15);
+}
+
+/* Smooth bar progress animation */
+.progress-bar-fill {
+  width: 0%;
+  transition: width 1.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Gradient Text reveal */
+.text-gradient-reveal {
+  background: linear-gradient(100deg, #ffffff 0%, #4cd7f6 60%, #acedff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { 'colors': { 'error': '#ffb4ab', 'on-error': '#690005', 'on-secondary-container': '#e6ecff', 'surface-bright': '#373940', 'on-surface-variant': '#bcc9cd', 'on-primary': '#003640', 'tertiary-container': '#1bbd85', 'surface-container-low': '#191b22', 'secondary-fixed': '#d8e2ff', 'primary-container': '#06b6d4', 'outline': '#869397', 'primary': '#4cd7f6', 'primary-fixed': '#acedff', 'surface-container-lowest': '#0c0e14', 'on-primary-fixed-variant': '#004e5c', 'on-tertiary-fixed': '#002113', 'surface': '#111319', 'inverse-surface': '#e2e2ea', 'surface-tint': '#4cd7f6', 'on-background': '#e2e2ea', 'tertiary-fixed': '#6ffbbe', 'on-tertiary-container': '#00452e', 'on-surface': '#e2e2ea', 'on-secondary-fixed-variant': '#004395', 'surface-container-high': '#282a30', 'surface-container-highest': '#33343b', 'secondary': '#adc6ff', 'inverse-primary': '#00687a', 'on-primary-container': '#00424f', 'on-error-container': '#ffdad6', 'surface-dim': '#111319', 'outline-variant': '#3d494c', 'surface-variant': '#33343b', 'on-secondary': '#002e6a', 'background': '#111319', 'surface-container': '#1d1f26', 'secondary-container': '#0566d9', 'on-tertiary': '#003824', 'primary-fixed-dim': '#4cd7f6', 'error-container': '#93000a', 'tertiary': '#4edea3', 'on-tertiary-fixed-variant': '#005236', 'secondary-fixed-dim': '#adc6ff', 'tertiary-fixed-dim': '#4edea3', 'on-primary-fixed': '#001f26', 'on-secondary-fixed': '#001a42', 'inverse-on-surface': '#2e3037' }, 'borderRadius': { 'DEFAULT': '0.125rem', 'lg': '0.25rem', 'xl': '0.5rem', 'full': '0.75rem' }, 'spacing': { 'space-lg': '1.5rem', 'margin': '2rem', 'gutter': '1.5rem', 'space-sm': '0.5rem', 'space-xs': '0.25rem', 'space-md': '1rem', 'space-xl': '2.5rem' }, 'fontFamily': { 'code-block': ['JetBrains Mono'], 'headline-lg-mobile': ['Geist'], 'label-sm': ['JetBrains Mono'], 'headline-md': ['Geist'], 'body-sm': ['Geist'], 'body-lg': ['Geist'], 'display-mobile': ['Geist'], 'display': ['Geist'], 'headline-lg': ['Geist'], 'body-md': ['Geist'], 'code-inline': ['JetBrains Mono'], 'label-md': ['JetBrains Mono'], 'headline-sm': ['Geist'] }, 'fontSize': { 'code-block': ['0.875rem', { 'lineHeight': '1.6', 'letterSpacing': '-0.01em', 'fontWeight': '400' }], 'headline-lg-mobile': ['1.75rem', { 'lineHeight': '1.25', 'letterSpacing': '-0.02em', 'fontWeight': '600' }], 'label-sm': ['0.6875rem', { 'lineHeight': '1.3', 'letterSpacing': '0.06em', 'fontWeight': '500' }], 'headline-md': ['1.5rem', { 'lineHeight': '1.3', 'letterSpacing': '-0.02em', 'fontWeight': '500' }], 'body-sm': ['0.8125rem', { 'lineHeight': '1.5', 'letterSpacing': '0', 'fontWeight': '400' }], 'body-lg': ['1.125rem', { 'lineHeight': '1.6', 'letterSpacing': '-0.01em', 'fontWeight': '400' }], 'display-mobile': ['2.25rem', { 'lineHeight': '1.2', 'letterSpacing': '-0.025em', 'fontWeight': '600' }], 'display': ['3.5rem', { 'lineHeight': '1.1', 'letterSpacing': '-0.03em', 'fontWeight': '600' }], 'headline-lg': ['2.25rem', { 'lineHeight': '1.2', 'letterSpacing': '-0.025em', 'fontWeight': '600' }], 'body-md': ['0.9375rem', { 'lineHeight': '1.6', 'letterSpacing': '-0.005em', 'fontWeight': '400' }], 'code-inline': ['0.8125rem', { 'lineHeight': '1.4', 'letterSpacing': '-0.01em', 'fontWeight': '400' }], 'label-md': ['0.75rem', { 'lineHeight': '1.4', 'letterSpacing': '0.04em', 'fontWeight': '500' }], 'headline-sm': ['1.125rem', { 'lineHeight': '1.4', 'letterSpacing': '-0.01em', 'fontWeight': '500' }] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container relative min-h-screen">
+<!-- Unified Interactive Fluid Particle & Grid Canvas Background -->
+<div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden tech-grid-bg">
+<canvas class="w-full h-full block opacity-75" id="ambient-canvas" width="1280" height="2295"></canvas>
+<div class="absolute inset-0 bg-gradient-to-b from-surface-dim/40 via-transparent to-surface-dim pointer-events-none"></div>
+<div class="absolute w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px] -translate-x-1/2 -translate-y-1/2 transition-transform duration-100 ease-out pointer-events-none" id="cursor-glow"></div>
+</div>
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/80 backdrop-blur-xl border-b border-outline-variant/20 shadow-[0_1px_8px_rgba(0,0,0,0.2)]"><div class="h-16 max-w-[1200px] mx-auto px-margin flex items-center justify-between"><div class="flex items-center gap-space-lg"><a class="flex items-center font-label-md text-label-md tracking-tight text-on-surface hover:text-primary transition-colors" data-path="who-am-i" href="#"><span class="text-primary mr-space-xs">&lt;</span>LP <span class="text-primary ml-space-xs">/&gt;</span></a><div class="hidden sm:flex items-center gap-space-xs px-space-sm py-0.5 rounded bg-surface-container-low/90 border border-outline-variant/30"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span><span class="font-label-sm text-label-sm uppercase text-on-surface-variant">Available for Staff Roles</span></div></div><nav class="hidden md:flex items-center gap-space-md" data-active-classes="text-on-surface bg-surface-container-high px-space-sm py-space-xs rounded"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="who-am-i" href="#"><span class="text-primary font-code-inline text-code-inline mr-1">01.</span>Who am I</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="experience" href="#"><span class="text-primary font-code-inline text-code-inline mr-1">02.</span>Experience</a><a aria-current="page" class="font-label-md text-label-md text-on-surface bg-surface-container-high px-space-sm py-space-xs rounded transition-colors" data-path="technologies" href="#"><span class="text-primary font-code-inline text-code-inline mr-1">03.</span>Technologies</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="contact" href="#"><span class="text-primary font-code-inline text-code-inline mr-1">04.</span>Contact</a></nav><div class="flex items-center gap-space-md"><a class="px-space-md py-space-xs rounded bg-surface-container-low/90 hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all flex items-center gap-space-xs border border-outline-variant/30" href="https://linkedin.com" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[16px] text-primary">description</span><span class="">Curriculum</span><span class="material-symbols-outlined text-[14px] text-on-surface-variant">arrow_outward</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_0_12px_rgba(76,215,246,0.3)]"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header>
+<main class="w-full pt-16 bg-transparent min-h-screen relative z-10"><div class="flex flex-col w-full">
+<!-- Interactive Navigation State Controller -->
+<script>
+    (function () {
+      const navLinks = document.querySelectorAll('header nav a[data-path]');
+      navLinks.forEach((link) => {
+        if (link.getAttribute('data-path') === 'technologies') {
+          link.className =
+            'font-label-md text-label-md text-on-surface bg-surface-container-high px-space-sm py-space-xs rounded transition-colors';
+        } else {
+          link.className =
+            'font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors';
+        }
+      });
+    })();
+  </script>
+<!-- Main Container constrained to grid standard -->
+<div class="w-full max-w-[1200px] mx-auto px-margin py-space-xl flex flex-col gap-space-xl">
+<!-- Section Header & Narrative Intro -->
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-sm text-label-sm uppercase text-primary tracking-widest">Stack Audit &amp; Technical Vectors</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">//</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">REV_2025.04</span>
+</div>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs max-w-2xl">
+<h1 class="font-display text-display text-on-surface tracking-tight"><span class="text-primary font-headline-lg mr-space-xs inline-block tech-reveal">03.</span><span class="tech-reveal tech-shimmer-cyan inline-block">Technologies</span></h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed opacity-95 transition-all duration-700">
+            “A list of technologies — from the ones I use every day to the ones that are now part of me. But mind you: the future changes fast, and so does this list with it.”
+          </p>
+</div>
+<!-- Telemetry Summary Widget -->
+<div class="glass-panel rounded-xl p-space-md flex items-center gap-space-lg">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">ACTIVE_DOMAINS</span>
+<span class="font-code-block text-headline-sm text-on-surface font-semibold">10 Vectors</span>
+</div>
+<div class="w-px h-8 bg-surface-container-high"></div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">PRIMARY_SYNTHESIS</span>
+<span class="font-code-block text-headline-sm text-tertiary font-semibold">TypeScript &amp; AI</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Telemetry Filter / Perspective Switcher -->
+<div class="flex flex-wrap items-center justify-between gap-space-md glass-panel rounded-xl p-space-sm">
+<div class="flex items-center gap-space-xs overflow-x-auto" id="filter-controls">
+<button class="filter-btn px-space-md py-space-xs rounded font-label-md text-label-md bg-surface-container-high text-on-surface transition-all" data-filter="all" onclick="filterTech('all')">
+          All Matrix (10)
+        </button>
+<button class="filter-btn px-space-md py-space-xs rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-filter="core" onclick="filterTech('core')">
+          Core Proficiency (≥80%)
+        </button>
+<button class="filter-btn px-space-md py-space-xs rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-filter="systems" onclick="filterTech('systems')">
+          Architecture &amp; Cloud
+        </button>
+<button class="filter-btn px-space-md py-space-xs rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-filter="frontier" onclick="filterTech('frontier')">
+          R&amp;D &amp; Frontier
+        </button>
+</div>
+<div class="flex items-center gap-space-xs px-space-md py-space-xs">
+<span class="material-symbols-outlined text-[16px] text-tertiary">tune</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Index: Engineering Resonance</span>
+</div>
+</div>
+<!-- Comprehensive Technological Matrix Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg" id="tech-matrix">
+<!-- Item 1: LLM Development Agents & AI Documentation (85%) -->
+<div class="tech-card glass-panel flex flex-col justify-between rounded-xl p-space-lg transition-all duration-300 hover:-translate-y-1 group" data-category="core frontier">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="p-2 rounded bg-surface-container-high/80 text-primary flex items-center justify-center transition-colors group-hover:bg-primary/20">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+</span>
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider">AI_AGENTIC_SYSTEMS</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary transition-colors">LLM Development Agents &amp; AI Documentation</h2>
+</div>
+</div>
+<div class="text-right">
+<span class="font-code-block text-headline-md font-semibold text-primary counter-val" data-target="85">85%</span>
+</div>
+</div>
+<!-- Micro-gauge Progress Bar with animated fill -->
+<div class="w-full bg-surface-container-lowest/80 h-1.5 rounded-full overflow-hidden p-0">
+<div class="progress-bar-fill bg-primary h-full rounded-full pulse-glow" data-percent="85" style="width: 85%;"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            I design and orchestrate LLM-based development agents and write AI-friendly documentation, bridging the human team and AI tooling in the development workflow.
+          </p>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant bg-surface-container-lowest/50 border border-outline-variant/20 px-space-md py-space-xs rounded hover:border-primary/40 transition-colors">
+<span class="">VECTOR: Workflow Automation</span>
+<span class="text-tertiary flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-tertiary animate-pulse"></span> Active Daily</span>
+</div>
+</div>
+<!-- Item 5 (Promoted): JavaScript (Node.js + TypeScript) (90%) -->
+<div class="tech-card glass-panel flex flex-col justify-between rounded-xl p-space-lg transition-all duration-300 hover:-translate-y-1 group" data-category="core">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="p-2 rounded bg-surface-container-high/80 text-primary flex items-center justify-center transition-colors group-hover:bg-tertiary/20">
+<span class="material-symbols-outlined text-[20px]">data_object</span>
+</span>
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider">CORE_RUNTIME</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-tertiary transition-colors">JavaScript (Node.js + TypeScript)</h2>
+</div>
+</div>
+<div class="text-right">
+<span class="font-code-block text-headline-md font-semibold text-tertiary counter-val" data-target="90">90%</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-lowest/80 h-1.5 rounded-full overflow-hidden p-0">
+<div class="progress-bar-fill bg-tertiary h-full rounded-full pulse-glow text-tertiary" data-percent="90" style="width: 90%;"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            It's the language/stack that recurs throughout my career: backend, automation, integrations, cloud projects, PWA, orchestration. Maybe I don't know everything and TypeScript surprises me every time, but by now JS is my home.
+          </p>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant bg-surface-container-lowest/50 border border-outline-variant/20 px-space-md py-space-xs rounded hover:border-tertiary/40 transition-colors">
+<span class="">VECTOR: Full-Stack &amp; Orchestration</span>
+<span class="text-tertiary flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-tertiary animate-pulse"></span> Native Stack</span>
+</div>
+</div>
+<!-- Item 2: CI/CD & Automation (80%) -->
+<div class="tech-card glass-panel flex flex-col justify-between rounded-xl p-space-lg transition-all duration-300 hover:-translate-y-1 group" data-category="core systems">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="p-2 rounded bg-surface-container-high/80 text-primary flex items-center justify-center transition-colors group-hover:bg-primary/20">
+<span class="material-symbols-outlined text-[20px]">sync_alt</span>
+</span>
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider">PIPELINE_ORCHESTRATION</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary transition-colors">CI/CD &amp; Automation (Jenkins, GitLab, Bamboo)</h2>
+</div>
+</div>
+<div class="text-right">
+<span class="font-code-block text-headline-md font-semibold text-on-surface counter-val" data-target="80">80%</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-lowest/80 h-1.5 rounded-full overflow-hidden p-0">
+<div class="progress-bar-fill bg-primary h-full rounded-full pulse-glow text-primary" data-percent="80" style="width: 80%;"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            I've introduced automations, selected tools, optimized pipelines and internal processes. Solid competence, both in processes and R&amp;D.
+          </p>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant bg-surface-container-lowest/50 border border-outline-variant/20 px-space-md py-space-xs rounded hover:border-primary/40 transition-colors">
+<span class="">VECTOR: Release Engineering</span>
+<span class="text-on-surface-variant">Production Hardened</span>
+</div>
+</div>
+<!-- Item 3: Frontend Architecture (80%) -->
+<div class="tech-card glass-panel flex flex-col justify-between rounded-xl p-space-lg transition-all duration-300 hover:-translate-y-1 group" data-category="core">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="p-2 rounded bg-surface-container-high/80 text-primary flex items-center justify-center transition-colors group-hover:bg-primary/20">
+<span class="material-symbols-outlined text-[20px]">layers</span>
+</span>
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider">CLIENT_TOPOLOGY</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary transition-colors">Frontend Architecture (React.js, Angular, Vanilla JS)</h2>
+</div>
+</div>
+<div class="text-right">
+<span class="font-code-block text-headline-md font-semibold text-on-surface counter-val" data-target="80">80%</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-lowest/80 h-1.5 rounded-full overflow-hidden p-0">
+<div class="progress-bar-fill bg-primary h-full rounded-full pulse-glow text-primary" data-percent="80" style="width: 80%;"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            I've led frontend teams, defined RAD components, re-engineered products, developed PWAs. I know lifecycle, rendering, and structuring complex UI architectures.
+          </p>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant bg-surface-container-lowest/50 border border-outline-variant/20 px-space-md py-space-xs rounded hover:border-primary/40 transition-colors">
+<span class="">VECTOR: Design Systems &amp; UX Perf</span>
+<span class="text-on-surface-variant">Staff Experience</span>
+</div>
+</div>
+<!-- Item 6: PHP (85%) -->
+<div class="tech-card glass-panel flex flex-col justify-between rounded-xl p-space-lg transition-all duration-300 hover:-translate-y-1 group" data-category="core systems">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="p-2 rounded bg-surface-container-high/80 text-primary flex items-center justify-center transition-colors group-hover:bg-primary/20">
+<span class="material-symbols-outlined text-[20px]">dns</span>
+</span>
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider">ENTERPRISE_LEGACY_MODERN</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary transition-colors">PHP (Symfony, Zend, legacy-to-modern)</h2>
+</div>
+</div>
+<div class="text-right">
+<span class="font-code-block text-headline-md font-semibold text-on-surface counter-val" data-target="85">85%</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-lowest/80 h-1.5 rounded-full overflow-hidden p-0">
+<div class="progress-bar-fill bg-primary h-full rounded-full pulse-glow text-primary" data-percent="85" style="width: 85%;"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            I've developed and maintained Zend APIs for years. Recently I worked with Symfony on medium-sized projects. Even if it's less central for me today, the level is definitely expert.
+          </p>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant bg-surface-container-lowest/50 border border-outline-variant/20 px-space-md py-space-xs rounded hover:border-primary/40 transition-colors">
+<span class="">VECTOR: Enterprise Migration</span>
+<span class="text-on-surface-variant">High Maturity</span>
+</div>
+</div>
+<!-- Item 4: Advanced Architectures (65%) -->
+<div class="tech-card glass-panel flex flex-col justify-between rounded-xl p-space-lg transition-all duration-300 hover:-translate-y-1 group" data-category="systems">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="p-2 rounded bg-surface-container-high/80 text-primary flex items-center justify-center transition-colors group-hover:bg-primary-container/20">
+<span class="material-symbols-outlined text-[20px]">account_tree</span>
+</span>
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider">DOMAIN_STRATEGY</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary-container transition-colors">Advanced Architectures (DDD, Event-Driven, CQRS)</h2>
+</div>
+</div>
+<div class="text-right">
+<span class="font-code-block text-headline-md font-semibold text-on-surface counter-val" data-target="65">65%</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-lowest/80 h-1.5 rounded-full overflow-hidden p-0">
+<div class="progress-bar-fill bg-primary-container h-full rounded-full pulse-glow text-primary-container" data-percent="65" style="width: 65%;"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Studying advanced architectures to increase robustness, scalability and clarity of complex systems I manage, improving quality of technical decisions and design processes.
+          </p>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant bg-surface-container-lowest/50 border border-outline-variant/20 px-space-md py-space-xs rounded hover:border-primary/40 transition-colors">
+<span class="">VECTOR: Distributed Patterns</span>
+<span class="text-primary flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-primary animate-pulse"></span> Active Focus</span>
+</div>
+</div>
+<!-- Item 7: Cloud & Distributed Systems (Docker, Kubernetes) (60%) -->
+<div class="tech-card glass-panel flex flex-col justify-between rounded-xl p-space-lg transition-all duration-300 hover:-translate-y-1 group" data-category="systems">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="p-2 rounded bg-surface-container-high/80 text-primary flex items-center justify-center transition-colors group-hover:bg-primary-container/20">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+</span>
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider">INFRA_SCALING</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary-container transition-colors">Cloud &amp; Distributed Systems (Docker, Kubernetes)</h2>
+</div>
+</div>
+<div class="text-right">
+<span class="font-code-block text-headline-md font-semibold text-on-surface counter-val" data-target="60">60%</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-lowest/80 h-1.5 rounded-full overflow-hidden p-0">
+<div class="progress-bar-fill bg-primary-container h-full rounded-full pulse-glow text-primary-container" data-percent="60" style="width: 60%;"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            In my recent experiences I brought a product natively distributed on K8s with 100+ machines, pipelines, containerization and business continuity. I'm not a pure DevOps, but I have concrete experience with real architectures.
+          </p>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant bg-surface-container-lowest/50 border border-outline-variant/20 px-space-md py-space-xs rounded hover:border-primary-container/40 transition-colors">
+<span class="">VECTOR: 100+ Nodes Multi-Cluster</span>
+<span class="text-on-surface-variant">Applied Production</span>
+</div>
+</div>
+<!-- Item 8: Cloud Provider Deep Dive (50%) -->
+<div class="tech-card glass-panel flex flex-col justify-between rounded-xl p-space-lg transition-all duration-300 hover:-translate-y-1 group" data-category="systems">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="p-2 rounded bg-surface-container-high/80 text-primary flex items-center justify-center transition-colors group-hover:bg-secondary/20">
+<span class="material-symbols-outlined text-[20px]">cloud</span>
+</span>
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider">HYPERSCALER_ECOSYSTEMS</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-secondary transition-colors">Cloud Provider Deep Dive (AWS, GCP, Azure)</h2>
+</div>
+</div>
+<div class="text-right">
+<span class="font-code-block text-headline-md font-semibold text-on-surface counter-val" data-target="50">50%</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-lowest/80 h-1.5 rounded-full overflow-hidden p-0">
+<div class="progress-bar-fill bg-secondary h-full rounded-full pulse-glow text-secondary" data-percent="50" style="width: 50%;"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Deepening knowledge of major cloud providers to consolidate architectural skills on managed services, security, networking and scalability, fundamental for supporting modern enterprise solutions.
+          </p>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant bg-surface-container-lowest/50 border border-outline-variant/20 px-space-md py-space-xs rounded hover:border-secondary/40 transition-colors">
+<span class="">VECTOR: Enterprise IAM &amp; Networking</span>
+<span class="text-secondary flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-secondary animate-pulse"></span> Ongoing Study</span>
+</div>
+</div>
+<!-- Item 9: Machine Learning (40%) -->
+<div class="tech-card glass-panel flex flex-col justify-between rounded-xl p-space-lg transition-all duration-300 hover:-translate-y-1 group" data-category="frontier">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="p-2 rounded bg-surface-container-high/80 text-primary flex items-center justify-center transition-colors group-hover:bg-secondary/20">
+<span class="material-symbols-outlined text-[20px]">model_training</span>
+</span>
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider">APPLIED_INTELLIGENCE</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-secondary transition-colors">Machine Learning</h2>
+</div>
+</div>
+<div class="text-right">
+<span class="font-code-block text-headline-md font-semibold text-on-surface counter-val" data-target="40">40%</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-lowest/80 h-1.5 rounded-full overflow-hidden p-0">
+<div class="progress-bar-fill bg-secondary h-full rounded-full pulse-glow text-secondary" data-percent="40" style="width: 40%;"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Focusing on Machine Learning to enhance predictive and analytical capabilities of products I oversee, integrating intelligence into decision-making flows and internal automations.
+          </p>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant bg-surface-container-lowest/50 border border-outline-variant/20 px-space-md py-space-xs rounded hover:border-secondary/40 transition-colors">
+<span class="">VECTOR: Predictive Analytics &amp; Flows</span>
+<span class="text-secondary flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-secondary animate-pulse"></span> Exploratory</span>
+</div>
+</div>
+<!-- Item 10: WebAssembly (WASM) (20%) -->
+<div class="tech-card glass-panel flex flex-col justify-between rounded-xl p-space-lg transition-all duration-300 hover:-translate-y-1 group" data-category="frontier">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="p-2 rounded bg-surface-container-high/80 text-primary flex items-center justify-center transition-colors group-hover:bg-primary/20">
+<span class="material-symbols-outlined text-[20px]">memory</span>
+</span>
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider">LOW_LEVEL_SANDBOX</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary transition-colors">WebAssembly (WASM)</h2>
+</div>
+</div>
+<div class="text-right">
+<span class="font-code-block text-headline-md font-semibold text-on-surface counter-val" data-target="20">20%</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-lowest/80 h-1.5 rounded-full overflow-hidden p-0">
+<div class="progress-bar-fill bg-surface-container-highest h-full rounded-full pulse-glow text-surface-bright" data-percent="20" style="width: 20%;"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Studying WebAssembly to evaluate new high-performance solutions in the browser and server-side contexts, with the goal of bringing efficiency and portability to distributed and real-time scenarios.
+          </p>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant bg-surface-container-lowest/50 border border-outline-variant/20 px-space-md py-space-xs rounded hover:border-surface-bright transition-colors">
+<span class="">VECTOR: Native Client Compute</span>
+<span class="text-on-surface-variant flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-surface-container-highest"></span> Early Research</span>
+</div>
+</div>
+</div>
+<!-- Telemetry Spectrum Visual Breakdown -->
+<div class="w-full glass-panel rounded-xl p-space-lg flex flex-col gap-space-md" id="proficiency-spectrum">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">query_stats</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Proficiency Distribution Spectrum</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Aggregated Experience Index</span>
+</div>
+<!-- Segmented Bar Visualization with Animated Shimmer Glow -->
+<div class="w-full h-3 rounded-full bg-surface-container-lowest/90 border border-outline-variant/30 overflow-hidden flex gap-0.5 p-0.5 relative">
+<div class="h-full bg-gradient-to-r from-tertiary/90 via-tertiary to-tertiary-container rounded-l-full animate-shimmer" style="width: 40%;" title="Core Languages &amp; Frameworks (40%)"></div>
+<div class="h-full bg-gradient-to-r from-primary-container via-primary to-primary-fixed-dim animate-shimmer" style="width: 30%;" title="AI, Tooling &amp; Automation (30%)"></div>
+<div class="h-full bg-gradient-to-r from-secondary-container via-secondary to-secondary-fixed-dim animate-shimmer" style="width: 20%;" title="Systems &amp; Architecture (20%)"></div>
+<div class="h-full bg-gradient-to-r from-surface-container-high via-surface-bright to-surface-variant rounded-r-full" style="width: 10%;" title="Emergent &amp; WASM (10%)"></div>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-md pt-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="h-2 w-2 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Core Stack (TS, PHP)</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">AI &amp; Pipelines</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="h-2 w-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Systems &amp; K8s</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="h-2 w-2 rounded-full bg-surface-bright"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">WASM &amp; Frontiers</span>
+</div>
+</div>
+</div>
+<!-- Bottom Inter-Section Transition Anchor -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md glass-panel rounded-xl p-space-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-high/80 border border-outline-variant/30 flex items-center justify-center text-primary shadow-[0_0_15px_rgba(76,215,246,0.2)]">
+<span class="material-symbols-outlined text-[20px]">terminal</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Next Chapter</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-medium">Ready to discuss system design or staff collaborations?</span>
+</div>
+</div>
+<a class="px-space-lg py-space-sm rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-md text-label-md transition-all flex items-center gap-space-xs border border-outline-variant/30 hover:border-primary/50 shadow-sm" data-path="contact" href="#">
+<span class="text-primary font-code-inline">04.</span>
+<span class="">Get in Touch</span>
+<span class="material-symbols-outlined text-[16px] text-primary">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Interactive Filtering Logic & Interactive Animations -->
+<script>
+    function filterTech(category) {
+      const cards = document.querySelectorAll('#tech-matrix .tech-card');
+      const buttons = document.querySelectorAll('#filter-controls .filter-btn');
+
+      buttons.forEach((btn) => {
+        if (btn.getAttribute('data-filter') === category) {
+          btn.className =
+            'filter-btn px-space-md py-space-xs rounded font-label-md text-label-md bg-surface-container-high text-on-surface transition-all';
+        } else {
+          btn.className =
+            'filter-btn px-space-md py-space-xs rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all';
+        }
+      });
+
+      cards.forEach((card) => {
+        const itemCategories = card.getAttribute('data-category') || '';
+        if (category === 'all' || itemCategories.includes(category)) {
+          card.style.display = 'flex';
+          card.style.opacity = '1';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Interactive Card Spotlight Hover Effect
+    document.querySelectorAll('.glass-panel').forEach((panel) => {
+      panel.addEventListener('mousemove', (e) => {
+        const rect = panel.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        panel.style.setProperty('--mouse-x', `${x}px`);
+        panel.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+
+    // Progress Bar + Animated Counter Count-Up
+    function animateCountersAndBars() {
+      const progressBars = document.querySelectorAll('.progress-bar-fill');
+      const counterEls = document.querySelectorAll('.counter-val');
+
+      // Animate Bar Widths
+      progressBars.forEach((bar) => {
+        const target = bar.getAttribute('data-percent');
+        setTimeout(() => {
+          bar.style.width = target + '%';
+        }, 150);
+      });
+
+      // Animate Numbers
+      counterEls.forEach((counter) => {
+        const target = parseInt(counter.getAttribute('data-target') || '0', 10);
+        const duration = 1200;
+        const startTime = performance.now();
+
+        function updateCount(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease-out cubic
+          const easeProgress = 1 - Math.pow(1 - progress, 3);
+          const currentVal = Math.floor(easeProgress * target);
+          counter.textContent = currentVal + '%';
+
+          if (progress < 1) {
+            requestAnimationFrame(updateCount);
+          } else {
+            counter.textContent = target + '%';
+          }
+        }
+        requestAnimationFrame(updateCount);
+      });
+    }
+
+    // Unified Ambient Interactive Particle Canvas
+    (function initAmbientShader() {
+      const canvas = document.getElementById('ambient-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let width = (canvas.width = window.innerWidth);
+      let height = (canvas.height = window.innerHeight);
+
+      const mouse = { x: width * 0.5, y: height * 0.3, targetX: width * 0.5, targetY: height * 0.3 };
+      const glowEl = document.getElementById('cursor-glow');
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        mouse.targetX = e.clientX;
+        mouse.targetY = e.clientY;
+        if (glowEl) {
+          glowEl.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+        }
+      });
+
+      const particleCount = Math.min(Math.floor(width * 0.045), 55);
+      const particles = [];
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          radius: Math.random() * 1.6 + 0.6,
+          baseAlpha: Math.random() * 0.35 + 0.15,
+          color: Math.random() > 0.4 ? '76, 215, 246' : (Math.random() > 0.5 ? '78, 222, 163' : '173, 198, 255')
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, width, height);
+
+        // Gentle mouse lerp
+        mouse.x += (mouse.targetX - mouse.x) * 0.05;
+        mouse.y += (mouse.targetY - mouse.y) * 0.05;
+
+        // Draw connections
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0) p.x = width;
+          if (p.x > width) p.x = 0;
+          if (p.y < 0) p.y = height;
+          if (p.y > height) p.y = 0;
+
+          // Mouse attraction/deflection
+          const dxMouse = mouse.x - p.x;
+          const dyMouse = mouse.y - p.y;
+          const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+          if (distMouse < 180) {
+            p.x += (dxMouse / distMouse) * 0.3;
+            p.y += (dyMouse / distMouse) * 0.3;
+          }
+
+          // Draw particle
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${p.color}, ${p.baseAlpha})`;
+          ctx.fill();
+
+          // Connect adjacent nodes
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const dx = p.x - p2.x;
+            const dy = p.y - p2.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 130) {
+              const alpha = (1 - dist / 130) * 0.16;
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = `rgba(76, 215, 246, ${alpha})`;
+              ctx.lineWidth = 0.75;
+              ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(draw);
+      }
+      requestAnimationFrame(draw);
+    })();
+
+    // Run bar and numbers on load
+    window.addEventListener('DOMContentLoaded', animateCountersAndBars);
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      setTimeout(animateCountersAndBars, 100);
+    }
+  </script>
+</div></main>
+<footer class="w-full bg-surface-container-lowest/80 backdrop-blur-md border-t border-outline-variant/30"><div class="max-w-[1200px] mx-auto px-margin py-8 flex flex-col md:flex-row items-center justify-between gap-4"><div class="flex flex-col items-center md:items-start gap-1"><p class="font-label-md text-label-md text-on-surface-variant">Designed &amp; Built by Luca Palomba — System Architecture &amp; Engineering</p></div><div class="flex items-center gap-6"><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" href="https://github.com" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[16px]">terminal</span><span class="">GitHub</span></a><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" href="https://linkedin.com" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[16px]">hub</span><span class="">LinkedIn</span></a><span class="font-label-sm text-label-sm text-on-surface-variant/70">© 2025 Luca Palomba</span></div></div></footer>
+
+
+</body></html>
