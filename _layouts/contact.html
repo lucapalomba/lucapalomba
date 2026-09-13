@@ -5,32 +5,58 @@ layout: default
 <!-- Main Content -->
 <main class="page contact-content" id="main-content">
     <div class="container">
-        <h1 class="section-title"><span class="section-number">04.</span> <span class="section-title-text">{{ t.contact.title }}</span></h1>
-        <p class="contact-description">{{ t.contact.description }}</p>
+        <div class="section-header">
+            <p class="kicker"><span class="accent">04. Transmission Channel //</span></p>
+            <h1 class="section-title"><span class="section-number">04.</span> <span class="section-title-text">{{ t.contact.title }}</span></h1>
+            <p class="contact-description">{{ t.contact.description }}</p>
+        </div>
 
-        <a href="mailto:luca.palomba.developer@gmail.com" class="contact-email">
-            luca.palomba.developer@gmail.com
-        </a>
+        <div class="grid contact-grid">
+            <div class="card col-6 contact-dispatch">
+                <p class="telemetry-title">{% include icon.html name="alternate_email" %} {{ t.contact.dispatch.title }}</p>
+                <a href="mailto:luca.palomba.developer@gmail.com" class="contact-email">
+                    luca.palomba.developer@gmail.com
+                </a>
+                <div class="contact-actions">
+                    <a href="mailto:luca.palomba.developer@gmail.com" class="btn btn--primary">{{ t.contact.dispatch.compose }}
+                        {% include icon.html name="arrow_outward" %}</a>
+                    <button type="button" class="btn btn--secondary" id="copy-email"
+                        data-copied-label="{{ t.contact.dispatch.copied }}"
+                        data-copy-failed="{{ t.contactScript.copyFailed }}">
+                        {% include icon.html name="content_copy" %}
+                        <span class="copy-label">{{ t.contact.dispatch.copy }}</span>
+                    </button>
+                    <span class="visually-hidden" id="copy-status" aria-live="polite"></span>
+                </div>
+            </div>
 
-        <div class="social-links">
-            <a href="https://github.com/lucapalomba" target="_blank" rel="noopener noreferrer"
-                aria-label="{{ t.a11y.github }}">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path
-                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                    </path>
-                </svg>
-            </a>
-            <a href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer"
-                aria-label="{{ t.a11y.linkedin }}">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                    <rect x="2" y="9" width="4" height="12"></rect>
-                    <circle cx="4" cy="4" r="2"></circle>
-                </svg>
-            </a>
+            <div class="col-6 contact-side">
+                <div class="contact-tiles">
+                    <div class="stat-tile">
+                        <span class="stat-label">{{ t.contact.tiles.timezoneLabel }}</span>
+                        <span class="stat-value">{{ t.contact.tiles.timezoneValue }}</span>
+                        <span class="stat-sub"><span class="ping-dot"></span> {{ t.contact.tiles.timezoneSub }}</span>
+                    </div>
+                    <div class="stat-tile">
+                        <span class="stat-label">{{ t.contact.tiles.latencyLabel }}</span>
+                        <span class="stat-value">{{ t.contact.tiles.latencyValue }}</span>
+                        <span class="stat-sub">{{ t.contact.tiles.latencySub }}</span>
+                    </div>
+                </div>
+
+                <h2 class="contact-subhead">{{ t.contact.network.title }}</h2>
+                <ul class="network-list">
+                    <li class="kv-row">
+                        <span class="kv-key">{% include icon.html name="github" %} github.com/lucapalomba</span>
+                        <a class="kv-value" href="https://github.com/lucapalomba" target="_blank" rel="noopener noreferrer">{{ t.contact.network.githubSub }} {% include icon.html name="arrow_outward" %}</a>
+                    </li>
+                    <li class="kv-row">
+                        <span class="kv-key">{% include icon.html name="linkedin" %} linkedin.com/in/lucapalomba/</span>
+                        <a class="kv-value" href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer">{{ t.contact.network.linkedinSub }} {% include icon.html name="arrow_outward" %}</a>
+                    </li>
+                </ul>
+                <p class="placement chip">{{ t.contact.placement }}</p>
+            </div>
         </div>
     </div>
 </main>

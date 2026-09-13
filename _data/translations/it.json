@@ -66,13 +66,123 @@
         }
     },
     "consoleEasterEgg": "Se stai leggendo questo messaggio vuol dire che fai il mio stesso lavoro. Perchè non mi contatti e ci prendiamo un caffè?",
+    "home": {
+        "meta": {
+            "role": "ARCH_SPEC :: STAFF_IC / LEAD",
+            "location": "LOC: REMOTO / UE (UTC+1)",
+            "reviewCurriculum": "Guarda il Curriculum"
+        },
+        "telemetry": {
+            "title": "Telemetria principale",
+            "tiles": [
+                {
+                    "label": "Tech Debt Burn",
+                    "value": "85%",
+                    "sub": "Meno ritardo nel refactoring"
+                },
+                {
+                    "label": "Deploy del venerdì",
+                    "value": "0.00",
+                    "sub": "SICURO 100% weekend tranquilli"
+                },
+                {
+                    "label": "Velocità dello sprint",
+                    "value": "+42%",
+                    "sub": "Dopo il reset architetturale"
+                },
+                {
+                    "label": "Salute build CI",
+                    "value": "99.8%",
+                    "sub": "Build su main sempre verdi"
+                }
+            ]
+        },
+        "pillars": {
+            "kicker": "Aree di pratica principali",
+            "title": "Progettato per la certezza quando la posta è alta",
+            "lead": "Una sintesi disciplinata di artigianato software concreto, chiarezza organizzativa ed esecuzione pragmatica dell'AI.",
+            "items": [
+                {
+                    "number": "Pilastro 01",
+                    "icon": "groups",
+                    "title": "Leadership tecnica e Team Lead",
+                    "body": "Coordino squadre cross-funzionali, affino i ritmi SCRUM e guido la R&D con priorità chiare, così gli sviluppatori rilasciano senza attrito.",
+                    "capabilities": ["Mentorship", "Architettura agile", "Allineamento stakeholder"]
+                },
+                {
+                    "number": "Pilastro 02",
+                    "icon": "auto_fix_high",
+                    "title": "Abbattimento debito tecnico e architettura",
+                    "body": "Smonto monoliti fragili, introduco una governance pulita dei commit, costruisco test automatici completi e tutelo weekend tranquilli.",
+                    "capabilities": ["CI zero-regressioni", "Sistemi disaccoppiati", "0 deploy il venerdì"]
+                },
+                {
+                    "number": "Pilastro 03",
+                    "icon": "hub",
+                    "title": "AI Enabler e full stack moderno",
+                    "body": "Porto in produzione flussi di lavoro pragmatici con agenti LLM. Costruisco frontend web reattivi e resilienti con backend Node.js e Cloud ad alto throughput.",
+                    "capabilities": ["React / Next", "Node.js / TS", "Flussi LLM"]
+                }
+            ]
+        },
+        "charter": {
+            "kicker": "Charter architetturale",
+            "title": "architecture_charter.manifest",
+            "status": "BLOCCATO // PROD-STABILE",
+            "items": [
+                {
+                    "step": "01",
+                    "text": "Entro in codebase caotiche e porto chiarezza. Diagnostico i collo di bottiglia sistemici entro 72 ore, prioritizzando percorsi di stabilizzazione a basso rischio e alto rendimento."
+                },
+                {
+                    "step": "02",
+                    "text": "Patto rigoroso \"zero deploy il venerdì\". I deploy avvengono da lunedì a giovedì prima delle 15:00 UTC con canary e rollback automatici. Tutelo il tempo libero degli ingegneri."
+                },
+                {
+                    "step": "03",
+                    "text": "Rendo le persone più efficaci con LLM e acceleratori DevEx. Aumento la generazione di test, le migrazioni di schema e la documentazione con strumenti AI strutturati."
+                }
+            ]
+        },
+        "philosophy": {
+            "title": "La leadership tecnica è prima di tutto abilitare le persone",
+            "body": "L'architettura più pulita non vale nulla se il team è esausto. Definendo specifiche tecniche chiarissime, automatizzando i controlli di qualità ripetitivi e disaccoppiando le dipendenze complesse, lo sviluppo torna piacevole."
+        },
+        "nextStep": {
+            "kicker": "Prossimo passo",
+            "title": "Pronto a vedere il codice e l'impatto?",
+            "body": "Esplora le tappe di leadership senior, le revisioni architetturali e la delivery full-stack.",
+            "cta": "Esplora le esperienze"
+        }
+    },
     "experiences": {
         "title": "Esperienze lavorative",
         "pageTitle": "Esperienze lavorative — Luca Palomba",
         "description": "Esplora le esperienze lavorative di Luca Palomba, inclusi ruoli come Senior Full Stack Developer, R&D Manager e Team Lead.",
-        "lead": "Ruoli e progetti selezionati nel corso della mia carriera.",
+        "kicker": "Percorso di carriera",
+        "lead": "Ruoli e progetti selezionati nel corso della mia carriera, dall'architettura software distribuita alla leadership di team e all'ingegneria aumentata dall'AI.",
         "back": "← Indietro",
         "keyProject": "Progetto chiave:",
+        "telemetry": {
+            "title": "Leadership",
+            "tenureLabel": "Anzianità cumulativa",
+            "tenureValue": "18+",
+            "tenureSub": "Anni di attività",
+            "teamsLabel": "Team guidati",
+            "teamsValue": "20",
+            "teamsSub": "Ingegneri",
+            "metrics": [
+                { "key": "LEADERSHIP_MAX", "value": "20 ingegneri / 4 squadre" },
+                { "key": "OPEX_REDUCTION", "value": "~50% in 12 mesi" },
+                { "key": "METHODOLOGY", "value": "SCRUM / CI-CD / AI-Assisted" },
+                { "key": "R&D_SPECIALIZATION", "value": "Openware PSIM e sistemi distribuiti" }
+            ]
+        },
+        "philosophy": {
+            "kicker": "Filosofia di carriera",
+            "quote": "L'architettura tecnica raggiunge il suo massimo solo se unita a coordinamento umano intenzionale, empatia e automazione pragmatica."
+        },
+        "nextStep": "Vedi le tecnologie",
         "jobs": [
             {
                 "date": "Feb 2026 — Presente",
@@ -204,6 +314,33 @@
         "description": "Esplora le tecnologie con cui Luca Palomba ha esperienza e quelle che è entusiasta di imparare.",
         "lead": "Una lista di tecnologie, da quelle che uso tutti i giorni a quelle che ormai fanno parte di me. Ma attenzione: il futuro cambia in fretta, e questa lista con lui.",
         "experiencedTitle": "Esperienza tecnologica",
+        "activeDomains": "Domini attivi",
+        "primarySynthesis": "Sintesi principale",
+        "filterLabel": "Filtra le tecnologie per categoria",
+        "filters": {
+            "all": "Matrice completa (10)",
+            "core": "Competenza core (≥80%)",
+            "architecture": "Architettura e cloud",
+            "frontier": "R&D e frontiera",
+            "count": "{count} visualizzate"
+        },
+        "emptyState": "Nessuna tecnologia in questa categoria per ora.",
+        "categories": {
+            "core": "Runtime core",
+            "architecture": "Infra e scalabilità",
+            "frontier": "Frontiera R&D"
+        },
+        "spectrumTitle": "Spettro di distribuzione delle competenze",
+        "spectrumLegend": [
+            { "label": "Stack core (TS, PHP)", "tone": "core" },
+            { "label": "AI e pipeline", "tone": "ai" },
+            { "label": "Sistemi e K8s", "tone": "architecture" },
+            { "label": "WASM e frontiera", "tone": "frontier" }
+        ],
+        "nextChapter": {
+            "kicker": "Prossimo capitolo",
+            "title": "Pronto a parlare di system design o di collaborazioni staff?"
+        },
         "tech": {
             "aiAgents": "Agenti di sviluppo LLM & Documentazione per AI",
             "jsNode": "JavaScript (Node.js + TypeScript)",
@@ -232,18 +369,43 @@
     "contact": {
         "title": "Mettiti in contatto",
         "pageTitle": "Contatti — Luca Palomba",
-        "description": "Sono attualmente aperto a nuove opportunità e collaborazioni. Sentiti libero di contattarmi — la mia casella di posta è sempre aperta, che tu abbia una domanda o voglia solo salutare."
+        "description": "Sono attualmente aperto a nuove opportunità e collaborazioni. Sentiti libero di contattarmi — la mia casella di posta è sempre aperta, che tu abbia una domanda o voglia solo salutare.",
+        "dispatch": {
+            "title": "Dispatch principale — in ascolto",
+            "compose": "Scrivi una email",
+            "copy": "Copia",
+            "copied": "Copiato!"
+        },
+        "tiles": {
+            "timezoneLabel": "Fuso orario",
+            "timezoneValue": "UE / UTC+1",
+            "timezoneSub": "Risposta attiva",
+            "latencyLabel": "Latenza",
+            "latencyValue": "< 24 ore",
+            "latencySub": "SLA p99: nominale"
+        },
+        "network": {
+            "title": "Profili di rete",
+            "githubSub": "Log dei commit open source e architetture",
+            "linkedinSub": "Storia professionale e network"
+        },
+        "placement": "Posizionamento: Staff / Lead IC · Sistemi distribuiti · Architettura dei sistemi"
     },
     "notFound": {
         "pageTitle": "404 - Pagina Non Trovata | Luca Palomba",
         "code": "404",
         "title": "Pagina Non Trovata",
-        "description": "Non è un bug, è una feature… che però non troviamo. Ritorniamo a casa",
-        "homeButton": "Torna alla home"
+        "description": "La rotta richiesta non esiste o è stata spostata su un altro branch. Sembra che tu sia finito in territorio non committato — obiettivi chiari, commit puliti, ma nessun endpoint configurato qui.",
+        "homeButton": "Torna alla panoramica",
+        "browseButton": "Sfoglia le tecnologie",
+        "quickJump": "Salto rapido"
     },
     "backToTop": "Torna in cima",
     "footer": {
         "provenance": "Progettato e sviluppato da Luca Palomba — Architettura dei sistemi e ingegneria"
+    },
+    "contactScript": {
+        "copyFailed": "Impossibile copiare — copia l'indirizzo manualmente."
     },
     "sound": {
         "mute": "Disattiva i suoni della tastiera",
