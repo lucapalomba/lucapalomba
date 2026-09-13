@@ -8,10 +8,10 @@ body {
     display: none !important;
 }
 
-/* The ambient backdrop canvas is not started under reduced motion; hide it so
-   only the static scrim remains. */
-.backdrop {
-    display: none !important;
+/* The ambient backdrop curves are frozen under reduced motion; the static grid
+   and scrim stay (they are not motion). */
+.backdrop-curve {
+    animation: none !important;
 }
 
 /* Kill every remaining infinite CSS animation under reduced motion so no

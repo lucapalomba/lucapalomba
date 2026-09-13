@@ -20,10 +20,17 @@
 
     {% include transition-overlay.html %}
 
-    <!-- Ambient backdrop: the animated obsidian grid + flowing energy curves
-         from the design export, reimplemented in js/backdrop.js. Decorative,
-         aria-hidden, and replaced by a static gradient under reduced motion. -->
-    <canvas id="backdrop" class="backdrop" aria-hidden="true"></canvas>
+    <!-- Ambient backdrop: the export's obsidian grid + flowing curves, done in
+         CSS on the compositor instead of a per-frame canvas (the canvas cost
+         ~117s of main-thread work on a throttled mobile CPU, failing the
+         Lighthouse budget). Decorative, aria-hidden, frozen under reduced
+         motion. The cursor light is a small compositor layer moved by
+         js/backdrop.js. -->
+    <div class="backdrop" aria-hidden="true">
+      <span class="backdrop-curve backdrop-curve--cyan"></span>
+      <span class="backdrop-curve backdrop-curve--emerald"></span>
+      <span class="backdrop-light" id="backdrop-light"></span>
+    </div>
     <div class="backdrop-scrim" aria-hidden="true"></div>
 
     <!-- The 404 is deliberately header-less: it is reached from a bad link and

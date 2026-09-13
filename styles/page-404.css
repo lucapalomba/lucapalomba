@@ -1,0 +1,84 @@
+﻿/* --- 404 ----------------------------------------------------------------- */
+/* No navbar on this page (see _layouts/default.html), so the top padding does
+   not reserve the nav height — only breathing room. */
+.error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: var(--space-xl) var(--margin);
+}
+
+.error-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-md);
+}
+
+.error-badge {
+  color: var(--error);
+  border-color: var(--error);
+}
+
+.error-code {
+  font-family: var(--font-ui);
+  font-size: var(--display-size);
+  font-weight: var(--display-weight);
+  letter-spacing: var(--display-tracking);
+  color: var(--primary);
+  margin: 0;
+}
+
+.error-title-inline {
+  color: var(--on-surface);
+}
+
+.error-desc {
+  color: var(--on-surface-variant);
+  max-width: 520px;
+  margin: 0;
+}
+
+.error-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.error-quickjump ol {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-md);
+  list-style: none;
+  padding: 0;
+  margin: var(--space-md) 0 0;
+}
+
+.error-quickjump a {
+  font-family: var(--font-mono);
+  font-size: var(--body-sm-size);
+  color: var(--on-surface-variant);
+  text-decoration: none;
+}
+
+.error-quickjump a:hover {
+  color: var(--primary);
+}
+
+@media (max-width: 767px) {
+  .tech-summary,
+  .contact-tiles {
+    grid-template-columns: 1fr;
+  }
+
+  .exp-side {
+    position: static;
+  }
+}
+

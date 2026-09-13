@@ -60,14 +60,67 @@ html.js body {
   outline-offset: 2px;
 }
 
-/* Ambient backdrop canvas + readability scrim, behind page content. */
+/* Ambient backdrop: obsidian grid + flowing curves + cursor light, all on the
+   compositor. The grid is a tiled CSS gradient (no canvas, no per-frame work),
+   the curves are two elements animated with transform, and the light is a
+   pre-rendered radial gradient moved by js/backdrop.js. */
 .backdrop {
   position: fixed;
   inset: 0;
-  width: 100%;
-  height: 100%;
   z-index: -1;
   pointer-events: none;
+  overflow: hidden;
+  background-color: #0c0e14;
+  background-image:
+    linear-gradient(to right, rgba(76, 215, 246, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(76, 215, 246, 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.backdrop-curve {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  height: 1.5px;
+  display: block;
+  will-change: transform;
+  border-radius: 50%;
+}
+
+.backdrop-curve--cyan {
+  top: 28%;
+  background: linear-gradient(90deg, transparent, rgba(76, 215, 246, 0.16), transparent);
+  animation: backdrop-drift 26s ease-in-out infinite alternate;
+}
+
+.backdrop-curve--emerald {
+  top: 62%;
+  background: linear-gradient(90deg, transparent, rgba(78, 222, 163, 0.12), transparent);
+  animation: backdrop-drift 34s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes backdrop-drift {
+  from {
+    transform: translate3d(-4%, 0, 0) rotate(-1.2deg);
+  }
+
+  to {
+    transform: translate3d(4%, 40px, 0) rotate(1.2deg);
+  }
+}
+
+.backdrop-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 350px;
+  height: 350px;
+  pointer-events: none;
+  will-change: transform;
+  background: radial-gradient(circle,
+      rgba(76, 215, 246, 0.08) 0%,
+      rgba(6, 182, 212, 0.025) 50%,
+      rgba(12, 14, 20, 0) 70%);
 }
 
 .backdrop-scrim {

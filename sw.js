@@ -49,13 +49,12 @@ const PRECACHE_URLS = [
   './it/contact.html',
   './404.html',
   './manifest.webmanifest',
-  './styles/fonts.css',
-  './styles/tokens.css',
-  './styles/components.css',
-  './styles/transitions.css',
-  './styles/main.css',
-  './styles/motion.css',
-  './styles/pages.css',
+  './styles/app.css',
+  './styles/page-index.css',
+  './styles/page-experiences.css',
+  './styles/page-technologies.css',
+  './styles/page-contact.css',
+  './styles/page-404.css',
   './styles/mobile.css',
   './styles/mobile-small.css',
   './styles/reduced-motion.css',
@@ -70,11 +69,10 @@ const PRECACHE_URLS = [
   './js/titleAnimation.js',
   './js/techProgress.js',
   './js/contactCopy.js',
-  './fonts/Geist/Geist-Regular.woff2',
-  './fonts/Geist/Geist-Medium.woff2',
-  './fonts/Geist/Geist-SemiBold.woff2',
-  './fonts/JetBrains_Mono/JetBrainsMono-Regular.woff2',
-  './fonts/JetBrains_Mono/JetBrainsMono-Medium.woff2'
+  './fonts/Geist/Geist-Latin-Variable.woff2',
+  './fonts/Geist/Geist-Latin-Ext-Variable.woff2',
+  './fonts/JetBrains_Mono/JetBrainsMono-Latin-Variable.woff2',
+  './fonts/JetBrains_Mono/JetBrainsMono-Latin-Ext-Variable.woff2'
 ];
 
 // Served for a navigation that is neither cached nor reachable. Every page of
