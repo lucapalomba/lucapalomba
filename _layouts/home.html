@@ -6,14 +6,95 @@ layout: default
 {%- assign first_step = hero_steps[0] %}
 <!-- Main Content -->
 <main class="content-wrapper" id="main-content">
-  <section class="hero">
-    <p class="hero-intro">{{ t.index.hero.intro }}</p>
-    <h1 class="hero-name" fetchpriority="high">{{ t.index.hero.name }}</h1>
-    <h2 class="hero-title">{{ first_step.text }}</h2>
-    <h3 class="hero-subtitle">{{ t.index.subtitle }}</h3>
-    <p class="hero-bio">{{ t.index.hero.bio }}</p>
-    <a href="experiences.html" class="hero-cta">{{ t.index.hero.cta }}</a>
-  </section>
+  <div class="container">
+    <div class="grid home-grid">
+      <section class="hero col-8">
+        <p class="hero-meta">
+          <span class="chip">{{ t.home.meta.role }}</span>
+          <span class="chip">{{ t.home.meta.location }}</span>
+        </p>
+        <p class="hero-intro">{{ t.index.hero.intro }}</p>
+        <h1 class="hero-name" fetchpriority="high">{{ t.index.hero.name }}</h1>
+        <h2 class="hero-title">{{ first_step.text }}</h2>
+        <h3 class="hero-subtitle">{{ t.index.subtitle }}</h3>
+        <p class="hero-bio">{{ t.index.hero.bio }}</p>
+        <div class="hero-cta-row">
+          <a href="experiences.html" class="btn btn--primary">{{ t.index.hero.cta }}</a>
+          <a href="https://www.linkedin.com/in/lucapalomba/" target="_blank" rel="noopener noreferrer"
+            class="btn btn--secondary">{% include icon.html name="arrow_outward" %} {{ t.home.meta.reviewCurriculum }}</a>
+        </div>
+      </section>
+
+      <aside class="telemetry col-4 reveal" aria-label="{{ t.home.telemetry.title }}">
+        <p class="telemetry-title">{% include icon.html name="memory" %} {{ t.home.telemetry.title }}</p>
+        <dl class="telemetry-list">
+          {%- for tile in t.home.telemetry.tiles %}
+          <div class="stat-tile">
+            <dt class="stat-label">{{ tile.label }}</dt>
+            <dd class="stat-value">{{ tile.value }}</dd>
+            <dd class="stat-sub">{{ tile.sub }}</dd>
+          </div>
+          {%- endfor %}
+        </dl>
+      </aside>
+    </div>
+
+    <section class="home-section reveal">
+      <div class="section-header">
+        <p class="kicker"><span class="accent">01.1 //</span> {{ t.home.pillars.kicker }}</p>
+        <h2 class="headline">{{ t.home.pillars.title }}</h2>
+        <p class="lead">{{ t.home.pillars.lead }}</p>
+      </div>
+      <div class="grid pillar-grid">
+        {%- for pillar in t.home.pillars.items %}
+        <article class="card col-4 pillar" style="--reveal-delay: {{ forloop.index0 | times: 100 }}ms">
+          <span class="pillar-icon">{% include icon.html name=pillar.icon %}</span>
+          <p class="pillar-number">{{ pillar.number }}</p>
+          <h3 class="pillar-title">{{ pillar.title }}</h3>
+          <p class="pillar-body">{{ pillar.body }}</p>
+          <ul class="pillar-chips">
+            {%- for cap in pillar.capabilities %}
+            <li class="chip">{{ cap }}</li>
+            {%- endfor %}
+          </ul>
+        </article>
+        {%- endfor %}
+      </div>
+    </section>
+
+    <section class="home-section reveal">
+      <div class="section-header">
+        <p class="kicker"><span class="accent">01.2 //</span> {{ t.home.charter.kicker }}</p>
+      </div>
+      <div class="ledger card">
+        <p class="ledger-title">{% include icon.html name="terminal" %} {{ t.home.charter.title }}
+          <span class="chip badge--accent">{{ t.home.charter.status }}</span>
+        </p>
+        <ol class="ledger-list">
+          {%- for item in t.home.charter.items %}
+          <li>
+            <span class="ledger-step">{{ item.step }}</span>
+            <span class="ledger-text">{{ item.text }}</span>
+          </li>
+          {%- endfor %}
+        </ol>
+      </div>
+    </section>
+
+    <section class="home-section reveal philosophy">
+      <span class="pillar-icon">{% include icon.html name="psychology" %}</span>
+      <h2 class="headline">{{ t.home.philosophy.title }}</h2>
+      <p class="lead">{{ t.home.philosophy.body }}</p>
+    </section>
+
+    <section class="home-section cta-band reveal">
+      <p class="kicker">{{ t.home.nextStep.kicker }}</p>
+      <h2 class="headline">{{ t.home.nextStep.title }}</h2>
+      <p class="lead">{{ t.home.nextStep.body }}</p>
+      <a href="experiences.html" class="btn btn--primary">{{ t.home.nextStep.cta }}
+        {% include icon.html name="arrow_forward" %}</a>
+    </section>
+  </div>
 </main>
 
 <!-- Typewriter configuration for titleAnimation.js. The steps are the locale's

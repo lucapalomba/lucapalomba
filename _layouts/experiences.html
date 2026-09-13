@@ -5,49 +5,84 @@ layout: default
 <!-- Main Content -->
 <main class="page" id="main-content">
   <div class="container">
-    <h1 class="section-title"><span class="section-number">02.</span> <span class="section-title-text">{{ t.experiences.title }}</span>
-      <button class="print-btn" onclick="event.preventDefault(); handlePrint();" aria-label="{{ t.a11y.print }}">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="6 9 6 2 18 2 18 9"></polyline>
-          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-          <rect x="6" y="14" width="12" height="8"></rect>
-        </svg>
-      </button>
-    </h1>
-    <p class="lead">{{ t.experiences.lead }}</p>
+    <div class="section-header">
+      <p class="kicker"><span class="accent">// Trace &amp; Milestones //</span> {{ t.experiences.kicker }}</p>
+      <h1 class="section-title"><span class="section-number">02.</span> <span class="section-title-text">{{ t.experiences.title }}</span>
+        <button class="print-btn" onclick="event.preventDefault(); handlePrint();" aria-label="{{ t.a11y.print }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+        </button>
+      </h1>
+      <p class="lead">{{ t.experiences.lead }}</p>
+    </div>
 
-    <ul class="timeline">
-      {%- for job in t.experiences.jobs %}
-      {%- assign title_parts = job.title | split: ' — ' %}
-      <li class="timeline-item">
-        <div class="timeline-marker"></div>
-        <div class="timeline-content">
-          <h2>{{ title_parts[0] }} <span class="company">@ {{ title_parts[1] }}</span></h2>
-          <div class="date">{{ job.date }}</div>
-          <ul class="job-description">
-            {%- for sentence in job.description %}
-            <li>{{ sentence }}</li>
-            {%- endfor %}
-          </ul>
-          {%- if job.keyProject %}
-          <div class="key-project">
-            <div class="kp-title">
-              <span class="kp-label">{{ t.experiences.keyProject }}</span>
-              <span class="kp-project-name">{{ job.keyProjectTitle }}</span>
+    <div class="grid experiences-grid">
+      <div class="col-8">
+        <ul class="timeline">
+          {%- for job in t.experiences.jobs %}
+          {%- assign title_parts = job.title | split: ' — ' %}
+          <li class="timeline-item reveal">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h2>{{ title_parts[0] }} <span class="company">@ {{ title_parts[1] }}</span></h2>
+              <div class="date">{{ job.date }}</div>
+              <ul class="job-description">
+                {%- for sentence in job.description %}
+                <li>{{ sentence }}</li>
+                {%- endfor %}
+              </ul>
+              {%- if job.keyProject %}
+              <div class="key-project">
+                <div class="kp-title">
+                  <span class="kp-label">{{ t.experiences.keyProject }}</span>
+                  <span class="kp-project-name">{{ job.keyProjectTitle }}</span>
+                </div>
+                <div class="kp-description">{{ job.keyProject }}</div>
+              </div>
+              {%- endif %}
+              <div class="tech-stack">
+                {%- for tech in job.techStack %}
+                <span>{{ tech }}</span>
+                {%- endfor %}
+              </div>
             </div>
-            <div class="kp-description">{{ job.keyProject }}</div>
-          </div>
-          {%- endif %}
-          <div class="tech-stack">
-            {%- for tech in job.techStack %}
-            <span>{{ tech }}</span>
-            {%- endfor %}
-          </div>
-        </div>
-      </li>
-      {%- endfor %}
-    </ul>
+          </li>
+          {%- endfor %}
+        </ul>
+      </div>
 
+      <aside class="col-4 telemetry telemetry--sticky reveal" aria-label="{{ t.experiences.telemetry.title }}">
+        <p class="telemetry-title">{% include icon.html name="query_stats" %} {{ t.experiences.telemetry.title }}</p>
+        <div class="stat-tile">
+          <span class="stat-label">{{ t.experiences.telemetry.tenureLabel }}</span>
+          <span class="stat-value">{{ t.experiences.telemetry.tenureValue }}</span>
+          <span class="stat-sub">{{ t.experiences.telemetry.tenureSub }}</span>
+        </div>
+        <div class="stat-tile">
+          <span class="stat-label">{{ t.experiences.telemetry.teamsLabel }}</span>
+          <span class="stat-value">{{ t.experiences.telemetry.teamsValue }}</span>
+          <span class="stat-sub">{{ t.experiences.telemetry.teamsSub }}</span>
+        </div>
+        <dl class="telemetry-metrics">
+          {%- for metric in t.experiences.telemetry.metrics %}
+          <div class="kv-row">
+            <dt class="kv-key">{{ metric.key }}</dt>
+            <dd class="kv-value">{{ metric.value }}</dd>
+          </div>
+          {%- endfor %}
+        </dl>
+      </aside>
+    </div>
+
+    <section class="home-section reveal">
+      <p class="kicker">{{ t.experiences.philosophy.kicker }}</p>
+      <p class="lead quote">{{ t.experiences.philosophy.quote }}</p>
+      <a href="technologies.html" class="btn btn--secondary">{{ t.experiences.nextStep }} {% include icon.html name="arrow_forward" %}</a>
+    </section>
   </div>
 </main>
 
@@ -57,16 +92,14 @@ function handlePrint() {
     window.print();
   } catch (e) {
     console.error('Print failed:', e);
-    // Fallback: try to open print dialog manually
     if (document.queryCommandSupported('print')) {
       document.execCommand('print');
     } else {
-      alert('Please use Ctrl+P or Cmd+P to print this page');
+      alert('{{ t.a11y.print }}');
     }
   }
 }
 
-// Also add event listener as backup
 document.addEventListener('DOMContentLoaded', function() {
   const printBtn = document.querySelector('.print-btn');
   if (printBtn) {
