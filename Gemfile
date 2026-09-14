@@ -20,10 +20,10 @@ end
 # inside compress_javascript. The lockfile already resolved to 2.x, so this
 # changes nothing at runtime; it only stops the failure from recurring.
 # This ceiling alone is not sufficient: Dependabot rewrites the bound of a
-# direct dependency itself, so `.github/dependabot.yml` ignores json >= 3.0.0
-# as well. Remove both once jekyll-minifier can move to 0.2.x, which swaps the
-# JS compressor for terser. That is blocked: 0.2.x requires jekyll ~> 4.0,
-# while github-pages pins jekyll 3.10.0.
+# direct dependency itself, so `.github/dependabot.yml` also ignores json major
+# version updates. Remove both once jekyll-minifier can move to 0.2.x, which
+# swaps the JS compressor for terser. That is blocked: 0.2.x requires
+# jekyll ~> 4.0, while github-pages pins jekyll 3.10.0.
 gem "json", "< 3"
 
 group :test do
