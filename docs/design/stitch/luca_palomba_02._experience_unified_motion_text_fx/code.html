@@ -1,0 +1,642 @@
+<!DOCTYPE html><html class="dark" lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>
+  @layer base {
+    html, body { margin: 0; padding: 0; }
+    body { overscroll-behavior: none; }
+    main > :first-child { margin-top: 0 !important; }
+    main > :last-child { margin-bottom: 0 !important; }
+  }
+  ::-webkit-scrollbar { display: none; }
+
+  /* Animated shimmering cyan gradient text */
+  @keyframes cyan-shimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .title-shimmer {
+    background: linear-gradient(90deg, #e2e2ea 0%, #4cd7f6 30%, #6ffbbe 50%, #acedff 75%, #e2e2ea 100%);
+    background-size: 250% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: cyan-shimmer 8s ease infinite;
+  }
+
+  /* Reveal animation for cards and items */
+  @keyframes fadeSlideUp {
+    0% { opacity: 0; transform: translateY(18px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .stagger-card {
+    opacity: 0;
+    animation: fadeSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Micro bullet hover bounce */
+  .bullet-item {
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.2s ease;
+  }
+  .bullet-item:hover {
+    transform: translateX(4px);
+  }
+  .bullet-item:hover .bullet-icon {
+    color: #4edea3;
+    transform: scale(1.2);
+  }
+  .bullet-icon {
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  /* Interactive spotlight on cards */
+  .spotlight-card {
+    position: relative;
+    background: rgba(17, 19, 25, 0.82);
+  }
+  .spotlight-card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: radial-gradient(400px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(76, 215, 246, 0.45), transparent 70%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .spotlight-card:hover::before {
+    opacity: 1;
+  }
+
+  /* Timeline bar reveal animation */
+  @keyframes timelineFill {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  .animate-bar {
+    transform-origin: left;
+    animation: timelineFill 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Shimmer sweep effect on telemetry container */
+  @keyframes scanlineGlow {
+    0% { transform: translateY(-100%); opacity: 0; }
+    50% { opacity: 0.35; }
+    100% { transform: translateY(200%); opacity: 0; }
+  }
+  .telemetry-scan {
+    position: relative;
+    overflow: hidden;
+  }
+  .telemetry-scan::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent, rgba(76,215,246,0.12), transparent);
+    animation: scanlineGlow 5s ease-in-out infinite;
+    pointer-events: none;
+  }
+</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { 'colors': { 'error': '#ffb4ab', 'on-error': '#690005', 'on-secondary-container': '#e6ecff', 'surface-bright': '#373940', 'on-surface-variant': '#bcc9cd', 'on-primary': '#003640', 'tertiary-container': '#1bbd85', 'surface-container-low': '#191b22', 'secondary-fixed': '#d8e2ff', 'primary-container': '#06b6d4', 'outline': '#869397', 'primary': '#4cd7f6', 'primary-fixed': '#acedff', 'surface-container-lowest': '#0c0e14', 'on-primary-fixed-variant': '#004e5c', 'on-tertiary-fixed': '#002113', 'surface': '#111319', 'inverse-surface': '#e2e2ea', 'surface-tint': '#4cd7f6', 'on-background': '#e2e2ea', 'tertiary-fixed': '#6ffbbe', 'on-tertiary-container': '#00452e', 'on-surface': '#e2e2ea', 'on-secondary-fixed-variant': '#004395', 'surface-container-high': '#282a30', 'surface-container-highest': '#33343b', 'secondary': '#adc6ff', 'inverse-primary': '#00687a', 'on-primary-container': '#00424f', 'on-error-container': '#ffdad6', 'surface-dim': '#111319', 'outline-variant': '#3d494c', 'surface-variant': '#33343b', 'on-secondary': '#002e6a', 'background': '#111319', 'surface-container': '#1d1f26', 'secondary-container': '#0566d9', 'on-tertiary': '#003824', 'primary-fixed-dim': '#4cd7f6', 'error-container': '#93000a', 'tertiary': '#4edea3', 'on-tertiary-fixed-variant': '#005236', 'secondary-fixed-dim': '#adc6ff', 'tertiary-fixed-dim': '#4edea3', 'on-primary-fixed': '#001f26', 'on-secondary-fixed': '#001a42', 'inverse-on-surface': '#2e3037' }, 'borderRadius': { 'DEFAULT': '0.125rem', 'lg': '0.25rem', 'xl': '0.5rem', 'full': '0.75rem' }, 'spacing': { 'space-lg': '1.5rem', 'margin': '2rem', 'gutter': '1.5rem', 'space-sm': '0.5rem', 'space-xs': '0.25rem', 'space-md': '1rem', 'space-xl': '2.5rem' }, 'fontFamily': { 'code-block': ['JetBrains Mono', 'monospace'], 'headline-lg-mobile': ['Geist', 'sans-serif'], 'label-sm': ['JetBrains Mono', 'monospace'], 'headline-md': ['Geist', 'sans-serif'], 'body-sm': ['Geist', 'sans-serif'], 'body-lg': ['Geist', 'sans-serif'], 'display-mobile': ['Geist', 'sans-serif'], 'display': ['Geist', 'sans-serif'], 'headline-lg': ['Geist', 'sans-serif'], 'body-md': ['Geist', 'sans-serif'], 'code-inline': ['JetBrains Mono', 'monospace'], 'label-md': ['JetBrains Mono', 'monospace'], 'headline-sm': ['Geist', 'sans-serif'] }, 'fontSize': { 'code-block': ['0.875rem', { 'lineHeight': '1.6', 'letterSpacing': '-0.01em', 'fontWeight': '400' }], 'headline-lg-mobile': ['1.75rem', { 'lineHeight': '1.25', 'letterSpacing': '-0.02em', 'fontWeight': '600' }], 'label-sm': ['0.6875rem', { 'lineHeight': '1.3', 'letterSpacing': '0.06em', 'fontWeight': '500' }], 'headline-md': ['1.5rem', { 'lineHeight': '1.3', 'letterSpacing': '-0.02em', 'fontWeight': '500' }], 'body-sm': ['0.8125rem', { 'lineHeight': '1.5', 'letterSpacing': '0', 'fontWeight': '400' }], 'body-lg': ['1.125rem', { 'lineHeight': '1.6', 'letterSpacing': '-0.01em', 'fontWeight': '400' }], 'display-mobile': ['2.25rem', { 'lineHeight': '1.2', 'letterSpacing': '-0.025em', 'fontWeight': '600' }], 'display': ['3.5rem', { 'lineHeight': '1.1', 'letterSpacing': '-0.03em', 'fontWeight': '600' }], 'headline-lg': ['2.25rem', { 'lineHeight': '1.2', 'letterSpacing': '-0.025em', 'fontWeight': '600' }], 'body-md': ['0.9375rem', { 'lineHeight': '1.6', 'letterSpacing': '-0.005em', 'fontWeight': '400' }], 'code-inline': ['0.8125rem', { 'lineHeight': '1.4', 'letterSpacing': '-0.01em', 'fontWeight': '400' }], 'label-md': ['0.75rem', { 'lineHeight': '1.4', 'letterSpacing': '0.04em', 'fontWeight': '500' }], 'headline-sm': ['1.125rem', { 'lineHeight': '1.4', 'letterSpacing': '-0.01em', 'fontWeight': '500' }] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen relative overflow-x-hidden"><!-- Interactive Fluid Particle Canvas (Identical to 01. Who Am I) --><canvas class="fixed inset-0 w-full h-full pointer-events-none -z-10" id="fluid-bg-canvas" width="1280" height="3017"></canvas><div class="fixed inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_0%,rgba(17,19,25,0.78)_100%)] -z-10"></div><header class="fixed top-0 left-0 right-0 z-50 bg-[#111319]/80 backdrop-blur-md border-b border-white/[0.06]"><div class="h-16 max-w-[1200px] mx-auto px-margin flex items-center justify-between"><div class="flex items-center gap-space-lg"><a class="flex items-center font-label-md text-label-md tracking-tight text-on-surface hover:text-primary transition-colors group" data-path="who-am-i" href="#"><span class="text-primary mr-space-xs transition-transform group-hover:-translate-x-0.5">&lt;</span>LP <span class="text-primary ml-space-xs transition-transform group-hover:translate-x-0.5">/&gt;</span></a><div class="hidden sm:flex items-center gap-space-xs px-space-sm py-0.5 rounded bg-surface-container-low/80 backdrop-blur-md border border-white/[0.04]"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span><span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Available for Staff Roles</span></div></div><nav class="hidden md:flex items-center gap-space-md"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="who-am-i" href="#"><span class="text-primary font-code-inline text-code-inline mr-1">01.</span>Who am I</a><a aria-current="page" class="font-label-md text-label-md text-on-surface bg-surface-container-high/90 border border-primary/20 px-space-sm py-space-xs rounded transition-colors whitespace-nowrap shadow-[0_0_12px_rgba(76,215,246,0.18)]" data-path="experience" href="#"><span class="text-primary font-code-inline text-code-inline mr-1">02.</span>Experience</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="technologies" href="#"><span class="text-primary font-code-inline text-code-inline mr-1">03.</span>Technologies</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="contact" href="#"><span class="text-primary font-code-inline text-code-inline mr-1">04.</span>Contact</a></nav><div class="flex items-center gap-space-md"><a class="px-space-md py-space-xs rounded bg-surface-container-low/80 backdrop-blur-md hover:bg-surface-container-high hover:border-primary/40 text-on-surface font-label-md text-label-md transition-all flex items-center gap-space-xs border border-white/[0.06]" href="https://linkedin.com" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[16px] text-primary">description</span><span class="">Curriculum</span><span class="material-symbols-outlined text-[14px] text-on-surface-variant">arrow_outward</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_0_10px_rgba(76,215,246,0.35)]"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-transparent min-h-screen"><div class="flex flex-col w-full">
+<!-- Ambient Light Well / Canvas Glow -->
+<div class="relative w-full overflow-hidden">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[850px] h-[360px] bg-gradient-to-b from-primary/15 via-tertiary/8 to-transparent blur-3xl pointer-events-none -z-10"></div>
+<div class="max-w-[1200px] mx-auto px-margin py-space-xl">
+<!-- Section Header with Animated Reveal & Shimmer -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-xl pb-space-lg border-b border-white/[0.06]">
+<div>
+<div class="flex items-center gap-space-xs mb-space-xs opacity-0 animate-[fadeSlideUp_0.6s_ease_forwards]">
+<span class="font-code-inline text-label-sm text-primary">//</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Trace &amp; Milestones // Career Vector</span>
+</div>
+<h1 class="text-[2.75rem] md:text-[3.5rem] leading-[1.1] font-bold tracking-tight flex items-baseline gap-x-3 mb-1 tech-reveal" style="animation-delay: 0.1s;"><span class="text-primary font-code-inline font-semibold drop-shadow-[0_0_14px_rgba(76,215,246,0.45)]">02.</span><span class="title-shimmer">Work experiences</span></h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-space-xs max-w-xl opacity-0 animate-[fadeSlideUp_0.7s_cubic-bezier(0.16,1,0.3,1)_0.2s_forwards]">Selected roles and projects across my career, from distributed software architecture to team leadership and AI-augmented engineering.</p>
+</div>
+<!-- Telemetry Summary Metric Pill with Animated Counters -->
+<div class="flex items-center gap-space-sm p-space-sm bg-[#111319]/80 backdrop-blur-md rounded-lg shadow-sm border border-white/[0.08] hover:border-primary/40 transition-colors opacity-0 animate-[fadeSlideUp_0.7s_cubic-bezier(0.16,1,0.3,1)_0.25s_forwards]">
+<div class="px-space-md py-space-xs rounded bg-surface-container/70 border border-white/[0.04]">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant block">Cumulative Tenure</span>
+<span class="font-label-md text-label-md text-tertiary font-code-inline font-semibold flex items-center gap-0.5">
+<span class="count-up" data-suffix="+" data-target="18">18</span>
+<span class=""> Years Active</span>
+</span>
+</div>
+<div class="px-space-md py-space-xs rounded bg-surface-container/70 border border-white/[0.04]">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant block">Teams Scaled</span>
+<span class="font-label-md text-label-md text-primary font-code-inline font-semibold flex items-center gap-0.5">
+<span class="">Up to </span>
+<span class="count-up" data-suffix="" data-target="20">20</span>
+<span class=""> Eng</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Main Layout: 12-column architecture (8 cols timeline, 4 cols executive telemetry) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left: Chronological Experience Feed (8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-space-lg" id="experiences-container">
+<!-- Experience Card 1: Vigilate SRL -->
+<div class="spotlight-card rounded-xl backdrop-blur-md p-space-lg shadow-lg border border-white/[0.08] hover:border-primary/60 hover:shadow-[0_0_28px_rgba(76,215,246,0.22)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col gap-space-md card-cascade" style="animation-delay: 0.15s;">
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-xs pb-space-sm border-b border-white/[0.04]">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-baseline flex-wrap gap-x-2">
+<span class="">Senior Full Stack Developer • AI Enabler</span>
+<span class="text-primary font-body-md font-medium hover:underline cursor-default">@ Vigilate SRL</span>
+</h2>
+<span class="font-code-inline text-label-sm text-tertiary whitespace-nowrap px-2 py-0.5 rounded bg-tertiary/10 border border-tertiary/20 shadow-[0_0_8px_rgba(78,222,163,0.2)]">Feb 2026 — Present</span>
+</div>
+<ul class="space-y-space-xs text-on-surface-variant font-body-md text-body-md">
+<li class="bullet-item flex items-start gap-space-sm cursor-default">
+<span class="material-symbols-outlined bullet-icon text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span class="">Analyzing and redesigning development processes to optimize human/AI coordination across the product engineering lifecycle.</span>
+</li>
+<li class="bullet-item flex items-start gap-space-sm cursor-default">
+<span class="material-symbols-outlined bullet-icon text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span class="">Redesigning and maintaining automation development and continuous deployment pipelines (CI/CD).</span>
+</li>
+<li class="bullet-item flex items-start gap-space-sm cursor-default">
+<span class="material-symbols-outlined bullet-icon text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span class="">Keeping software quality, reliability guarantees, and computing resource utilization strictly coordinated.</span>
+</li>
+</ul>
+<div class="flex flex-wrap gap-space-xs pt-space-sm border-t border-white/[0.04]">
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">AI Process Design</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">Automation</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">CI/CD</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">Full Stack</span>
+</div>
+</div>
+<!-- Experience Card 2: P&B Linking / CO.GEN -->
+<div class="spotlight-card rounded-xl backdrop-blur-md p-space-lg shadow-lg border border-white/[0.08] hover:border-primary/60 hover:shadow-[0_0_28px_rgba(76,215,246,0.22)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col gap-space-md card-cascade" style="animation-delay: 0.25s;">
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-xs pb-space-sm border-b border-white/[0.04]">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-baseline flex-wrap gap-x-2">
+<span class="">Senior Full Stack Developer • Head of R&amp;D</span>
+<span class="text-primary font-body-md font-medium hover:underline cursor-default">@ P&amp;B Linking / CO.GEN</span>
+</h2>
+<span class="font-code-inline text-label-sm text-on-surface-variant whitespace-nowrap px-2 py-0.5 rounded bg-surface-container-high/60 border border-white/[0.05]">Dec 2020 — May 2025</span>
+</div>
+<ul class="space-y-space-xs text-on-surface-variant font-body-md text-body-md">
+<li class="bullet-item flex items-start gap-space-sm cursor-default">
+<span class="material-symbols-outlined bullet-icon text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span class="">Led R&amp;D activities for the Openware PSIM enterprise platform and structured high-bandwidth coordination bridges between core engineering and stakeholders.</span>
+</li>
+<li class="bullet-item flex items-start gap-space-sm cursor-default">
+<span class="material-symbols-outlined bullet-icon text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span class="">Organized workflow through disciplined SCRUM ceremonies, cutting delivery friction and cycle drift.</span>
+</li>
+<li class="bullet-item flex items-start gap-space-sm cursor-default">
+<span class="material-symbols-outlined bullet-icon text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span class="">Reduced infrastructure and tooling operational expenses by ~50% within a single calendar year through architectural consolidation.</span>
+</li>
+<li class="bullet-item flex items-start gap-space-sm cursor-default">
+<span class="material-symbols-outlined bullet-icon text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span class="">Led product research, technical analysis, and architectural roadmaps, managing up to 20 engineers across 4 cross-functional product squads.</span>
+</li>
+</ul>
+<!-- Key Project Callout -->
+<div class="p-space-md rounded bg-surface-container/80 border-l-2 border-primary border border-white/[0.04] transition-all hover:bg-surface-container">
+<div class="flex items-center gap-space-xs mb-1">
+<span class="material-symbols-outlined text-[15px] text-primary">terminal</span>
+<span class="font-code-inline text-label-sm text-primary uppercase font-semibold">Key project: Openware PSIM</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">Physical Security Information Management platform coordinating mission-critical enterprise security subsystems.</p>
+</div>
+<div class="flex flex-wrap gap-space-xs pt-space-sm border-t border-white/[0.04]">
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">Cloud Architecture</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">Leading</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">Docker</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">Kubernetes</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">SCRUM</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">React</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">Node.js</span>
+</div>
+</div>
+<!-- Experience Card 3: Novigo-Consulting -->
+<div class="spotlight-card rounded-xl backdrop-blur-md p-space-lg shadow-lg border border-white/[0.08] hover:border-primary/60 hover:shadow-[0_0_28px_rgba(76,215,246,0.22)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col gap-space-md card-cascade" style="animation-delay: 0.35s;">
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-xs pb-space-sm border-b border-white/[0.04]">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-baseline flex-wrap gap-x-2">
+<span class="">Full Stack Developer • Team Lead</span>
+<span class="text-primary font-body-md font-medium hover:underline cursor-default">@ Novigo-Consulting</span>
+</h2>
+<span class="font-code-inline text-label-sm text-on-surface-variant whitespace-nowrap px-2 py-0.5 rounded bg-surface-container-high/60 border border-white/[0.05]">Nov 2016 — Nov 2020</span>
+</div>
+<ul class="space-y-space-xs text-on-surface-variant font-body-md text-body-md">
+<li class="bullet-item flex items-start gap-space-sm cursor-default">
+<span class="material-symbols-outlined bullet-icon text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span class="">Designed and implemented enterprise application architecture utilizing robust Zend APIs, performant React frontends, and automated Node.js workflows.</span>
+</li>
+<li class="bullet-item flex items-start gap-space-sm cursor-default">
+<span class="material-symbols-outlined bullet-icon text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span class="">Served as project and engineering team lead for national and international development groups, managing up to 20 people.</span>
+</li>
+<li class="bullet-item flex items-start gap-space-sm cursor-default">
+<span class="material-symbols-outlined bullet-icon text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span class="">Oversaw third-party software/service selection, integration verification, and regression pipelines in the capacity of R&amp;D Manager.</span>
+</li>
+</ul>
+<div class="flex flex-wrap gap-space-xs pt-space-sm border-t border-white/[0.04]">
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">Leading</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">React</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">Node.js</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">PHP / Zend Framework</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">Automation</span>
+</div>
+</div>
+<!-- Experience Card 4: Publidesign s.r.l. -->
+<div class="spotlight-card rounded-xl backdrop-blur-md p-space-lg shadow-lg border border-white/[0.08] hover:border-primary/60 hover:shadow-[0_0_28px_rgba(76,215,246,0.22)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col gap-space-md card-cascade" style="animation-delay: 0.45s;">
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-xs pb-space-sm border-b border-white/[0.04]">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-baseline flex-wrap gap-x-2">
+<span class="">CTO • Full Stack Developer</span>
+<span class="text-primary font-body-md font-medium hover:underline cursor-default">@ Publidesign s.r.l.</span>
+</h2>
+<span class="font-code-inline text-label-sm text-on-surface-variant whitespace-nowrap px-2 py-0.5 rounded bg-surface-container-high/60 border border-white/[0.05]">2015 — 2016</span>
+</div>
+<ul class="space-y-space-xs text-on-surface-variant font-body-md text-body-md">
+<li class="bullet-item flex items-start gap-space-sm cursor-default">
+<span class="material-symbols-outlined bullet-icon text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span class="">Architected and delivered custom enterprise solutions and plugins for WordPress client ecosystems.</span>
+</li>
+<li class="bullet-item flex items-start gap-space-sm cursor-default">
+<span class="material-symbols-outlined bullet-icon text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span class="">Served as Chief Technology Officer for the Baucoin venture incubator.</span>
+</li>
+</ul>
+<!-- Key Project Callout -->
+<div class="p-space-md rounded bg-surface-container/80 border-l-2 border-primary border border-white/[0.04] transition-all hover:bg-surface-container">
+<div class="flex items-center gap-space-xs mb-1">
+<span class="material-symbols-outlined text-[15px] text-primary">token</span>
+<span class="font-code-inline text-label-sm text-primary uppercase font-semibold">Key project: Baucoin</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">Platform for managing credits for circular economy based on services for pets.</p>
+</div>
+<div class="flex flex-wrap gap-space-xs pt-space-sm border-t border-white/[0.04]">
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">WordPress</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">Startup</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">Leading</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">PHP</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">Node.js</span>
+</div>
+</div>
+<!-- Experience Card 5: TargatoBS -->
+<div class="spotlight-card rounded-xl backdrop-blur-md p-space-lg shadow-lg border border-white/[0.08] hover:border-primary/60 hover:shadow-[0_0_28px_rgba(76,215,246,0.22)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col gap-space-md card-cascade" style="animation-delay: 0.55s;">
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-xs pb-space-sm border-b border-white/[0.04]">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-baseline flex-wrap gap-x-2">
+<span class="">Founder • Startupper • Pitcher</span>
+<span class="text-primary font-body-md font-medium hover:underline cursor-default">@ TargatoBS</span>
+</h2>
+<span class="font-code-inline text-label-sm text-on-surface-variant whitespace-nowrap px-2 py-0.5 rounded bg-surface-container-high/60 border border-white/[0.05]">2012 — 2016</span>
+</div>
+<ul class="space-y-space-xs text-on-surface-variant font-body-md text-body-md">
+<li class="bullet-item flex items-start gap-space-sm cursor-default">
+<span class="material-symbols-outlined bullet-icon text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span class="">Explored creative technical and entrepreneurial avenues to drive personal expression and community innovation.</span>
+</li>
+<li class="bullet-item flex items-start gap-space-sm cursor-default">
+<span class="material-symbols-outlined bullet-icon text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span class="">Competed in hackathons and startup contests, won awards, presented at tech gatherings, and graduated business school modules.</span>
+</li>
+<li class="bullet-item flex items-start gap-space-sm cursor-default">
+<span class="material-symbols-outlined bullet-icon text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span class="">Formative realization: grounding pure technical prowess with deep soft skills and communicative empathy.</span>
+</li>
+</ul>
+<!-- Key Project Callout -->
+<div class="p-space-md rounded bg-surface-container/80 border-l-2 border-primary border border-white/[0.04] transition-all hover:bg-surface-container">
+<div class="flex items-center gap-space-xs mb-1">
+<span class="material-symbols-outlined text-[15px] text-primary">apartment</span>
+<span class="font-code-inline text-label-sm text-primary uppercase font-semibold">Key project: BREIM</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">Product for the management of real estate sales.</p>
+</div>
+<div class="flex flex-wrap gap-space-xs pt-space-sm border-t border-white/[0.04]">
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">Startup</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">Soft Skills</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">Public Speaking</span>
+</div>
+</div>
+<!-- Experience Card 6: DuckMa s.r.l. -->
+<div class="spotlight-card rounded-xl backdrop-blur-md p-space-lg shadow-lg border border-white/[0.08] hover:border-primary/60 hover:shadow-[0_0_28px_rgba(76,215,246,0.22)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col gap-space-md card-cascade" style="animation-delay: 0.65s;">
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-xs pb-space-sm border-b border-white/[0.04]">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-baseline flex-wrap gap-x-2">
+<span class="">Full Stack Developer</span>
+<span class="text-primary font-body-md font-medium hover:underline cursor-default">@ DuckMa s.r.l.</span>
+</h2>
+<span class="font-code-inline text-label-sm text-on-surface-variant whitespace-nowrap px-2 py-0.5 rounded bg-surface-container-high/60 border border-white/[0.05]">Oct 2013 — 2014</span>
+</div>
+<ul class="space-y-space-xs text-on-surface-variant font-body-md text-body-md">
+<li class="bullet-item flex items-start gap-space-sm cursor-default">
+<span class="material-symbols-outlined bullet-icon text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span class="">Engineered robust RESTful backend APIs with low latency response times using Node.js and PHP.</span>
+</li>
+<li class="bullet-item flex items-start gap-space-sm cursor-default">
+<span class="material-symbols-outlined bullet-icon text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span class="">Pioneered early Progressive Web App (PWA) workflows and hybrid mobile setups using Apache Cordova and Ionic.</span>
+</li>
+<li class="bullet-item flex items-start gap-space-sm cursor-default">
+<span class="material-symbols-outlined bullet-icon text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span class="">Contributed key architectural UI/UX wireframes and interaction patterns for PHONOTTO launcher.</span>
+</li>
+</ul>
+<div class="flex flex-wrap gap-space-xs pt-space-sm border-t border-white/[0.04]">
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">Node.js</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">PHP</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">Ionic</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">PWA</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">UI/UX</span>
+</div>
+</div>
+<!-- Experience Card 7: System 2000 s.r.l. -->
+<div class="spotlight-card rounded-xl backdrop-blur-md p-space-lg shadow-lg border border-white/[0.08] hover:border-primary/60 hover:shadow-[0_0_28px_rgba(76,215,246,0.22)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col gap-space-md card-cascade" style="animation-delay: 0.75s;">
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-xs pb-space-sm border-b border-white/[0.04]">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-baseline flex-wrap gap-x-2">
+<span class="">Web Developer</span>
+<span class="text-primary font-body-md font-medium hover:underline cursor-default">@ System 2000 s.r.l.</span>
+</h2>
+<span class="font-code-inline text-label-sm text-on-surface-variant whitespace-nowrap px-2 py-0.5 rounded bg-surface-container-high/60 border border-white/[0.05]">Dec 2007 — Sep 2012</span>
+</div>
+<ul class="space-y-space-xs text-on-surface-variant font-body-md text-body-md">
+<li class="bullet-item flex items-start gap-space-sm cursor-default">
+<span class="material-symbols-outlined bullet-icon text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span class="">Delivered mission-critical IT consultancy for multi-tier regional and national infrastructure projects.</span>
+</li>
+<li class="bullet-item flex items-start gap-space-sm cursor-default">
+<span class="material-symbols-outlined bullet-icon text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span class="">Developed high-reliability healthcare record and clinical management systems on the .NET framework.</span>
+</li>
+<li class="bullet-item flex items-start gap-space-sm cursor-default">
+<span class="material-symbols-outlined bullet-icon text-[16px] text-primary mt-1 shrink-0">arrow_right</span>
+<span class="">Created dynamic biomedical data visualization dashboards for the VIGILO telemetry and wearable sensor platform.</span>
+</li>
+</ul>
+<div class="flex flex-wrap gap-space-xs pt-space-sm border-t border-white/[0.04]">
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">.NET</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">C#</span>
+<span class="px-space-sm py-0.5 rounded font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container-highest/70 border border-white/[0.04] hover:text-primary hover:border-primary/30 transition-colors">Data Visualization</span>
+</div>
+</div>
+</div>
+<!-- Right: Executive Telemetry & Technical Insights Sidebar (4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-space-lg">
+<!-- Career Architecture Snapshot -->
+<div class="telemetry-scan rounded-xl backdrop-blur-md bg-[#111319]/80 p-space-lg shadow-lg border border-white/[0.08] hover:border-primary/40 transition-colors sticky top-24 card-cascade" style="animation-delay: 0.35s;">
+<div class="flex items-center justify-between pb-space-sm border-b border-white/[0.04] mb-space-md">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+  Telemetry // Leadership
+</span>
+<span class="material-symbols-outlined text-[18px] text-primary">query_stats</span>
+</div>
+<!-- SVG Career Timeline Distribution Graphic with fluid progressive entrance -->
+<div class="p-space-sm rounded bg-surface-container-lowest/80 border border-white/[0.04] mb-space-md relative overflow-hidden group">
+<div class="flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant mb-2">
+<span class="">Timeline Span</span>
+<span class="font-code-inline text-tertiary">2007 → 2026+</span>
+</div>
+<svg class="w-full h-14" fill="none" viewBox="0 0 280 44" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="primaryGrad" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0%" stop-color="#4cd7f6" stop-opacity="0.8"></stop>
+<stop offset="100%" stop-color="#6ffbbe" stop-opacity="1"></stop>
+</linearGradient>
+</defs>
+<!-- Grid lines -->
+<line class="text-outline-variant/40" stroke="currentColor" stroke-width="1" x1="0" x2="280" y1="36" y2="36"></line>
+<line class="text-outline-variant/20" stroke="currentColor" stroke-dasharray="2 2" stroke-width="1" x1="70" x2="70" y1="10" y2="36"></line>
+<line class="text-outline-variant/20" stroke="currentColor" stroke-dasharray="2 2" stroke-width="1" x1="140" x2="140" y1="10" y2="36"></line>
+<line class="text-outline-variant/20" stroke="currentColor" stroke-dasharray="2 2" stroke-width="1" x1="210" x2="210" y1="10" y2="36"></line>
+<!-- Timeline segments with animated fill -->
+<rect class="text-on-surface-variant/40 animate-bar" fill="currentColor" height="4" rx="2" style="animation-delay: 0.1s;" width="70" x="0" y="32"></rect>
+<rect class="text-secondary animate-bar" fill="currentColor" height="6" rx="2" style="animation-delay: 0.3s;" width="55" x="75" y="30"></rect>
+<rect class="text-primary animate-bar" fill="currentColor" height="8" rx="2" style="animation-delay: 0.5s;" width="60" x="135" y="28"></rect>
+<rect class="animate-bar" fill="url(#primaryGrad)" height="12" rx="2" style="animation-delay: 0.7s; filter: drop-shadow(0 0 6px rgba(111,251,190,0.4));" width="65" x="200" y="24"></rect>
+<circle class="text-tertiary animate-pulse" cx="268" cy="30" fill="currentColor" r="3.5"></circle>
+<!-- Text labels -->
+<text class="text-[9px] font-label-sm text-on-surface-variant" fill="currentColor" x="2" y="20">Sys2000</text>
+<text class="text-[9px] font-label-sm text-on-surface-variant" fill="currentColor" x="75" y="20">Venture</text>
+<text class="text-[9px] font-label-sm text-primary" fill="currentColor" x="140" y="16">Novigo</text>
+<text class="text-[9px] font-label-sm text-tertiary" fill="currentColor" x="205" y="12">P&amp;B / R&amp;D</text>
+</svg>
+</div>
+<!-- Key Metric Rows with Count-Up animation -->
+<div class="space-y-space-xs font-label-md text-label-md">
+<div class="flex items-center justify-between py-space-xs border-b border-white/[0.03] group hover:bg-surface-container/40 px-1 rounded transition-colors">
+<span class="text-on-surface-variant font-code-inline">LEADERSHIP_MAX:</span>
+<span class="text-on-surface font-code-inline flex items-center gap-1 font-semibold">
+<span class="count-up text-primary" data-target="20">20</span>
+<span class="">Engineers / 4 Squads</span>
+</span>
+</div>
+<div class="flex items-center justify-between py-space-xs border-b border-white/[0.03] group hover:bg-surface-container/40 px-1 rounded transition-colors">
+<span class="text-on-surface-variant font-code-inline">OPEX_REDUCTION:</span>
+<span class="text-tertiary font-code-inline font-semibold flex items-center gap-1 px-1.5 py-0.5 rounded bg-tertiary/10 border border-tertiary/20 shadow-[0_0_10px_rgba(78,222,163,0.25)] animate-pulse">
+<span class="">~</span><span class="count-up" data-target="50">50</span><span class="">% in 12 Months</span>
+</span>
+</div>
+<div class="flex items-center justify-between py-space-xs border-b border-white/[0.03] group hover:bg-surface-container/40 px-1 rounded transition-colors">
+<span class="text-on-surface-variant font-code-inline">METHODOLOGY:</span>
+<span class="text-on-surface font-code-inline">SCRUM / CI-CD / AI-Assisted</span>
+</div>
+<div class="flex items-center justify-between py-space-xs border-b border-white/[0.03] group hover:bg-surface-container/40 px-1 rounded transition-colors">
+<span class="text-on-surface-variant font-code-inline">R&amp;D_SPECIALIZATION:</span>
+<span class="text-primary font-code-inline font-medium">Openware PSIM &amp; Distributed Systems</span>
+</div>
+</div>
+<!-- Architectural Quote Callout -->
+<div class="mt-space-md p-space-md rounded bg-surface-container-highest/60 border border-white/[0.04] relative group">
+<span class="font-code-inline text-[11px] text-tertiary uppercase tracking-wider block mb-1 flex items-center gap-1">
+<span class="text-primary">//</span> Career Philosophy
+</span>
+<p class="font-body-sm text-body-sm text-on-surface italic">
+  “Realizing technical architecture reaches its highest ceiling only when paired with intentional human coordination, empathy, and pragmatic automation.”
+</p>
+</div>
+<!-- Next Phase Action Card -->
+<div class="mt-space-lg p-space-md rounded-xl bg-gradient-to-br from-surface-container/90 to-surface-container-high/90 border border-white/[0.08] hover:border-primary/50 transition-all hover:shadow-[0_0_20px_rgba(76,215,246,0.15)] group">
+<div class="flex items-center gap-space-xs mb-space-xs">
+<span class="font-code-inline text-code-inline text-primary">03.</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface font-medium">Explore Core Stack</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">
+  Review specific framework mastery, infrastructure tools, languages, and orchestration benchmarks.
+</p>
+<a class="w-full py-space-xs px-space-md bg-on-surface text-surface font-label-md text-label-md rounded flex items-center justify-center gap-space-xs hover:bg-primary hover:text-on-primary shadow-sm transition-all group-hover:shadow-[0_0_15px_rgba(76,215,246,0.3)]" data-path="technologies" href="#">
+<span class="">View Technologies</span>
+<span class="material-symbols-outlined text-[16px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Progression Strip -->
+<div class="mt-space-xl pt-space-lg border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-space-xs group" data-path="who-am-i" href="#">
+<span class="material-symbols-outlined text-[16px] transition-transform group-hover:-translate-x-1">arrow_back</span>
+<span class="">01. Who am I</span>
+</a>
+<a class="font-label-md text-label-md text-primary hover:text-on-surface transition-colors flex items-center gap-space-xs group" data-path="technologies" href="#">
+<span class="">03. Technologies</span>
+<span class="material-symbols-outlined text-[16px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div></main><footer class="w-full bg-[#111319]/80 backdrop-blur-md border-t border-white/[0.04]"><div class="max-w-[1200px] mx-auto px-margin py-space-xl flex flex-col md:flex-row items-center justify-between gap-space-lg"><div class="flex flex-col items-center md:items-start gap-space-xs"><p class="font-label-md text-label-md text-on-surface-variant">Designed &amp; Built by Luca Palomba — System Architecture &amp; Engineering</p></div><div class="flex items-center gap-space-md font-label-md text-label-md text-on-surface-variant"><a class="hover:text-primary transition-colors flex items-center gap-space-xs" href="https://github.com" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[16px]">terminal</span><span class="">GitHub</span></a><span class="text-outline-variant">·</span><a class="hover:text-primary transition-colors flex items-center gap-space-xs" href="https://linkedin.com" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[16px]">hub</span><span class="">LinkedIn</span></a><span class="text-outline-variant">·</span><span class="font-label-sm text-label-sm text-on-surface-variant">© 2025 Luca Palomba</span></div></div></footer>
+<!-- Unified Fluid Interactive Canvas Shader Engine + Reactive Micro-interactions -->
+<script>
+(function() {
+  // --- 1. UNIFIED FLUID BACKGROUND (Interactive particles + deflection matching Who Am I) ---
+  const canvas = document.getElementById('fluid-bg-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      initParticles();
+    });
+
+    const mouse = { x: -1000, y: -1000, radius: 140 };
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+    window.addEventListener('mouseleave', () => {
+      mouse.x = -1000;
+      mouse.y = -1000;
+    });
+
+    const particles = [];
+    const count = Math.min(Math.floor((width * height) / 14000), 85);
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.45;
+        this.vy = (Math.random() - 0.5) * 0.45;
+        this.baseRadius = Math.random() * 1.5 + 0.8;
+        this.radius = this.baseRadius;
+        this.color = Math.random() > 0.35 ? '76, 215, 246' : '111, 251, 190';
+        this.alpha = Math.random() * 0.35 + 0.15;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0) this.x = width;
+        if (this.x > width) this.x = 0;
+        if (this.y < 0) this.y = height;
+        if (this.y > height) this.y = 0;
+
+        // Fluid mouse deflection
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < mouse.radius) {
+          const force = (1 - dist / mouse.radius) * 1.8;
+          this.x -= (dx / dist) * force;
+          this.y -= (dy / dist) * force;
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${this.color}, ${this.alpha})`;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = `rgba(${this.color}, 0.5)`;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+    }
+
+    function initParticles() {
+      particles.length = 0;
+      for (let i = 0; i < count; i++) {
+        particles.push(new Particle());
+      }
+    }
+    initParticles();
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Connect near particles
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < 110) {
+            const alpha = (1 - dist / 110) * 0.12;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(76, 215, 246, ${alpha})`;
+            ctx.lineWidth = 0.75;
+            ctx.stroke();
+          }
+        }
+      }
+
+      particles.forEach((p) => {
+        p.update();
+        p.draw();
+      });
+
+      requestAnimationFrame(animate);
+    }
+    animate();
+  }
+
+  // --- 2. SPOTLIGHT MOUSE REACTION ON EXPERIENCE CARDS ---
+  const cards = document.querySelectorAll('.spotlight-card');
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  });
+
+  // --- 3. ANIMATED NUMBER COUNTERS (Tenure, Teams, Opex) ---
+  const counters = document.querySelectorAll('.count-up');
+  let countersTriggered = false;
+
+  function runCounters() {
+    if (countersTriggered) return;
+    countersTriggered = true;
+
+    counters.forEach(counter => {
+      const target = parseInt(counter.getAttribute('data-target'), 10) || 0;
+      const duration = 1600;
+      const startTime = performance.now();
+
+      function updateNumber(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // easeOutExpo
+        const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+        const current = Math.floor(ease * target);
+        counter.textContent = current;
+
+        if (progress < 1) {
+          requestAnimationFrame(updateNumber);
+        } else {
+          counter.textContent = target;
+        }
+      }
+      requestAnimationFrame(updateNumber);
+    });
+  }
+
+  // Trigger counters shortly after page interactive load
+  setTimeout(runCounters, 300);
+
+})();
+</script>
+
+
+</body></html>

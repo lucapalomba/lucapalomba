@@ -1,0 +1,738 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'error': '#ffb4ab',
+        'on-error': '#690005',
+        'on-secondary-container': '#e6ecff',
+        'surface-bright': '#373940',
+        'on-surface-variant': '#bcc9cd',
+        'on-primary': '#003640',
+        'tertiary-container': '#1bbd85',
+        'surface-container-low': '#191b22',
+        'secondary-fixed': '#d8e2ff',
+        'primary-container': '#06b6d4',
+        'outline': '#869397',
+        'primary': '#4cd7f6',
+        'primary-fixed': '#acedff',
+        'surface-container-lowest': '#0c0e14',
+        'on-primary-fixed-variant': '#004e5c',
+        'on-tertiary-fixed': '#002113',
+        'surface': '#111319',
+        'inverse-surface': '#e2e2ea',
+        'surface-tint': '#4cd7f6',
+        'on-background': '#e2e2ea',
+        'tertiary-fixed': '#6ffbbe',
+        'on-tertiary-container': '#00452e',
+        'on-surface': '#e2e2ea',
+        'on-secondary-fixed-variant': '#004395',
+        'surface-container-high': '#282a30',
+        'surface-container-highest': '#33343b',
+        'secondary': '#adc6ff',
+        'inverse-primary': '#00687a',
+        'on-primary-container': '#00424f',
+        'on-error-container': '#ffdad6',
+        'surface-dim': '#111319',
+        'outline-variant': '#3d494c',
+        'surface-variant': '#33343b',
+        'on-secondary': '#002e6a',
+        'background': '#111319',
+        'surface-container': '#1d1f26',
+        'secondary-container': '#0566d9',
+        'on-tertiary': '#003824',
+        'primary-fixed-dim': '#4cd7f6',
+        'error-container': '#93000a',
+        'tertiary': '#4edea3',
+        'on-tertiary-fixed-variant': '#005236',
+        'secondary-fixed-dim': '#adc6ff',
+        'tertiary-fixed-dim': '#4edea3',
+        'on-primary-fixed': '#001f26',
+        'on-secondary-fixed': '#001a42',
+        'inverse-on-surface': '#2e3037'
+      },
+      borderRadius: {
+        'DEFAULT': '0.125rem',
+        'lg': '0.25rem',
+        'xl': '0.5rem',
+        'full': '0.75rem'
+      },
+      spacing: {
+        'space-lg': '1.5rem',
+        'margin': '2rem',
+        'gutter': '1.5rem',
+        'space-sm': '0.5rem',
+        'space-xs': '0.25rem',
+        'space-md': '1rem',
+        'space-xl': '2.5rem'
+      },
+      fontFamily: {
+        'code-block': ['JetBrains Mono'],
+        'headline-lg-mobile': ['Geist'],
+        'label-sm': ['JetBrains Mono'],
+        'headline-md': ['Geist'],
+        'body-sm': ['Geist'],
+        'body-lg': ['Geist'],
+        'display-mobile': ['Geist'],
+        'display': ['Geist'],
+        'headline-lg': ['Geist'],
+        'body-md': ['Geist'],
+        'code-inline': ['JetBrains Mono'],
+        'label-md': ['JetBrains Mono'],
+        'headline-sm': ['Geist']
+      },
+      fontSize: {
+        'code-block': ['0.875rem', { 'lineHeight': '1.6', 'letterSpacing': '-0.01em', 'fontWeight': '400' }],
+        'headline-lg-mobile': ['1.75rem', { 'lineHeight': '1.25', 'letterSpacing': '-0.02em', 'fontWeight': '600' }],
+        'label-sm': ['0.6875rem', { 'lineHeight': '1.3', 'letterSpacing': '0.06em', 'fontWeight': '500' }],
+        'headline-md': ['1.5rem', { 'lineHeight': '1.3', 'letterSpacing': '-0.02em', 'fontWeight': '500' }],
+        'body-sm': ['0.8125rem', { 'lineHeight': '1.5', 'letterSpacing': '0', 'fontWeight': '400' }],
+        'body-lg': ['1.125rem', { 'lineHeight': '1.6', 'letterSpacing': '-0.01em', 'fontWeight': '400' }],
+        'display-mobile': ['2.25rem', { 'lineHeight': '1.2', 'letterSpacing': '-0.025em', 'fontWeight': '600' }],
+        'display': ['3.5rem', { 'lineHeight': '1.1', 'letterSpacing': '-0.03em', 'fontWeight': '600' }],
+        'headline-lg': ['2.25rem', { 'lineHeight': '1.2', 'letterSpacing': '-0.025em', 'fontWeight': '600' }],
+        'body-md': ['0.9375rem', { 'lineHeight': '1.6', 'letterSpacing': '-0.005em', 'fontWeight': '400' }],
+        'code-inline': ['0.8125rem', { 'lineHeight': '1.4', 'letterSpacing': '-0.01em', 'fontWeight': '400' }],
+        'label-md': ['0.75rem', { 'lineHeight': '1.4', 'letterSpacing': '0.04em', 'fontWeight': '500' }],
+        'headline-sm': ['1.125rem', { 'lineHeight': '1.4', 'letterSpacing': '-0.01em', 'fontWeight': '500' }]
+      }
+    }
+  }
+};
+</script>
+<style>
+@layer base {
+  html, body { margin: 0; padding: 0; }
+  body { overscroll-behavior: none; }
+  main > :first-child { margin-top: 0 !important; }
+  main > :last-child { margin-bottom: 0 !important; }
+}
+::-webkit-scrollbar { display: none; }
+
+/* Refined Keyframes & Typography Shimmer */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 8px rgba(78, 222, 163, 0.7)); }
+  50% { opacity: 0.55; filter: drop-shadow(0 0 2px rgba(78, 222, 163, 0.2)); }
+}
+.animate-pulse-glow { animation: pulse-glow 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+
+@keyframes text-shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.shimmer-text {
+  background: linear-gradient(90deg, #e2e2ea 0%, #4cd7f6 30%, #ffffff 50%, #4cd7f6 70%, #e2e2ea 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-shimmer 8s ease-in-out infinite;
+}
+
+@keyframes fadeSlideUp {
+  0% { opacity: 0; transform: translateY(18px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.reveal-1 { animation: fadeSlideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.reveal-2 { animation: fadeSlideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s backwards; }
+.reveal-3 { animation: fadeSlideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s backwards; }
+
+/* Interactive Glowing / 3D Magnetic Cards */
+.tilt-card {
+  position: relative;
+  transition: transform 0.25s cubic-bezier(0.2, 0, 0.2, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  will-change: transform;
+}
+.tilt-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(76, 215, 246, 0.35), transparent 45%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.tilt-card:hover::before {
+  opacity: 1;
+}
+
+/* Button & Badge Aura Glow */
+.aura-btn {
+  position: relative;
+  transition: all 0.25s ease;
+}
+.aura-btn:hover {
+  box-shadow: 0 0 25px -4px rgba(76, 215, 246, 0.45);
+  transform: translateY(-1px);
+}
+.aura-btn-primary:hover {
+  box-shadow: 0 0 28px -2px rgba(226, 226, 234, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Telemetry Sparkline SVG Animation */
+@keyframes sparkline-draw {
+  0% { stroke-dashoffset: 400; }
+  100% { stroke-dashoffset: 0; }
+}
+.sparkline-line {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: sparkline-draw 2.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes ping-dot {
+  0% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(2.2); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
+}
+.pulse-point {
+  animation: ping-dot 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+</style>
+</head>
+<body class="bg-background font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container relative">
+<!-- Unified 60fps Interactive Cyan/Obsidian Shader & Fluid Grid Canvas -->
+<canvas class="fixed inset-0 w-full h-full pointer-events-none -z-10" id="flow-canvas" width="1280" height="1939"></canvas>
+<!-- Dark Scrim / Readability Gradient Overlay for continuous obsidian contrast -->
+<div class="fixed inset-0 w-full h-full pointer-events-none -z-10" style="background: radial-gradient(circle at 50% 20%, rgba(17,19,25,0.25) 0%, rgba(11,13,19,0.85) 60%, rgba(11,13,19,0.98) 100%);"></div>
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-outline-variant/15">
+<div class="h-16 max-w-[1200px] mx-auto px-margin flex items-center justify-between">
+<div class="flex items-center gap-space-lg">
+<a class="flex items-center font-label-md text-label-md tracking-tight text-on-surface hover:text-primary transition-colors" data-path="who-am-i" href="#">
+<span class="text-primary mr-space-xs">&lt;</span>LP <span class="text-primary ml-space-xs">/&gt;</span>
+</a>
+<div class="hidden sm:flex items-center gap-space-xs px-space-sm py-0.5 rounded bg-surface-container-low/80 backdrop-blur-md aura-btn border border-outline-variant/20">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+</span>
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant">Available for Staff Roles</span>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-space-md" data-active-classes="text-on-surface bg-surface-container-high px-space-sm py-space-xs rounded">
+<a aria-current="page" class="font-label-md transition-colors text-on-surface bg-surface-container-high px-space-sm py-space-xs rounded" data-path="who-am-i" href="#">
+<span class="text-primary font-code-inline text-code-inline mr-1">01.</span>Who am I
+      </a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="experience" href="#">
+<span class="text-primary font-code-inline text-code-inline mr-1">02.</span>Experience
+      </a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="technologies" href="#">
+<span class="text-primary font-code-inline text-code-inline mr-1">03.</span>Technologies
+      </a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="contact" href="#">
+<span class="text-primary font-code-inline text-code-inline mr-1">04.</span>Contact
+      </a>
+</nav>
+<div class="flex items-center gap-space-md">
+<a class="px-space-md py-space-xs rounded bg-surface-container-low/80 backdrop-blur-md hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all flex items-center gap-space-xs aura-btn border border-outline-variant/20" href="https://linkedin.com" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[16px] text-primary">description</span>
+<span class="">Curriculum</span>
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">arrow_outward</span>
+</a>
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center aura-btn shadow-[0_0_12px_rgba(76,215,246,0.5)]">
+<span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+</div>
+</div>
+</div>
+</header>
+<main class="w-full pt-16 bg-transparent min-h-screen">
+<div class="flex flex-col w-full">
+<!-- Subtle Architectural Hero Backdrop & Lighting -->
+<section class="relative w-full overflow-hidden pb-space-xl">
+<!-- Ambient Radial Gradient Scrim -->
+<div class="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[520px] bg-gradient-to-b from-primary/10 via-primary/[0.02] to-transparent blur-3xl opacity-70"></div>
+<div class="relative max-w-[1200px] mx-auto px-margin pt-space-xl">
+<!-- Top Meta Track / Identity Badge -->
+<div class="flex items-center gap-space-sm mb-space-md tech-reveal"><div class="inline-flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low/80 backdrop-blur-md border border-outline-variant/20 aura-btn"><span class="inline-block w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(76,215,246,0.9)] animate-pulse"></span><span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">ARCH_SPEC :: STAFF_IC / LEAD</span></div><div class="hidden sm:inline-flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low/80 backdrop-blur-md border border-outline-variant/20 aura-btn"><span class="material-symbols-outlined text-primary text-[14px]">terminal</span><span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">LOC: REMOTE / EU (UTC+1)</span></div></div>
+<!-- Main Typographic Canvas -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<div class="lg:col-span-8 flex flex-col gap-space-xs tech-reveal tech-reveal-delay-1">
+<span class="font-label-md text-label-md text-primary font-medium tracking-wide">Hi, my name is</span>
+<h1 class="font-display text-display tracking-tight leading-[1.05] mt-1 shimmer-text font-semibold">
+              Luca Palomba.
+            </h1>
+<h2 class="font-headline-lg text-headline-lg text-on-surface-variant tracking-tight mt-space-xs">
+              I build things for the web.
+            </h2>
+<div class="mt-space-md inline-block max-w-2xl">
+<h3 class="font-headline-sm text-headline-sm text-primary tracking-normal flex items-center gap-2">
+<span class="">Full Stack Developer &amp; Team Lead, Engineering leadership experience</span>
+</h3>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant/90 max-w-2xl mt-space-sm leading-relaxed">
+              Software engineer with tech-debt-demolisher super-powers: I walk into chaos, straighten things out, and help everyone go home stress-free. Clear goals, clean commits, and no Friday deploys.
+            </p>
+<!-- Executive CTA Row -->
+<div class="flex flex-wrap items-center gap-space-md mt-space-lg pt-space-xs">
+<a class="inline-flex items-center justify-center gap-space-sm px-space-lg py-space-sm rounded bg-on-surface text-surface font-body-md text-body-md font-medium hover:opacity-90 transition-all shadow-sm group aura-btn aura-btn-primary" data-path="experience" href="#">
+<span class="">Check out my experiences!</span>
+<span class="material-symbols-outlined text-[18px] transition-transform duration-200 group-hover:translate-x-1">arrow_forward</span>
+</a>
+<a class="inline-flex items-center gap-space-xs px-space-md py-space-sm rounded bg-surface-container-low/80 backdrop-blur-md text-on-surface hover:bg-surface-container transition-colors font-body-md text-body-md aura-btn border border-outline-variant/20" href="https://www.linkedin.com/in/lucapalomba/" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
+<span class="">Review Curriculum</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[14px]">arrow_outward</span>
+</a>
+<div class="flex items-center gap-space-xs px-space-sm py-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="h-1.5 w-1.5 rounded-full bg-tertiary animate-pulse-glow"></span>
+<span class="">Available for H2 2025</span>
+</div>
+</div>
+</div>
+<!-- Telemetry Sidebar / Engineering Cockpit Card -->
+<div class="lg:col-span-4 w-full mt-space-lg lg:mt-0 card-cascade cascade-delay-2">
+<div class="rounded-xl bg-surface-container-low/80 backdrop-blur-md p-space-lg shadow-sm flex flex-col gap-space-md border border-outline-variant/20 tilt-card">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">memory</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface">Core Telemetry</span>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container/80 backdrop-blur-sm font-code-inline text-label-sm text-tertiary border border-tertiary/20">v4.18.0</span>
+</div>
+<!-- Metric Stats Grid with animated counters -->
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="bg-surface-container/80 backdrop-blur-sm p-space-sm rounded flex flex-col border border-outline-variant/10">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Tech Debt Burn</span>
+<span class="font-code-block text-headline-sm text-on-surface mt-0.5" data-counter="85" data-suffix="%">85%</span>
+<span class="font-label-sm text-[10px] text-tertiary mt-1">Reduced refactor lag</span>
+</div>
+<div class="bg-surface-container/80 backdrop-blur-sm p-space-sm rounded flex flex-col border border-outline-variant/10">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Friday Deploys</span>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-code-block text-headline-sm text-primary">0.00</span>
+<span class="inline-flex items-center px-1.5 py-0.2 rounded text-[9px] font-code-inline bg-tertiary/15 text-tertiary border border-tertiary/30 animate-pulse-glow">SAFE</span>
+</div>
+<span class="font-label-sm text-[10px] text-on-surface-variant mt-1">100% Weekend Peace</span>
+</div>
+<div class="bg-surface-container/80 backdrop-blur-sm p-space-sm rounded flex flex-col border border-outline-variant/10">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Sprint Velocity</span>
+<span class="font-code-block text-headline-sm text-on-surface mt-0.5" data-counter="42" data-prefix="+" data-suffix="%">+42%</span>
+<span class="font-label-sm text-[10px] text-tertiary mt-1">Post-architecture reset</span>
+</div>
+<div class="bg-surface-container/80 backdrop-blur-sm p-space-sm rounded flex flex-col border border-outline-variant/10">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">CI Build Health</span>
+<span class="font-code-block text-headline-sm text-tertiary mt-0.5" data-counter="99.8" data-decimals="1" data-suffix="%">99.8%</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant mt-1">Green main builds</span>
+</div>
+</div>
+<!-- Sparkline Visual Component with progressive drawing and realtime pulsing indicator -->
+<div class="bg-surface-container/80 backdrop-blur-sm p-space-sm rounded flex flex-col gap-space-xs border border-outline-variant/10 relative overflow-hidden">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+                    SYSTEM RELIABILITY INDEX
+                  </span>
+<span class="text-tertiary font-code-inline">SLO 99.95%</span>
+</div>
+<div class="relative w-full h-12">
+<svg class="w-full h-12 text-primary overflow-visible" fill="none" viewBox="0 0 300 48">
+<!-- Area fill underneath path -->
+<path d="M0 38 L30 35 L60 37 L90 28 L120 30 L150 20 L180 22 L210 12 L240 14 L270 8 L300 6 L300 48 L0 48 Z" fill="currentColor" fill-opacity="0.1"></path>
+<!-- Progressive Drawn Line -->
+<path class="sparkline-line" d="M0 38 L30 35 L60 37 L90 28 L120 30 L150 20 L180 22 L210 12 L240 14 L270 8 L300 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+<!-- Live Head Pulse Beacon -->
+<circle class="filter drop-shadow-[0_0_6px_rgba(76,215,246,0.9)]" cx="300" cy="6" fill="#4cd7f6" r="3.5"></circle>
+<circle class="pulse-point origin-center" cx="300" cy="6" fill="none" r="7" stroke="#4cd7f6" stroke-width="1.5"></circle>
+</svg>
+</div>
+</div>
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant pt-space-xs">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">commit</span>
+<span class="">Atomic commits only</span>
+</span>
+<span class="text-on-surface">Git bisect ready</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Key Pillars Section (Asymmetric Bento Grid with 3D Tilt & Glow) -->
+<section class="w-full bg-surface-container-lowest/60 backdrop-blur-md py-space-xl border-y border-outline-variant/10">
+<div class="max-w-[1200px] mx-auto px-margin">
+<!-- Section Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-space-lg gap-space-sm">
+<div>
+<div class="flex items-center gap-space-xs mb-space-xs">
+<span class="text-primary font-code-inline text-code-inline">01.1 //</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Core Practice Areas</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface shimmer-text font-semibold">
+              Engineered for high-stakes certainty.
+            </h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">
+            A disciplined synthesis of hands-on software craft, organizational clarity, and pragmatic AI execution.
+          </p>
+</div>
+<!-- Bento Grid Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter"><!-- Pillar 1: Leadership & Team Lead -->
+<div class="tilt-card card-cascade cascade-delay-1 bg-surface-container-low/80 backdrop-blur-md hover:bg-surface-container/90 p-space-lg rounded-xl flex flex-col justify-between group border border-outline-variant/10 hover:border-primary/40">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="w-10 h-10 rounded bg-surface-container flex items-center justify-center text-primary group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(76,215,246,0.3)] transition-all">
+<span class="material-symbols-outlined text-[22px]">groups</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Pillar 01</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface tracking-tight mb-space-xs">
+                Engineering Leadership &amp; Team Lead
+              </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Coordinating cross-functional squads, fine-tuning SCRUM rhythms, and steering R&amp;D with clear prioritization so developers ship without friction.
+              </p>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-container-lowest/40 p-space-sm rounded">
+<div class="font-label-sm text-label-sm uppercase text-on-surface-variant mb-space-xs">Capabilities</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface aura-btn border border-outline-variant/10">Squad Mentorship</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface aura-btn border border-outline-variant/10">Agile Architecture</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface aura-btn border border-outline-variant/10">Stakeholder Sync</span>
+</div>
+</div>
+</div>
+<!-- Pillar 2: Tech Debt & Architecture -->
+<div class="tilt-card card-cascade cascade-delay-2 bg-surface-container-low/80 backdrop-blur-md hover:bg-surface-container/90 p-space-lg rounded-xl flex flex-col justify-between group border border-outline-variant/10 hover:border-tertiary/40">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="w-10 h-10 rounded bg-surface-container flex items-center justify-center text-tertiary group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(78,222,163,0.3)] transition-all">
+<span class="material-symbols-outlined text-[22px]">auto_fix_high</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Pillar 02</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface tracking-tight mb-space-xs">
+                Tech Debt Demolition &amp; Architecture
+              </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Dismantling brittle monoliths, introducing clean commit governance, establishing comprehensive automated testing, and safeguarding calm weekends.
+              </p>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-container-lowest/40 p-space-sm rounded">
+<div class="font-label-sm text-label-sm uppercase text-on-surface-variant mb-space-xs">Frameworks</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface aura-btn border border-outline-variant/10">Zero-Regression CI</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface aura-btn border border-outline-variant/10">Decoupled Systems</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface aura-btn border border-outline-variant/10">0 Friday Deploys</span>
+</div>
+</div>
+</div>
+<!-- Pillar 3: AI Enabler & Modern Full Stack -->
+<div class="tilt-card card-cascade cascade-delay-3 bg-surface-container-low/80 backdrop-blur-md hover:bg-surface-container/90 p-space-lg rounded-xl flex flex-col justify-between group border border-outline-variant/10 hover:border-primary/40">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="w-10 h-10 rounded bg-surface-container flex items-center justify-center text-primary group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(76,215,246,0.3)] transition-all">
+<span class="material-symbols-outlined text-[22px]">hub</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Pillar 03</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface tracking-tight mb-space-xs">
+                AI Enabler &amp; Modern Full Stack
+              </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Deploying pragmatic LLM agent workflows into production applications. Building resilient, reactive web frontends with high-throughput Node.js &amp; Cloud backends.
+              </p>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-container-lowest/40 p-space-sm rounded">
+<div class="font-label-sm text-label-sm uppercase text-on-surface-variant mb-space-xs">Ecosystem</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface aura-btn border border-outline-variant/10">React / Next</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface aura-btn border border-outline-variant/10">Node.js / TS</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface aura-btn border border-outline-variant/10">LLM Workflows</span>
+</div>
+</div>
+</div></div>
+</div>
+</section>
+<!-- Technical Operating Principles / Terminal Protocol Section -->
+<section class="w-full py-space-xl">
+<div class="max-w-[1200px] mx-auto px-margin">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+<!-- Visual Architecture Ledger Card -->
+<div class="lg:col-span-7 bg-surface-container-low/80 backdrop-blur-md rounded-xl p-space-lg border border-outline-variant/20 tilt-card card-cascade">
+<div class="flex items-center justify-between pb-space-sm mb-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">terminal</span>
+<span class="font-code-block text-code-block text-on-surface">architecture_charter.manifest</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant border border-outline-variant/30 px-2 py-0.5 rounded">LOCKED // PROD-STABLE</span>
+</div>
+<div class="flex flex-col gap-space-sm font-code-block text-body-sm text-on-surface-variant">
+<div class="flex items-start gap-space-sm p-space-sm rounded bg-surface-container/80 backdrop-blur-sm border border-outline-variant/10 hover:border-primary/30 transition-colors">
+<span class="text-tertiary">01</span>
+<div>
+<span class="text-on-surface font-medium">Walk into chaotic codebases, deliver clarity</span>
+<p class="text-on-surface-variant text-[13px] mt-0.5">Diagnose systemic bottlenecks within 72 hours, prioritize low-risk high-yield stabilization paths.</p>
+</div>
+</div>
+<div class="flex items-start gap-space-sm p-space-sm rounded bg-surface-container/80 backdrop-blur-sm border border-outline-variant/10 hover:border-primary/30 transition-colors">
+<span class="text-primary">02</span>
+<div>
+<span class="text-on-surface font-medium">Strict "Zero Friday Deploys" Covenant</span>
+<p class="text-on-surface-variant text-[13px] mt-0.5">Deploys run Mon-Thu before 15:00 UTC with automated canary rollback gates. Protect engineers' time off.</p>
+</div>
+</div>
+<div class="flex items-start gap-space-sm p-space-sm rounded bg-surface-container/80 backdrop-blur-sm border border-outline-variant/10 hover:border-primary/30 transition-colors">
+<span class="text-tertiary">03</span>
+<div>
+<span class="text-on-surface font-medium">Empower humans via LLM &amp; DevEx accelerators</span>
+<p class="text-on-surface-variant text-[13px] mt-0.5">Augment test generation, schema migrations, and documentation using structured AI tooling.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Contextual Bio Quote / Engineering Philosophy -->
+<div class="lg:col-span-5 flex flex-col justify-center">
+<div class="flex items-center gap-space-xs mb-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[18px] animate-pulse-glow">psychology</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Philosophy</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface tracking-tight mb-space-sm shimmer-text font-semibold">
+              Engineering leadership is human enablement first.
+            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-space-md">
+              The cleanest architecture means nothing if the team is burning out. By setting crystal-clear technical specifications, automating repetitive quality checks, and decoupling complex dependencies, development becomes enjoyable again.
+            </p>
+<div class="flex items-center gap-space-md">
+<a class="inline-flex items-center gap-space-xs font-label-md text-label-md text-primary hover:underline underline-offset-4 group" data-path="experience" href="#">
+<span class="">View track record &amp; metrics</span>
+<span class="material-symbols-outlined text-[16px] transition-transform duration-200 group-hover:translate-x-1">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Forward Callout -->
+<section class="w-full bg-surface-container-lowest/60 backdrop-blur-md py-space-xl border-t border-outline-variant/10">
+<div class="max-w-[1200px] mx-auto px-margin">
+<div class="rounded-xl bg-surface-container-low/80 backdrop-blur-md p-space-xl flex flex-col md:flex-row items-center justify-between gap-space-lg border border-outline-variant/20 tilt-card card-cascade">
+<div class="flex flex-col gap-space-xs max-w-xl">
+<span class="font-label-sm text-label-sm uppercase text-primary tracking-wider">Next Step</span>
+<h3 class="font-headline-lg text-headline-lg text-on-surface tracking-tight shimmer-text font-semibold">Ready to see the code &amp; impact?</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Explore senior leadership milestones, architectural overhauls, and full-stack technical delivery.</p>
+</div>
+<div class="flex items-center gap-space-md shrink-0">
+<a class="inline-flex items-center gap-space-xs px-space-lg py-space-sm rounded bg-on-surface text-surface font-body-md text-body-md font-medium hover:opacity-90 transition-opacity aura-btn aura-btn-primary" data-path="experience" href="#">
+<span class="">Explore Experiences</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<footer class="w-full bg-surface-container-lowest/90 backdrop-blur-md border-t border-outline-variant/10">
+<div class="max-w-[1200px] mx-auto px-margin py-space-xl flex flex-col md:flex-row items-center justify-between gap-space-lg">
+<div class="flex flex-col items-center md:items-start gap-space-xs">
+<p class="font-label-md text-label-md text-on-surface-variant">Designed &amp; Built by Luca Palomba — System Architecture &amp; Engineering</p>
+</div>
+<div class="flex items-center gap-space-lg">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-space-xs" href="https://github.com" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+<span class="">GitHub</span>
+</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-space-xs" href="https://linkedin.com" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[16px]">hub</span>
+<span class="">LinkedIn</span>
+</a>
+<span class="font-label-sm text-label-sm text-on-surface-variant">© 2025 Luca Palomba</span>
+</div>
+</div>
+</footer>
+<!-- Interactive Unified 60fps Shader Engine & Micro-Interactions Script -->
+<script>
+(function() {
+  // 1. Unified 60fps interactive Canvas: Flowing Obsidian Waves & Cyan Grid with Mouse Deflection
+  const canvas = document.getElementById('flow-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+    let time = 0;
+    const mouse = { x: width * 0.5, y: height * 0.35, targetX: width * 0.5, targetY: height * 0.35 };
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.targetX = e.clientX;
+      mouse.targetY = e.clientY;
+    });
+
+    const gridSpacing = 48;
+
+    function render() {
+      time += 0.008;
+      mouse.x += (mouse.targetX - mouse.x) * 0.05;
+      mouse.y += (mouse.targetY - mouse.y) * 0.05;
+
+      ctx.fillStyle = '#0c0e14';
+      ctx.fillRect(0, 0, width, height);
+
+      // Render subtle perspective mesh with mouse deflection
+      ctx.lineWidth = 1;
+      const cols = Math.ceil(width / gridSpacing) + 2;
+      const rows = Math.ceil(height / gridSpacing) + 2;
+
+      for (let i = 0; i < cols; i++) {
+        const xBase = i * gridSpacing;
+        ctx.beginPath();
+        let active = false;
+
+        for (let j = 0; j < rows; j++) {
+          const yBase = j * gridSpacing;
+          const dx = xBase - mouse.x;
+          const dy = yBase - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const maxDist = 260;
+          let pushX = 0;
+          let pushY = 0;
+
+          if (dist < maxDist) {
+            const force = (1 - dist / maxDist) * 22;
+            pushX = (dx / dist) * force;
+            pushY = (dy / dist) * force;
+          }
+
+          const wave = Math.sin(time * 1.5 + (xBase * 0.004) + (yBase * 0.005)) * 9;
+          const px = xBase + pushX;
+          const py = yBase + wave + pushY;
+
+          if (j === 0) {
+            ctx.moveTo(px, py);
+          } else {
+            ctx.lineTo(px, py);
+          }
+        }
+        ctx.strokeStyle = 'rgba(76, 215, 246, 0.04)';
+        ctx.stroke();
+      }
+
+      // Horizontal wave sweeps
+      for (let j = 0; j < rows; j += 2) {
+        const yBase = j * gridSpacing;
+        ctx.beginPath();
+        for (let i = 0; i < cols; i++) {
+          const xBase = i * gridSpacing;
+          const dx = xBase - mouse.x;
+          const dy = yBase - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          let pushY = 0;
+          if (dist < 260) {
+            pushY = (dy / dist) * (1 - dist / 260) * 20;
+          }
+          const wave = Math.sin(time * 1.8 + (xBase * 0.005) + (yBase * 0.003)) * 12;
+          const px = xBase;
+          const py = yBase + wave + pushY;
+          if (i === 0) ctx.moveTo(px, py);
+          else ctx.lineTo(px, py);
+        }
+        ctx.strokeStyle = 'rgba(76, 215, 246, 0.035)';
+        ctx.stroke();
+      }
+
+      // Flowing luminous energy curves
+      for (let k = 0; k < 3; k++) {
+        ctx.beginPath();
+        const speed = time * (0.8 + k * 0.25);
+        const yOffset = height * (0.2 + k * 0.28);
+        for (let x = 0; x <= width; x += 24) {
+          const y = yOffset +
+            Math.sin(speed + x * 0.003 + k) * 35 +
+            Math.cos(speed * 0.6 + x * 0.0015) * 25;
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.lineWidth = 1.4;
+        ctx.strokeStyle = k === 1 ? 'rgba(78, 222, 163, 0.13)' : 'rgba(76, 215, 246, 0.16)';
+        ctx.stroke();
+      }
+
+      // Soft ambient light at cursor
+      const radial = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 350);
+      radial.addColorStop(0, 'rgba(76, 215, 246, 0.08)');
+      radial.addColorStop(0.5, 'rgba(6, 182, 212, 0.025)');
+      radial.addColorStop(1, 'rgba(12, 14, 20, 0)');
+      ctx.fillStyle = radial;
+      ctx.fillRect(0, 0, width, height);
+
+      requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
+  }
+
+  // 2. Animated Numerical Counters (Core Telemetry)
+  const counterElements = document.querySelectorAll('[data-counter]');
+  if (counterElements.length > 0) {
+    const duration = 1800; // ms
+    const startTime = performance.now();
+
+    function animateCounters(now) {
+      const elapsed = Math.min(now - startTime, duration);
+      const progress = 1 - Math.pow(1 - elapsed / duration, 3); // ease-out cubic
+
+      counterElements.forEach((el) => {
+        const target = parseFloat(el.getAttribute('data-counter'));
+        const prefix = el.getAttribute('data-prefix') || '';
+        const suffix = el.getAttribute('data-suffix') || '';
+        const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+        const current = (progress * target).toFixed(decimals);
+        el.textContent = `${prefix}${current}${suffix}`;
+      });
+
+      if (elapsed < duration) {
+        requestAnimationFrame(animateCounters);
+      }
+    }
+    setTimeout(() => {
+      requestAnimationFrame(animateCounters);
+    }, 200);
+  }
+
+  // 3. 3D Magnetic Tilt and Cursor Glow for cards
+  const cards = document.querySelectorAll('.tilt-card');
+  cards.forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+
+      // Gentle subtle 3D tilt calculation
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -3;
+      const rotateY = ((x - centerX) / centerX) * 4;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-2px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+    });
+  });
+})();
+</script>
+
+
+</body></html>
