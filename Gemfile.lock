@@ -254,7 +254,7 @@ GEM
       gemoji (>= 3, < 5)
       html-pipeline (~> 2.2)
       jekyll (>= 3.0, < 5.0)
-    json (2.21.2)
+    json (3.0.2)
     json-minify (0.0.3)
       json (> 0)
     kramdown (2.4.0)
@@ -338,7 +338,7 @@ DEPENDENCIES
   jekyll-minifier
   jekyll-seo-tag
   jekyll-sitemap
-  json (< 3)
+  json (< 4)
 
 CHECKSUMS
   Ascii85 (2.0.1) sha256=15cb5d941808543cbb9e7e6aea3c8ec3877f154c3461e8b3673e97f7ecedbe5a
@@ -420,7 +420,7 @@ CHECKSUMS
   jekyll-titles-from-headings (0.5.3) sha256=77366754e361ea7b5d87881f5b1380835f5ce910c240a4d9ac2d7afe86d28481
   jekyll-watch (2.2.1) sha256=bc44ed43f5e0a552836245a54dbff3ea7421ecc2856707e8a1ee203a8387a7e1
   jemoji (0.13.0) sha256=5d4c3e8e2cbbb2b73997c31294f6f70c94e4d4fade039373e86835bcf5529e7c
-  json (2.21.2) sha256=1f1d3b7cf2b3ba1a69beca0bb6db13d5438b80bff3cd54cdaaa620b9b07c1c6a
+  json (3.0.2) sha256=8e6d7e7b11384c21230430cef90b71f14849a34a1f4452796670f7c981bd19df
   json-minify (0.0.3) sha256=fd38ef93867332c2340aaf1b57335782ab5958fe6fb3ca7a8aba1469f0bf08ae
   kramdown (2.4.0) sha256=b62e5bcbd6ea20c7a6730ebbb2a107237856e14f29cebf5b10c876cc1a2481c5
   kramdown-parser-gfm (1.1.0) sha256=fb39745516427d2988543bf01fc4cf0ab1149476382393e0e9c48592f6581729

@@ -22,7 +22,7 @@ end
 # Remove once jekyll-minifier can move to 0.2.x, which swaps the JS compressor
 # for terser. That is blocked: 0.2.x requires jekyll ~> 4.0, while github-pages
 # pins jekyll 3.10.0.
-gem "json", "< 3"
+gem "json", "< 4"
 
 group :test do
   gem "html-proofer"
