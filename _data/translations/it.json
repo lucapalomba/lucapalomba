@@ -401,15 +401,15 @@
         },
         "meta": {
             "aiAgents": { "domain": "SISTEMI_AI_AGENTICI", "vector": "Automazione dei flussi", "status": "Attivo ogni giorno" },
-            "jsNode": { "domain": "RUNTIME_CORE", "vector": "Full-Stack e orchestrazione", "status": "Stack nativo" },
+            "jsNode": { "domain": "RUNTIME_PRINCIPALE", "vector": "Full-Stack e orchestrazione", "status": "Stack nativo" },
             "cicd": { "domain": "ORCHESTRAZIONE_DELIVERY", "vector": "Ingegneria dei rilasci", "status": "Consolidato in produzione" },
             "react": { "domain": "TOPOLOGIA_CLIENT", "vector": "Design system e performance UX", "status": "Esperienza staff" },
-            "php": { "domain": "ENTERPRISE_LEGACY_MODERN", "vector": "Migrazione enterprise", "status": "Alta maturità" },
+            "php": { "domain": "ENTERPRISE_LEGACY_MODERNO", "vector": "Migrazione enterprise", "status": "Alta maturità" },
             "architectures": { "domain": "STRATEGIA_DI_DOMINIO", "vector": "Pattern distribuiti", "status": "Focus attivo" },
             "cloudK8s": { "domain": "SCALING_INFRA", "vector": "Multi-cluster 100+ nodi", "status": "In produzione" },
             "cloud": { "domain": "ECOSISTEMI_HYPERSCALER", "vector": "IAM e networking enterprise", "status": "In studio" },
             "ml": { "domain": "INTELLIGENZA_APPLICATA", "vector": "Analytics predittiva e flussi", "status": "Esplorativo" },
-            "wasm": { "domain": "SANDBOX_LOW_LEVEL", "vector": "Compute nativo client", "status": "Ricerca iniziale" }
+            "wasm": { "domain": "SANDBOX_BASSO_LIVELLO", "vector": "Compute nativo client", "status": "Ricerca iniziale" }
         }
     },
     "contact": {
