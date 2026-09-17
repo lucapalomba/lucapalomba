@@ -29,8 +29,9 @@ const CACHE_NAME = 'lucapalomba-' + VERSION;
 // The shell: every page in both languages, the stylesheets and scripts they
 // need, and the self-hosted fonts that `styles/fonts.css` asks for first and
 // `_includes/head.html` preloads. Deliberately NOT the icons (~200 KB each) or
-// the typewriter sounds (~2 mp3): those are runtime-cached on first use instead
-// of costing every visitor a download before they have asked for anything.
+// the typewriter sounds (they no longer exist, D6): those are runtime-cached on
+// first use instead of costing every visitor a download before they have asked
+// for anything.
 //
 // There is no `translations/*.json` entry and no `js/i18n.js`: since issue #82
 // the copy is rendered by Jekyll from `_data/translations/` at build time, so
@@ -65,6 +66,7 @@ const PRECACHE_URLS = [
   './js/navigation.js',
   './js/hamburger.js',
   './js/backToTop.js',
+  './js/backdrop.js',
   './js/motion.js',
   './js/titleAnimation.js',
   './js/techProgress.js',
@@ -115,9 +117,9 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const request = event.request;
 
-  // Never touch anything that is not a plain same-origin GET: the particles
-  // CDN is cross-origin (its response is opaque and must not be cached), and
-  // caching a POST would be wrong.
+  // Never touch anything that is not a plain same-origin GET: cross-origin
+  // requests are opaque (and nothing external is loaded any more — fonts and
+  // icons are self-hosted), and caching a POST would be wrong.
   if (request.method !== 'GET') return;
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
@@ -151,7 +153,7 @@ async function handleNavigation(request) {
 }
 
 // Cache-first: the shell is already precached, and anything else same-origin
-// (icons, sounds) is fetched once and then served from the cache.
+// (icons and similar) is fetched once and then served from the cache.
 async function handleAsset(request) {
   const cached = await caches.match(request);
   if (cached) return cached;

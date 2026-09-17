@@ -10,12 +10,18 @@
 // performance 0.35). This is rAF-coalesced and writes one style property.
 //
 // Decorative; does nothing when the visitor prefers reduced motion (the CSS
-// freezes the light too).
+// freezes the light too). Only runs for a real pointing device: on a
+// coarse-pointer (touch) phone there is no cursor to follow, so the listener
+// and the eased rAF chain would be wasted work on the exact devices the
+// Lighthouse mobile budget is measured on.
 (function () {
   'use strict';
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (reduced.matches) return;
+
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  if (!finePointer.matches) return;
 
   const light = document.getElementById('backdrop-light');
   if (!light) return;
