@@ -45,6 +45,25 @@ updates:
       prefix: "chore"
       include: "scope"
     labels: ["dependencies", "ruby"]
+    # The `json < 3` ceiling in the Gemfile is not enough on its own: for a
+    # direct dependency, Dependabot treats the requirement as part of the update
+    # and rewrites the bound itself, so it proposed json 3.0.2 by loosening
+    # `< 3` to `< 4` (PR #137). json 3 dropped the `create_additions` keyword
+    # that htmlcompressor -- a jekyll-minifier dependency -- passes to
+    # JSON.parse, which kills `bundle exec jekyll build` inside
+    # compress_javascript. The ignore below is the half Dependabot cannot edit.
+    # `update-types` is the documented, ecosystem-agnostic way to say "no major
+    # bumps for this gem" -- the ranges in a `versions` entry would have to be
+    # written in RubyGems' own notation, and getting that wrong fails silently.
+    # Only major updates are ignored, so json 2.x patches still come through,
+    # and `update-types` governs version updates only -- a json security update
+    # would still open its own PR.
+    # Remove it together with the Gemfile ceiling once jekyll-minifier can move
+    # to 0.2.x, which swaps the JS compressor for terser. That is blocked:
+    # 0.2.x requires jekyll ~> 4.0, while github-pages pins jekyll 3.10.0.
+    ignore:
+      - dependency-name: "json"
+        update-types: ["version-update:semver-major"]
     groups:
       gems-patch:
         patterns: ["*"]
