@@ -74,43 +74,35 @@
         },
         "telemetry": {
             "title": "Telemetria principale",
-            "version": "v4.18.0",
-            "reliability": "INDICE DI AFFIDABILITÀ",
-            "slo": "SLO 99.95%",
+            "version": "PRINCIPI_ING",
+            "reliability": "AFFIDABILITÀ DEI RILASCI",
+            "slo": "Lun–Gio, con canary",
             "commits": "Solo commit atomici",
             "bisect": "Pronto per git bisect",
             "tiles": [
                 {
-                    "label": "Tech Debt Burn",
-                    "value": "85%",
-                    "counter": "85",
-                    "suffix": "%",
-                    "sub": "Meno ritardo nel refactoring",
+                    "label": "Debito tecnico",
+                    "value": "Continuo",
+                    "sub": "Refactoring a ogni modifica",
                     "subTone": "tertiary"
                 },
                 {
                     "label": "Deploy del venerdì",
-                    "value": "0.00",
+                    "value": "Mai",
                     "badge": "SAFE",
-                    "sub": "100% weekend tranquilli",
+                    "sub": "Weekend sempre liberi",
                     "tone": "primary"
                 },
                 {
-                    "label": "Velocità dello sprint",
-                    "value": "+42%",
-                    "counter": "42",
-                    "prefix": "+",
-                    "suffix": "%",
-                    "sub": "Dopo il reset architetturale",
+                    "label": "Ritmo di delivery",
+                    "value": "Sostenibile",
+                    "sub": "Costante dopo ogni reset",
                     "subTone": "tertiary"
                 },
                 {
                     "label": "Salute build CI",
-                    "value": "99.8%",
-                    "counter": "99.8",
-                    "decimals": "1",
-                    "suffix": "%",
-                    "sub": "Build su main sempre verdi",
+                    "value": "Verde di default",
+                    "sub": "La main resta rilasciabile",
                     "tone": "tertiary"
                 }
             ]
@@ -150,7 +142,6 @@
             ]
         },
         "charter": {
-            "kicker": "Charter architetturale",
             "title": "architecture_charter.manifest",
             "status": "BLOCCATO // PROD-STABILE",
             "items": [
@@ -193,7 +184,6 @@
         "description": "Esplora le esperienze lavorative di Luca Palomba, inclusi ruoli come Senior Full Stack Developer, R&D Manager e Team Lead.",
         "kicker": "Percorso di carriera",
         "lead": "Ruoli e progetti selezionati nel corso della mia carriera, dall'architettura software distribuita alla leadership di team e all'ingegneria aumentata dall'AI.",
-        "back": "← Indietro",
         "keyProject": "Progetto chiave:",
         "telemetry": {
             "title": "Telemetria // Leadership",
@@ -385,6 +375,7 @@
             "title": "Pronto a parlare di system design o di collaborazioni staff?",
             "cta": "Contattami"
         },
+        "vectorLabel": "VETTORE:",
         "tech": {
             "aiAgents": "Agenti di sviluppo LLM & Documentazione per AI",
             "jsNode": "JavaScript (Node.js + TypeScript)",
@@ -408,6 +399,18 @@
             "cloud": "Approfondisco i principali cloud provider per consolidare le competenze architetturali su servizi gestiti, sicurezza, networking e scalabilità, fondamentali per supportare soluzioni enterprise moderne.",
             "ml": "Mi sto focalizzando sul Machine Learning per potenziare le capacità predittive e analitiche dei prodotti che seguo, integrando intelligenza nei flussi decisionali e negli automatismi interni.",
             "wasm": "Studio WebAssembly per valutare nuove soluzioni ad alte prestazioni nel browser e in contesti server-side, con l'obiettivo di portare efficienza e portabilità in scenari distribuiti e real-time."
+        },
+        "meta": {
+            "aiAgents": { "domain": "SISTEMI_AI_AGENTICI", "vector": "Automazione dei flussi", "status": "Attivo ogni giorno" },
+            "jsNode": { "domain": "RUNTIME_CORE", "vector": "Full-Stack e orchestrazione", "status": "Stack nativo" },
+            "cicd": { "domain": "ORCHESTRAZIONE_DELIVERY", "vector": "Release engineering", "status": "Production hardened" },
+            "react": { "domain": "TOPOLOGIA_CLIENT", "vector": "Design system e performance UX", "status": "Esperienza staff" },
+            "php": { "domain": "ENTERPRISE_LEGACY_MODERN", "vector": "Migrazione enterprise", "status": "Alta maturità" },
+            "architectures": { "domain": "STRATEGIA_DI_DOMINIO", "vector": "Pattern distribuiti", "status": "Focus attivo" },
+            "cloudK8s": { "domain": "SCALING_INFRA", "vector": "Multi-cluster 100+ nodi", "status": "In produzione" },
+            "cloud": { "domain": "ECOSISTEMI_HYPERSCALER", "vector": "IAM e networking enterprise", "status": "In studio" },
+            "ml": { "domain": "INTELLIGENZA_APPLICATA", "vector": "Analytics predittiva e flussi", "status": "Esplorativo" },
+            "wasm": { "domain": "SANDBOX_LOW_LEVEL", "vector": "Compute nativo client", "status": "Ricerca iniziale" }
         }
     },
     "contact": {
@@ -436,9 +439,15 @@
         "network": {
             "title": "Profili di rete",
             "githubSub": "Log dei commit open source e architetture",
-            "linkedinSub": "Storia professionale e network"
+            "linkedinSub": "Storia professionale e network",
+            "endpoints": "Endpoint"
         },
-        "placement": "Posizionamento: Staff / Lead IC · Sistemi distribuiti · Architettura dei sistemi"
+        "placementLabel": "Posizionamento target",
+        "placement": "Staff / Lead IC · Sistemi distribuiti · Architettura dei sistemi",
+        "provenance": {
+            "label": "Provenienza ingegneristica",
+            "body": "Progettato e sviluppato da Luca Palomba."
+        }
     },
     "notFound": {
         "pageTitle": "404 - Pagina Non Trovata | Luca Palomba",

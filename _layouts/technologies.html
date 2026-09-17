@@ -2,16 +2,18 @@
 layout: default
 ---
 {%- comment -%}
-  Each row is "dictionary key : percentage : tone : category : domain label :
-  vector label : status". The keys are looked up in the locale's
-  `technologies.tech` and `technologies.desc` maps rather than written out, so
-  the names and descriptions stay in the dictionary like every other string.
-  The category drives the filter; the export's own filter was inconsistent
-  (PHP 85% and Advanced Architectures 65% sat in buckets their scores
-  contradicted), so here a card's bucket always matches the row.
+  Each row is "dictionary key : percentage : tone : category : rise". The name,
+  description, domain label, vector label and status all come from the locale's
+  `technologies.tech`, `technologies.desc` and `technologies.meta` maps, so no
+  prose is hardcoded in the markup (R14). `category` drives the filter; `rise`
+  is the momentum marker on the bar and is language-independent.
+
+  The export's own filter was inconsistent (PHP 85% and Advanced Architectures
+  65% sat in buckets their scores contradicted), so here a card's bucket always
+  matches the row.
 {%- endcomment -%}
 {%- assign t = site.data.translations[page.lang] %}
-{%- assign tech_rows = "aiAgents:85:primary:core:AI_AGENTIC_SYSTEMS:Workflow Automation:Active Daily:12|jsNode:90:tertiary:core:CORE_RUNTIME:Full-Stack & Orchestration:Native Stack:0|cicd:80:primary:systems:PIPELINE_ORCHESTRATION:Release Engineering:Production Hardened:8|react:80:primary:core:CLIENT_TOPOLOGY:Design Systems & UX Perf:Staff Experience:4|php:85:primary:core:ENTERPRISE_LEGACY_MODERN:Enterprise Migration:High Maturity:0|architectures:65:secondary:systems:DOMAIN_STRATEGY:Distributed Patterns:Active Focus:2|cloudK8s:60:primary:systems:INFRA_SCALING:100+ Nodes Multi-Cluster:Applied Production:0|cloud:50:secondary:systems:HYPERSCALER_ECOSYSTEMS:Enterprise IAM & Networking:Ongoing Study:0|ml:40:secondary:frontier:APPLIED_INTELLIGENCE:Predictive Analytics & Flows:Exploratory:0|wasm:20:neutral:frontier:LOW_LEVEL_SANDBOX:Native Client Compute:Early Research:0" | split: "|" %}
+{%- assign tech_rows = "aiAgents:85:primary:core:12|jsNode:90:tertiary:core:0|cicd:80:primary:systems:8|react:80:primary:core:4|php:85:primary:core:0|architectures:65:secondary:systems:2|cloudK8s:60:primary:systems:0|cloud:50:secondary:systems:0|ml:40:secondary:frontier:0|wasm:20:neutral:frontier:0" | split: "|" %}
 <!-- Main Content -->
 <main class="page" id="main-content">
     <div class="container tech-stack-page">
@@ -61,10 +63,8 @@ layout: default
             {%- assign tech_percent = f[1] %}
             {%- assign tech_tone = f[2] %}
             {%- assign tech_cat = f[3] %}
-            {%- assign tech_domain = f[4] %}
-            {%- assign tech_vector = f[5] %}
-            {%- assign tech_status = f[6] %}
-            {%- assign tech_rise = f[7] %}
+            {%- assign tech_rise = f[4] %}
+            {%- assign tech_meta = t.technologies.meta[tech_key] %}
             <article class="glass-panel tech-card reveal" data-category="{{ tech_cat }}"
                 style="--reveal-delay: {{ forloop.index0 | times: 60 }}ms">
                 <div class="tech-card-body">
@@ -72,7 +72,7 @@ layout: default
                         <div class="tech-card-id">
                             <span class="tech-card-icon tech-card-icon--{{ tech_tone }}">{% include icon.html name="memory" %}</span>
                             <div>
-                                <span class="tech-domain">{{ tech_domain }}</span>
+                                <span class="tech-domain">{{ tech_meta.domain }}</span>
                                 <h2 class="tech-name">{{ t.technologies.tech[tech_key] }}</h2>
                             </div>
                         </div>
@@ -87,8 +87,8 @@ layout: default
                     <p class="tech-description">{{ t.technologies.desc[tech_key] }}</p>
                 </div>
                 <div class="tech-card-foot">
-                    <span>VECTOR: {{ tech_vector }}</span>
-                    <span class="tech-status tech-status--{{ tech_tone }}"><span class="dot-{{ tech_tone }}"></span>{{ tech_status }}</span>
+                    <span>{{ t.technologies.vectorLabel }} {{ tech_meta.vector }}</span>
+                    <span class="tech-status tech-status--{{ tech_tone }}"><span class="dot-{{ tech_tone }}"></span>{{ tech_meta.status }}</span>
                 </div>
             </article>
             {%- endfor %}
