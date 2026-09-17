@@ -22,7 +22,7 @@
         "brand": "Luca Palomba — home"
     },
     "index": {
-        "pageTitle": "Luca Palomba - Engineering Manager e Web Developer",
+        "pageTitle": "Luca Palomba — Engineering Manager e Web Developer",
         "description": "Portfolio di Luca Palomba, Engineering Manager, Team Lead e Web Developer specializzato in sviluppo full-stack e R&D.",
         "subtitle": "Full Stack Developer e Team Lead, esperienza di leadership tecnica",
         "hero": {
@@ -389,7 +389,7 @@
         },
         "desc": {
             "aiAgents": "Progetto e orchestro agenti di sviluppo basati su LLM e redigo documentazione strutturata per l'AI, facendo da ponte tra il team umano e gli strumenti AI nel flusso di sviluppo.",
-            "jsNode": "È il linguaggio/stack che si ripresenta più volte nella mia carriera: backend, automation, integrazioni, progetti cloud, PWA, orchestrazione. Forse non conosco tutto e Typescript mi sorprende ogni volta, ma ormai JS è la mia casa.",
+            "jsNode": "È il linguaggio/stack che si ripresenta più volte nella mia carriera: backend, automation, integrazioni, progetti cloud, PWA, orchestrazione. Forse non conosco tutto e TypeScript mi sorprende ogni volta, ma ormai JS è la mia casa.",
             "react": "Ho guidato team frontend, definito componenti RAD, reingegnerizzato prodotti, sviluppato PWA. Conosci ciclo di vita, rendering, strutturazione architetture UI complesse.",
             "cloudK8s": "Nelle mie ultime esperienze ho portato un prodotto nativamente distribuito su K8s con 100+ macchine, pipeline, containerizzazione e business continuity. Non sono un DevOps puro, ma ho esperienza concreta di architetture reali.",
             "php": "Ho sviluppato e mantenuto API Zend per anni. Ultimamente ho lavorato con Symfony per progetti di medie dimensioni. Anche se oggi è meno centrale per me, il livello è sicuramente esperto.",
