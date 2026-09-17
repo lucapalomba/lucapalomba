@@ -65,7 +65,7 @@
             ]
         }
     },
-    "consoleEasterEgg": "Se stai leggendo questo messaggio vuol dire che fai il mio stesso lavoro. Perchè non mi contatti e ci prendiamo un caffè?",
+    "consoleEasterEgg": "Se stai leggendo questo messaggio vuol dire che fai il mio stesso lavoro. Perché non mi contatti e ci prendiamo un caffè?",
     "home": {
         "meta": {
             "role": "ARCH_SPEC :: STAFF_IC / LEAD",
@@ -149,7 +149,7 @@
                     "step": "01",
                     "tone": "tertiary",
                     "title": "Entro in codebase caotiche e porto chiarezza",
-                    "body": "Diagnostico i collo di bottiglia sistemici entro 72 ore, prioritizzando percorsi di stabilizzazione a basso rischio e alto rendimento."
+                    "body": "Diagnostico i colli di bottiglia sistemici entro 72 ore, prioritizzando percorsi di stabilizzazione a basso rischio e alto rendimento."
                 },
                 {
                     "step": "02",
@@ -261,7 +261,7 @@
                 "title": "Full Stack Developer • Team Lead • R&D Manager — Novigo-Consulting",
                 "description": [
                     "Progettato e implementato l'architettura applicativa (API Zend, frontend React, automazione Node.js).",
-                    "Servito come project e team lead per team nazionali e internazionali, gestendo fino a 20 persone.",
+                    "Ho ricoperto il ruolo di project e team lead per team nazionali e internazionali, gestendo fino a 20 persone.",
                     "Come R&D Manager, supervisionato la selezione di software/servizi e test di integrazione."
                 ],
                 "keyProject": "Sviluppato componenti di automazione RAD utilizzati in tutti i prodotti.",
@@ -278,10 +278,10 @@
                 "date": "2015 — 2016",
                 "title": "CTO • Full Stack Developer — Publidesign s.r.l.",
                 "description": [
-                    "Sviluppo customizazzioni di progetti Wordpress.",
+                    "Sviluppo personalizzazioni di progetti WordPress.",
                     "CTO per la startup Baucoin."
                 ],
-                "keyProject": "Piattaforma di gestione crediti per economia circolare basata sui servizi per Pet",
+                "keyProject": "Piattaforma di gestione crediti per economia circolare basata sui servizi per animali domestici",
                 "keyProjectTitle": "Baucoin",
                 "techStack": [
                     "WordPress",
@@ -313,8 +313,8 @@
                 "title": "Full Stack Developer — DuckMa s.r.l.",
                 "description": [
                     "Sviluppo API backend (Node.js, PHP).",
-                    "Sviluppo Applicazioni Ibride con Ionic e PWA.",
-                    "Designer UI/UX per PHONOTTO."
+                    "Sviluppo applicazioni ibride con Ionic e PWA.",
+                    "Progettista UI/UX per PHONOTTO."
                 ],
                 "keyProject": null,
                 "techStack": [
@@ -391,7 +391,7 @@
             "aiAgents": "Progetto e orchestro agenti di sviluppo basati su LLM e redigo documentazione strutturata per l'AI, facendo da ponte tra il team umano e gli strumenti AI nel flusso di sviluppo.",
             "jsNode": "È il linguaggio/stack che si ripresenta più volte nella mia carriera: backend, automation, integrazioni, progetti cloud, PWA, orchestrazione. Forse non conosco tutto e Typescript mi sorprende ogni volta, ma ormai JS è la mia casa.",
             "react": "Ho guidato team frontend, definito componenti RAD, reingegnerizzato prodotti, sviluppato PWA. Conosci ciclo di vita, rendering, strutturazione architetture UI complesse.",
-            "cloudK8s": "Nele mie ultime esperienze ho portato un prodotto nativamente distribuito su K8s con 100+ macchine, pipeline, containerizzazione e business continuity. Non sono un DevOps puro, ma ho esperienza concreta di architetture reali.",
+            "cloudK8s": "Nelle mie ultime esperienze ho portato un prodotto nativamente distribuito su K8s con 100+ macchine, pipeline, containerizzazione e business continuity. Non sono un DevOps puro, ma ho esperienza concreta di architetture reali.",
             "php": "Ho sviluppato e mantenuto API Zend per anni. Ultimamente ho lavorato con Symfony per progetti di medie dimensioni. Anche se oggi è meno centrale per me, il livello è sicuramente esperto.",
             "cicd": "Ho introdotto automazioni, selezionato strumenti, ottimizzato pipeline e processi interni. Competenza solida, anche lato processi e R&D.",
             "architectures": "Approfondisco le architetture evolute per aumentare la robustezza, la scalabilità e la chiarezza dei sistemi complessi che gestisco, migliorando la qualità delle decisioni tecniche e dei processi di progettazione.",
@@ -402,7 +402,7 @@
         "meta": {
             "aiAgents": { "domain": "SISTEMI_AI_AGENTICI", "vector": "Automazione dei flussi", "status": "Attivo ogni giorno" },
             "jsNode": { "domain": "RUNTIME_CORE", "vector": "Full-Stack e orchestrazione", "status": "Stack nativo" },
-            "cicd": { "domain": "ORCHESTRAZIONE_DELIVERY", "vector": "Release engineering", "status": "Production hardened" },
+            "cicd": { "domain": "ORCHESTRAZIONE_DELIVERY", "vector": "Ingegneria dei rilasci", "status": "Consolidato in produzione" },
             "react": { "domain": "TOPOLOGIA_CLIENT", "vector": "Design system e performance UX", "status": "Esperienza staff" },
             "php": { "domain": "ENTERPRISE_LEGACY_MODERN", "vector": "Migrazione enterprise", "status": "Alta maturità" },
             "architectures": { "domain": "STRATEGIA_DI_DOMINIO", "vector": "Pattern distribuiti", "status": "Focus attivo" },
