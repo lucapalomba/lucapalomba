@@ -33,12 +33,12 @@
     </div>
     <div class="backdrop-scrim" aria-hidden="true"></div>
 
-    <!-- The 404 is deliberately header-less: it is reached from a bad link and
-         has no in-page navigation contract, so the quick-jump links in the page
-         body are the way back. -->
-    {% unless page.body_class == 'not-found-page' %}
+    <!-- Full chrome on every page, including the 404: the design wants the
+         navbar and footer there (R13), so the old `not-found-page` branch that
+         suppressed the header is gone. Only the navigation hint stays off: the
+         404 is not one of the four pages in js/navigation.js's cycle, so
+         arrow-key/swipe navigation is a no-op and the hint would lie. -->
     {% include navbar.html %}
-    {% endunless %}
 
     {{ content }}
 
