@@ -16,6 +16,12 @@
     display: none;
 }
 
+/* The avatar is desktop chrome; on small screens the drawer carries the
+   identity instead, so the row stays brand + language + hamburger. */
+.navbar-avatar {
+    display: none;
+}
+
 .nav-links {
     display: none;
 }

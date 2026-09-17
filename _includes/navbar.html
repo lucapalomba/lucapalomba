@@ -48,6 +48,7 @@
             <a class="lang-toggle lang-switch" href="{{ page.alt_url | relative_url }}" hreflang="{{ page.alt_lang }}"
                 aria-label="{{ t.nav.langSwitch }}">{{ t.nav.langCode }}</a>
             {%- endif %}
+            <span class="navbar-avatar" aria-hidden="true">{% include icon.html name="person" %}</span>
             <button class="hamburger-menu" id="hamburger-toggle" aria-label="{{ t.a11y.toggleMenu }}" aria-expanded="false"
                 aria-controls="mobile-nav">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"

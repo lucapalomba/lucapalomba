@@ -136,6 +136,17 @@ layout: default
         </div>
       </aside>
     </div>
+
+    <!-- Prev/next progression strip (R10, kept per D7): the export's own
+         two-ended footer, using the same numbered nav labels as the navbar. -->
+    <nav class="exp-progression reveal" aria-label="{{ t.a11y.mainNav }}">
+      <a href="index.html" class="exp-progression-link">
+        {% include icon.html name="arrow_back" %}<span><span class="nav-number">01.</span> {{ t.nav.whoami }}</span>
+      </a>
+      <a href="technologies.html" class="exp-progression-link exp-progression-link--next">
+        <span><span class="nav-number">03.</span> {{ t.nav.technologies }}</span>{% include icon.html name="arrow_forward" %}
+      </a>
+    </nav>
   </div>
 </main>
 

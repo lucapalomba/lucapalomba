@@ -46,10 +46,10 @@
 }
 
 .glass-panel {
-  background: rgba(17, 19, 25, 0.82);
+  background: rgba(25, 27, 34, 0.8);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(61, 73, 76, 0.38);
+  border: 1px solid rgba(61, 73, 76, 0.2);
   border-radius: var(--radius-xl);
   padding: var(--space-md);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
@@ -58,19 +58,20 @@
 
 .glass-panel:hover {
   border-color: rgba(76, 215, 246, 0.45);
-  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.65),
-    0 0 24px -2px rgba(6, 182, 212, 0.15);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.65);
 }
 
 .tech-summary {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-lg);
+  gap: var(--space-md);
 }
 
 .tech-summary-cell {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .tech-summary-value {
@@ -78,9 +79,22 @@
   font-size: var(--headline-sm-size);
   font-weight: 600;
   color: var(--on-surface);
+  overflow-wrap: anywhere;
 }
 
 .tech-summary-value--tertiary { color: var(--tertiary); }
+
+/* The summary must not push the page wide below 600px (finding B): DESIGN.md
+   asks for a stack here, with the divider hidden once the cells wrap. */
+@media (max-width: 599px) {
+  .tech-summary {
+    gap: var(--space-sm);
+  }
+
+  .tech-summary-divider {
+    display: none;
+  }
+}
 
 .tech-summary-divider {
   width: 1px;
@@ -440,5 +454,75 @@
   font-size: var(--headline-sm-size);
   font-weight: 500;
   color: var(--on-surface);
+}
+
+/* Rising-fast indicator on the progress bars: a row of green right-pointing
+   chevrons (">>>") starting at the fill's right tip, the count encoding
+   momentum. `left` is set inline per card to match data-progress; a right-edge
+   mask fades the trailing end. The nudge is a single 1.6s cycle that settles,
+   not an infinite float (R19). Lives in this sheet because only the
+   technologies page renders these cards. */
+.tech-card .progress {
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-rise {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+  pointer-events: none;
+  z-index: 2;
+  animation: tech-rise-float 1.6s ease-in-out 1;
+  -webkit-mask-image: linear-gradient(to right, #000 70%, transparent);
+  mask-image: linear-gradient(to right, #000 70%, transparent);
+}
+
+.tech-rise i {
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-top: 2px solid #22c55e;
+  border-right: 2px solid #22c55e;
+  transform: rotate(45deg);
+  filter: drop-shadow(0 0 2px rgba(34, 197, 94, 0.7));
+}
+
+@keyframes tech-rise-float {
+
+  0%,
+  100% {
+    transform: translate(0, -50%);
+  }
+
+  50% {
+    transform: translate(6px, -50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-rise {
+    animation: none;
+  }
+
+  .tech-rise i {
+    filter: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .tech-rise {
+    gap: 1px;
+  }
+
+  .tech-rise i {
+    width: 3px;
+    height: 3px;
+  }
 }
 
