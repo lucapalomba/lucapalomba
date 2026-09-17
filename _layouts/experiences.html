@@ -99,10 +99,11 @@ layout: default
               <rect class="timeline-fill tl-seg tl-seg--primary" height="8" rx="2" width="60" x="135" y="28" style="--reveal-delay: 0.5s"></rect>
               <rect class="timeline-fill tl-seg" fill="url(#timelineGrad)" height="12" rx="2" width="65" x="200" y="24" style="--reveal-delay: 0.7s"></rect>
               <circle class="tl-beacon" cx="268" cy="30" r="3.5" fill="#4edea3"></circle>
-              <text class="tl-label" x="2" y="20">Sys2000</text>
-              <text class="tl-label" x="75" y="20">Venture</text>
-              <text class="tl-label tl-label--primary" x="140" y="16">Novigo</text>
-              <text class="tl-label tl-label--tertiary" x="205" y="12">P&amp;B / COGEN</text>
+              {%- assign tl = t.experiences.telemetry.timelineLabels %}
+              <text class="tl-label" x="2" y="20">{{ tl[0] }}</text>
+              <text class="tl-label" x="75" y="20">{{ tl[1] }}</text>
+              <text class="tl-label tl-label--primary" x="140" y="16">{{ tl[2] }}</text>
+              <text class="tl-label tl-label--tertiary" x="205" y="12">{{ tl[3] }}</text>
             </svg>
           </div>
 

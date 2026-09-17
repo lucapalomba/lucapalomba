@@ -2,13 +2,13 @@
 layout: default
 ---
 {%- assign t = site.data.translations[page.lang] %}
+{%- assign email = site.data.person.email | remove: 'mailto:' %}
 <!-- Main Content -->
 <main class="page" id="main-content">
     <div class="container contact-page">
 
         <header class="contact-header reveal">
             <div class="contact-header-label">
-                <span class="accent-text">{{ t.contact.channelNumber }}</span>
                 <span class="kicker">{{ t.contact.channelLabel }}</span>
                 <span class="dot-tertiary"></span>
             </div>
@@ -25,10 +25,10 @@ layout: default
                 </div>
                 <div class="dispatch-address">
                     <span class="dispatch-address-label">{{ t.contact.dispatch.directAddress }}</span>
-                    <span class="dispatch-address-value" id="target-email">luca.palomba.developer@gmail.com</span>
+                    <span class="dispatch-address-value" id="target-email">{{ email }}</span>
                 </div>
                 <div class="dispatch-actions">
-                    <a href="mailto:luca.palomba.developer@gmail.com" class="btn btn--primary">
+                    <a href="mailto:{{ email }}" class="btn btn--primary">
                         <span>{{ t.contact.dispatch.compose }}</span>{% include icon.html name="arrow_outward" %}
                     </a>
                     <button type="button" class="btn btn--secondary" id="copy-email"

@@ -9,9 +9,9 @@ class TitleAnimator {
     // Users who prefer reduced motion get a static, fully rendered title.
     this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Headline variants and the sound base URL are rendered by the page
-    // (_layouts/home.html) from the locale dictionary, so the animator no longer
-    // keeps its own copies of both languages' strings.
+    // Headline variants are rendered by the page (_layouts/home.html) from the
+    // locale dictionary, so the animator no longer keeps its own copies of
+    // both languages' strings.
     const config = this.readConfig();
 
     this.stepIndex = 0;

@@ -11,7 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const label = button.querySelector('.copy-label');
   const status = document.getElementById('copy-status');
   const iconCopied = button.querySelector('.icon-check');
-  const address = 'luca.palomba.developer@gmail.com';
+  // The address is rendered by the page from _data/person.yml into #target-email,
+  // so this script never carries its own copy of the address to drift.
+  const address = (document.getElementById('target-email') || {}).textContent || '';
   const defaultLabel = label ? label.textContent : '';
   const copiedLabel = button.getAttribute('data-copied-label') || defaultLabel;
   const failedMessage = button.getAttribute('data-copy-failed') || 'Copy failed';

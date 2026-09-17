@@ -2,9 +2,9 @@
     <div class="footer-inner">
         <p class="footer-provenance">{{ t.footer.provenance }}</p>
         <div class="footer-meta">
-            <a href="https://github.com/lucapalomba" target="_blank" rel="noopener noreferrer">{% include icon.html name="terminal" %}<span>GitHub</span></a>
+            <a href="https://github.com/lucapalomba" target="_blank" rel="noopener noreferrer" aria-label="{{ t.a11y.github }}">{% include icon.html name="github" %}<span>GitHub</span></a>
             <a href="https://www.linkedin.com/in/lucapalomba/" target="_blank"
-                rel="noopener noreferrer">{% include icon.html name="hub" %}<span>LinkedIn</span></a>
+                rel="noopener noreferrer" aria-label="{{ t.a11y.linkedin }}">{% include icon.html name="linkedin" %}<span>LinkedIn</span></a>
             <span>© {{ site.time | date: "%Y" }} Luca Palomba</span>
         </div>
     </div>

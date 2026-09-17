@@ -194,6 +194,7 @@
             "teamsUnit": "Eng",
             "timelineSpan": "Timeline Span",
             "timelineRange": "2007 → 2026+",
+            "timelineLabels": ["Sys2000", "Venture", "Novigo", "P&B / COGEN"],
             "metrics": [
                 { "key": "LEADERSHIP_MAX", "value": "20 Engineers / 4 Squads", "tone": "primary" },
                 { "key": "OPEX_REDUCTION", "value": "~50% in 12 Months", "tone": "tertiary" },
@@ -344,9 +345,7 @@
         "pageTitle": "Technologies — Luca Palomba",
         "description": "Explore the technologies Luca Palomba has experience with and those he's eager to learn.",
         "lead": "A list of technologies — from the ones I use every day to the ones that are now part of me. But mind you: the future changes fast, and so does this list with it.",
-        "experiencedTitle": "Technological Experience",
         "kicker": "Stack Audit & Technical Vectors",
-        "rev": "REV_2025.04",
         "activeDomains": "ACTIVE_DOMAINS",
         "activeDomainsValue": "10 Vectors",
         "primarySynthesis": "PRIMARY_SYNTHESIS",
@@ -415,7 +414,6 @@
         "title": "Get In Touch",
         "pageTitle": "Contact — Luca Palomba",
         "description": "I'm currently open to new opportunities and collaborations. Feel free to reach out — my inbox is always open, whether you have a question or just want to say hi.",
-        "channelNumber": "04.",
         "channelLabel": "Transmission Channel",
         "node": "# NODE: CONTACT_STREAM // OK",
         "dispatch": {
@@ -462,10 +460,6 @@
     },
     "contactScript": {
         "copyFailed": "Could not copy — please copy the address manually."
-    },
-    "sound": {
-        "mute": "Mute keyboard sounds",
-        "unmute": "Unmute keyboard sounds"
     },
     "navigation": {
         "hintTouch": "Swipe ← → to navigate",

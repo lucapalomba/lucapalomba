@@ -196,6 +196,7 @@
             "teamsUnit": "Ing",
             "timelineSpan": "Arco temporale",
             "timelineRange": "2007 → 2026+",
+            "timelineLabels": ["Sys2000", "Venture", "Novigo", "P&B / COGEN"],
             "metrics": [
                 { "key": "LEADERSHIP_MAX", "value": "20 ingegneri / 4 squadre", "tone": "primary" },
                 { "key": "OPEX_REDUCTION", "value": "~50% in 12 mesi", "tone": "tertiary" },
@@ -346,9 +347,7 @@
         "pageTitle": "Tecnologie — Luca Palomba",
         "description": "Esplora le tecnologie con cui Luca Palomba ha esperienza e quelle che è entusiasta di imparare.",
         "lead": "Una lista di tecnologie, da quelle che uso tutti i giorni a quelle che ormai fanno parte di me. Ma attenzione: il futuro cambia in fretta, e questa lista con lui.",
-        "experiencedTitle": "Esperienza tecnologica",
         "kicker": "Audit dello stack e vettori tecnici",
-        "rev": "REV_2025.04",
         "activeDomains": "DOMINI_ATTIVI",
         "activeDomainsValue": "10 vettori",
         "primarySynthesis": "SINTESI_PRIMARIA",
@@ -417,7 +416,6 @@
         "title": "Mettiti in contatto",
         "pageTitle": "Contatti — Luca Palomba",
         "description": "Sono attualmente aperto a nuove opportunità e collaborazioni. Sentiti libero di contattarmi — la mia casella di posta è sempre aperta, che tu abbia una domanda o voglia solo salutare.",
-        "channelNumber": "04.",
         "channelLabel": "Canale di trasmissione",
         "node": "# NODE: CONTACT_STREAM // OK",
         "dispatch": {
@@ -464,10 +462,6 @@
     },
     "contactScript": {
         "copyFailed": "Impossibile copiare — copia l'indirizzo manualmente."
-    },
-    "sound": {
-        "mute": "Disattiva i suoni della tastiera",
-        "unmute": "Attiva i suoni della tastiera"
     },
     "navigation": {
         "hintTouch": "Scorri ← → per navigare",
