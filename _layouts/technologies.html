@@ -2,18 +2,19 @@
 layout: default
 ---
 {%- comment -%}
-  Each row is "dictionary key : percentage : tone : category : rise". The name,
+  Each row is "dictionary key : percentage : tone : category : rise : icon". The name,
   description, domain label, vector label and status all come from the locale's
   `technologies.tech`, `technologies.desc` and `technologies.meta` maps, so no
   prose is hardcoded in the markup (R14). `category` drives the filter; `rise`
-  is the momentum marker on the bar and is language-independent.
+  is the momentum marker on the bar and is language-independent; `icon` is the
+  `_includes/icon.html` glyph name so each vector reads as its own technology.
 
   The export's own filter was inconsistent (PHP 85% and Advanced Architectures
   65% sat in buckets their scores contradicted), so here a card's bucket always
   matches the row.
 {%- endcomment -%}
 {%- assign t = site.data.translations[page.lang] %}
-{%- assign tech_rows = "aiAgents:85:primary:core:12|jsNode:90:tertiary:core:0|cicd:80:primary:systems:8|react:80:primary:core:4|php:85:primary:core:0|architectures:65:secondary:systems:2|cloudK8s:60:primary:systems:0|cloud:50:secondary:systems:0|ml:40:secondary:frontier:0|wasm:20:neutral:frontier:0" | split: "|" %}
+{%- assign tech_rows = "aiAgents:85:primary:core:12:smart_toy|jsNode:90:tertiary:core:0:terminal|cicd:80:primary:systems:8:sync_alt|react:80:primary:core:4:layers|php:85:primary:core:0:data_object|architectures:65:secondary:systems:2:account_tree|cloudK8s:60:primary:systems:0:cloud|cloud:50:secondary:systems:0:dns|ml:40:secondary:frontier:0:model_training|wasm:20:neutral:frontier:0:speed" | split: "|" %}
 <!-- Main Content -->
 <main class="page" id="main-content">
     <div class="container tech-stack-page">
@@ -64,13 +65,14 @@ layout: default
             {%- assign tech_tone = f[2] %}
             {%- assign tech_cat = f[3] %}
             {%- assign tech_rise = f[4] %}
+            {%- assign tech_icon = f[5] %}
             {%- assign tech_meta = t.technologies.meta[tech_key] %}
             <article class="glass-panel tech-card reveal" data-category="{{ tech_cat }}"
                 style="--reveal-delay: {{ forloop.index0 | times: 60 }}ms">
                 <div class="tech-card-body">
                     <div class="tech-card-top">
                         <div class="tech-card-id">
-                            <span class="tech-card-icon tech-card-icon--{{ tech_tone }}">{% include icon.html name="memory" %}</span>
+                            <span class="tech-card-icon tech-card-icon--{{ tech_tone }}">{% include icon.html name=tech_icon %}</span>
                             <div>
                                 <span class="tech-domain">{{ tech_meta.domain }}</span>
                                 <h2 class="tech-name">{{ t.technologies.tech[tech_key] }}</h2>

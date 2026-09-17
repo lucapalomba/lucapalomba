@@ -117,7 +117,7 @@ layout: default
 
           <div class="print-cta">
             <p class="print-cta-claim">{{ t.experiences.printCta.claim }}</p>
-            <button class="btn btn--secondary print-btn" onclick="event.preventDefault(); handlePrint();" aria-label="{{ t.a11y.print }}">
+            <button type="button" class="btn btn--secondary print-btn" aria-label="{{ t.a11y.print }}">
               {% include icon.html name="description" %}
               <span>{{ t.experiences.printCta.button }}</span>
             </button>
