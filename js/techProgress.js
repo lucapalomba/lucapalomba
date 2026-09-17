@@ -7,8 +7,11 @@
 //
 // The filter is a proper control, unlike the export's filterTech(): it exposes
 // aria-pressed, hides non-matching cards, and shows an empty state. A card
-// revealed by the filter was display:none (and therefore never observed), so
-// its bar is filled explicitly.
+// revealed by the filter was display:none and so never entered the viewport as
+// far as the observers are concerned, so the first time it is shown its
+// entrance reveal and its bar fill are forced explicitly. On the initial
+// `all` pass nothing was hidden, so nothing is forced — the scroll reveals own
+// that first paint instead of playing off-screen.
 document.addEventListener('DOMContentLoaded', () => {
   if (!document.body.classList.contains('technologies-page')) return;
 
@@ -54,8 +57,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cards.forEach((card) => {
       const match = category === 'all' || card.getAttribute('data-category') === category;
+      const wasHidden = card.hidden;
       card.hidden = !match;
-      if (match) visible++;
+      if (!match) return;
+      visible++;
+
+      // Only a card this filter actually brings back (hidden before the click)
+      // needs its entrance and its bar forced: it was display:none while the
+      // observers were running. Cards that were never hidden are left to the
+      // scroll observers, so the initial `all` pass does not pre-empt them and
+      // play the stagger off-screen.
+      if (wasHidden) {
+        card.classList.add('in');
+        const fill = card.querySelector('.tech-progress-fill');
+        if (fill && fill.style.width === '') {
+          fillBar(fill);
+        }
+      }
     });
 
     buttons.forEach((button) => {
@@ -67,18 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (emptyEl) {
       emptyEl.hidden = visible !== 0;
     }
-
-    // A card revealed by the filter was display:none and never observed, so
-    // fill it now.
-    cards.forEach((card) => {
-      if (!card.hidden) {
-        card.classList.add('in');
-        const fill = card.querySelector('.tech-progress-fill');
-        if (fill && fill.style.width === '') {
-          fillBar(fill);
-        }
-      }
-    });
   };
 
   buttons.forEach((button) => {
