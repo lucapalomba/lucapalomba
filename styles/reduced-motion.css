@@ -14,18 +14,12 @@ body {
     animation: none !important;
 }
 
-/* Kill every remaining infinite CSS animation under reduced motion so no
-   element keeps looping — an accessibility win and a battery win. */
+/* Kill the remaining looping/transitioning motion under reduced motion so no
+   element keeps animating — an accessibility win and a battery win. The
+   typing indicator is the only loop left, and it exists only while the hero
+   typewriter is between steps (see docs/design-system-revamp.md, R19). */
 .tech-progress-fill {
     transition: none !important;
-}
-
-.tech-progress-fill::after {
-    animation: none !important;
-}
-
-.error-code {
-    animation: none !important;
 }
 
 .typing-dots span {

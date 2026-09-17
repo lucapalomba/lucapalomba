@@ -101,7 +101,7 @@
   font-size: var(--headline-lg-size);
   line-height: var(--headline-lg-line);
   letter-spacing: var(--headline-lg-tracking);
-  font-weight: 400;
+  font-weight: var(--headline-lg-weight);
   color: var(--on-surface-variant);
   margin: var(--space-xs) 0 0;
   min-height: 1.2em;
@@ -238,6 +238,27 @@
 }
 
 .telemetry-tile-sub--tertiary { color: var(--tertiary); }
+
+/* Status badge on a telemetry tile (home's telemetry cockpit only). */
+.telemetry-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 0.375rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1.5;
+  background: rgba(78, 222, 163, 0.15);
+  color: var(--tertiary);
+  border: 1px solid rgba(78, 222, 163, 0.3);
+  margin-right: var(--space-xs);
+  vertical-align: middle;
+}
+
+/* The Friday Deploys tile lays its value and badge on one row. */
+.telemetry-tile .telemetry-tile-value + .telemetry-tile-sub .telemetry-badge {
+  margin-left: 0;
+}
 
 .telemetry-spark {
   padding: var(--space-sm);

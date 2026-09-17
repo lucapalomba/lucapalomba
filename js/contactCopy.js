@@ -2,13 +2,15 @@
 //
 // Replaces the export's copyEmail(), which had no failure path or live
 // announcement. Failure is surfaced inline and via aria-live instead of a
-// blocking alert().
+// blocking alert(). The button glyph swaps to a check while the confirmation
+// is showing, and its accessible name is updated with it.
 document.addEventListener('DOMContentLoaded', () => {
   const button = document.getElementById('copy-email');
   if (!button) return;
 
   const label = button.querySelector('.copy-label');
   const status = document.getElementById('copy-status');
+  const iconCopied = button.querySelector('.icon-check');
   const address = 'luca.palomba.developer@gmail.com';
   const defaultLabel = label ? label.textContent : '';
   const copiedLabel = button.getAttribute('data-copied-label') || defaultLabel;
@@ -18,12 +20,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (status) status.textContent = message;
   };
 
+  const showCopied = (copied) => {
+    button.classList.toggle('is-copied', copied);
+    if (iconCopied) iconCopied.hidden = !copied;
+    if (label) label.textContent = copied ? copiedLabel : defaultLabel;
+    button.setAttribute('aria-label', copied ? copiedLabel : defaultLabel);
+  };
+
   button.addEventListener('click', () => {
     const done = () => {
-      if (label) label.textContent = copiedLabel;
       announce(copiedLabel);
+      showCopied(true);
       window.setTimeout(() => {
-        if (label) label.textContent = defaultLabel;
+        showCopied(false);
         announce('');
       }, 2000);
     };
