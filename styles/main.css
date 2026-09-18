@@ -1,33 +1,15 @@
-/* Fonts */
-/* Note: Font loading is handled via <link> in HTML for performance */
-
-/* Global Styles */
-:root {
-  /* Colors */
-  --bg-color: #0a0a0f;
-  --text-primary: #e6e6ef;
-  --text-secondary: #8892b0;
-  --text-tertiary: #ccd6f6;
-  --text-date: #a8b2d1;
-  --accent-color: #B77EF1;
-  --accent-color-rgb: 183, 126, 241;
-  /* For rgba usage */
-  --accent-hover: rgba(157, 80, 187, 0.1);
-  --nav-bg: rgba(10, 10, 15, 0.85);
-  --mobile-nav-bg: #0d0d14;
-
-  /* Fonts */
-  --font-main: 'Roboto Mono', 'Menlo', 'Consolas', 'Monaco', 'Liberation Mono', 'Lucida Console', monospace;
-
-}
+/* Global shell styles.
+   Colour, spacing, radii, typography and motion tokens live in tokens.css,
+   loaded before this sheet; component primitives in components.css; per-page
+   compositions in pages.css. This sheet owns the page frame: body, skip link,
+   navbar, drawer, footer, back-to-top and the navigation hint. */
 
 body {
   margin: 0;
   padding: 0;
-  background: var(--bg-color);
-  color: var(--text-primary);
-  /* Default text color*/
-  font-family: var(--font-main);
+  background: var(--surface);
+  color: var(--on-surface);
+  font-family: var(--font-ui);
   font-weight: 400;
   transition: opacity 0.2s ease-in-out;
 }
@@ -45,8 +27,13 @@ html.js body {
 }
 
 @keyframes body-fade-in {
-  from { opacity: 0.01; }
-  to { opacity: 1; }
+  from {
+    opacity: 0.01;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 /* Skip to content link - hidden but accessible to keyboard users */
@@ -54,8 +41,8 @@ html.js body {
   position: absolute;
   top: -40px;
   left: 0;
-  background: var(--accent-color);
-  color: var(--bg-color);
+  background: var(--primary);
+  color: var(--on-primary);
   padding: 8px 16px;
   text-decoration: none;
   z-index: 100;
@@ -66,187 +53,268 @@ html.js body {
   top: 0;
 }
 
-/* Particles Container */
-#particles-js {
+/* One visible focus ring across the revamp (2px offset cyan, per DESIGN.md).
+   Controls with their own :focus-visible rule override it. */
+:focus-visible {
+  outline: 2px solid var(--primary-container);
+  outline-offset: 2px;
+}
+
+/* Ambient backdrop: obsidian grid + flowing curves + cursor light, all on the
+   compositor. The grid is a tiled CSS gradient (no canvas, no per-frame work),
+   the curves are two elements animated with transform, and the light is a
+   pre-rendered radial gradient moved by js/backdrop.js. */
+.backdrop {
   position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background-color: #0c0e14;
+  background-image:
+    linear-gradient(to right, rgba(76, 215, 246, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(76, 215, 246, 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.backdrop-curve {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  height: 1.5px;
+  display: block;
+  will-change: transform;
+  border-radius: 50%;
+}
+
+.backdrop-curve--cyan {
+  top: 28%;
+  background: linear-gradient(90deg, transparent, rgba(76, 215, 246, 0.16), transparent);
+  animation: backdrop-drift 26s ease-in-out infinite alternate;
+}
+
+.backdrop-curve--emerald {
+  top: 62%;
+  background: linear-gradient(90deg, transparent, rgba(78, 222, 163, 0.12), transparent);
+  animation: backdrop-drift 34s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes backdrop-drift {
+  from {
+    transform: translate3d(-4%, 0, 0) rotate(-1.2deg);
+  }
+
+  to {
+    transform: translate3d(4%, 40px, 0) rotate(1.2deg);
+  }
+}
+
+.backdrop-light {
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  /* auto: lets particles.js receive mousemove for the on-hover "grab" effect.
-     Set to none by accident in 0ca2d9d (404-page refactor); restored here. */
-  pointer-events: auto;
-}
-
-/* Typography & Shared Components */
-h1 {
-  /* Default h1 style from experiences.html, can be overridden */
-  font-size: 2.6rem;
-  margin: 0 0 18px;
-  background: linear-gradient(45deg, var(--accent-color), var(--accent-color));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  font-weight: 400;
-}
-
-/* Layout Helpers */
-.content-wrapper {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  width: 350px;
+  height: 350px;
   pointer-events: none;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 110px 20px;
+  will-change: transform;
+  background: radial-gradient(circle,
+      rgba(76, 215, 246, 0.08) 0%,
+      rgba(6, 182, 212, 0.025) 50%,
+      rgba(12, 14, 20, 0) 70%);
 }
 
-.page {
-  position: relative;
-  z-index: 2;
-  padding: 60px 20px;
-  min-height: 100vh;
+.backdrop-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
   pointer-events: none;
-  margin-top: 100px;
+  background: radial-gradient(circle at 50% 20%,
+      rgba(17, 19, 25, 0.25) 0%,
+      rgba(11, 13, 19, 0.85) 60%,
+      rgba(11, 13, 19, 0.98) 100%);
 }
 
-.container {
-  max-width: 900px;
-  width: 100%;
-  margin: 0 auto;
-}
-
-/* Navigation */
+/* --- Navigation --------------------------------------------------------- */
+/* The navbar is a full-width fixed bar whose content is capped by
+   .navbar-inner. Horizontal padding lives on the inner track only: having it on
+   both elements doubled the 2rem margin (and pushed the row past 1200px on
+   narrow desktops). The safe-area insets keep the bar clear of a notch/home
+   indicator when the PWA is installed in standalone display mode. */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 50px;
-  height: 100px;
+  padding: 0;
+  padding-left: env(safe-area-inset-left, 0);
+  padding-right: env(safe-area-inset-right, 0);
+  height: var(--nav-height);
   position: fixed;
   top: 0;
   width: 100%;
   box-sizing: border-box;
-  z-index: 10;
+  z-index: 50;
   pointer-events: auto;
-  background: var(--nav-bg);
-  backdrop-filter: blur(10px);
+  background: rgba(12, 14, 20, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(61, 73, 76, 0.15);
 }
 
-.logo a {
-  color: var(--accent-color);
-  font-family: var(--font-main);
-  font-size: 1.5rem;
-  font-weight: 700;
+.navbar-inner {
+  max-width: var(--max-width);
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  padding-inline: var(--margin);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  box-sizing: border-box;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.brand-link {
+  display: inline-flex;
+  align-items: center;
+  color: var(--on-surface);
+  font-family: var(--font-mono);
+  font-size: var(--label-md-size);
+  font-weight: 500;
   text-decoration: none;
-  letter-spacing: 1px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.brand-bracket {
+  color: var(--primary);
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.navbar-actions .resume-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.navbar-actions .resume-btn svg:first-child {
+  color: var(--primary);
+}
+
+/* Availability badge in the navbar: status dot + label, mono, uppercase. */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+  font-weight: var(--label-sm-weight);
+  letter-spacing: var(--label-sm-tracking);
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+  background: rgba(25, 27, 34, 0.8);
+  border: 1px solid rgba(61, 73, 76, 0.2);
+  border-radius: var(--radius);
+  padding: 0.125rem 0.5rem;
+  white-space: nowrap;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: var(--space-md);
+  margin-left: 20px;
 }
 
 .nav-links ol {
   display: flex;
-  gap: 30px;
+  gap: var(--space-md);
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .nav-links a {
-  color: var(--text-primary);
+  color: var(--on-surface-variant);
   text-decoration: none;
-  font-size: 13px;
-  font-family: var(--font-main);
-  transition: color 0.3s ease;
+  font-size: var(--label-md-size);
+  font-family: var(--font-mono);
+  transition: color 0.2s ease;
 }
 
 .nav-links a:hover {
-  color: var(--accent-color);
+  color: var(--on-surface);
 }
 
 .nav-links a:focus {
-  outline: 2px solid var(--accent-color);
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
-/* Indicate current page for screen readers and keyboard users */
+/* Active link: the export's raised pill with a cyan-tinted border. */
 .nav-links a[aria-current="page"] {
-  border-bottom: 2px solid var(--accent-color);
-  padding-bottom: 4px;
+  color: var(--on-surface);
+  background: rgba(40, 42, 48, 0.9);
+  border: 1px solid rgba(76, 215, 246, 0.2);
+  border-radius: var(--radius);
+  padding: 0.25rem 0.5rem;
+  box-shadow: 0 0 12px rgba(76, 215, 246, 0.18);
 }
 
 .nav-number {
-  color: var(--accent-color);
-  margin-right: 5px;
-  font-family: var(--font-main);
+  color: var(--primary);
+  margin-right: 4px;
+  font-family: var(--font-mono);
 }
 
 /* Button Utilities (Common styles) */
 a.resume-btn,
-a.mobile-resume-btn,
-a.hero-cta,
-a.home-btn {
-  color: var(--text-tertiary);
-  border: 1px solid var(--accent-color);
-  border-radius: 4px;
-  padding: 0.75rem 1rem;
-  font-family: var(--font-main);
+a.mobile-resume-btn {
+  color: var(--on-surface);
+  border: 1px solid rgba(61, 73, 76, 0.3);
+  border-radius: var(--radius);
+  padding: 0.25rem 1rem;
+  font-family: var(--font-mono);
+  font-size: var(--label-md-size);
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.2);
+  transition: all 0.2s ease;
+  background: rgba(25, 27, 34, 0.9);
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: var(--space-xs);
 }
 
 a.resume-btn:hover,
-a.mobile-resume-btn:hover,
-a.hero-cta:hover,
-a.home-btn:hover {
-  background: rgba(var(--accent-color-rgb), 0.1);
-  box-shadow: 0 0 20px rgba(var(--accent-color-rgb), 0.4);
-  color: var(--text-primary);
+a.mobile-resume-btn:hover {
+  background: var(--surface-container-high);
+  border-color: rgba(76, 215, 246, 0.4);
+  color: var(--on-surface);
 }
 
 a.resume-btn:focus,
-a.mobile-resume-btn:focus,
-a.hero-cta:focus,
-a.home-btn:focus {
-  outline: 2px solid var(--accent-color);
+a.mobile-resume-btn:focus {
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
-/* Specific Button Overrides */
-a.resume-btn {
-  margin-left: 15px;
-}
+/* Tablet tier (769-1023px) lives at the end of this file, after the base
+   `.hamburger-menu { display: none }`, so its `display: flex` is not overridden
+   by a later rule of the same specificity. */
 
-
-
-/* Navbar glyph buttons: the sound toggle (home page only) and the language
-   switcher. Deliberately the same control — a 30x30 bare glyph in the accent
-   colour — so the two read as a pair, and the "Curriculum" CTA stays the only
-   bordered button in the navbar, which is the one that matters. Same shape as
-   the hamburger, which is the third member of the family.
-
-   The switcher's label stays text ("IT"/"EN") rather than becoming an icon: a
-   flag or a globe is ambiguous about which language you are switching *to*, and
-   the full wording is already in its `aria-label` and `hreflang`.
-
-   This is the shared box; `.sound-toggle`'s own block below adds only what is
-   specific to it (the svg sizing and the state-driven icon swap), and the
-   switcher's container-specific values are in its own section at the end of the
-   sheet, where they can outrank `.nav-links a` / `.mobile-nav a`. */
-.sound-toggle,
+/* Language switcher: a bare glyph in the accent colour, same family as the
+   hamburger. The text label ("IT"/"EN") stays text rather than an icon, since
+   a flag or globe is ambiguous about the target language. */
 .lang-toggle {
   display: flex;
   background: transparent;
@@ -255,34 +323,26 @@ a.resume-btn {
   padding: 0;
   width: 30px;
   height: 30px;
-  color: var(--accent-color);
-  transition: all 0.3s ease;
+  color: var(--primary);
+  transition: color 0.2s ease;
   justify-content: center;
   align-items: center;
-}
-
-.lang-toggle {
-  font-family: var(--font-main);
-  font-size: 13px;
+  font-family: var(--font-mono);
+  font-size: var(--label-md-size);
   line-height: 1;
+  text-decoration: none;
 }
 
-.sound-toggle:hover,
 .lang-toggle:hover {
-  color: var(--text-primary);
+  color: var(--on-surface);
 }
 
-.sound-toggle:focus,
 .lang-toggle:focus {
-  outline: 2px solid var(--accent-color);
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
-/* Navbar action cluster: the sound toggle (home page only) and the hamburger.
-   The auto left margin keeps the cluster pinned right now that it is a single
-   flex child of the space-between navbar, and the gap spaces the two buttons
-   on mobile without moving the hamburger off the right edge, because it stays
-   the last element in the cluster. */
+/* Navbar action cluster: the hamburger. Pinned right. */
 .nav-actions {
   display: flex;
   align-items: center;
@@ -290,31 +350,24 @@ a.resume-btn {
   margin-left: auto;
 }
 
-/* Only >768px: below that .nav-links is hidden, and the hamburger must stay
-   flush with the navbar's own padding. */
-.nav-links {
-  margin-left: 20px;
+/* Navbar avatar: the export's 8x8 circular person glyph at the end of the
+   action row (decorative — the brand link is the accessible home). */
+.navbar-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--on-primary);
+  flex-shrink: 0;
+  box-shadow: 0 0 12px rgba(76, 215, 246, 0.3);
 }
 
-/* Sound-toggle specifics. The button itself is styled by the shared "Navbar
-   glyph buttons" rule above. */
-.sound-toggle svg {
-  width: 24px;
-  height: 24px;
-  stroke: currentColor;
-}
-
-/* The two glyphs are swapped by state, so the button needs no class juggling */
-.sound-toggle .sound-toggle-icon--off {
-  display: none;
-}
-
-.sound-toggle[aria-pressed="true"] .sound-toggle-icon--on {
-  display: none;
-}
-
-.sound-toggle[aria-pressed="true"] .sound-toggle-icon--off {
-  display: block;
+.navbar-avatar svg {
+  width: 18px;
+  height: 18px;
 }
 
 /* Hamburger Menu Button */
@@ -327,7 +380,7 @@ a.resume-btn {
   width: 30px;
   height: 30px;
   z-index: 11;
-  color: var(--accent-color);
+  color: var(--primary);
   transition: all 0.3s ease;
   justify-content: center;
   align-items: center;
@@ -346,11 +399,10 @@ a.resume-btn {
 }
 
 .hamburger-menu:focus {
-  outline: 2px solid var(--accent-color);
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
-/* Animate lines to X when menu is active */
 .hamburger-menu.active svg line:nth-child(1) {
   transform: translateY(6px) rotate(45deg);
 }
@@ -367,17 +419,17 @@ a.resume-btn {
 .mobile-nav {
   display: none;
   position: fixed;
-  top: 70px;
+  top: var(--nav-height);
   left: 0;
   right: 0;
-  background: var(--mobile-nav-bg);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(var(--accent-color-rgb), 0.2);
+  background: var(--surface-container-lowest);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(61, 73, 76, 0.2);
   flex-direction: column;
   padding: 20px 25px;
   gap: 20px;
-  z-index: 9;
-  max-height: calc(100vh - 70px);
+  z-index: 49;
+  max-height: calc(100vh - var(--nav-height));
   overflow-y: auto;
 }
 
@@ -395,117 +447,50 @@ a.resume-btn {
 }
 
 .mobile-nav a {
-  color: var(--text-primary);
+  color: var(--on-surface-variant);
   text-decoration: none;
   font-size: 16px;
-  font-family: var(--font-main);
+  font-family: var(--font-mono);
   transition: color 0.3s ease;
   padding: 10px 0;
 }
 
 .mobile-nav a:hover {
-  color: var(--accent-color);
+  color: var(--primary);
 }
 
 .mobile-nav a:focus {
-  outline: 2px solid var(--accent-color);
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
 .mobile-nav a[aria-current="page"] {
-  border-left: 2px solid var(--accent-color);
+  border-left: 2px solid var(--primary);
   padding-left: 12px;
-  color: var(--accent-color);
+  color: var(--primary);
 }
 
 a.mobile-resume-btn {
   text-align: center;
 }
 
-/* Hero Section */
-.hero {
+/* --- Footer ------------------------------------------------------------- */
+.footer {
+  width: 100%;
+  background: rgba(12, 14, 20, 0.9);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(61, 73, 76, 0.1);
+  padding: var(--space-xl) 0;
+}
+
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-inline: var(--margin);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-  padding: 0;
-  max-width: 1000px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.hero-intro {
-  color: var(--accent-color);
-  font-family: var(--font-main);
-  font-size: 16px;
-  margin: 0 0 30px 4px;
-}
-
-.hero-name {
-  font-size: 80px;
-  font-weight: 700;
-  color: var(--text-tertiary);
-  margin: 0;
-  line-height: 1.1;
-  background: none;
-  -webkit-background-clip: unset;
-  background-clip: unset;
-  text-shadow: none;
-}
-
-.hero-title {
-  font-size: 80px;
-  font-weight: 700;
-  color: var(--text-secondary);
-  margin: 0 0 20px;
-  line-height: 1.1;
-  position: relative;
-  min-height: 2em;
-  cursor: pointer;
-  pointer-events: auto;
-}
-
-.hero-title .highlight {
-  color: var(--accent-color);
-  font-weight: 700;
-}
-
-.hero-subtitle {
-  font-size: 20px;
-  font-weight: 400;
-  color: var(--accent-color);
-  margin: 0 0 20px;
-  font-family: var(--font-main);
-  letter-spacing: 0.5px;
-}
-
-.hero-bio {
-  margin: 20px 0 50px;
-  max-width: 540px;
-  color: var(--text-secondary);
-  font-size: 20px;
-  line-height: 1.5;
-}
-
-.hero-cta {
-  background-color: transparent;
-  padding: 1.25rem 1.75rem;
-  font-size: 14px;
-  line-height: 1;
-  transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-  pointer-events: auto;
-}
-
-/* Footer */
-.footer {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 20px;
-  color: var(--text-secondary);
-  font-family: var(--font-main);
-  font-size: 12px;
+  gap: var(--space-lg);
   text-align: center;
 }
 
@@ -514,709 +499,62 @@ a.mobile-resume-btn {
   line-height: 1.6;
 }
 
+.footer-provenance {
+  color: var(--on-surface-variant);
+  font-family: var(--font-mono);
+  font-size: var(--label-md-size);
+}
+
+.footer-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+  font-family: var(--font-mono);
+  font-size: var(--label-md-size);
+  color: var(--on-surface-variant);
+}
+
+.footer-meta a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.footer-meta svg {
+  width: 16px;
+  height: 16px;
+}
+
 .footer a {
-  color: #ffffff;
+  color: var(--on-surface-variant);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .footer a:hover {
-  color: var(--text-tertiary);
+  color: var(--primary);
 }
 
-/* Experiences Page Specifics */
-.section-title {
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--text-tertiary);
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  position: relative;
-  overflow: visible;
-}
-
-.section-number {
-  color: var(--accent-color);
-  font-family: var(--font-main);
-  font-size: 24px;
-  margin-right: 10px;
-  font-weight: 400;
-}
-
-.print-btn {
-  background: none;
-  border: 1px solid var(--accent-color);
-  border-radius: 8px;
-  padding: 8px;
-  margin-left: auto;
-  cursor: pointer;
-  color: var(--accent-color);
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  flex-shrink: 0;
-  pointer-events: auto;
-}
-
-.print-btn:hover {
-  background: var(--accent-color);
-  color: white;
-  transform: scale(1.05);
-}
-
-.print-btn:active {
-  transform: scale(0.95);
-}
-
-p.lead {
-  color: var(--text-secondary);
-  margin-bottom: 40px;
-  font-size: 18px;
-  max-width: 600px;
-}
-
-.timeline {
-  position: relative;
-  margin: 40px 0;
-  padding: 0;
-  list-style: none;
-  border-left: 2px solid rgba(var(--accent-color-rgb), 0.2);
-  margin-left: 10px;
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: 50px;
-  padding-left: 40px;
-}
-
-.timeline-marker {
-  position: absolute;
-  left: -6px;
-  top: 5px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--accent-color);
-  box-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.5);
-}
-
-.timeline-content h2 {
-  margin: 0 0 5px;
-  font-size: 20px;
-  color: var(--text-tertiary);
-  font-weight: 700;
-}
-
-.timeline-content .company {
-  color: var(--accent-color);
-}
-
-.timeline-content .date {
-  font-family: var(--font-main);
-  font-size: 13px;
-  color: var(--text-date);
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.job-description {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 20px;
-}
-
-.job-description li {
-  position: relative;
-  padding-left: 20px;
-  margin-bottom: 10px;
-  color: var(--text-secondary);
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-.job-description li::before {
-  content: '▹';
-  position: absolute;
-  left: 0;
-  color: var(--accent-color);
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.key-project {
-  margin: 24px 0;
-  padding: 24px;
-  background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(var(--accent-color-rgb), 0.15);
-  border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.key-project::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg,
-      transparent,
-      rgba(var(--accent-color-rgb), 0.3),
-      transparent);
-}
-
-.key-project:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(var(--accent-color-rgb), 0.3);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
-.kp-title {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  /* Gap between label and project name */
-  margin-bottom: 12px;
-}
-
-.kp-label {
-  color: var(--accent-color);
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  font-family: var(--font-main);
-  /* Remove flex/margin from label since it's now in kp-title container */
-}
-
-.kp-project-name {
-  color: #fff;
-  /* White title as requested */
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-family: var(--font-main);
-}
-
-.kp-title::after {
-  content: '';
-  display: block;
-  flex-grow: 1;
-  height: 1px;
-  background: rgba(var(--accent-color-rgb), 0.2);
-  margin-left: 16px;
-  min-width: 20px;
-  /* Ensure line is visible even if wrapped */
-}
-
-.kp-description {
-  color: var(--text-tertiary);
-  font-size: 15px;
-  line-height: 1.7;
-  font-weight: 400;
-}
-
-.tech-stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.tech-stack span {
-  font-family: var(--font-main);
-  font-size: 12px;
-  color: var(--accent-color);
-  background: rgba(var(--accent-color-rgb), 0.1);
-  padding: 5px 12px;
-  border-radius: 15px;
-  line-height: 1;
-}
-
-/* Technologies Page Styles */
-.tech-section {
-  margin-bottom: 60px;
-  pointer-events: auto;
-
-}
-
-.tech-section-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--text-tertiary);
-  margin-bottom: 30px;
-  margin-top: 0;
-}
-
-.tech-progress-list {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.tech-progress-item {
-  width: 100%;
-}
-
-.tech-description {
-  margin-top: 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-.tech-progress-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.tech-name {
-  font-size: 18px;
-  color: var(--text-tertiary);
-  font-weight: 700;
-}
-
-.tech-percentage {
-  font-family: var(--font-main);
-  font-size: 16px;
-  color: var(--accent-color);
-  font-weight: 700;
-}
-
-.tech-progress-bar {
-  width: 100%;
-  height: 8px;
-  background: rgba(var(--accent-color-rgb), 0.1);
-  border-radius: 10px;
-  overflow: visible;
-  position: relative;
-}
-
-.tech-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #6e48aa, var(--accent-color));
-  border-radius: 10px;
-  width: 0%;
-  transition: width 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);
-  position: relative;
-  box-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.5);
-  overflow: hidden;
-}
-
-.tech-progress-fill::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(90deg,
-      transparent,
-      rgba(255, 255, 255, 0.3),
-      transparent);
-  animation: shimmer 2s infinite;
-}
-
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-
-  100% {
-    transform: translateX(100%);
+@media (min-width: 768px) {
+  .footer-inner {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
   }
 }
 
-/* Rising-fast indicator: a horizontal row of green right-pointing
-   chevrons (">>>") starting at the progress fill's right tip and extending
-   rightward over the unfilled track, vertically centered on the bar so
-   they don't overlap the fill. The number of <i> chevrons encodes momentum
-   (more = rising faster); `left` is set inline per item to match
-   data-progress. A right-edge mask fades the trailing end so larger
-   clusters stay compact, and the float animation nudges them side-to-side. */
-.tech-rise {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translate(0, -50%);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 2px;
-  pointer-events: none;
-  z-index: 2;
-  animation: tech-rise-float 1.6s ease-in-out infinite;
-  -webkit-mask-image: linear-gradient(to right, #000 70%, transparent);
-  mask-image: linear-gradient(to right, #000 70%, transparent);
-}
-
-.tech-rise i {
-  display: block;
-  width: 4px;
-  height: 4px;
-  border-top: 2px solid #22c55e;
-  border-right: 2px solid #22c55e;
-  transform: rotate(45deg);
-  filter: drop-shadow(0 0 2px rgba(34, 197, 94, 0.7));
-}
-
-@keyframes tech-rise-float {
-
-  0%,
-  100% {
-    transform: translate(0, -50%);
-  }
-
-  50% {
-    transform: translate(6px, -50%);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  /* Entry fade-in is skipped too, so reduced-motion users get the page
-     instantly (matches the instant exit path in transitions.js). */
-  html.js body {
-    animation: none;
-  }
-
-  .tech-rise {
-    animation: none;
-  }
-
-  .tech-rise i {
-    filter: none;
-  }
-}
-
-/* Keep the chevron cluster inside the viewport on small screens: a
-   12-chevron row at 4px+2px gap is ~70px wide and would overflow the
-   bar/page on phones. Shrink the chevrons and tighten the gap so the
-   whole cluster stays within the track. */
-@media (max-width: 600px) {
-  .tech-rise {
-    gap: 1px;
-  }
-
-  .tech-rise i {
-    width: 3px;
-    height: 3px;
-  }
-}
-
-/* Navigation Hint Overlay */
-.navigation-hint {
-  position: fixed;
-  top: 110px; /* below the fixed 100px navbar — never covers bottom CTAs or back-to-top */
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 9999;
-  background: var(--nav-bg);
-  backdrop-filter: blur(5px);
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: 1px solid rgba(var(--accent-color-rgb), 0.3);
-  color: var(--text-tertiary);
-  font-family: var(--font-main);
-  font-size: 14px;
-  pointer-events: auto; /* clickable so the user can dismiss it */
-  cursor: pointer;
-  opacity: 1;
-  transition: opacity 1s ease-out;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.navigation-hint.fade-out {
-  opacity: 0;
-}
-
-.navigation-hint kbd {
-  background-color: rgba(var(--accent-color-rgb), 0.15);
-  border: 1px solid rgba(var(--accent-color-rgb), 0.5);
-  border-radius: 4px;
-  box-shadow: 0 2px 0 rgba(var(--accent-color-rgb), 0.2);
-  color: var(--accent-color);
-  display: inline-block;
-  font-family: var(--font-main);
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1;
-  padding: 4px 8px;
-  white-space: nowrap;
-  margin: 0 4px;
-}
-
-/* Contact Page Styles */
-.contact-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 200px);
-  text-align: center;
-}
-
-.contact-content .container {
-  max-width: 600px;
-}
-
-.contact-content .section-title {
-  justify-content: center;
-  margin-bottom: 30px;
-}
-
-.contact-description {
-  color: var(--text-secondary);
-  font-size: 18px;
-  line-height: 1.6;
-  margin-bottom: 40px;
-  max-width: 540px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.contact-email {
-  display: inline-block;
-  color: var(--text-tertiary);
-  font-size: 28px;
-  font-weight: 700;
-  text-decoration: none;
-  margin-bottom: 40px;
-  transition: color 0.3s ease;
-  word-break: break-all;
-  pointer-events: auto;
-}
-
-.contact-email:hover {
-  color: var(--accent-color);
-}
-
-.contact-email:focus {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 4px;
-}
-
-.social-links {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 40px;
-}
-
-.social-links a {
-  color: var(--text-secondary);
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: auto;
-}
-
-.social-links a:hover {
-  color: var(--accent-color);
-  transform: translateY(-3px);
-}
-
-.social-links a:focus {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 4px;
-}
-
-.social-links svg {
-  width: 28px;
-  height: 28px;
-}
-
-/* 404 Page Styles */
-.error-page {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  text-align: center;
-  padding: 20px;
-  pointer-events: auto;
-}
-
-.error-code {
-  font-size: 120px;
-  font-weight: 700;
-  color: var(--accent-color);
-  margin: 0;
-  line-height: 1;
-  font-family: var(--font-main);
-  animation: glitch 3s ease-in-out infinite;
-  position: relative;
-}
-
-.error-title {
-  font-size: 32px;
-  color: var(--text-tertiary);
-  margin: 20px 0;
-}
-
-.error-desc {
-  color: var(--text-secondary);
-  font-size: 18px;
-  max-width: 500px;
-  margin-bottom: 40px;
-}
-
-.home-btn {
-  font-size: 14px;
-  pointer-events: auto;
-}
-
-/* Glitch animation for 404 - broken digital connection effect */
-@keyframes glitch {
-  0% {
-    transform: translate(0);
-    opacity: 1;
-  }
-
-  10% {
-    transform: translate(-2px, 2px);
-    opacity: 0.8;
-  }
-
-  15% {
-    transform: translate(2px, -2px);
-    opacity: 0.9;
-  }
-
-  20% {
-    transform: translate(-1px, -1px);
-    opacity: 0.85;
-    text-shadow:
-      -2px 0 var(--accent-color),
-      2px 0 rgba(var(--accent-color-rgb), 0.5);
-  }
-
-  25% {
-    transform: translate(1px, 1px);
-    opacity: 0.95;
-  }
-
-  30% {
-    transform: translate(0);
-    opacity: 1;
-    filter: blur(1px);
-  }
-
-  35% {
-    transform: translate(-3px, 0);
-    opacity: 0.7;
-    letter-spacing: 3px;
-  }
-
-  40% {
-    transform: translate(3px, 0);
-    opacity: 0.8;
-    letter-spacing: -2px;
-  }
-
-  45% {
-    transform: translate(0);
-    opacity: 1;
-    filter: blur(0);
-    letter-spacing: normal;
-  }
-
-  50% {
-    transform: translate(-1px, 1px) skew(1deg);
-    opacity: 0.9;
-    text-shadow:
-      -3px 0 rgba(var(--accent-color-rgb), 0.7),
-      3px 0 rgba(var(--accent-color-rgb), 0.3);
-  }
-
-  55% {
-    transform: translate(1px, -1px) skew(-1deg);
-    opacity: 0.85;
-  }
-
-  60% {
-    transform: translate(0) skew(0);
-    opacity: 1;
-    text-shadow: none;
-  }
-
-  65% {
-    transform: translate(-2px, 0);
-    opacity: 0.75;
-    filter: blur(2px);
-  }
-
-  70% {
-    transform: translate(2px, 0);
-    opacity: 0.8;
-  }
-
-  75% {
-    transform: translate(0);
-    opacity: 1;
-    filter: blur(0);
-  }
-
-  80% {
-    transform: translate(-1px, -1px);
-    opacity: 0.9;
-    letter-spacing: 2px;
-  }
-
-  85% {
-    transform: translate(1px, 1px);
-    opacity: 0.95;
-    letter-spacing: normal;
-  }
-
-  90% {
-    transform: translate(0);
-    opacity: 1;
-  }
-
-  95% {
-    transform: translate(-1px, 0);
-    opacity: 0.98;
-  }
-
-  100% {
-    transform: translate(0);
-    opacity: 1;
-    text-shadow: none;
-    filter: blur(0);
-  }
-}
-
-/* Back to Top Button */
+/* --- Back to Top Button ------------------------------------------------- */
 .back-to-top-btn {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  background-color: rgba(10, 10, 15, 0.9);
-  border: 1px solid rgba(136, 146, 176, 0.2);
-  color: var(--text-secondary);
+  background-color: rgba(17, 19, 25, 0.9);
+  border: 1px solid rgba(61, 73, 76, 0.3);
+  color: var(--on-surface-variant);
   padding: 12px 20px;
-  border-radius: 4px;
+  border-radius: var(--radius);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1227,8 +565,8 @@ p.lead {
   transition: all 0.3s ease;
   z-index: 99;
   backdrop-filter: blur(5px);
-  font-family: var(--font-main);
-  font-size: 14px;
+  font-family: var(--font-mono);
+  font-size: var(--label-md-size);
   letter-spacing: 0.5px;
 }
 
@@ -1238,10 +576,10 @@ p.lead {
 }
 
 .back-to-top-btn:hover {
-  background-color: rgba(20, 20, 25, 1);
-  border-color: var(--text-secondary);
-  color: var(--text-primary);
-  transform: translateY(-5px);
+  background-color: var(--surface-container-high);
+  border-color: rgba(76, 215, 246, 0.4);
+  color: var(--on-surface);
+  transform: translateY(-3px);
 }
 
 .back-to-top-btn svg {
@@ -1254,21 +592,25 @@ p.lead {
   transform: translateY(-3px);
 }
 
-/* Typing Indicator */
+/* Typing indicator appended by the hero typewriter. The dots are inline-block
+   spans that must stay on one line: the parent is force-wrapped off, and each
+   dot reserves its own character box with a fixed width so three dots read as
+   ". . ." horizontally rather than stacking. */
 .typing-dots {
-  display: inline-block;
+  display: inline;
+  white-space: nowrap;
   margin-left: 4px;
 }
 
 .typing-dots span {
   display: inline-block;
-  width: auto;
-  height: auto;
+  width: 0.35em;
+  height: 1em;
   border-radius: 0;
   background-color: transparent;
   animation: bounce 1.4s infinite ease-in-out both;
-  margin: 0 -0.1em;
-  color: var(--text-secondary);
+  color: var(--on-surface-variant);
+  vertical-align: baseline;
 }
 
 .typing-dots span::before {
@@ -1297,25 +639,18 @@ p.lead {
     transform: scale(1);
   }
 }
-/* ---------------------------------------------------------------------------
-   Language switcher and server-rendered navigation hint.
 
-   The switcher reuses the shared glyph styling of `.sound-toggle` ("Navbar
-   glyph buttons" above), but it is an `<a>` sitting inside two containers whose
-   generic link rules are *more* specific than a bare `.lang-toggle`:
-   `.nav-links a` and `.mobile-nav a` both set `color`, and the drawer's also
-   sets `font-size` and `padding`. Restating the glyph's own values on a
-   two-class selector is what makes it win in both places, so the switcher
-   really is the same control as the sound toggle rather than a link that
-   happens to have a border-like box in one container and not the other.
+/* ---------------------------------------------------------------------------
+   Language switcher inside the two container contexts. `.nav-links a` and
+   `.mobile-nav a` both set `color` (and the drawer sets font-size/padding), so
+   the switcher's own values are restated on a two-class selector to win in
+   both places.
    --------------------------------------------------------------------------- */
 .nav-links a.lang-toggle,
 .mobile-nav a.lang-toggle {
-  color: var(--accent-color);
-  font-size: 13px;
+  color: var(--primary);
+  font-size: var(--label-md-size);
   padding: 0;
-  /* No global `a` reset in this sheet — only the button utilities at the top
-     have one — so the underline has to go explicitly. */
   text-decoration: none;
 }
 
@@ -1325,7 +660,7 @@ p.lead {
 
 .nav-links a.lang-toggle:hover,
 .mobile-nav a.lang-toggle:hover {
-  color: var(--text-primary);
+  color: var(--on-surface);
 }
 
 .mobile-nav a.lang-toggle {
@@ -1333,21 +668,56 @@ p.lead {
   align-self: flex-start;
 }
 
-/* The hint ships both variants in the HTML and CSS picks the right one. The old
-   code decided in JavaScript from `navigator.maxTouchPoints`, which called
-   touchscreen laptops touch devices and left the hint box empty — permanently,
-   for anyone without JS. `hover: none` + `pointer: coarse` is what "touch
-   screen" actually means.
-
-   Visibility is driven by `aria-hidden` rather than a class: the hint is hidden
-   until navigation.js flips the attribute to "false" to show it, so a page
-   whose script never runs shows nothing. */
+/* Navigation hint overlay. Visibility is driven by `aria-hidden`: the hint is
+   hidden until navigation.js flips it to "false", so a page whose script never
+   runs shows nothing. CSS picks the right variant from the pointer media
+   query rather than JavaScript sniffing maxTouchPoints. */
 .navigation-hint {
+  position: fixed;
+  top: calc(var(--nav-height) + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  background: var(--nav-bg);
+  backdrop-filter: blur(5px);
+  padding: 10px 20px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(76, 215, 246, 0.3);
+  color: var(--on-surface);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  pointer-events: auto;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 1s ease-out;
   display: none;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .navigation-hint[aria-hidden="false"] {
   display: flex;
+}
+
+.navigation-hint.fade-out {
+  opacity: 0;
+}
+
+.navigation-hint kbd {
+  background-color: rgba(76, 215, 246, 0.15);
+  border: 1px solid rgba(76, 215, 246, 0.5);
+  border-radius: 4px;
+  box-shadow: 0 2px 0 rgba(76, 215, 246, 0.2);
+  color: var(--primary);
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 4px 8px;
+  white-space: nowrap;
+  margin: 0 4px;
 }
 
 .hint-touch {
@@ -1361,5 +731,54 @@ p.lead {
 
   .hint-keyboard {
     display: none;
+  }
+}
+
+/* --- Generic page frame ------------------------------------------------ */
+/* Non-home pages share a simple container + top padding. */
+.page {
+  position: relative;
+  z-index: 2;
+  padding-top: calc(var(--nav-height) + var(--space-xl));
+  padding-bottom: var(--space-xl);
+  min-height: 100vh;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- Tablet tier (769-1023px) ------------------------------------------- */
+/* R04 asks for a real tier between desktop and mobile, and mobile.css only
+   engages at 768. The export's navbar holds five items; this one carries seven
+   (four links + Curriculum + language + avatar), so at tablet width the
+   numbered row moves into the existing drawer instead of being crushed. Placed
+   here, after the base `.hamburger-menu { display: none }`, so the
+   `display: flex` below is not overridden. */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .nav-links,
+  .navbar-brand .status-badge,
+  .navbar-actions .resume-btn {
+    display: none;
+  }
+
+  .hamburger-menu {
+    display: flex;
+  }
+
+  /* DESIGN.md's tablet tier: a 24px margin, between the 16px phone margin
+     (mobile.css) and the 32px desktop one (--margin). */
+  .container,
+  .navbar-inner,
+  .footer-inner {
+    padding-inline: 1.5rem;
   }
 }

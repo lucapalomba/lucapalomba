@@ -2,7 +2,7 @@
 
 ```text
 > whoami
-Full Stack Developer & Team Lead — I build things for the web,
+Engineering Manager, Team Lead & Full Stack Developer — I build things for the web,
 lead the people who build them, and let AI agents do the boring parts.
 ```
 
@@ -12,7 +12,7 @@ lead the people who build them, and let AI agents do the boring parts.
 
 ## 🧑‍💻 About me
 
-I'm a Full Stack Developer and Team Lead with a soft spot for clean code, good DX, and shipping things that actually work. My natural habitat is somewhere between the browser and the whiteboard — writing code in the morning, unblocking people in the afternoon.
+I'm an Engineering Manager, Team Lead and Full Stack Developer with a soft spot for clean code, good DX, and shipping things that actually work. My natural habitat is somewhere between the browser and the whiteboard — writing code in the morning, unblocking people in the afternoon.
 
 ## 🤖 Humans + AI, best team ever
 

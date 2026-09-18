@@ -1,0 +1,86 @@
+﻿/* --- 404 ----------------------------------------------------------------- */
+/* Full chrome now (R13): the fixed navbar is present, so the top padding
+   clears the nav height and the box fills the remaining viewport. */
+.error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding-top: calc(var(--nav-height) + var(--space-xl));
+  padding-bottom: var(--space-xl);
+  padding-inline: var(--margin);
+  box-sizing: border-box;
+}
+
+.error-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-md);
+}
+
+.error-badge {
+  color: var(--error);
+  border-color: var(--error);
+}
+
+.error-code {
+  font-family: var(--font-ui);
+  font-size: var(--display-size);
+  font-weight: var(--display-weight);
+  letter-spacing: var(--display-tracking);
+  color: var(--primary);
+  margin: 0;
+}
+
+/* Every other page title steps down at 1024/768; this one was the only
+   composition left at 56px on a 320px screen (finding E). */
+@media (max-width: 1023px) {
+  .error-code {
+    font-size: var(--display-mobile-size);
+    line-height: var(--display-mobile-line);
+    letter-spacing: var(--display-mobile-tracking);
+  }
+}
+
+.error-title-inline {
+  color: var(--on-surface);
+}
+
+.error-desc {
+  color: var(--on-surface-variant);
+  max-width: 520px;
+  margin: 0;
+}
+
+.error-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.error-quickjump ol {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-md);
+  list-style: none;
+  padding: 0;
+  margin: var(--space-md) 0 0;
+}
+
+.error-quickjump a {
+  font-family: var(--font-mono);
+  font-size: var(--body-sm-size);
+  color: var(--on-surface-variant);
+  text-decoration: none;
+}
+
+.error-quickjump a:hover {
+  color: var(--primary);
+}
+
