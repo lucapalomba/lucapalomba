@@ -208,6 +208,14 @@
   top: calc(var(--nav-height) + var(--space-lg));
 }
 
+/* Stacked below the feed on mobile, the sticky pin is meaningless (and a tall
+   sticky sidebar fights the scroll), so drop it below the breakpoint. */
+@media (max-width: 767px) {
+  .exp-side {
+    position: static;
+  }
+}
+
 .telemetry-side {
   display: flex;
   flex-direction: column;

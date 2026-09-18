@@ -84,13 +84,3 @@
   color: var(--primary);
 }
 
-@media (max-width: 767px) {
-  .contact-tiles {
-    grid-template-columns: 1fr;
-  }
-
-  .exp-side {
-    position: static;
-  }
-}
-
