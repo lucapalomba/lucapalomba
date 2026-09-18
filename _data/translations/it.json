@@ -378,12 +378,12 @@
         "tech": {
             "aiAgents": "Agenti di sviluppo LLM & Documentazione per AI",
             "jsNode": "JavaScript (Node.js + TypeScript)",
-            "react": "Frontend Architecture (React.js, Angular, Vanilla JS)",
-            "cloudK8s": "Cloud & Distributed Systems (Docker, Kubernetes)",
-            "php": "PHP (Symfony, Zend, legacy-to-modern)",
-            "cicd": "CI/CD & Automation (Jenkins, GitLab, Bamboo)",
+            "react": "Architettura frontend (React.js, Angular, Vanilla JS)",
+            "cloudK8s": "Cloud e sistemi distribuiti (Docker, Kubernetes)",
+            "php": "PHP (Symfony, Zend, da legacy a moderno)",
+            "cicd": "CI/CD e automazione (Jenkins, GitLab, Bamboo)",
             "architectures": "Architetture evolute (DDD, Event-Driven, CQRS)",
-            "cloud": "Cloud provider deep dive (AWS, GCP, Azure)",
+            "cloud": "Approfondimento sui cloud provider (AWS, GCP, Azure)",
             "ml": "Machine Learning",
             "wasm": "WebAssembly (WASM)"
         },
@@ -400,16 +400,16 @@
             "wasm": "Studio WebAssembly per valutare nuove soluzioni ad alte prestazioni nel browser e in contesti server-side, con l'obiettivo di portare efficienza e portabilità in scenari distribuiti e real-time."
         },
         "meta": {
-            "aiAgents": { "domain": "SISTEMI_AI_AGENTICI", "vector": "Automazione dei flussi", "status": "Attivo ogni giorno" },
-            "jsNode": { "domain": "RUNTIME_PRINCIPALE", "vector": "Full-Stack e orchestrazione", "status": "Stack nativo" },
-            "cicd": { "domain": "ORCHESTRAZIONE_DELIVERY", "vector": "Ingegneria dei rilasci", "status": "Consolidato in produzione" },
-            "react": { "domain": "TOPOLOGIA_CLIENT", "vector": "Design system e performance UX", "status": "Esperienza staff" },
-            "php": { "domain": "ENTERPRISE_LEGACY_MODERNO", "vector": "Migrazione enterprise", "status": "Alta maturità" },
-            "architectures": { "domain": "STRATEGIA_DI_DOMINIO", "vector": "Pattern distribuiti", "status": "Focus attivo" },
-            "cloudK8s": { "domain": "SCALING_INFRA", "vector": "Multi-cluster 100+ nodi", "status": "In produzione" },
-            "cloud": { "domain": "ECOSISTEMI_HYPERSCALER", "vector": "IAM e networking enterprise", "status": "In studio" },
-            "ml": { "domain": "INTELLIGENZA_APPLICATA", "vector": "Analytics predittiva e flussi", "status": "Esplorativo" },
-            "wasm": { "domain": "SANDBOX_BASSO_LIVELLO", "vector": "Compute nativo client", "status": "Ricerca iniziale" }
+            "aiAgents": { "domain": "AI_AGENTIC_SYSTEMS", "vector": "Automazione dei flussi", "status": "Attivo ogni giorno" },
+            "jsNode": { "domain": "CORE_RUNTIME", "vector": "Full-Stack e orchestrazione", "status": "Stack nativo" },
+            "cicd": { "domain": "PIPELINE_ORCHESTRATION", "vector": "Ingegneria dei rilasci", "status": "Consolidato in produzione" },
+            "react": { "domain": "CLIENT_TOPOLOGY", "vector": "Design system e performance UX", "status": "Esperienza staff" },
+            "php": { "domain": "ENTERPRISE_LEGACY_MODERN", "vector": "Migrazione enterprise", "status": "Alta maturità" },
+            "architectures": { "domain": "DOMAIN_STRATEGY", "vector": "Pattern distribuiti", "status": "Focus attivo" },
+            "cloudK8s": { "domain": "INFRA_SCALING", "vector": "Multi-cluster 100+ nodi", "status": "In produzione" },
+            "cloud": { "domain": "HYPERSCALER_ECOSYSTEMS", "vector": "IAM e networking enterprise", "status": "In studio" },
+            "ml": { "domain": "APPLIED_INTELLIGENCE", "vector": "Analytics predittiva e flussi", "status": "Esplorativo" },
+            "wasm": { "domain": "LOW_LEVEL_SANDBOX", "vector": "Compute nativo client", "status": "Ricerca iniziale" }
         }
     },
     "contact": {
