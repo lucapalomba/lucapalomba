@@ -39,7 +39,11 @@ const LOCALES = ['en', 'it'];
 const LOCALE_PATHS = LOCALES.map(lang => path.join(DATA_DIR, `${lang}.json`));
 
 // Directories that hold sources to scan for `t.` references and pages.
-const SKIP_DIRS = new Set(['node_modules', '.git', '.github', 'scripts', 'scratch', 'vendor']);
+// `.claude` is skipped because agent worktrees live under `.claude/worktrees/`:
+// each is a full checkout of another branch, so scanning them would flag that
+// branch's own (valid) references and pages as errors against this working
+// tree. CI has no worktrees, so this only affects local runs.
+const SKIP_DIRS = new Set(['node_modules', '.git', '.github', '.claude', 'scripts', 'scratch', 'vendor']);
 
 // Build output, at any name: Jekyll is run with several destinations here
 // (`_site` for the deploy build, `_site_lhci` for Lighthouse), and a stale one
