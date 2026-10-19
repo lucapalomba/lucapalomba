@@ -1,0 +1,88 @@
+﻿/* --- Shared page atoms --------------------------------------------------- */
+.kicker {
+  font-family: var(--font-mono);
+  font-size: var(--label-md-size);
+  letter-spacing: var(--label-md-tracking);
+  text-transform: uppercase;
+  color: var(--outline);
+  margin: 0;
+}
+
+.kicker .accent {
+  color: var(--primary);
+}
+
+.accent-text {
+  color: var(--primary);
+}
+
+.lead,
+.page-lead {
+  color: var(--on-surface-variant);
+}
+
+.page-copy {
+  color: var(--on-surface-variant);
+  font-size: var(--body-lg-size);
+  line-height: var(--body-lg-line);
+}
+
+.page-title {
+  font-family: var(--font-ui);
+  font-size: var(--headline-lg-size);
+  line-height: var(--headline-lg-line);
+  font-weight: 600;
+  letter-spacing: var(--headline-lg-tracking);
+  color: var(--on-surface);
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-xs);
+  margin: var(--space-xs) 0 0;
+}
+
+.page-title--display {
+  font-size: var(--display-size);
+  line-height: 1.1;
+  letter-spacing: var(--display-tracking);
+  font-weight: 600;
+}
+
+.section-number {
+  font-family: var(--font-mono);
+  color: var(--primary);
+  font-size: var(--headline-lg-size);
+  font-weight: 600;
+}
+
+.section-number--lg {
+  font-size: var(--headline-lg-size);
+}
+
+.print-btn {
+  margin-left: auto;
+  align-self: center;
+  background: none;
+  border: 1px solid rgba(61, 73, 76, 0.3);
+  border-radius: var(--radius);
+  padding: 6px;
+  cursor: pointer;
+  color: var(--primary);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.print-btn:hover {
+  background: var(--surface-container-high);
+  border-color: rgba(76, 215, 246, 0.4);
+}
+
+@media (max-width: 767px) {
+  .page-title--display {
+    font-size: var(--display-mobile-size);
+    letter-spacing: var(--display-mobile-tracking);
+  }
+}
+

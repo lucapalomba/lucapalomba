@@ -4,8 +4,21 @@ layout: default
 {%- assign t = site.data.translations[page.lang] %}
 <!-- Main Content -->
 <main class="error-page" id="main-content">
-    <h1 class="error-code">{{ t.notFound.code }}</h1>
-    <h2 class="error-title">{{ t.notFound.title }}</h2>
-    <p class="error-desc">{{ t.notFound.description }}</p>
-    <a href="{{ '/' | relative_url }}" class="home-btn">{{ t.notFound.homeButton }}</a>
+    <div class="container error-inner">
+        <p class="chip badge--accent error-badge"><span class="ping-dot"></span> ERR_ROUTE_NULL // 404</p>
+        <h1 class="error-code">{{ t.notFound.code }}. <span class="error-title-inline">{{ t.notFound.title }}</span></h1>
+        <p class="error-desc">{{ t.notFound.description }}</p>
+        <div class="error-actions">
+            <a href="{{ '/' | relative_url }}" class="btn btn--primary">{% include icon.html name="home" %} {{ t.notFound.homeButton }}</a>
+            <a href="technologies.html" class="btn btn--secondary">{% include icon.html name="memory" %} {{ t.notFound.browseButton }}</a>
+        </div>
+        <nav class="error-quickjump" aria-label="{{ t.notFound.quickJump }}">
+            <ol>
+                <li><a href="index.html"><span class="nav-number">01.</span> {{ t.nav.whoami }}</a></li>
+                <li><a href="experiences.html"><span class="nav-number">02.</span> {{ t.nav.experience }}</a></li>
+                <li><a href="technologies.html"><span class="nav-number">03.</span> {{ t.nav.technologies }}</a></li>
+                <li><a href="contact.html"><span class="nav-number">04.</span> {{ t.nav.contact }}</a></li>
+            </ol>
+        </nav>
+    </div>
 </main>

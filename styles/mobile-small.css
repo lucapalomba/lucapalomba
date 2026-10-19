@@ -1,7 +1,4 @@
 /* Styles for max-width: 640px */
-.page {
-    padding: 40px 20px;
-}
 
 .content-wrapper {
     padding-top: 110px;
@@ -11,9 +8,11 @@
     align-items: flex-start;
 }
 
-.container {
-    padding: 0;
-}
+/* The 16px mobile margin comes from mobile.css's `.container
+   { padding-inline: var(--space-md) }`; the old `padding: 0` here cancelled it
+   for every page whose wrapper is not `.page` — the home hero (`.home-main`) ran
+   flush against the viewport edge below 640px. Vertical padding stays on
+   main.css's `.page`, which clears the fixed navbar. */
 
 .timeline {
     margin-left: 5px;

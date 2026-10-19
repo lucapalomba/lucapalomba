@@ -1,0 +1,275 @@
+/* ---------------------------------------------------------------------------
+   Component primitives — "Obsidian Precision"
+
+   Plain CSS classes matching the design spec: layout container and grid,
+   section header, card, chip, badge, stat tile, key-value row, buttons,
+   status dot, progress bar and sparkline. Loaded after tokens.css, before
+   main.css, so page-specific rules can still override.
+
+   Depth comes from surface luminance and 1px micro-borders, not shadows.
+   Pills are excluded on purpose (DESIGN.md); circular radii only for avatars
+   and status dots.
+   --------------------------------------------------------------------------- */
+
+/* --- Layout ------------------------------------------------------------- */
+/* The `hidden` attribute must win over any author `display` declaration.
+   Without this reset `.tech-card { display: flex }` defeated the user agent's
+   `[hidden] { display: none }`, so the technologies filter flipped
+   `aria-pressed` and coloured the button while the matrix never changed. */
+[hidden] {
+  display: none !important;
+}
+
+/* The mockups cap content at 1200px with a 2rem horizontal margin. */
+.container {
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+  padding-inline: var(--margin);
+  box-sizing: border-box;
+}
+
+/* Full-bleed section band: background tier + hairline rules, as the export's
+   `w-full bg-... border-y` sections. Content inside still uses .container. */
+.band {
+  width: 100%;
+  padding-block: var(--space-xl);
+  border-block: 1px solid var(--border-subtle);
+}
+
+.band--raised {
+  background: rgba(12, 14, 20, 0.6);
+}
+
+.band--top {
+  border-block: none;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gutter);
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+
+/* Column spans, desktop-first via the 12-col grid. */
+.col-3 { grid-column: span 12; }
+.col-4 { grid-column: span 12; }
+.col-5 { grid-column: span 12; }
+.col-6 { grid-column: span 12; }
+.col-7 { grid-column: span 12; }
+.col-8 { grid-column: span 12; }
+.col-9 { grid-column: span 12; }
+
+@media (min-width: 768px) {
+  .col-3 { grid-column: span 4; }
+  .col-4 { grid-column: span 4; }
+  .col-5 { grid-column: span 4; }
+  .col-6 { grid-column: span 8; }
+  .col-7 { grid-column: span 8; }
+  .col-8 { grid-column: span 8; }
+  .col-9 { grid-column: span 8; }
+}
+
+@media (min-width: 1024px) {
+  .col-3 { grid-column: span 3; }
+  .col-4 { grid-column: span 4; }
+  .col-5 { grid-column: span 5; }
+  .col-6 { grid-column: span 6; }
+  .col-7 { grid-column: span 7; }
+  .col-8 { grid-column: span 8; }
+  .col-9 { grid-column: span 9; }
+}
+
+/* --- Surfaces ------------------------------------------------------------ */
+/* The export's glass panel: translucent canvas, backdrop blur, hairline
+   border, and a hover that lifts the border and adds a soft neutral shadow.
+   The surface is `surface-container-low/80` with an alpha .2 border, matching
+   the mockups (an earlier pass used the darker surface at alpha .38). */
+.card {
+  background: rgba(25, 27, 34, 0.8);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(61, 73, 76, 0.2);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  box-sizing: border-box;
+}
+
+.card--interactive {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.card--interactive:hover {
+  border-color: rgba(76, 215, 246, 0.45);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.65);
+  transform: translateY(-1px);
+}
+
+/* --- Chip & badge -------------------------------------------------------- */
+.chip,
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+  font-weight: var(--label-sm-weight);
+  letter-spacing: var(--label-sm-tracking);
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+  background: var(--surface-container-low);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: 0.25rem 0.5rem;
+  line-height: 1;
+}
+
+.badge--accent {
+  color: var(--primary);
+  border-color: var(--border-interactive);
+}
+
+/* --- Status dot ---------------------------------------------------------- */
+.ping-dot {
+  position: relative;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--tertiary);
+  flex-shrink: 0;
+}
+
+/* A single ping cycle per DESIGN.md, not the infinite Tailwind animate-ping. */
+.ping-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: inherit;
+  animation: ping-once 2s var(--ease-expo-out) 1;
+}
+
+/* --- Stat label ---------------------------------------------------------- */
+/* Mono uppercase micro-label used on the telemetry tiles, the technologies
+   summary and the contact tiles. Kept as a standalone primitive because those
+   three compositions consume it outside a shared tile component. */
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+  letter-spacing: var(--label-sm-tracking);
+  text-transform: uppercase;
+  color: var(--outline);
+}
+
+/* --- Buttons ------------------------------------------------------------- */
+/* Primary: solid on-surface surface with deep text (the export's
+   `bg-on-surface text-surface`). Secondary: glass chip with hairline border. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: var(--body-md-size);
+  line-height: 1;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background-color var(--duration-base) ease,
+    border-color var(--duration-base) ease,
+    color var(--duration-base) ease,
+    opacity var(--duration-base) ease,
+    box-shadow var(--duration-base) ease;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--primary-container);
+  outline-offset: 2px;
+}
+
+.btn--primary {
+  background: var(--on-surface);
+  color: var(--surface);
+}
+
+.btn--primary:hover {
+  opacity: 0.9;
+  box-shadow: 0 0 28px -2px rgba(226, 226, 234, 0.5);
+}
+
+.btn--secondary {
+  background: rgba(25, 27, 34, 0.8);
+  backdrop-filter: blur(12px);
+  border-color: rgba(61, 73, 76, 0.2);
+  color: var(--on-surface);
+}
+
+.btn--secondary:hover {
+  background: var(--surface-container);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--primary);
+}
+
+.btn--ghost:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* --- Progress ------------------------------------------------------------ */
+/* Rectangular, per DESIGN.md ("pill shapes are deliberately excluded"). */
+.progress {
+  width: 100%;
+  height: 6px;
+  background: rgba(12, 14, 20, 0.8);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.progress .progress-fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--primary);
+  border-radius: inherit;
+  transition: width 1.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --- Sparkline ----------------------------------------------------------- */
+.sparkline {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--primary);
+}
+
+.sparkline path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+

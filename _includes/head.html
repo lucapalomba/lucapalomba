@@ -52,12 +52,14 @@
 <link rel="icon" href="{{ '/images/favicon-32.png' | relative_url }}" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="{{ '/images/icon-192.png' | relative_url }}" sizes="192x192">
 <link rel="shortcut icon" href="{{ '/images/favicon-32.png' | relative_url }}">
-<meta name="theme-color" content="#0a0a0f">
+<meta name="theme-color" content="#111319">
 
-<!-- Preload critical fonts and CSS -->
-<link rel="preload" href="{{ '/fonts/Roboto_Mono/static/RobotoMono-Variable.woff2' | relative_url }}" as="font"
+<!-- Preload only the font the first text paint needs. Preloading every face
+     competes with the stylesheet on the slow-4G critical path; the rest load
+     with font-display: swap. -->
+<link rel="preload" href="{{ '/fonts/Geist/Geist-Latin-Variable.woff2' | relative_url }}" as="font"
   type="font/woff2" crossorigin>
-<link rel="preload" href="{{ '/styles/main.css' | relative_url }}" as="style">
+<link rel="preload" href="{{ '/styles/app.css' | relative_url }}" as="style">
 
 <!-- Web App Manifest -->
 <link rel="manifest" href="{{ '/manifest.webmanifest' | relative_url }}">
@@ -101,10 +103,22 @@
 {{ page.header_scripts }}
 {% endif %}
 
-<!-- Fonts -->
-<link rel="stylesheet" href="{{ '/styles/fonts.css' | relative_url }}">
-<link rel="stylesheet" href="{{ '/styles/transitions.css' | relative_url }}">
-<link rel="stylesheet" href="{{ '/styles/main.css' | relative_url }}">
+<!-- Styles: one shared bundle every page needs, plus one small per-page sheet so
+     a page never downloads another page's composition. The media-specific sheets
+     stay on their own link so they are not on the critical path. -->
+<link rel="stylesheet" href="{{ '/styles/app.css' | relative_url }}">
+{%- case page.i18n_key %}
+{%- when 'index' %}
+<link rel="stylesheet" href="{{ '/styles/page-index.css' | relative_url }}">
+{%- when 'experiences' %}
+<link rel="stylesheet" href="{{ '/styles/page-experiences.css' | relative_url }}">
+{%- when 'technologies' %}
+<link rel="stylesheet" href="{{ '/styles/page-technologies.css' | relative_url }}">
+{%- when 'contact' %}
+<link rel="stylesheet" href="{{ '/styles/page-contact.css' | relative_url }}">
+{%- when 'notFound' %}
+<link rel="stylesheet" href="{{ '/styles/page-404.css' | relative_url }}">
+{%- endcase %}
 <link rel="stylesheet" href="{{ '/styles/mobile.css' | relative_url }}" media="(max-width: 768px)">
 <link rel="stylesheet" href="{{ '/styles/mobile-small.css' | relative_url }}" media="(max-width: 640px)">
 <link rel="stylesheet" href="{{ '/styles/reduced-motion.css' | relative_url }}"

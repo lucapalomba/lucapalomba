@@ -1,0 +1,18 @@
+---
+---
+/* Shared stylesheet: everything every page needs.
+   tokens -> fonts -> component primitives -> shell (main) -> motion -> the
+   shared page atoms. Each page then loads one small page-*.css with just its
+   own composition (see head.html), so the home never downloads the
+   technologies or contact rules.
+
+   The sources stay separate under styles/ for editing; this concatenates them
+   at build time so the critical path is two requests (this + the page sheet)
+   instead of seven individual <link>s. */
+{% include_relative tokens.css %}
+{% include_relative fonts.css %}
+{% include_relative components.css %}
+{% include_relative transitions.css %}
+{% include_relative main.css %}
+{% include_relative motion.css %}
+{% include_relative shared-atoms.css %}

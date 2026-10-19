@@ -27,13 +27,11 @@ const VERSION = new URL(self.location.href).searchParams.get('v') || 'dev';
 const CACHE_NAME = 'lucapalomba-' + VERSION;
 
 // The shell: every page in both languages, the stylesheets and scripts they
-// need, and the variable font that `styles/fonts.css` asks for first and
-// `_includes/head.html` preloads. The `RobotoMono-Regular.ttf` fallback in that
-// same `src` list is not worth its 88 KB here: the browser only reaches for it
-// when it cannot take the woff2, which no service-worker-capable browser does.
-// Deliberately NOT the icons (~200 KB each) or the typewriter sounds (~2 mp3):
-// those are runtime-cached on first use instead of costing every visitor a
-// download before they have asked for anything.
+// need, and the self-hosted fonts that `styles/fonts.css` asks for first and
+// `_includes/head.html` preloads. Deliberately NOT the icons (~200 KB each) or
+// the typewriter sounds (they no longer exist, D6): those are runtime-cached on
+// first use instead of costing every visitor a download before they have asked
+// for anything.
 //
 // There is no `translations/*.json` entry and no `js/i18n.js`: since issue #82
 // the copy is rendered by Jekyll from `_data/translations/` at build time, so
@@ -52,9 +50,12 @@ const PRECACHE_URLS = [
   './it/contact.html',
   './404.html',
   './manifest.webmanifest',
-  './styles/fonts.css',
-  './styles/transitions.css',
-  './styles/main.css',
+  './styles/app.css',
+  './styles/page-index.css',
+  './styles/page-experiences.css',
+  './styles/page-technologies.css',
+  './styles/page-contact.css',
+  './styles/page-404.css',
   './styles/mobile.css',
   './styles/mobile-small.css',
   './styles/reduced-motion.css',
@@ -65,11 +66,15 @@ const PRECACHE_URLS = [
   './js/navigation.js',
   './js/hamburger.js',
   './js/backToTop.js',
+  './js/backdrop.js',
+  './js/motion.js',
   './js/titleAnimation.js',
   './js/techProgress.js',
-  './js/soundMute.js',
-  './js/particles.min.js',
-  './fonts/Roboto_Mono/static/RobotoMono-Variable.woff2'
+  './js/contactCopy.js',
+  './fonts/Geist/Geist-Latin-Variable.woff2',
+  './fonts/Geist/Geist-Latin-Ext-Variable.woff2',
+  './fonts/JetBrains_Mono/JetBrainsMono-Latin-Variable.woff2',
+  './fonts/JetBrains_Mono/JetBrainsMono-Latin-Ext-Variable.woff2'
 ];
 
 // Served for a navigation that is neither cached nor reachable. Every page of
@@ -112,9 +117,9 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const request = event.request;
 
-  // Never touch anything that is not a plain same-origin GET: the particles
-  // CDN is cross-origin (its response is opaque and must not be cached), and
-  // caching a POST would be wrong.
+  // Never touch anything that is not a plain same-origin GET: cross-origin
+  // requests are opaque (and nothing external is loaded any more — fonts and
+  // icons are self-hosted), and caching a POST would be wrong.
   if (request.method !== 'GET') return;
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
@@ -148,7 +153,7 @@ async function handleNavigation(request) {
 }
 
 // Cache-first: the shell is already precached, and anything else same-origin
-// (icons, sounds) is fetched once and then served from the cache.
+// (icons and similar) is fetched once and then served from the cache.
 async function handleAsset(request) {
   const cached = await caches.match(request);
   if (cached) return cached;
