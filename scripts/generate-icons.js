@@ -64,7 +64,11 @@ const COLOR_TYPE_RGBA = 6;
 const CHANNELS = { [COLOR_TYPE_RGB]: 3, [COLOR_TYPE_RGBA]: 4 };
 
 const OUTPUTS = [
-  { file: 'icon-192.png', size: 192, alpha: true },
+  // `palette` re-encodes the file as an indexed PNG. Only the 192 icon needs
+  // it: that is the file every page load fetches as the apple-touch-icon, so it
+  // is the only one whose bytes sit on the critical path. The 512s are fetched
+  // once, at install time, and keep their truecolour encoding.
+  { file: 'icon-192.png', size: 192, alpha: true, palette: 256 },
   { file: 'icon-512.png', size: 512, alpha: true },
   { file: 'icon-maskable-512.png', size: 512, alpha: false },
   { file: 'favicon-32.png', size: 32, alpha: true },
@@ -276,6 +280,250 @@ function writePng(width, height, channels, pixels) {
     makeChunk('IEND', Buffer.alloc(0)),
   ];
   return Buffer.concat(chunks);
+}
+
+// ---------------------------------------------------------------------------
+// Indexed-colour (palette) encoding
+//
+// The 192x192 RGBA icon is ~35 KB of this artwork, and every page load pays for
+// it: browsers fetch the <link rel="apple-touch-icon"> eagerly. Re-encoding it
+// as an indexed PNG (colour type 3) with a 256-entry palette keeps the artwork
+// intact at icon size and costs a third of the bytes — 25 KB off a page whose
+// whole budget is ~166 KB.
+//
+// The palette is derived from the image itself: exact (lossless) when it holds
+// few enough colours, median-cut otherwise. Alpha is thresholded to one bit,
+// which is all keyed artwork with a hard edge needs.
+// ---------------------------------------------------------------------------
+
+const TRANSPARENT_INDEX = 0;
+const ALPHA_CUTOFF = 128;
+const COLOR_TYPE_INDEXED = 3;
+
+function colorKey(r, g, b) {
+  return (r << 16) | (g << 8) | b;
+}
+
+/** Weighted histogram of the opaque colours in a pixel buffer. */
+function colorHistogram(channels, pixels) {
+  const counts = new Map();
+  for (let i = 0; i < pixels.length; i += channels) {
+    const alpha = channels === 4 ? pixels[i + 3] : 255;
+    if (alpha < ALPHA_CUTOFF) continue;
+    const key = colorKey(pixels[i], pixels[i + 1], pixels[i + 2]);
+    counts.set(key, (counts.get(key) || 0) + 1);
+  }
+  const entries = [];
+  for (const [key, count] of counts) {
+    entries.push({
+      r: (key >> 16) & 0xff,
+      g: (key >> 8) & 0xff,
+      b: key & 0xff,
+      count,
+      key,
+    });
+  }
+  // Sorted by packed colour so ties never depend on Map insertion order.
+  entries.sort((a, b) => a.key - b.key);
+  return entries;
+}
+
+function makeBox(entries) {
+  let rMin = 255;
+  let rMax = 0;
+  let gMin = 255;
+  let gMax = 0;
+  let bMin = 255;
+  let bMax = 0;
+  let weight = 0;
+  for (const entry of entries) {
+    if (entry.r < rMin) rMin = entry.r;
+    if (entry.r > rMax) rMax = entry.r;
+    if (entry.g < gMin) gMin = entry.g;
+    if (entry.g > gMax) gMax = entry.g;
+    if (entry.b < bMin) bMin = entry.b;
+    if (entry.b > bMax) bMax = entry.b;
+    weight += entry.count;
+  }
+  const spans = [rMax - rMin, gMax - gMin, bMax - bMin];
+  let channel = 0;
+  for (let i = 1; i < 3; i++) if (spans[i] > spans[channel]) channel = i;
+  return { entries, weight, channel, span: spans[channel] };
+}
+
+function boxMean(box) {
+  let r = 0;
+  let g = 0;
+  let b = 0;
+  let weight = 0;
+  for (const entry of box.entries) {
+    r += entry.r * entry.count;
+    g += entry.g * entry.count;
+    b += entry.b * entry.count;
+    weight += entry.count;
+  }
+  return [Math.round(r / weight), Math.round(g / weight), Math.round(b / weight)];
+}
+
+/** Median cut: split the widest, heaviest box until `maxColors` boxes exist. */
+function medianCut(entries, maxColors) {
+  const boxes = [makeBox(entries)];
+  while (boxes.length < maxColors) {
+    let target = -1;
+    let bestScore = 0;
+    for (let i = 0; i < boxes.length; i++) {
+      const box = boxes[i];
+      if (box.entries.length < 2) continue;
+      // Weighting by the pixel count keeps a wide but nearly empty box from
+      // soaking up palette entries the artwork needs.
+      const score = box.span * Math.log2(1 + box.weight);
+      if (target < 0 || score > bestScore) {
+        bestScore = score;
+        target = i;
+      }
+    }
+    if (target < 0) break;
+
+    const box = boxes[target];
+    const field = box.channel === 0 ? 'r' : box.channel === 1 ? 'g' : 'b';
+    const sorted = box.entries
+      .slice()
+      .sort((a, b) => a[field] - b[field] || a.key - b.key);
+
+    const half = box.weight / 2;
+    let accumulated = 0;
+    let split = 1;
+    for (let i = 0; i < sorted.length; i++) {
+      accumulated += sorted[i].count;
+      split = i + 1;
+      if (accumulated >= half) break;
+    }
+    if (split > sorted.length - 1) split = sorted.length - 1;
+
+    boxes.splice(target, 1, makeBox(sorted.slice(0, split)), makeBox(sorted.slice(split)));
+  }
+  return boxes.map(boxMean);
+}
+
+/**
+ * Palette with the transparent slot reserved at index 0, so an opaque pixel can
+ * never collide with it. Entry 0 is a placeholder whose colour is never used:
+ * those pixels carry tRNS alpha 0.
+ */
+function buildPalette(channels, pixels, maxColors) {
+  const entries = colorHistogram(channels, pixels);
+  const opaqueLimit = Math.max(1, maxColors - 1);
+  if (entries.length === 0) return [[0, 0, 0]];
+  if (entries.length <= opaqueLimit) {
+    return [[0, 0, 0], ...entries.map((entry) => [entry.r, entry.g, entry.b])];
+  }
+  return [[0, 0, 0], ...medianCut(entries, opaqueLimit)];
+}
+
+function nearestColor(palette, r, g, b) {
+  let best = 1;
+  let bestDistance = Infinity;
+  for (let i = 1; i < palette.length; i++) {
+    const dr = r - palette[i][0];
+    const dg = g - palette[i][1];
+    const db = b - palette[i][2];
+    const distance = dr * dr + dg * dg + db * db;
+    if (distance < bestDistance) {
+      bestDistance = distance;
+      best = i;
+    }
+  }
+  return best;
+}
+
+function buildIndices(width, height, channels, pixels, palette) {
+  const count = width * height;
+  const indices = Buffer.alloc(count);
+  const cache = new Map();
+  for (let p = 0; p < count; p++) {
+    const i = p * channels;
+    const alpha = channels === 4 ? pixels[i + 3] : 255;
+    if (alpha < ALPHA_CUTOFF) {
+      indices[p] = TRANSPARENT_INDEX;
+      continue;
+    }
+    const key = colorKey(pixels[i], pixels[i + 1], pixels[i + 2]);
+    let index = cache.get(key);
+    if (index === undefined) {
+      index = nearestColor(palette, pixels[i], pixels[i + 1], pixels[i + 2]);
+      cache.set(key, index);
+    }
+    indices[p] = index;
+  }
+  return indices;
+}
+
+function writeIndexedPng(width, height, palette, indices, hasTransparency) {
+  const stride = width; // one byte per pixel
+  const raw = Buffer.alloc((stride + 1) * height);
+  const candidate = Buffer.alloc(stride);
+
+  for (let y = 0; y < height; y++) {
+    const cur = indices.subarray(y * stride, (y + 1) * stride);
+    const prev = y > 0 ? indices.subarray((y - 1) * stride, y * stride) : null;
+
+    let bestType = 0;
+    let bestCost = Infinity;
+    for (let type = 0; type <= 4; type++) {
+      filterLine(type, cur, prev, 1, candidate);
+      const cost = filterCost(candidate);
+      if (cost < bestCost) {
+        bestCost = cost;
+        bestType = type;
+      }
+    }
+
+    raw[y * (stride + 1)] = bestType;
+    filterLine(bestType, cur, prev, 1, candidate);
+    candidate.copy(raw, y * (stride + 1) + 1);
+  }
+
+  const ihdr = Buffer.alloc(13);
+  ihdr.writeUInt32BE(width, 0);
+  ihdr.writeUInt32BE(height, 4);
+  ihdr[8] = 8; // bit depth
+  ihdr[9] = COLOR_TYPE_INDEXED;
+  ihdr[10] = 0; // deflate
+  ihdr[11] = 0; // adaptive filtering
+  ihdr[12] = 0; // non-interlaced
+
+  const plte = Buffer.alloc(palette.length * 3);
+  palette.forEach(([r, g, b], i) => {
+    plte[i * 3] = r;
+    plte[i * 3 + 1] = g;
+    plte[i * 3 + 2] = b;
+  });
+
+  const chunks = [PNG_SIGNATURE, makeChunk('IHDR', ihdr), makeChunk('PLTE', plte)];
+  if (hasTransparency) {
+    const trns = Buffer.alloc(palette.length, 255);
+    trns[TRANSPARENT_INDEX] = 0;
+    chunks.push(makeChunk('tRNS', trns));
+  }
+  chunks.push(makeChunk('IDAT', zlib.deflateSync(raw, { level: 9 })), makeChunk('IEND', Buffer.alloc(0)));
+  return Buffer.concat(chunks);
+}
+
+/** Indexed re-encode of an RGBA/RGB buffer. Returns the bytes and colour count. */
+function writePalettePng(width, height, channels, pixels, maxColors) {
+  const palette = buildPalette(channels, pixels, maxColors);
+  const indices = buildIndices(width, height, channels, pixels, palette);
+  let hasTransparency = false;
+  for (let p = 0; p < indices.length; p++) {
+    if (indices[p] === TRANSPARENT_INDEX) {
+      hasTransparency = true;
+      break;
+    }
+  }
+  return {
+    png: writeIndexedPng(width, height, palette, indices, hasTransparency),
+    colors: palette.length - 1,
+  };
 }
 
 function makeChunk(type, data) {
@@ -787,11 +1035,17 @@ function reportKeying(layer) {
 }
 
 function reportIhdr(label, file) {
-  const img = readPng(file);
-  const bytes = fs.statSync(file).size;
+  // Read the IHDR straight out of the file: readPng() only decodes truecolour
+  // images (types 2 and 6), and the indexed icon has no channel count to derive.
+  const buf = fs.readFileSync(file);
+  const width = buf.readUInt32BE(16);
+  const height = buf.readUInt32BE(20);
+  const bitDepth = buf[24];
+  const colorType = buf[25];
+  const bytes = buf.length;
   console.log(
-    `  ${label.padEnd(22)} ${String(img.width).padStart(3)}x${String(img.height).padEnd(3)}` +
-      ` depth ${img.bitDepth}  colour type ${img.colorType}  ${(bytes / 1024).toFixed(1)} KiB`
+    `  ${label.padEnd(22)} ${String(width).padStart(3)}x${String(height).padEnd(3)}` +
+      ` depth ${bitDepth}  colour type ${colorType}  ${(bytes / 1024).toFixed(1)} KiB`
   );
 }
 
@@ -862,7 +1116,14 @@ function main() {
       ? output.size * (1 - 2 * ICON_MARGIN)
       : output.size * MASKABLE_FIT;
     const composed = compose(cropped, output.size, fit, !output.alpha);
-    const png = writePng(output.size, output.size, composed.channels, composed.buffer);
+    let png;
+    if (output.palette) {
+      const indexed = writePalettePng(output.size, output.size, composed.channels, composed.buffer, output.palette);
+      png = indexed.png;
+      console.log(`  ${output.file.padEnd(22)} indexed, ${indexed.colors} colours`);
+    } else {
+      png = writePng(output.size, output.size, composed.channels, composed.buffer);
+    }
     const target = path.join(IMAGES_DIR, output.file);
     fs.writeFileSync(target, png);
     reportIhdr(output.file, target);
@@ -888,4 +1149,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { readPng, writePng };
+module.exports = { readPng, writePng, writePalettePng };
