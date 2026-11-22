@@ -644,6 +644,19 @@
   }
 }
 
+/* The typewriter rewrites this line four times per locale. Below ~620px the
+   longest step wraps to a second line while the shorter ones (and every
+   partial frame while typing) stay on one, so the single-line min-height on
+   .hero-title let the whole block below it jump on each step (CLS 0.027 on
+   mobile, 5 shifts, all on .hero-cta-row). Two lines covers the longest step
+   in both dictionaries: measured 2 lines for IT at 580 and for EN at 600,
+   one line for both at 620. */
+@media (max-width: 619px) {
+  .hero-title {
+    min-height: 2.4em;
+  }
+}
+
 @media (max-width: 767px) {
   .telemetry-grid {
     grid-template-columns: 1fr;
