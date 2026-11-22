@@ -20,7 +20,7 @@
 <nav class="navbar">
     <div class="navbar-inner">
         <div class="navbar-brand">
-            <a href="index.html" class="brand-link" aria-label="{{ t.a11y.brand }}">
+            <a href="index.html" class="brand-link" aria-label="LP — {{ t.a11y.brand }}">
                 <span class="brand-bracket">&lt;</span>LP <span class="brand-bracket">/&gt;</span>
             </a>
             <span class="status-badge"><span class="ping-dot"></span>{{ t.nav.availability }}</span>
@@ -46,7 +46,7 @@
             </a>
             {%- if page.alt_url %}
             <a class="lang-toggle lang-switch" href="{{ page.alt_url | relative_url }}" hreflang="{{ page.alt_lang }}"
-                aria-label="{{ t.nav.langSwitch }}">{{ t.nav.langCode }}</a>
+                aria-label="{{ t.nav.langCode }} — {{ t.nav.langSwitch }}">{{ t.nav.langCode }}</a>
             {%- endif %}
             <span class="navbar-avatar" aria-hidden="true">{% include icon.html name="person" %}</span>
             <button class="hamburger-menu" id="hamburger-toggle" aria-label="{{ t.a11y.toggleMenu }}" aria-expanded="false"
@@ -77,7 +77,7 @@
             class="mobile-resume-btn" aria-label="{{ t.a11y.curriculum }}">{{ t.nav.curriculum }}</a>
         {%- if page.alt_url %}
         <a class="lang-toggle lang-switch" href="{{ page.alt_url | relative_url }}" hreflang="{{ page.alt_lang }}"
-            aria-label="{{ t.nav.langSwitch }}">{{ t.nav.langCode }}</a>
+            aria-label="{{ t.nav.langCode }} — {{ t.nav.langSwitch }}">{{ t.nav.langCode }}</a>
         {%- endif %}
     </div>
 </nav>
