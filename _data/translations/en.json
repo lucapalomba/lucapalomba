@@ -208,6 +208,7 @@
         },
         "printCta": {
             "claim": "Like what you see? Print it as a CV",
+            "download": "Download CV (PDF)",
             "button": "Print CV"
         },
         "nextPhase": {

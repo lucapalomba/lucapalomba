@@ -118,8 +118,21 @@ layout: default
 
           <div class="print-cta">
             <p class="print-cta-claim">{{ t.experiences.printCta.claim }}</p>
-            <button type="button" class="btn btn--secondary print-btn" aria-label="{{ t.a11y.print }}">
+            {%- comment -%}
+              The CV is a PDF generated at build time (scripts/build-cv-pdf.js),
+              not a print dialog. `window.print()` cannot turn off the browser's
+              own header and footer, and those put the page URL — a link to
+              itself — at the bottom of every sheet (issue #153). The print
+              button stays as the secondary action for people who want the page.
+            {%- endcomment -%}
+            {%- assign cv_pdf = '/cv/luca-palomba-cv' -%}
+            {%- if page.lang == 'it' -%}{%- assign cv_pdf = cv_pdf | append: '-it' -%}{%- endif -%}
+            {%- assign cv_pdf = cv_pdf | append: '.pdf' -%}
+            <a class="btn btn--primary print-cta-download" href="{{ cv_pdf | relative_url }}" download>
               {% include icon.html name="description" %}
+              <span>{{ t.experiences.printCta.download }}</span>
+            </a>
+            <button type="button" class="btn btn--secondary print-btn" aria-label="{{ t.a11y.print }}">
               <span>{{ t.experiences.printCta.button }}</span>
             </button>
           </div>
