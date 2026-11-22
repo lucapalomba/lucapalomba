@@ -46,7 +46,11 @@ jekyll-minifier:
 # vendored Stitch export: ~3 MB of mockup HTML and PNGs) — repo documentation,
 # not site content, and far too heavy to copy into _site on every build,
 # where htmlproofer and Lighthouse would also have to walk it. .zed/ is editor
-# config, not site content.
+# config, not site content. package.json, package-lock.json, lighthouserc.json,
+# README.md and LICENSE are repo tooling/licence/notes: without these entries a
+# plain `jekyll build` copied all five into _site, so /package-lock.json (40 KB
+# of dependency metadata) and /README.md were being published and fetched by
+# nobody.
 exclude:
   - Gemfile
   - Gemfile.lock
@@ -60,6 +64,11 @@ exclude:
   - scratch
   - docs
   - .zed
+  - package.json
+  - package-lock.json
+  - lighthouserc.json
+  - README.md
+  - LICENSE
 
 # SEO settings
 author: Luca Palomba
