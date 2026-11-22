@@ -1,5 +1,6 @@
 # Jekyll build artifacts
 _site/
+_site_cv/
 .sass-cache/
 .jekyll-cache/
 .jekyll-metadata
