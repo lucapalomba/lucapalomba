@@ -496,3 +496,12 @@
   transform: translateX(4px);
 }
 
+/* The CV masthead rendered at the top of `_layouts/experiences.html` is for
+   paper only: `styles/print-experiences.css` turns it on inside `@media print`.
+   This rule has to live in a screen sheet — the print sheet is linked with
+   `media="print"`, so anything written there never applies on screen, and the
+   masthead used to duplicate the page head above it (issue #150). */
+.cv-header {
+  display: none;
+}
+
