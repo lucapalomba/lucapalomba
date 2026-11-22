@@ -30,6 +30,9 @@ class PageTransition {
       const link = e.target.closest('a[href]');
       if (!link) return;
       if (link.target === '_blank' || link.classList.contains('skip-link')) return;
+      // A download is not a navigation: preventDefault here would cancel the
+      // file and put the raw PDF/zip in the tab instead (issue #153 follow-up).
+      if (link.hasAttribute('download')) return;
       if (link.hostname !== window.location.hostname) return;
       // Same-page anchor: let the browser scroll natively, no transition.
       if (link.pathname === window.location.pathname && link.hash) return;
