@@ -1,0 +1,397 @@
+﻿/* --- Contact ------------------------------------------------------------- */
+.contact-content {
+  text-align: left;
+}
+
+.contact-grid {
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+.contact-description {
+  color: var(--on-surface-variant);
+  max-width: 540px;
+  margin: 0;
+}
+
+.contact-dispatch {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.contact-email {
+  display: inline-block;
+  color: var(--on-surface);
+  font-family: var(--font-mono);
+  font-size: var(--headline-sm-size);
+  text-decoration: none;
+  margin: var(--space-md) 0;
+  word-break: break-all;
+}
+
+.contact-email:hover {
+  color: var(--primary);
+}
+
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.contact-side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.contact-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
+}
+
+.contact-tiles .stat-sub {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.contact-subhead {
+  font-family: var(--font-mono);
+  font-size: var(--label-md-size);
+  letter-spacing: var(--label-md-tracking);
+  text-transform: uppercase;
+  color: var(--outline);
+  margin: 0;
+}
+
+.network-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* --- Contact (refined) --------------------------------------------------- */
+.contact-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.contact-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.contact-header-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--on-surface-variant);
+}
+
+.contact-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 42rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.contact-dispatch {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  background: rgba(29, 31, 38, 0.6);
+  border: 1px solid rgba(61, 73, 76, 0.4);
+}
+
+.dispatch-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.dispatch-title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--on-surface-variant);
+}
+
+.dispatch-title svg {
+  width: 20px;
+  height: 20px;
+  color: var(--primary);
+}
+
+.dispatch-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--radius);
+  background: rgba(12, 14, 20, 0.8);
+  border: 1px solid rgba(78, 222, 163, 0.3);
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+  color: var(--tertiary);
+}
+
+.dispatch-address {
+  display: flex;
+  flex-direction: column;
+}
+
+.dispatch-address-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--outline);
+  margin-bottom: 0.25rem;
+}
+
+.dispatch-address-value {
+  font-family: var(--font-mono);
+  font-size: var(--code-block-size);
+  color: var(--on-surface);
+  letter-spacing: 0.02em;
+  word-break: break-all;
+}
+
+.dispatch-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: 1px solid rgba(61, 73, 76, 0.15);
+}
+
+/* The copy button keeps both glyphs in the DOM; the check is unhidden while
+   the confirmation is showing (js/contactCopy.js). */
+#copy-email .icon-check {
+  display: inline-flex;
+}
+
+#copy-email .icon-check svg {
+  width: 16px;
+  height: 16px;
+  color: var(--tertiary);
+}
+
+.contact-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-sm);
+}
+
+.contact-tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding: var(--space-md);
+}
+
+.contact-tile-value {
+  font-family: var(--font-mono);
+  font-size: var(--headline-md-size);
+  color: var(--on-surface);
+  font-variant-numeric: tabular-nums;
+}
+
+.contact-tile-sub {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+  color: var(--on-surface-variant);
+}
+
+.contact-tile-sub svg {
+  width: 14px;
+  height: 14px;
+  color: var(--tertiary);
+}
+
+.contact-network {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  background: rgba(25, 27, 34, 0.8);
+}
+
+.network-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.network-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.network-row:last-child {
+  border-bottom: none;
+}
+
+.network-id {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: var(--label-md-size);
+  color: var(--on-surface-variant);
+}
+
+.network-id svg {
+  width: 16px;
+  height: 16px;
+}
+
+.network-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+  color: var(--primary);
+  text-decoration: none;
+  text-align: right;
+}
+
+.contact-placement {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  text-align: left;
+}
+
+.placement-dot {
+  position: relative;
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--tertiary);
+  box-shadow: 0 0 8px var(--tertiary);
+}
+
+.placement-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: inherit;
+  animation: ping-once 2s var(--ease-expo-out) 1;
+}
+
+.placement-copy {
+  display: flex;
+  flex-direction: column;
+}
+
+.placement-label {
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+  letter-spacing: var(--label-sm-tracking);
+  text-transform: uppercase;
+  color: var(--on-surface);
+}
+
+.placement-value {
+  font-family: var(--font-mono);
+  font-size: var(--body-sm-size);
+  color: var(--on-surface-variant);
+}
+
+.contact-endpoints {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--on-surface-variant);
+  margin: 0;
+}
+
+/* Provenance band: the export keeps it inside the 42rem column as a card with
+   its own label/copy and the node chip on the right, not a full-width rule. */
+.contact-provenance {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 42rem;
+  margin: 0 auto;
+  width: 100%;
+  padding: var(--space-lg);
+  background: rgba(12, 14, 20, 0.6);
+}
+
+@media (min-width: 768px) {
+  .contact-provenance {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.provenance-copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.provenance-body {
+  font-family: var(--font-ui);
+  font-size: var(--body-md-size);
+  color: var(--on-surface);
+  margin: 0;
+}
+
+.provenance-node {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+  color: var(--on-surface-variant);
+  background: rgba(25, 27, 34, 0.7);
+  border: 1px solid rgba(61, 73, 76, 0.3);
+  border-radius: var(--radius);
+  padding: 0.125rem 0.75rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .contact-tiles {
+    grid-template-columns: 1fr;
+  }
+
+  .network-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+
+  .network-link {
+    text-align: left;
+  }
+}
+

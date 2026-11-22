@@ -1,0 +1,498 @@
+﻿/* --- Experiences --------------------------------------------------------- */
+.page-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid rgba(61, 73, 76, 0.2);
+}
+
+@media (min-width: 768px) {
+  .page-head {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.page-head-copy {
+  display: flex;
+  flex-direction: column;
+}
+
+.telemetry-pill {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+  background: rgba(17, 19, 25, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(61, 73, 76, 0.2);
+  border-radius: var(--radius-lg);
+}
+
+.telemetry-pill-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius);
+  background: rgba(29, 31, 38, 0.7);
+  border: 1px solid rgba(61, 73, 76, 0.1);
+}
+
+/* Row 1: small mono uppercase label. Row 2: the value, mono semibold, with its
+   unit inline in the same weight but a muted colour — matches the export's
+   `font-label-sm` label over a `font-label-md` value. */
+.telemetry-pill-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+  font-weight: var(--label-sm-weight);
+  letter-spacing: var(--label-sm-tracking);
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+.telemetry-pill-value {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--label-md-size);
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.telemetry-pill-value--tertiary { color: var(--tertiary); }
+.telemetry-pill-value--primary { color: var(--primary); }
+
+.telemetry-pill-unit {
+  font-weight: 600;
+  color: var(--on-surface-variant);
+}
+
+.exp-grid {
+  align-items: start;
+  gap: var(--gutter);
+}
+
+.exp-feed {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.exp-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.exp-card-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid rgba(61, 73, 76, 0.1);
+}
+
+@media (min-width: 640px) {
+  .exp-card-head {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+}
+
+.exp-role {
+  font-family: var(--font-ui);
+  font-size: var(--headline-md-size);
+  font-weight: 500;
+  letter-spacing: var(--headline-md-tracking);
+  color: var(--on-surface);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin: 0;
+}
+
+.exp-company {
+  color: var(--primary);
+}
+
+.exp-date {
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--radius);
+  background: rgba(40, 42, 48, 0.6);
+  border: 1px solid rgba(61, 73, 76, 0.2);
+}
+
+.exp-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.exp-bullets li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  color: var(--on-surface-variant);
+  font-size: var(--body-md-size);
+  line-height: var(--body-md-line);
+}
+
+.exp-bullets li svg {
+  width: 16px;
+  height: 16px;
+  color: var(--primary);
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.exp-keyproject {
+  padding: var(--space-md);
+  border-radius: var(--radius);
+  background: rgba(29, 31, 38, 0.8);
+  border: 1px solid rgba(61, 73, 76, 0.1);
+  border-left: 2px solid var(--primary);
+}
+
+.exp-kp-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 0 0 0.25rem;
+}
+
+.exp-kp-label svg {
+  width: 15px;
+  height: 15px;
+}
+
+.exp-kp-body {
+  font-size: var(--body-sm-size);
+  color: var(--on-surface);
+  margin: 0;
+}
+
+.exp-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  padding-top: var(--space-sm);
+  border-top: 1px solid rgba(61, 73, 76, 0.1);
+}
+
+.chip--solid {
+  background: rgba(51, 52, 59, 0.7);
+  color: var(--on-surface-variant);
+}
+
+.exp-side {
+  position: sticky;
+  top: calc(var(--nav-height) + var(--space-lg));
+}
+
+/* Stacked below the feed on mobile, the sticky pin is meaningless (and a tall
+   sticky sidebar fights the scroll), so drop it below the breakpoint. */
+@media (max-width: 767px) {
+  .exp-side {
+    position: static;
+  }
+}
+
+.telemetry-side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.telemetry-side-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid rgba(61, 73, 76, 0.1);
+}
+
+.telemetry-side-title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--on-surface-variant);
+}
+
+.telemetry-side-head svg {
+  width: 18px;
+  height: 18px;
+  color: var(--primary);
+}
+
+.dot-primary,
+.dot-tertiary,
+.dot-secondary,
+.dot-neutral {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.dot-primary { background: var(--primary); }
+.dot-tertiary { background: var(--tertiary); }
+.dot-secondary { background: var(--secondary); }
+.dot-neutral { background: var(--surface-container-highest); }
+
+.timeline-viz {
+  padding: var(--space-sm);
+  border-radius: var(--radius);
+  background: rgba(12, 14, 20, 0.8);
+  border: 1px solid rgba(61, 73, 76, 0.1);
+}
+
+.timeline-viz-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+  color: var(--on-surface-variant);
+  margin-bottom: var(--space-sm);
+}
+
+.timeline-viz-range {
+  color: var(--tertiary);
+}
+
+.timeline-svg {
+  width: 100%;
+  height: 3.5rem;
+  overflow: visible;
+}
+
+.tl-grid {
+  stroke: rgba(61, 73, 76, 0.4);
+  stroke-width: 1;
+}
+
+.tl-grid--dashed {
+  stroke-dasharray: 2 2;
+  stroke: rgba(61, 73, 76, 0.2);
+}
+
+.tl-seg--muted { fill: rgba(188, 201, 205, 0.4); }
+.tl-seg--secondary { fill: var(--secondary); }
+.tl-seg--primary { fill: var(--primary); }
+.tl-seg { filter: none; }
+
+.tl-beacon {
+  fill: var(--tertiary);
+}
+
+.tl-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  fill: var(--on-surface-variant);
+}
+
+.tl-label--primary { fill: var(--primary); }
+.tl-label--tertiary { fill: var(--tertiary); }
+
+.telemetry-metrics {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-mono);
+  font-size: var(--label-md-size);
+}
+
+.metric-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-xs) var(--space-sm);
+  padding: var(--space-xs) 0;
+  border-bottom: 1px solid rgba(61, 73, 76, 0.08);
+}
+
+.metric-key {
+  color: var(--on-surface-variant);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.metric-value {
+  text-align: right;
+  /* Wrap onto its own line or break long values rather than crush the row at
+     320px (R10). */
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.metric-value--plain { color: var(--on-surface); }
+.metric-value--primary { color: var(--primary); font-weight: 600; }
+.metric-value--tertiary { color: var(--tertiary); font-weight: 600; }
+.metric-value--secondary { color: var(--secondary); font-weight: 600; }
+
+.philosophy-callout {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  border-radius: var(--radius);
+  background: rgba(51, 52, 59, 0.6);
+  border: 1px solid rgba(61, 73, 76, 0.1);
+}
+
+.philosophy-callout-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--tertiary);
+  margin: 0 0 0.25rem;
+}
+
+.philosophy-callout-quote {
+  font-size: var(--body-sm-size);
+  color: var(--on-surface);
+  font-style: italic;
+  margin: 0;
+}
+
+.next-phase {
+  margin-top: var(--space-lg);
+  padding: var(--space-md);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(29, 31, 38, 0.9), rgba(40, 42, 48, 0.9));
+  border: 1px solid rgba(61, 73, 76, 0.2);
+}
+
+.next-phase-kicker {
+  font-family: var(--font-mono);
+  font-size: var(--code-inline-size, 0.8125rem);
+  color: var(--on-surface);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  margin: 0 0 var(--space-xs);
+}
+
+.next-phase-body {
+  font-size: var(--body-sm-size);
+  color: var(--on-surface-variant);
+  margin: 0 0 var(--space-md);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* Print CTA block in the experience sidebar, above the philosophy callout.
+   Lives in this sheet because only the experiences page renders it. */
+.print-cta {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  border-radius: var(--radius-lg);
+  background: rgba(12, 14, 20, 0.5);
+  border: 1px solid rgba(61, 73, 76, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.print-cta-claim {
+  font-family: var(--font-mono);
+  font-size: var(--label-sm-size);
+  color: var(--on-surface-variant);
+  margin: 0;
+}
+
+.print-cta .print-btn {
+  margin: 0;
+  width: 100%;
+  padding: 0.5rem 1.25rem;
+  font-size: var(--body-md-size);
+}
+
+.print-cta .print-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Prev/next progression strip: the export's two-ended footer, the same
+   circular navigation the navbar links and js/navigation.js arrows follow. */
+.exp-progression {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid rgba(61, 73, 76, 0.2);
+}
+
+@media (min-width: 640px) {
+  .exp-progression {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.exp-progression-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: var(--label-md-size);
+  color: var(--on-surface-variant);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.exp-progression-link:hover {
+  color: var(--on-surface);
+}
+
+.exp-progression-link--next {
+  color: var(--primary);
+}
+
+.exp-progression-link--next:hover {
+  color: var(--on-surface);
+}
+
+.exp-progression-link svg {
+  width: 16px;
+  height: 16px;
+}
+
+.exp-progression-link:hover svg {
+  transition: transform 0.2s ease;
+}
+
+.exp-progression-link:hover svg:first-child {
+  transform: translateX(-4px);
+}
+
+.exp-progression-link--next:hover svg {
+  transform: translateX(4px);
+}
+
