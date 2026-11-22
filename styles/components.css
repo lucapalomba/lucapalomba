@@ -251,10 +251,16 @@
 .progress .progress-fill {
   display: block;
   height: 100%;
-  width: 0;
+  width: 100%;
   background: var(--primary);
   border-radius: inherit;
-  transition: width 1.35s cubic-bezier(0.22, 1, 0.36, 1);
+  /* scaleX, not width: animating a used width relayouts the bar on every frame
+     and Lighthouse flags it as a non-composited animation. The bar keeps its
+     full width and is scaled from the left edge, which the compositor can do
+     on its own. techProgress.js drives the scale. */
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* --- Sparkline ----------------------------------------------------------- */

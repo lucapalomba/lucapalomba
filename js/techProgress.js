@@ -21,7 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const fillBar = (fill) => {
     const targetProgress = fill.getAttribute('data-progress');
     if (targetProgress) {
-      fill.style.width = `${targetProgress}%`;
+      // The bar is full width and scaled from the left (see components.css):
+      // a compositor-friendly stand-in for animating `width`, which relayouts
+      // the bar on every frame.
+      fill.style.transform = `scaleX(${Number(targetProgress) / 100})`;
     }
   };
 
