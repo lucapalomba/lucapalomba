@@ -38,6 +38,12 @@ const CACHE_NAME = 'lucapalomba-' + VERSION;
 // those two were only ever fetched by the client-side i18n layer that is gone.
 // The Italian pages take their place — they are real files now, and each one is
 // the entry point to that language offline.
+//
+// The two Latin-Ext subsets are deliberately absent: every character the EN and
+// IT copy actually uses lives in the Latin subset (accented vowels are U+00E0-
+// U+00F9, the en dash U+2013 is in U+2000-206F), so precaching them spent ~27 KB
+// of first-load traffic on glyphs no page requests. They are still cached the
+// first time something does need them, by the cache-first asset handler below.
 const PRECACHE_URLS = [
   './',
   './index.html',
@@ -72,9 +78,7 @@ const PRECACHE_URLS = [
   './js/techProgress.js',
   './js/contactCopy.js',
   './fonts/Geist/Geist-Latin-Variable.woff2',
-  './fonts/Geist/Geist-Latin-Ext-Variable.woff2',
-  './fonts/JetBrains_Mono/JetBrainsMono-Latin-Variable.woff2',
-  './fonts/JetBrains_Mono/JetBrainsMono-Latin-Ext-Variable.woff2'
+  './fonts/JetBrains_Mono/JetBrainsMono-Latin-Variable.woff2'
 ];
 
 // Served for a navigation that is neither cached nor reachable. Every page of
