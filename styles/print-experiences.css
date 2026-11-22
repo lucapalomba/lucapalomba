@@ -46,7 +46,10 @@
     visibility: visible !important;
   }
 
-  /* Page chrome off. */
+  /* Page chrome off. Everything inside `#main-content` that is site chrome
+     rather than CV content must be listed here — `.exp-progression` is the
+     prev/next strip at the end of the page, and it is *inside* the main
+     element, so hiding `.navbar` and `.footer` is not enough (issue #150). */
   .navbar,
   .footer,
   .back-to-top-btn,
@@ -55,6 +58,7 @@
   .backdrop,
   .backdrop-scrim,
   .skip-link,
+  .exp-progression,
   .exp-side,
   .page-head,
   .print-cta,
@@ -249,9 +253,4 @@
   a[href]::after {
     content: none !important;
   }
-}
-
-/* On screen the print-only masthead is hidden. */
-.cv-header {
-  display: none;
 }
