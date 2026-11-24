@@ -48,6 +48,12 @@ jobs:
       - name: Test site with HTML Proofer
         run: bundle exec htmlproofer ./_site --disable-external --swap-urls "^${{ steps.pages.outputs.base_path }}/:/"
 
+      - name: Check CSS minifier output
+        # cssminify2 (via jekyll-minifier) mangles var() inside calc(); the
+        # declaration is dropped silently in the browser, so only a scan of the
+        # built sheets can catch it. See scripts/check-css-minify.js.
+        run: node scripts/check-css-minify.js ./_site
+
       - name: Build for Lighthouse CI
         # Lighthouse only pays for main and pull requests targeting main;
         # plain feature-branch pushes get build + htmlproofer only.

@@ -59,6 +59,13 @@
   --gutter: 1.5rem;
   --margin: 2rem;
   --nav-height: 64px;
+  /* Sticky pin for the experiences sidebar: --nav-height + --space-lg, written
+     as a literal on purpose. The CSS minifier (jekyll-minifier -> cssminify2)
+     puts spaces around every hyphen inside calc(), so `calc(var(--nav-height)
+     + …)` ships as `var( -  - nav - height)` and the browser drops the whole
+     declaration; scripts/check-css-minify.js fails the build on that pattern.
+     Keep this in sync with --nav-height and --space-lg. */
+  --sticky-top-offset: 5.5rem;
 
   /* Radii — exact values from the mockups' Tailwind config
      (DEFAULT 2px, lg 4px, xl 8px). Pills are excluded on purpose. */

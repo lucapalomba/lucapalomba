@@ -8,13 +8,16 @@
   justify-content: center;
   min-height: 100vh;
   text-align: center;
-  padding-top: calc(var(--nav-height) + var(--space-xl));
+  /* Split, not `calc(var(--nav-height) + var(--space-xl))`: the CSS minifier
+     corrupts var() inside calc() (see the note on `.page` in main.css). */
+  padding-top: var(--nav-height);
   padding-bottom: var(--space-xl);
   padding-inline: var(--margin);
   box-sizing: border-box;
 }
 
 .error-inner {
+  padding-top: var(--space-xl);
   display: flex;
   flex-direction: column;
   align-items: center;

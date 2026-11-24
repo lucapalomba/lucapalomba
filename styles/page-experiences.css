@@ -205,7 +205,9 @@
 
 .exp-side {
   position: sticky;
-  top: calc(var(--nav-height) + var(--space-lg));
+  /* Token, not `calc(var(--nav-height) + var(--space-lg))`: the CSS minifier
+     corrupts var() inside calc() (see styles/tokens.css). */
+  top: var(--sticky-top-offset);
 }
 
 /* Stacked below the feed on mobile, the sticky pin is meaningless (and a tall
