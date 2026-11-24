@@ -429,7 +429,11 @@ a.mobile-resume-btn:focus {
   padding: 20px 25px;
   gap: 20px;
   z-index: 49;
-  max-height: calc(100vh - var(--nav-height));
+  /* No var() inside calc() — the CSS minifier corrupts it (see `.page`); the
+     literal here is --nav-height (64px). `bottom: 0` cannot replace this: the
+     navbar's backdrop-filter makes it the containing block for this fixed
+     drawer, so the inset resolves against a 64px box and collapses it. */
+  max-height: calc(100vh - 64px);
   overflow-y: auto;
 }
 
@@ -674,7 +678,10 @@ a.mobile-resume-btn {
    query rather than JavaScript sniffing maxTouchPoints. */
 .navigation-hint {
   position: fixed;
-  top: calc(var(--nav-height) + 10px);
+  /* `top` + margin instead of `calc(var(--nav-height) + 10px)`: the minifier
+     corrupts var() inside calc() (see the note in `.page`). */
+  top: var(--nav-height);
+  margin-top: 10px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;
@@ -739,9 +746,23 @@ a.mobile-resume-btn {
 .page {
   position: relative;
   z-index: 2;
-  padding-top: calc(var(--nav-height) + var(--space-xl));
+  /* Split into two paddings on purpose: a single
+     `calc(var(--nav-height) + var(--space-xl))` is corrupted by the CSS
+     minifier (jekyll-minifier -> cssminify2), which puts spaces around every
+     hyphen inside calc(), shipping `var( -  - nav - height)` — an invalid
+     value the browser drops, which put every page title under the fixed
+     navbar. Never write var() inside calc() in these sheets;
+     scripts/check-css-minify.js fails the build if one slips through. */
+  padding-top: var(--nav-height);
   padding-bottom: var(--space-xl);
   min-height: 100vh;
+}
+
+/* The air between the navbar and the page head, on the container so the sum
+   needs no calc(). Every page layout puts `.container` directly inside
+   `main.page`. */
+.page > .container {
+  padding-top: var(--space-xl);
 }
 
 .visually-hidden {
