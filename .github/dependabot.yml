@@ -83,6 +83,18 @@ updates:
       prefix: "chore"
       include: "scope"
     labels: ["dependencies"]
+    # katex needs a manual `overrides` entry in package.json, for the same reason
+    # as smol-toml above: its parent pins it below the patched version, so no
+    # Dependabot update can exist. The chain is markdownlint-cli2 -> markdownlint
+    # -> micromark-extension-math@3.1.0 -> katex@^0.16.0, while GHSA-238p-pmpm-9mq7
+    # (prototype-pollution trust bypass) is fixed in 0.18.2. Dependabot's only path
+    # was a downgrade of markdownlint-cli2 from 0.24.2 to 0.16.0, so the security
+    # update job failed with `security_update_not_possible`. Hence the pin to
+    # ^0.19.1: 0.18.11 is npm-deprecated (published with unintended breaking
+    # changes), and the 0.17-0.19 breaks -- `__defineFunction` prop wrapping,
+    # prefixed CSS classes, strict-mode metrics reporting -- are unreachable here
+    # because markdownlint only parses math, it never renders it. Verified with a
+    # full `npm run lint:md` and a micromark render smoke test.
     groups:
       npm-patch:
         patterns: ["*"]
