@@ -196,12 +196,14 @@
             "teamsUnit": "Ing",
             "timelineSpan": "Arco temporale",
             "timelineRange": "2007 → 2026+",
-            "timelineLabels": ["Sys2000", "Venture", "Novigo", "P&B / COGEN"],
+            "groups": [
+                { "key": "consulting", "label": "Consulenza" }
+            ],
             "metrics": [
-                { "key": "LEADERSHIP_MAX", "value": "20 ingegneri / 4 squadre", "tone": "primary" },
-                { "key": "OPEX_REDUCTION", "value": "~50% in 12 mesi", "tone": "tertiary" },
-                { "key": "METHODOLOGY", "value": "SCRUM / CI-CD / AI-Assisted", "tone": "plain" },
-                { "key": "R&D_SPECIALIZATION", "value": "Sistemi distribuiti in business continuity", "tone": "primary" }
+                { "key": "TEAM_SCALE", "value": "fino a 20 ingegneri / 4 team di prodotto", "tone": "primary" },
+                { "key": "DELIVERY_METHOD", "value": "SCRUM · CI/CD · automazione", "tone": "plain" },
+                { "key": "COST_IMPACT", "value": "−50% sui costi degli strumenti in 12 mesi", "tone": "tertiary" },
+                { "key": "R&D_OUTCOME", "value": "Openware 3.0 — Docker su K8s in business continuity", "tone": "primary" }
             ]
         },
         "philosophy": {
@@ -220,6 +222,9 @@
         "jobs": [
             {
                 "date": "Feb 2026 — Presente",
+                "start": "2026-02",
+                "end": "now",
+                "short": "Vigilate",
                 "title": "Senior Full Stack Developer • AI Enabler — Vigilate SRL",
                 "description": [
                     "Analizzo e riprogetto i processi di sviluppo per ottimizzare il coordinamento umano/AI.",
@@ -236,6 +241,9 @@
             },
             {
                 "date": "Dic 2020 — Mag 2025",
+                "start": "2020-12",
+                "end": "2025-05",
+                "short": "P&B/COGEN",
                 "title": "Senior Full Stack Developer • Head of R&D — P&B Linking / Openware PSIM / COGEN S.p.a.S.U",
                 "description": [
                     "Ho guidato le attività di R&D e coordinato team con gli stakeholder.",
@@ -258,6 +266,9 @@
             },
             {
                 "date": "Nov 2016 — Nov 2020",
+                "start": "2016-11",
+                "end": "2020-11",
+                "short": "Novigo",
                 "title": "Full Stack Developer • Team Lead • R&D Manager — Novigo-Consulting",
                 "description": [
                     "Progettato e implementato l'architettura applicativa (API Zend, frontend React, automazione Node.js).",
@@ -276,6 +287,10 @@
             },
             {
                 "date": "2015 — 2016",
+                "start": "2015-01",
+                "end": "2016-12",
+                "short": "Publidesign",
+                "group": "consulting",
                 "title": "CTO • Full Stack Developer — Publidesign s.r.l.",
                 "description": [
                     "Sviluppo personalizzazioni di progetti WordPress.",
@@ -293,6 +308,10 @@
             },
             {
                 "date": "2012 — 2016",
+                "start": "2012-01",
+                "end": "2016-12",
+                "short": "TargatoBS",
+                "group": "consulting",
                 "title": "Founder • Startupper • Pitcher — TargatoBS",
                 "description": [
                     "Cercavo un modo per esprimere me stesso al meglio.",
@@ -310,6 +329,10 @@
             },
             {
                 "date": "Ott 2013 — 2014",
+                "start": "2013-10",
+                "end": "2014-12",
+                "short": "DuckMa",
+                "group": "consulting",
                 "title": "Full Stack Developer — DuckMa s.r.l.",
                 "description": [
                     "Sviluppo API backend (Node.js, PHP).",
@@ -327,6 +350,9 @@
             },
             {
                 "date": "Dic 2007 — Set 2012",
+                "start": "2007-12",
+                "end": "2012-09",
+                "short": "System 2000",
                 "title": "Web Developer — System 2000 s.r.l. / Associati s.r.l.",
                 "description": [
                     "Consulenza IT per progetti regionali/nazionali.",
