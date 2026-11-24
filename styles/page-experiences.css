@@ -283,39 +283,94 @@
   color: var(--tertiary);
 }
 
-.timeline-svg {
-  width: 100%;
-  height: 3.5rem;
-  overflow: visible;
+/* One row per role (issue #151): the bar sits where it belongs on the
+   calendar and is as long as the tenure, so the 2013–2016 overlaps are visible
+   instead of being flattened into a sequence that never happened. Names are
+   HTML, not SVG text, which is what makes them legible in a 363 px card. */
+.tl-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.tl-grid {
-  stroke: rgba(61, 73, 76, 0.4);
-  stroke-width: 1;
+.tl-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.tl-grid--dashed {
-  stroke-dasharray: 2 2;
-  stroke: rgba(61, 73, 76, 0.2);
-}
-
-.tl-seg--muted { fill: rgba(188, 201, 205, 0.4); }
-.tl-seg--secondary { fill: var(--secondary); }
-.tl-seg--primary { fill: var(--primary); }
-.tl-seg { filter: none; }
-
-.tl-beacon {
-  fill: var(--tertiary);
-}
-
-.tl-label {
+.tl-row-name {
+  flex: 0 0 64px;
   font-family: var(--font-mono);
-  font-size: 9px;
-  fill: var(--on-surface-variant);
+  font-size: 9.5px;
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.tl-label--primary { fill: var(--primary); }
-.tl-label--tertiary { fill: var(--tertiary); }
+.tl-row-track {
+  position: relative;
+  flex: 1;
+  height: 8px;
+  border-radius: 2px;
+  background: rgba(61, 73, 76, 0.18);
+}
+
+.tl-bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 2px;
+  background: rgba(76, 215, 246, 0.5);
+}
+
+/* The role in progress: the axis ends here, so it gets the accent. */
+.tl-bar--now {
+  background: linear-gradient(90deg, #4cd7f6, #6ffbbe);
+}
+
+.tl-row--axis {
+  margin-top: 1px;
+}
+
+.tl-row--axis .tl-row-track {
+  height: auto;
+  background: none;
+}
+
+.tl-tick {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--on-surface-variant);
+  opacity: 0.65;
+}
+
+/* The two ends of the axis anchor to the track edges instead of overhanging. */
+.tl-tick--start {
+  transform: none;
+}
+
+.tl-tick--end {
+  transform: translateX(-100%);
+}
+
+/* The role in progress ends where the axis ends: dot it so "now" is a mark,
+   not an inference. */
+.tl-bar--now::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #6ffbbe;
+  transform: translate(50%, -50%);
+}
 
 .telemetry-metrics {
   display: flex;
@@ -326,10 +381,8 @@
 
 .metric-row {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-xs) var(--space-sm);
+  flex-direction: column;
+  gap: 1px;
   padding: var(--space-xs) 0;
   border-bottom: 1px solid rgba(61, 73, 76, 0.08);
 }
@@ -340,10 +393,11 @@
   overflow-wrap: anywhere;
 }
 
+/* Key on its own line, value under it: the renamed metrics (issue #151) say
+   what they measure instead of implying it, so the values are long enough that
+   a right-aligned second line read as an orphan. */
 .metric-value {
-  text-align: right;
-  /* Wrap onto its own line or break long values rather than crush the row at
-     320px (R10). */
+  text-align: left;
   min-width: 0;
   overflow-wrap: anywhere;
 }

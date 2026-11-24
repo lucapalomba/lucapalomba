@@ -83,30 +83,129 @@ layout: default
               <span>{{ t.experiences.telemetry.timelineSpan }}</span>
               <span class="timeline-viz-range">{{ t.experiences.telemetry.timelineRange }}</span>
             </div>
-            <svg class="timeline-svg" viewBox="0 0 280 44" fill="none" aria-hidden="true">
-              <defs>
-                <linearGradient id="timelineGrad" x1="0" x2="1" y1="0" y2="0">
-                  <stop offset="0%" stop-color="#4cd7f6" stop-opacity="0.8"></stop>
-                  <stop offset="100%" stop-color="#6ffbbe" stop-opacity="1"></stop>
-                </linearGradient>
-              </defs>
-              <line class="tl-grid" x1="0" x2="280" y1="36" y2="36"></line>
-              <line class="tl-grid tl-grid--dashed" x1="70" x2="70" y1="10" y2="36"></line>
-              <line class="tl-grid tl-grid--dashed" x1="140" x2="140" y1="10" y2="36"></line>
-              <line class="tl-grid tl-grid--dashed" x1="210" x2="210" y1="10" y2="36"></line>
-              <rect class="timeline-fill tl-seg tl-seg--muted" height="4" rx="2" width="70" x="0" y="32" style="--reveal-delay: 0.1s"></rect>
-              <rect class="timeline-fill tl-seg tl-seg--secondary" height="6" rx="2" width="55" x="75" y="30" style="--reveal-delay: 0.3s"></rect>
-              <rect class="timeline-fill tl-seg tl-seg--primary" height="8" rx="2" width="60" x="135" y="28" style="--reveal-delay: 0.5s"></rect>
-              <rect class="timeline-fill tl-seg" fill="url(#timelineGrad)" height="12" rx="2" width="65" x="200" y="24" style="--reveal-delay: 0.7s"></rect>
-              <circle class="tl-beacon" cx="268" cy="30" r="3.5" fill="#4edea3"></circle>
-              {%- assign tl = t.experiences.telemetry.timelineLabels %}
-              <text class="tl-label" x="2" y="20">{{ tl[0] }}</text>
-              <text class="tl-label" x="75" y="20">{{ tl[1] }}</text>
-              <text class="tl-label tl-label--primary" x="140" y="16">{{ tl[2] }}</text>
-              <text class="tl-label tl-label--tertiary" x="205" y="12">{{ tl[3] }}</text>
-            </svg>
-          </div>
+            {%- comment -%}
+              The axis is derived from `t.experiences.jobs`, not from a
+              hand-written label array: the old four labels had drifted from the
+              seven roles in the feed, ended on a job that closed in May 2025 and
+              invented an employer called "Venture" (issue #151).
 
+              `start` / `end` are `YYYY-MM` in the dictionaries and `end: "now"`
+              is the build date, so the current role grows on its own and nothing
+              here has to change when a role opens or closes. One row per role,
+              bars placed at their real start and sized by real tenure: the
+              overlaps (TargatoBS / DuckMa / Publidesign in 2013–2016) are then
+              visible for what they were, instead of being flattened into a
+              sequence that never happened.
+            {%- endcomment -%}
+            {%- assign cv_jobs = t.experiences.jobs | reverse -%}
+            {%- assign now_year = site.time | date: "%Y" -%}
+            {%- assign now_month = site.time | date: "%-m" -%}
+            {%- assign now_idx = now_year | times: 12 | plus: now_month -%}
+            {%- assign first_idx = 999999 -%}
+            {%- assign last_idx = 0 -%}
+            {%- for job in cv_jobs -%}
+              {%- assign sp = job.start | split: "-" -%}
+              {%- assign si = sp[0] | times: 12 | plus: sp[1] -%}
+              {%- if job.end == "now" -%}
+                {%- assign ei = now_idx -%}
+              {%- else -%}
+                {%- assign ep = job.end | split: "-" -%}
+                {%- assign ei = ep[0] | times: 12 | plus: ep[1] -%}
+              {%- endif -%}
+              {%- if si < first_idx -%}{%- assign first_idx = si -%}{%- endif -%}
+              {%- if ei > last_idx -%}{%- assign last_idx = ei -%}{%- endif -%}
+            {%- endfor -%}
+            {%- assign span = last_idx | minus: first_idx | plus: 1 -%}
+            <div class="tl-rows">
+              {%- comment -%}
+                Roles can be bucketed: `group` on a job points at an entry of
+                `telemetry.groups`, and the members collapse into one row whose
+                bar spans them all, each tenure drawn inside it. The TargatoBS /
+                DuckMa / Publidesign years were three consultancy engagements
+                running in parallel, not three sequential employers (issue #151).
+              {%- endcomment -%}
+              {%- assign cv_groups = t.experiences.telemetry.groups -%}
+              {%- assign emitted_groups = "," -%}
+              {%- for job in cv_jobs -%}
+                {%- assign sp = job.start | split: "-" -%}
+                {%- assign si = sp[0] | times: 12 | plus: sp[1] -%}
+                {%- if job.end == "now" -%}
+                  {%- assign ei = now_idx -%}
+                {%- else -%}
+                  {%- assign ep = job.end | split: "-" -%}
+                  {%- assign ei = ep[0] | times: 12 | plus: ep[1] -%}
+                {%- endif -%}
+                {%- if job.group -%}
+                  {%- assign group_marker = "," | append: job.group | append: "," -%}
+                  {%- unless emitted_groups contains group_marker -%}
+                    {%- assign emitted_groups = emitted_groups | append: job.group | append: "," -%}
+                    {%- assign group_label = job.group -%}
+                    {%- for g in cv_groups -%}
+                      {%- if g.key == job.group -%}{%- assign group_label = g.label -%}{%- endif -%}
+                    {%- endfor -%}
+                    {%- assign g_start = 999999 -%}
+                    {%- assign g_end = 0 -%}
+                    {%- assign group_members = cv_jobs | where: "group", job.group | sort: "start" -%}
+                    {%- for member in group_members -%}
+                      {%- if member.group == job.group -%}
+                        {%- assign msp = member.start | split: "-" -%}
+                        {%- assign msi = msp[0] | times: 12 | plus: msp[1] -%}
+                        {%- if member.end == "now" -%}
+                          {%- assign mei = now_idx -%}
+                        {%- else -%}
+                          {%- assign mep = member.end | split: "-" -%}
+                          {%- assign mei = mep[0] | times: 12 | plus: mep[1] -%}
+                        {%- endif -%}
+                        {%- if msi < g_start -%}{%- assign g_start = msi -%}{%- endif -%}
+                        {%- if mei > g_end -%}{%- assign g_end = mei -%}{%- endif -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                    {%- assign g_span = g_end | minus: g_start | plus: 1 -%}
+                    {%- assign bar_left = g_start | minus: first_idx | times: 100.0 | divided_by: span | round: 2 -%}
+                    {%- assign bar_width = g_end | minus: g_start | plus: 1 | times: 100.0 | divided_by: span | round: 2 -%}
+              <div class="tl-row">
+                <span class="tl-row-name">{{ group_label }}</span>
+                <span class="tl-row-track">
+                  <span class="timeline-fill tl-bar" style="left: {{ bar_left }}%; width: {{ bar_width }}%; --reveal-delay: 0.15s"></span>
+                </span>
+              </div>
+                  {%- endunless -%}
+                {%- else -%}
+                  {%- assign bar_left = si | minus: first_idx | times: 100.0 | divided_by: span | round: 2 -%}
+                  {%- assign bar_width = ei | minus: si | plus: 1 | times: 100.0 | divided_by: span | round: 2 -%}
+                  {%- assign delay = forloop.index0 | times: 0.08 | plus: 0.15 -%}
+              <div class="tl-row">
+                <span class="tl-row-name">{{ job.short }}</span>
+                <span class="tl-row-track">
+                  <span class="timeline-fill tl-bar{% if job.end == "now" %} tl-bar--now{% endif %}"
+                        style="left: {{ bar_left }}%; width: {{ bar_width }}%; --reveal-delay: {{ delay }}s"></span>
+                </span>
+              </div>
+                {%- endif -%}
+              {%- endfor -%}
+                          {%- comment -%}
+                Five-year ticks: enough to read the scale without labelling every
+                year. A list, not a range — `continue` is Liquid 5, Jekyll 3.10
+                ships Liquid 4.
+              {%- endcomment -%}
+              {%- assign tick_years = "2012,2016,2020,2024" | split: "," -%}
+              {%- assign first_start = cv_jobs.first.start | split: "-" -%}
+              <div class="tl-row tl-row--axis" aria-hidden="true">
+                <span class="tl-row-name"></span>
+                <span class="tl-row-track">
+                  <span class="tl-tick tl-tick--start" style="left: 0">{{ first_start[0] }}</span>
+                  {%- for tick_year in tick_years -%}
+                  {%- assign tick_idx = tick_year | times: 12 | plus: 1 -%}
+                  {%- assign tick_pct = tick_idx | minus: first_idx | times: 100.0 | divided_by: span | round: 2 -%}
+                  {%- if tick_pct > 3 and tick_pct < 92 %}
+                  <span class="tl-tick" style="left: {{ tick_pct }}%">{{ tick_year }}</span>
+                  {%- endif -%}
+                  {%- endfor %}
+                  <span class="tl-tick tl-tick--end" style="left: 100%">{{ now_year }}</span>
+                </span>
+              </div>
+            </div>
+          </div>
           <div class="telemetry-metrics">
             {%- for metric in t.experiences.telemetry.metrics %}
             <div class="metric-row">
